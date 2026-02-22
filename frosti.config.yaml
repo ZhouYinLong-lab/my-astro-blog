@@ -71,13 +71,13 @@ user:
         ariaLabel: 赞助支持 # 汉化：图标的可访问性标签
         title: 赞助支持 # 汉化：图标的悬浮标题
         svg: "ri:cup-line"
-      - href: "https://github.com/EveSunMaple"
+      - href: "https://github.com/ZhouYinLong-lab/"
         ariaLabel: GitHub主页 # 汉化
         title: GitHub主页 # 汉化
         svg: "ri:github-line"
-      - href: "https://space.bilibili.com/438392347"
-        ariaLabel: 哔哩哔哩 # 汉化
-        title: 哔哩哔哩 # 汉化
+      - href: "https://space.bilibili.com/511060666?spm_id_from=333.1007.0.0"
+        ariaLabel: B站 # 汉化
+        title: B站 # 汉化
         svg: "ri:bilibili-line"
       - href: "https://x.com/EveSunMaple"
         ariaLabel: X(推特) # 汉化
