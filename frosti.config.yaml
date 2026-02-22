@@ -1,0 +1,103 @@
+# 网站的基本信息
+site:
+  tab: 寒柳别苑 # 浏览器标签栏上显示的文本
+  title: 💠 寒柳别苑 # 网站的标题
+  description: 柳含知发挥想象力和创造力的赛博后花园 # 网站的描述，用于SEO等
+  language: zh-CN # 🌟 关键：告诉浏览器这是一个简体中文网站
+  favicon: /favicon.ico # 网站的图标，用于浏览器标签栏和其他地方显示
+  theme: # 更多主题 https://daisyui.com/docs/themes/
+    light: winter # 主题的浅色模式
+    dark: dracula # 主题的深色模式
+    code: github-dark # 代码块的主题 https://expressive-code.com/guides/themes/
+  date_format: YYYY年MM月DD日 # 🌟 日期格式也改成了中文习惯
+  blog: # 博客相关配置
+    pageSize: 8 # 每页显示的文章数量
+  menu: # 菜单配置
+    - id: home 
+      text: 首页 # 汉化
+      href: / 
+      svg: "material-symbols:home-outline-rounded"
+      target: _self
+    - id: about
+      text: 居士自序 # 汉化
+      href: /about
+      svg: "material-symbols:info-outline-rounded"
+      target: _self
+    - id: blog
+      text: 博客 # 汉化
+      href: /blog
+      svg: "material-symbols:book-2-outline-rounded"
+      target: _self
+      subItems:
+        - id: all
+          text: 全部文章 # 汉化
+          href: /blog
+          svg: "material-symbols:ink-pen-outline-rounded"
+          target: _self
+        - id: documentation
+          text: 学习文档 # 汉化
+          href: /blog/category/Documentation
+          svg: "material-symbols:unknown-document-outline-rounded"
+          target: _self
+        - id: examples
+          text: 代码示例 # 汉化
+          href: /blog/category/Examples
+          svg: "material-symbols:deployed-code-outline"
+          target: _self
+    - id: project
+      text: 实验室项目 # 汉化
+      href: /project
+      svg: "material-symbols:code-blocks-outline"
+      target: _self
+    - id: friend
+      text: 友链 # 汉化
+      href: /friend
+      svg: "material-symbols:supervisor-account-outline-rounded"
+      target: _self
+    - id: contact
+      text: 联系我 # 汉化
+      href: "mailto:contact.evesunmaple@outlook.com"
+      target: _blank # 在新标签页打开
+      svg: "material-symbols:attach-email-outline-rounded"
+
+# 用户的个人信息
+user:
+  name: 柳含知 # 替换成了你的昵称
+  site: "https://frosti.saroprock.com" # 等以后配好了再换成你自己的域名
+  avatar: /profile.png # 用户头像路径
+  sidebar: # 侧边栏配置
+    social:
+      - href: "https://afdian.com/a/saroprock" 
+        ariaLabel: 赞助支持 # 汉化：图标的可访问性标签
+        title: 赞助支持 # 汉化：图标的悬浮标题
+        svg: "ri:cup-line"
+      - href: "https://github.com/EveSunMaple"
+        ariaLabel: GitHub主页 # 汉化
+        title: GitHub主页 # 汉化
+        svg: "ri:github-line"
+      - href: "https://space.bilibili.com/438392347"
+        ariaLabel: 哔哩哔哩 # 汉化
+        title: 哔哩哔哩 # 汉化
+        svg: "ri:bilibili-line"
+      - href: "https://x.com/EveSunMaple"
+        ariaLabel: X(推特) # 汉化
+        title: X(推特) # 汉化
+        svg: "ri:twitter-line"
+  footer:
+    social:
+      - href: "https://afdian.com/a/saroprock" 
+        ariaLabel: 赞助支持 
+        title: 赞助支持 
+        svg: "ri:cup-line"
+      - href: "https://github.com/EveSunMaple"
+        ariaLabel: GitHub主页 
+        title: GitHub主页 
+        svg: "ri:github-line"
+      - href: "https://space.bilibili.com/438392347"
+        ariaLabel: 哔哩哔哩 
+        title: 哔哩哔哩 
+        svg: "ri:bilibili-line"
+      - href: "https://x.com/EveSunMaple"
+        ariaLabel: X(推特) 
+        title: X(推特) 
+        svg: "ri:twitter-line"
