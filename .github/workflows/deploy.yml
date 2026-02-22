@@ -1,13 +1,10 @@
 name: Deploy to GitHub Pages
 
 on:
-  # 每次你把你写的文章推送到 main 分支时，自动触发流水线
   push:
     branches: [ main ]
-  # 允许你在 GitHub 网页上通过点击按钮手动触发部署
   workflow_dispatch:
 
-# 赋予 GitHub Actions 把生成的网页推送到 Pages 的权限
 permissions:
   contents: read
   pages: write
@@ -17,20 +14,31 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout your repository using git
+      - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Install, build, and configure Astro
-        uses: withastro/action@v3
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
         with:
-          # 明确告诉云端服务器，我们用的是最高效的 pnpm
-          package-manager: pnpm@latest
+          version: 9
 
-      # 【关键环节】生成 Frosti 主题所需的 Pagefind 搜索索引
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Build Astro
+        run: pnpm build
+
+      # 为 Frosti 生成搜索索引
       - name: Generate Pagefind Search Index
         run: npx pagefind --site dist
 
-      - name: Upload Pages artifact
+      - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
           path: dist/
