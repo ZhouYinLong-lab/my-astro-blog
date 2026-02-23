@@ -69,19 +69,19 @@ user:
         svg: "ri:wechat-line"
   footer:
     social:
-      - href: "https://afdian.com/a/saroprock" 
-        ariaLabel: 赞助支持 
-        title: 赞助支持 
-        svg: "ri:cup-line"
-      - href: "https://github.com/EveSunMaple"
-        ariaLabel: GitHub主页 
-        title: GitHub主页 
+      - href: "https://github.com/ZhouYinLong-lab/"
+        ariaLabel: GitHub # 汉化
+        title: GitHub # 汉化
         svg: "ri:github-line"
-      - href: "https://space.bilibili.com/438392347"
-        ariaLabel: 哔哩哔哩 
-        title: 哔哩哔哩 
+      - href: "https://space.bilibili.com/511060666"
+        ariaLabel: B站 # 汉化
+        title: B站 # 汉化
         svg: "ri:bilibili-line"
-      - href: "https://x.com/EveSunMaple"
-        ariaLabel: X(推特) 
-        title: X(推特) 
-        svg: "ri:twitter-line"
+      - href: "/qq.jpg" # 👈 点击后直接在浏览器打开你的 QQ 二维码图片
+        ariaLabel: QQ联系我
+        title: 扫码加我 QQ
+        svg: "ri:qq-line"
+      - href: "/wechat.jpg" # 👈 点击后打开公众号二维码图片
+        ariaLabel: 微信公众号
+        title: 关注我的微信公众号
+        svg: "ri:wechat-line"
