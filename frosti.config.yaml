@@ -28,24 +28,8 @@ site:
       href: /blog
       svg: "material-symbols:book-2-outline-rounded"
       target: _self
-      subItems:
-        - id: all
-          text: 全部文章 # 汉化
-          href: /blog
-          svg: "material-symbols:ink-pen-outline-rounded"
-          target: _self
-        - id: documentation
-          text: 学习文档 # 汉化
-          href: /blog/category/Documentation
-          svg: "material-symbols:unknown-document-outline-rounded"
-          target: _self
-        - id: examples
-          text: 代码示例 # 汉化
-          href: /blog/category/Examples
-          svg: "material-symbols:deployed-code-outline"
-          target: _self
     - id: project
-      text: 实验室项目 # 汉化
+      text: 实验室 # 汉化
       href: /project
       svg: "material-symbols:code-blocks-outline"
       target: _self
@@ -56,7 +40,7 @@ site:
       target: _self
     - id: contact
       text: 联系我 # 汉化
-      href: "mailto:contact.evesunmaple@outlook.com"
+      href: "mailto:Liuhanzhi23@outlook.com"
       target: _blank # 在新标签页打开
       svg: "material-symbols:attach-email-outline-rounded"
 
