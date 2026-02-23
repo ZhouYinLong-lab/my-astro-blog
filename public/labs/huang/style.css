@@ -1,0 +1,224 @@
+:root {
+    --brawl-yellow: #FFC61D;
+    --brawl-blue: #00AEEF;
+    --brawl-purple: #4B2E83;
+    --brawl-pink: #FF4081;
+    --bg-green-light: #4CAF50;
+    --bg-green-dark: #388E3C;
+    --stroke-color: #000;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    user-select: none;
+}
+
+body {
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    background: radial-gradient(circle, var(--bg-green-light) 0%, var(--bg-green-dark) 100%);
+    font-family: 'ZCOOL KuaiLe', cursive, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.game-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start; 
+}
+
+/* --- 转盘主体 --- */
+.wheel-wrapper {
+    position: relative;
+    left: -40vh;
+    width: 120vh;
+    height: 120vh;
+    border-radius: 50%;
+}
+
+.list {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    border: 12px solid var(--brawl-purple);
+    box-shadow: 
+        0 0 0 8px #000, 
+        0 20px 50px rgba(0,0,0,0.5),
+        inset 0 0 100px rgba(0,0,0,0.8);
+    background: radial-gradient(circle, #3d2a5e 0%, #1a102b 100%);
+    will-change: transform; 
+}
+
+/* --- 转盘文字 --- */
+.list span {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 50%;
+    height: 60px;
+    margin-top: -30px; 
+    line-height: 60px;
+    transform-origin: 0% 50%;
+    text-align: right;
+    
+    /* 这里的 padding-right 控制文字离中心的距离 */
+    /* 如果您的图标很大挡住了字，可以把这个数字改大，比如 150px */
+    padding-right: 120px; 
+    
+    font-size: 34px;
+    color: white;
+    -webkit-text-stroke: 2px var(--stroke-color);
+    text-shadow: 4px 4px 0px var(--stroke-color);
+    opacity: 0.5;
+    transition: all 0.2s ease;
+}
+
+.list span.active {
+    color: var(--brawl-yellow) !important;
+    font-size: 54px !important;
+    opacity: 1 !important;
+    z-index: 100;
+    text-shadow: 
+        4px 4px 0px var(--stroke-color),
+        0 0 25px var(--brawl-yellow);
+}
+
+/* --- 【修改】中心图标 (纯净版) --- */
+.center-logo {
+    position: absolute;
+    /* 绝对居中定位 */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    
+    z-index: 200;
+    
+    /* 尺寸：根据您的图片实际大小调整 */
+    width: 180px; 
+    height: 180px;
+    
+    /* 确保不做任何裁剪或背景填充，直接显示 PNG 原图 */
+    object-fit: contain; 
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    pointer-events: none;
+}
+
+/* --- 指针 --- */
+.pointer {
+    position: absolute;
+    left: 75vh;
+    z-index: 1000;
+    top: 50%;
+    transform: translateY(-50%);
+    filter: drop-shadow(0 8px 0px rgba(0,0,0,0.3));
+}
+
+.pointer-arrow {
+    width: 0; 
+    height: 0; 
+    border-top: 30px solid transparent;
+    border-bottom: 30px solid transparent;
+    border-right: 70px solid var(--brawl-pink);
+    animation: pointer-bounce 0.8s infinite alternate ease-in-out;
+}
+
+@keyframes pointer-bounce {
+    from { margin-left: 0; }
+    to { margin-left: 15px; }
+}
+
+/* --- 遮罩与控件 --- */
+.mask-overlay {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 30%;
+    height: 100%;
+    background: linear-gradient(to left, rgba(0,0,0,0.5), transparent);
+    pointer-events: none;
+}
+
+.controls {
+    position: absolute;
+    bottom: 40px;
+    right: 40px;
+    color: white;
+    font-size: 26px;
+    background: #000;
+    padding: 12px 24px;
+    border-radius: 12px;
+    border: 3px solid var(--brawl-yellow);
+    box-shadow: 6px 6px 0 rgba(0,0,0,0.4);
+    letter-spacing: 2px;
+    animation: blink 1.5s infinite;
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.6; }
+}
+
+/* --- 把这段加到 style.css 最后面 --- */
+
+@media screen and (orientation: portrait) {
+    /* 1. 调整转盘大小和位置，改用 vw (屏幕宽度) 单位 */
+    .wheel-wrapper {
+        width: 140vw;       /* 转盘宽度改为屏幕宽度的1.4倍 */
+        height: 140vw;      /* 保持正圆 */
+        left: -85vw;        /* 向左隐藏更多，只露出一边 */
+    }
+
+    /* 2. 调整中心图标大小 */
+    .center-logo {
+        width: 100px;
+        height: 100px;
+    }
+
+    /* 3. 把指针从“很远的右边”拉回来 */
+    .pointer {
+        left: auto;         /* 清除原来的左边距 */
+        right: 5vw;         /* 固定在屏幕右侧 5% 的位置 */
+        top: 50%;
+    }
+    
+    /* 4. 缩小文字，防止爆屏 */
+    .list span {
+        font-size: 18px;    /* 字体变小 */
+        padding-right: 70px; /* 调整文字距离中心的间距 */
+    }
+    
+    /* 选中时的高亮文字也对应缩小 */
+    .list span.active {
+        font-size: 32px !important;
+    }
+
+    /* 5. 修改提示文字 */
+    .controls {
+        font-size: 16px;
+        right: 20px;
+        bottom: 20px;
+    }
+    /* 利用 CSS 伪元素把 "PRESS SPACE" 改成 "TAP SCREEN" */
+    .controls {
+        visibility: hidden; /* 隐藏原来的字 */
+    }
+    .controls::after {
+        content: "TAP SCREEN"; /* 显示新文字 */
+        visibility: visible;
+        display: block;
+        color: white;
+    }
+}

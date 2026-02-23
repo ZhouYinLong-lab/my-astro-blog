@@ -11,8 +11,6 @@ site:
     code: github-dark # 代码块的主题 https://expressive-code.com/guides/themes/
   date_format: YYYY年MM月DD日 # 🌟 日期格式也改成了中文习惯
   blog: # 博客相关配置
-    postCardStyle: 'card'
-    showCover: true
     pageSize: 8 # 每页显示的文章数量
   menu: # 菜单配置
     - id: home 

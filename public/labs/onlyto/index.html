@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>今晚，整片星空将为你一人闪烁</title>
+    <style>
+    #videofilm {
+      width: 100%;
+      height: 100%;        /* 强制高度也占满 */
+      object-fit: cover;   /* 【关键】保持比例铺满，多余部分自动裁剪 */
+      position: fixed;
+      top: 0;              /* 确保从最顶端开始 */
+      left: 0;             /* 确保从最左端开始 */
+      z-index: -1;
+    }
+    
+    h1 {
+      font-size: 36px;
+      color: #B1BCE6;          /* 你原来的颜色，淡紫蓝，很梦幻 */
+      /* 改字体：推荐组合 */
+      font-family: "Great Vibes", cursive;   /* ← 最推荐！超级浪漫 */
+      /* 备选： "Dancing Script", cursive; */
+      /* 备选： "Sacramento", cursive; */
+      /* 备选： "Parisienne", cursive; */
+
+      text-align: center;      /* 建议加，让文字居中 */
+      letter-spacing: 1px;     /* 稍拉开间距，更优雅 */
+      text-shadow: 0 0 10px rgba(177, 188, 230, 0.8);  /* 加轻微发光，像星星 */
+    }
+  </style>
+  
+    <link rel="stylesheet" href="css/skystar.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Dancing+Script:wght@400;700&family=Sacramento&family=Parisienne&family=Pinyon+Script&display=swap" rel="stylesheet">
+  </head>
+  <body>
+    <video id="videofilm" poster="img/skystar2.jpg" autoplay muted loop>
+      <source src="video/skystar.mp4" type="video/mp4">
+    </video>
+    <div class="textone">
+      <h1>Look at the stars,</h1>
+    </div>
+    <div class="texttwo">
+      <h1>to see how they shine for you</h1>
+    </div>
+    <div class="textthree">
+      <h1></h1>
+    </div>
+    <audio id="bgm" src="video/music.mp3" autoplay loop oncanplay="this.volume=0.5"></audio>
+    <div class="container"></div>
+    <script src="js/skystar.js"></script>
+    
+    <script>
+      // 监听网页的任意点击事件
+      document.addEventListener('click', function() {
+          var audio = document.getElementById('bgm');
+          // 如果音乐暂停中，就让它播放
+          if (audio.paused) {
+              audio.play();
+          }
+      });
+    </script>
+
+    
+  </body>
+</html>

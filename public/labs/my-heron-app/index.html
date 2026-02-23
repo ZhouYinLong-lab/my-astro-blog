@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>夜鹭心情识别器</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>🪶 夜鹭心情识别器</h1>
+        <p>输入一段话，让本地 AI 呼唤出符合你心情的沙雕夜鹭！</p>
+        
+        <div class="input-group">
+            <textarea id="text-input" placeholder="今天心情怎么样？" rows="3"></textarea>
+            <button id="analyze-btn">召唤夜鹭！</button>
+        </div>
+
+        <div class="status-message" id="status-msg"></div>
+
+        <div class="image-container" id="image-container">
+            <img id="heron-img" src="" alt="心情夜鹭" style="display: none;">
+            <div id="emotion-label" class="emotion-label"></div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

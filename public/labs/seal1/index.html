@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>泳圈海豹泳池 (全动态气泡版)</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            background-color: #1a1a1a;
+            font-family: 'Courier New', Courier, monospace;
+            touch-action: none;
+        }
+
+        #game-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            /* 背景维持白色 */
+            background-color: #ffffff;
+            z-index: 1;
+        }
+
+        canvas {
+            display: block;
+            width: 100%;
+            height: 100%;
+            image-rendering: pixelated;
+        }
+
+        #ui-layer {
+            position: absolute;
+            top: 5%;
+            left: 0;
+            width: 100%;
+            text-align: center;
+            color: #006064; 
+            pointer-events: none;
+            z-index: 10;
+            transition: opacity 1s;
+        }
+
+        h1 {
+            font-size: 2rem;
+            margin: 0 0 10px 0;
+            letter-spacing: 4px;
+            font-weight: 800;
+            text-shadow: 2px 2px 0px rgba(128, 222, 234, 0.5);
+        }
+
+        p {
+            font-size: 1rem;
+            margin: 5px;
+            opacity: 0.9;
+            color: #00838f;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+<div id="game-container">
+    <div id="ui-layer">
+        <h1>SEAL POOL</h1>
+        <p id="status">Tap a Seal to Pull</p>
+    </div>
+    <canvas id="world"></canvas>
+</div>
+
+<script>
+const canvas = document.getElementById('world');
+const ctx = canvas.getContext('2d');
+const uiLayer = document.getElementById('ui-layer');
+const statusEl = document.getElementById('status');
+
+// --- 核心变量 ---
+const WATER_LEVEL = 180; 
+
+// --- 像素画工厂 (保持不变) ---
+const BASE_SPRITE_BLUE = {
+    awake: [
+        "       .......       ",
+        "      .xGGGGxS.      ",
+        "     .xGGGGGGxS.     ",
+        "     .xxGGGGxxS.     ",
+        "    .xxxxxxxxxxS.    ",
+        "    .x@xxxxx@xxS.    ",
+        "    .xxxxnxxxxxS.    ",
+        "    .xxxhhhxxxxS.    ",
+        "    .xhwwwwwxhx..    ",
+        "   .xhwwwwwwwhx.     ",
+        "  .yyyyyyyyyyyyy.    ",
+        " .yyPyyyPyyyPyyyy.   ", 
+        ".yyyyPyyyyPyyyyPyy.  ",
+        ".yyyyyyyyyyyyyyyyy.  ",
+        ".yyyyyyyyyyyyyyyyy.  ",
+        " .yyyyyyyyyyyyyyy.   ",
+        "  .yyyyyyyyyyyyy.    ",
+        "    .xBWWWWBx.       ",
+        "    .xBBWWBBx.       ",
+        "    .xBBWWBBx.       ",
+        "    .xBBBBBBx.       ",
+        "    .xBBBBBBx.       ",
+        "     .xBBBx.         ",
+        "     .xBBBx.         ",
+        "     .xBxBx.         ",
+        "    .xBx.xBx.        ",
+        "    .xB...xB.        ",
+        "     .......         "
+    ],
+    sleep: [ 
+        "       .......       ",
+        "      .xGGGGxS.      ",
+        "     .xGGGGGGxS.     ",
+        "     .xxGGGGxxS.     ",
+        "    .xxxxxxxxxxS.    ",
+        "    .x-xxxxx-xxS.    ",
+        "    .xxxxnxxxxxS.    ",
+        "    .xxxhhhxxxxS.    ",
+        "    .xhwwwwwxhx..    ",
+        "   .xhwwwwwwwhx.     ",
+        "  .yyyyyyyyyyyyy.    ",
+        " .yyPyyyPyyyPyyyy.   ",
+        ".yyyyPyyyyPyyyyPyy.  ",
+        ".yyyyyyyyyyyyyyyyy.  ",
+        ".yyyyyyyyyyyyyyyyy.  ",
+        " .yyyyyyyyyyyyyyy.   ",
+        "  .yyyyyyyyyyyyy.    ",
+        "    .xBWWWWBx.       ",
+        "    .xBBWWBBx.       ",
+        "    .xBBWWBBx.       ",
+        "    .xBBBBBBx.       ",
+        "    .xBBBBBBx.       ",
+        "     .xBBBx.         ",
+        "     .xBBBx.         ",
+        "     .xBxBx.         ",
+        "    .xBx.xBx.        ",
+        "    .xB...xB.        ",
+        "     .......         "
+    ]
+};
+
+const BASE_SPRITE_PINK = {
+    awake: JSON.parse(JSON.stringify(BASE_SPRITE_BLUE.awake)).map(row => 
+        row.replace("yyPyyyPyyyPyyyy", "yyyyPyyyPyyyPyy")
+           .replace("yyyyPyyyyPyyyyPyy", "yyPyyyyPyyyyPyyyy")
+    ),
+    sleep: JSON.parse(JSON.stringify(BASE_SPRITE_BLUE.sleep)).map(row => 
+        row.replace("yyPyyyPyyyPyyyy", "yyyyPyyyPyyyPyy")
+           .replace("yyyyPyyyyPyyyyPyy", "yyPyyyyPyyyyPyyyy")
+    )
+};
+
+const BASE_SPRITE_GREEN = {
+    awake: JSON.parse(JSON.stringify(BASE_SPRITE_BLUE.awake)).map(row => 
+        row.replace("yyPyyyPyyyPyyyy", "yPyyyyPyyyyPyyy") 
+           .replace("yyyyPyyyyPyyyyPyy", "yyyyyPyyyyPyyyyPy")
+    ),
+    sleep: JSON.parse(JSON.stringify(BASE_SPRITE_BLUE.sleep)).map(row => 
+        row.replace("yyPyyyPyyyPyyyy", "yPyyyyPyyyyPyyy")
+           .replace("yyyyPyyyyPyyyyPyy", "yyyyyPyyyyPyyyyPy")
+    )
+};
+
+const COMMON_COLORS = {
+    '.': null,
+    'x': '#546E7A', 'B': '#546E7A', '@': '#000000', '-': '#37474F', 
+    'n': '#F06292', 'h': '#455A64', 'w': '#FFFFFF', 'W': '#FFFFFF', 'y': '#FFEB3B',
+};
+
+const THEMES = {
+    blue: {
+        palette: { ...COMMON_COLORS, 'G': '#40C4FF', 'S': '#0288D1', 'P': '#F48FB1' },
+        sprite: BASE_SPRITE_BLUE
+    },
+    pink: {
+        palette: { ...COMMON_COLORS, 'G': '#FF80AB', 'S': '#C51162', 'P': '#69F0AE' },
+        sprite: BASE_SPRITE_PINK
+    },
+    green: {
+        palette: { ...COMMON_COLORS, 'G': '#69F0AE', 'S': '#2E7D32', 'P': '#FFAB40' },
+        sprite: BASE_SPRITE_GREEN
+    }
+};
+
+let width, height;
+let pixelSize = 5; 
+let touchX = 0, touchY = 0;
+let bubbles = [];
+let zParticles = []; 
+let hasInteracted = false;
+
+// --- 海豹类 ---
+class Seal {
+    constructor(type, startX, startY) {
+        this.type = type;
+        this.theme = THEMES[type];
+        this.x = startX;
+        this.y = startY;
+        this.vx = 0;
+        this.vy = 0;
+        this.angle = 0;
+        this.state = 'awake';
+        this.floatOffset = Math.random() * 10;
+        this.isDragging = false;
+        this.restingAngle = (Math.random() < 0.5 ? 1 : -1) * (Math.PI / 3);
+        this.drag = 0.94 + Math.random() * 0.03; 
+        this.swimSpeed = 0.003 + Math.random() * 0.002;
+    }
+
+    update() {
+        this.floatOffset += 0.08;
+
+        if (this.isDragging) {
+            if (!hasInteracted) {
+                hasInteracted = true;
+                uiLayer.style.opacity = '0';
+            }
+            const dx = touchX - this.x;
+            const dy = touchY - this.y;
+            this.vx += dx * 0.006;
+            this.vy += dy * 0.006;
+
+            if (Math.random() < 0.05) {
+                this.restingAngle = (Math.random() < 0.5 ? 1 : -1) * (Math.PI / 3 + (Math.random() - 0.5) * 0.2);
+            }
+        } else {
+            this.vy += 0.08; 
+            this.vx *= this.drag;
+        }
+
+        this.vx *= 0.92;
+        this.vy *= 0.92;
+        this.x += this.vx;
+        this.y += this.vy;
+
+        if (this.vy < -0.1) this.state = 'awake';
+        else if (this.vy > 0.1) this.state = 'sleep';
+
+        if (this.state === 'sleep' && !this.isDragging) {
+            if (Math.random() < 0.02) {
+                const headOffsetX = Math.sin(this.angle) * -40;
+                const headOffsetY = Math.cos(this.angle) * -40;
+                createZ(this.x + headOffsetX, this.y + headOffsetY);
+            }
+        }
+
+        let targetAngle = 0;
+        if (this.state === 'sleep' && this.y > height - 150) {
+            targetAngle = this.restingAngle;
+        } else {
+            targetAngle = this.vx * 0.15;
+        }
+        this.angle = (1 - 0.08) * this.angle + 0.08 * targetAngle;
+
+        const margin = 80;
+        if (this.y > height - margin) {
+            this.y = height - margin;
+            this.vy = 0;
+            this.state = 'sleep';
+        }
+        if (this.x < margin) { this.x = margin; this.vx *= -0.5; }
+        if (this.x > width - margin) { this.x = width - margin; this.vx *= -0.5; }
+
+        // --- 核心优化：动态冒泡系统 ---
+        // 1. 上浮时的气泡 (接近水面)
+        const bubbleStartLine = WATER_LEVEL + (height - WATER_LEVEL) / 2;
+        if (this.state === 'awake' && this.y < bubbleStartLine && this.y > WATER_LEVEL) {
+            const progress = 1 - (this.y - WATER_LEVEL) / (bubbleStartLine - WATER_LEVEL);
+            const chance = 0.05 + progress * 0.25;
+            if (Math.random() < chance) {
+                const startSize = (Math.random() * pixelSize) + (progress * 3);
+                createBubble(this.x + (Math.random()-0.5)*20, this.y - 40, false, startSize);
+            }
+        }
+
+        // 2. 下沉时的气泡 (新增)
+        // 条件：正在下沉(vy > 0.2)，在水中，且没有到底部
+        if (this.vy > 0.2 && this.y > WATER_LEVEL && this.y < height - 100) {
+            // 下沉速度越快，冒泡概率越大 (vy 通常在 0~5 之间)
+            const sinkBubbleChance = Math.min(this.vy * 0.1, 0.3);
+            if (Math.random() < sinkBubbleChance) {
+                // 气泡产生在海豹上方(模拟拖尾)，大小随机
+                createBubble(this.x + (Math.random()-0.5)*20, this.y - 30, false, Math.random() * 3 + 1);
+            }
+        }
+
+        // 3. 冲出水面时的水花
+        if (this.y < WATER_LEVEL) {
+            this.y = WATER_LEVEL;
+            this.vy = 0;
+            if (this.state === 'awake' && Math.random() < 0.3) {
+                createBubble(this.x, this.y - 10, true, null);
+            }
+        }
+    }
+
+    draw() {
+        const pattern = this.theme.sprite[this.state];
+        const palette = this.theme.palette;
+        
+        ctx.save();
+        ctx.translate(Math.floor(this.x), Math.floor(this.y));
+        ctx.rotate(this.angle);
+
+        const rows = pattern.length;
+        const cols = pattern[0].length;
+        const halfW = (cols * pixelSize) / 2;
+        const halfH = (rows * pixelSize) / 2;
+
+        if (Math.abs(this.angle) > 0.5) {
+             const breath = Math.sin(this.floatOffset) * 0.02 + 1;
+             ctx.scale(breath, 1);
+        } else {
+             const bob = Math.sin(this.floatOffset) * 3;
+             ctx.translate(0, bob);
+        }
+
+        for (let r = 0; r < rows; r++) {
+            const rowStr = pattern[r];
+            for (let c = 0; c < cols; c++) {
+                const char = rowStr[c];
+                const color = palette[char];
+                if (color) {
+                    ctx.fillStyle = color;
+                    ctx.fillRect(
+                        Math.floor(c * pixelSize - halfW), 
+                        Math.floor(r * pixelSize - halfH), 
+                        pixelSize, pixelSize
+                    );
+                }
+            }
+        }
+        ctx.restore();
+    }
+}
+
+let seals = [];
+
+function initSeals() {
+    seals = [
+        new Seal('blue', width * 0.5, height * 0.6),      
+        new Seal('pink', width * 0.3, height * 0.7),      
+        new Seal('green', width * 0.7, height * 0.5)      
+    ];
+}
+
+// --- 粒子特效 (核心优化) ---
+function createBubble(x, y, isSplash, overrideSize) {
+    bubbles.push({
+        x: x, y: y,
+        size: overrideSize || (Math.random() * (pixelSize * 1.5) + 2),
+        life: 100,
+        vx: (Math.random() - 0.5) * 2,
+        vy: isSplash ? -Math.random() * 4 : -Math.random() * 2 - 1,
+        isSplash: isSplash
+    });
+}
+
+function updateBubbles() {
+    for (let i = bubbles.length - 1; i >= 0; i--) {
+        let b = bubbles[i];
+        
+        if (!b.isSplash) {
+            b.vy -= 0.05; 
+            b.size += 0.05; 
+        }
+        
+        b.x += b.vx;
+        b.y += b.vy;
+        b.life -= 1.5;
+        
+        if (!b.isSplash && b.y <= WATER_LEVEL) {
+            b.life = 0;
+            bubbles.splice(i, 1);
+            continue;
+        }
+
+        if (b.life > 0) {
+            ctx.fillStyle = `rgba(255, 255, 255, ${b.life/100})`;
+            
+            ctx.beginPath();
+            ctx.arc(b.x, b.y, b.size/2, 0, Math.PI * 2);
+            ctx.fill();
+            
+            if (b.y >= WATER_LEVEL) {
+                ctx.fillStyle = "rgba(255,255,255,0.8)";
+                ctx.beginPath();
+                ctx.arc(b.x - b.size/4, b.y - b.size/4, b.size/4, 0, Math.PI*2);
+                ctx.fill();
+            }
+        } else {
+            bubbles.splice(i, 1);
+        }
+    }
+}
+
+function createZ(x, y) {
+    zParticles.push({
+        x: x, y: y,
+        char: Math.random() > 0.5 ? 'z' : 'Z',
+        size: Math.random() * 10 + 15,
+        life: 100,
+        vx: Math.sin(Date.now() / 100) * 0.5,
+        vy: -0.8
+    });
+}
+
+function updateZs() {
+    ctx.font = "bold 20px 'Courier New'";
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
+    for (let i = zParticles.length - 1; i >= 0; i--) {
+        let z = zParticles[i];
+        z.y += z.vy;
+        z.x += Math.sin(z.life * 0.1) * 0.5;
+        z.life -= 1;
+        if (z.life > 0) {
+            ctx.fillStyle = `rgba(0, 96, 100, ${z.life/100})`;
+            ctx.save();
+            ctx.translate(z.x, z.y);
+            let scale = 1 + (100 - z.life) * 0.01;
+            ctx.scale(scale, scale);
+            ctx.fillText(z.char, 0, 0);
+            ctx.restore();
+        } else {
+            zParticles.splice(i, 1);
+        }
+    }
+}
+
+function loop() {
+    ctx.clearRect(0, 0, width, height);
+
+    const gradient = ctx.createLinearGradient(0, WATER_LEVEL, 0, height);
+    gradient.addColorStop(0, '#80deea'); 
+    gradient.addColorStop(0.4, '#4dd0e1');
+    gradient.addColorStop(1, '#006064'); 
+    
+    ctx.fillStyle = gradient;
+    ctx.fillRect(0, WATER_LEVEL, width, height - WATER_LEVEL);
+    
+    ctx.fillStyle = "rgba(255,255,255,0.6)";
+    ctx.fillRect(0, WATER_LEVEL, width, 4);
+
+    updateBubbles();
+    seals.sort((a, b) => a.y - b.y);
+    seals.forEach(seal => {
+        seal.update();
+        seal.draw();
+    });
+    updateZs();
+    requestAnimationFrame(loop);
+}
+
+function resize() {
+    width = window.innerWidth;
+    height = window.innerHeight;
+    canvas.width = width;
+    canvas.height = height;
+    pixelSize = Math.min(width, height) < 600 ? 5 : 6;
+    if (seals.length === 0) initSeals();
+}
+
+function onInputStart(x, y) {
+    touchX = x;
+    touchY = y;
+    
+    let hitAny = false;
+    seals.forEach(seal => {
+        const dx = x - seal.x;
+        const dy = y - seal.y;
+        const dist = Math.sqrt(dx*dx + dy*dy);
+        
+        if (dist < 80) {
+            seal.isDragging = true;
+            hitAny = true;
+            createBubble(seal.x, seal.y, true, null);
+        }
+    });
+
+    if (hitAny) {
+        statusEl.innerText = "Gotcha!";
+    }
+}
+
+function onInputMove(x, y) {
+    touchX = x;
+    touchY = y;
+}
+
+function onInputEnd() {
+    seals.forEach(seal => seal.isDragging = false);
+    statusEl.innerText = "Sleeping...";
+}
+
+window.addEventListener('resize', resize);
+window.addEventListener('mousedown', e => onInputStart(e.clientX, e.clientY));
+window.addEventListener('mousemove', e => onInputMove(e.clientX, e.clientY));
+window.addEventListener('mouseup', onInputEnd);
+canvas.addEventListener('touchstart', e => { e.preventDefault(); onInputStart(e.touches[0].clientX, e.touches[0].clientY); }, {passive: false});
+canvas.addEventListener('touchmove', e => { e.preventDefault(); onInputMove(e.touches[0].clientX, e.touches[0].clientY); }, {passive: false});
+canvas.addEventListener('touchend', onInputEnd);
+
+resize();
+loop();
+
+</script>
+</body>
+</html>
