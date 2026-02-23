@@ -1,7 +1,7 @@
 ---
 title: "烟火文沃，康城新章"
 description: "旧社区文沃的重访随想，记录三年半来的变迁与回忆。"
-date: 2026-02-09
+pubDate: 2026-02-09
 category: "似水"
 tags: ["回忆"]
 cover: "/img/water/water1.jpg"
