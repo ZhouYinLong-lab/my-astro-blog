@@ -22,7 +22,7 @@ const blog = defineCollection({
         message: "tags must be unique",
       })
       .optional(),
-  }),
+  }).catchall(z.any()), // 👉 终极魔法：接收并放行任何未来自定义的字段！
 });
 
 export const collections = { blog };
