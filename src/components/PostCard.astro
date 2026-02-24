@@ -12,7 +12,7 @@ import PostInfo from "./widgets/PostInfo.astro";
 const {
   title,
   image,
-  cover, 
+  cover,
   pubDate,
   description,
   badge,
@@ -21,12 +21,12 @@ const {
   word = "0",
   time = "0",
   url = decodeURIComponent(Astro.url.toString()),
-} = Astro.props as any; 
+} = Astro.props as any;
 
 const displayDate = pubDate ? dayjs(pubDate).format(DATE_FORMAT) : "";
 
 // 👈 核心逻辑：优先使用 image，如果没有就用 cover
-const displayImage = image || cover; 
+const displayImage = image || cover;
 ---
 
 <Card class="overflow-hidden">

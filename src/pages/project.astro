@@ -1,8 +1,8 @@
 ---
+import { getCollection } from "astro:content";
 import { Icon } from "astro-icon/components";
 import MainCard from "@/components/MainCard.astro";
 import BaseLayout from "@/layouts/BaseLayout.astro";
-import { getCollection } from "astro:content";
 
 // 1. 获取所有的博客文章
 const allPosts = await getCollection("blog");
@@ -15,7 +15,9 @@ const labPosts = allPosts
     const cats = post.data.categories || [post.data.category];
     return cats.flat().includes("实验室");
   })
-  .sort((a: any, b: any) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+  .sort(
+    (a: any, b: any) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+  );
 ---
 
 <BaseLayout title="实验室项目">
