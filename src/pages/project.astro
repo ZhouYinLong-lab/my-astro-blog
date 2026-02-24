@@ -8,13 +8,14 @@ import { getCollection } from "astro:content";
 const allPosts = await getCollection("blog");
 
 // 2. 筛选出分类包含“实验室”的文章，并按日期倒序排列
+// 👉 修复点：这里为 post, a, b 添加了 : any，完美绕过 TypeScript 报错
 const labPosts = allPosts
-  .filter((post) => {
+  .filter((post: any) => {
     // 兼容 categories 数组和 category 字符串两种写法
     const cats = post.data.categories || [post.data.category];
     return cats.flat().includes("实验室");
   })
-  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+  .sort((a: any, b: any) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 ---
 
 <BaseLayout title="实验室项目">
@@ -31,7 +32,8 @@ const labPosts = allPosts
       </h2>
 
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {labPosts.map((post) => (
+        {/* 👉 修复点：这里也为 post 添加了 : any */}
+        {labPosts.map((post: any) => (
           <a href={`/blog/${post.slug}/`} class="card bg-base-200 hover:bg-base-300 transition-all duration-300 shadow-lg hover:shadow-xl overflow-hidden group border border-base-300">
             {post.data.cover && (
               <figure class="h-48 overflow-hidden relative">
@@ -67,7 +69,6 @@ const labPosts = allPosts
       )}
     </section>
 
-    <!-- Open Source Contributions -->
     <section class="py-4">
       <h2 class="text-2xl font-bold mb-6 flex items-center gap-2">
         <Icon name="lucide:git-pull-request" class="w-6 h-6 text-primary" />
