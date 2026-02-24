@@ -6,7 +6,7 @@ categories:
   - 似水
 tags: 
   - 回忆
-cover: "/img/water/water1.jpg"
+image: "/img/water/water1.jpg"
 ---
 近日屡次返回我曾居住的旧社区——文沃，与我三年半前往新城区上高中搬走时相比，变化颇巨，感慨良多，故留此纪念。
 
