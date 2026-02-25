@@ -73,7 +73,7 @@ body {
     text-align: right;
     
     /* 这里的 padding-right 控制文字离中心的距离 */
-    /* 如果您的图标很大挡住了字，可以把这个数字改大，比如 150px */
+    /* 如果您的图标很大挡住了字,可以把这个数字改大,比如 150px */
     padding-right: 120px; 
     
     font-size: 34px;
@@ -108,7 +108,7 @@ body {
     width: 180px; 
     height: 180px;
     
-    /* 确保不做任何裁剪或背景填充，直接显示 PNG 原图 */
+    /* 确保不做任何裁剪或背景填充,直接显示 PNG 原图 */
     object-fit: contain; 
     background: transparent;
     border: none;
@@ -174,11 +174,11 @@ body {
 /* --- 把这段加到 style.css 最后面 --- */
 
 @media screen and (orientation: portrait) {
-    /* 1. 调整转盘大小和位置，改用 vw (屏幕宽度) 单位 */
+    /* 1. 调整转盘大小和位置,改用 vw (屏幕宽度) 单位 */
     .wheel-wrapper {
         width: 140vw;       /* 转盘宽度改为屏幕宽度的1.4倍 */
         height: 140vw;      /* 保持正圆 */
-        left: -85vw;        /* 向左隐藏更多，只露出一边 */
+        left: -85vw;        /* 向左隐藏更多,只露出一边 */
     }
 
     /* 2. 调整中心图标大小 */
@@ -194,7 +194,7 @@ body {
         top: 50%;
     }
     
-    /* 4. 缩小文字，防止爆屏 */
+    /* 4. 缩小文字,防止爆屏 */
     .list span {
         font-size: 18px;    /* 字体变小 */
         padding-right: 70px; /* 调整文字距离中心的间距 */

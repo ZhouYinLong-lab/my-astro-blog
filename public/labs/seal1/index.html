@@ -278,12 +278,12 @@ class Seal {
         }
 
         // 2. 下沉时的气泡 (新增)
-        // 条件：正在下沉(vy > 0.2)，在水中，且没有到底部
+        // 条件：正在下沉(vy > 0.2),在水中,且没有到底部
         if (this.vy > 0.2 && this.y > WATER_LEVEL && this.y < height - 100) {
-            // 下沉速度越快，冒泡概率越大 (vy 通常在 0~5 之间)
+            // 下沉速度越快,冒泡概率越大 (vy 通常在 0~5 之间)
             const sinkBubbleChance = Math.min(this.vy * 0.1, 0.3);
             if (Math.random() < sinkBubbleChance) {
-                // 气泡产生在海豹上方(模拟拖尾)，大小随机
+                // 气泡产生在海豹上方(模拟拖尾),大小随机
                 createBubble(this.x + (Math.random()-0.5)*20, this.y - 30, false, Math.random() * 3 + 1);
             }
         }

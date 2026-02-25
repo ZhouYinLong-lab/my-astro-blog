@@ -1,5 +1,6 @@
 ---
 import PostCard from "@components/PostCard.astro";
+import MainCard from "@/components/MainCard.astro"; // 👈 新增引入大卡片组件
 import CardGroup from "@components/temple/CardGroup.astro";
 import Pagination from "@components/widgets/Pagination.astro";
 import { t } from "@config";
@@ -20,9 +21,7 @@ const pageLinks = generatePageLinks(totalPages);
 ---
 
 <BaseLayout title="Blog">
-  <!-- Blog Navigation Cards -->
   <CardGroup cols="2">
-    <!-- Archives Card -->
     <a href="/blog/archives" class="card bg-base-100 shadow-lg">
       <div class="card-body p-4">
         <div class="flex items-center gap-3">
@@ -37,7 +36,6 @@ const pageLinks = generatePageLinks(totalPages);
       </div>
     </a>
 
-    <!-- Categories Card -->
     <a href="/blog/categories" class="card bg-base-100 shadow-lg">
       <div class="card-body p-4">
         <div class="flex items-center gap-3">
@@ -52,7 +50,6 @@ const pageLinks = generatePageLinks(totalPages);
       </div>
     </a>
 
-    <!-- Tags Card -->
     <a href="/blog/tags" class="card bg-base-100 shadow-lg">
       <div class="card-body p-4">
         <div class="flex items-center gap-3">
@@ -67,7 +64,6 @@ const pageLinks = generatePageLinks(totalPages);
       </div>
     </a>
 
-    <!-- Search Card -->
     <a href="/blog/search" class="card bg-base-100 shadow-lg">
       <div class="card-body p-4">
         <div class="flex items-center gap-3">
@@ -83,22 +79,35 @@ const pageLinks = generatePageLinks(totalPages);
     </a>
   </CardGroup>
 
-  <!-- Blog Post List -->
   <CardGroup cols="1">
     {
       page.data.map((blog: Post) => (
-        <PostCard
-          title={blog.data.title}
-          image={blog.data.image}
-          description={blog.data.description}
-          url={"/blog/" + blog.slug}
-          pubDate={blog.data.pubDate}
-          badge={blog.data.badge}
-          categories={blog.data.categories}
-          tags={blog.data.tags}
-          word={blog.remarkPluginFrontmatter.totalCharCount}
-          time={blog.remarkPluginFrontmatter.readingTime}
-        />
+        blog.data.featured ? (
+          // 👇 如果文章有 featured: true，就渲染为巨大的 MainCard
+          <div class="mb-4">
+            <MainCard
+              title={blog.data.title}
+              image={blog.data.image}
+              description={blog.data.description}
+              link={blog.data.link ? blog.data.link : "/blog/" + blog.slug}
+              infoIcon="lucide:star"
+            />
+          </div>
+        ) : (
+          // 👇 如果没有，就规规矩矩地渲染为左文右图的 PostCard
+          <PostCard
+            title={blog.data.title}
+            image={blog.data.image}
+            description={blog.data.description}
+            url={"/blog/" + blog.slug}
+            pubDate={blog.data.pubDate}
+            badge={blog.data.badge}
+            categories={blog.data.categories}
+            tags={blog.data.tags}
+            word={blog.remarkPluginFrontmatter.totalCharCount}
+            time={blog.remarkPluginFrontmatter.readingTime}
+          />
+        )
       ))
     }
   </CardGroup>
