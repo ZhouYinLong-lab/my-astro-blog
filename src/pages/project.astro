@@ -7,8 +7,8 @@ import BaseLayout from "@/layouts/BaseLayout.astro";
 // 1. 获取所有的博客文章
 const allPosts = await getCollection("blog");
 
-// 2. 筛选出分类包含“实验室”的文章，并按日期倒序排列
-// 👉 修复点：这里为 post, a, b 添加了 : any，完美绕过 TypeScript 报错
+// 2. 筛选出分类包含“实验室”的文章,并按日期倒序排列
+// 👉 修复点：这里为 post, a, b 添加了 : any,完美绕过 TypeScript 报错
 const labPosts = allPosts
   .filter((post: any) => {
     // 兼容 categories 数组和 category 字符串两种写法
@@ -66,7 +66,7 @@ const labPosts = allPosts
       {labPosts.length === 0 && (
         <div class="text-center py-16 text-base-content/50 bg-base-200 rounded-2xl border border-dashed border-base-300 mt-4">
           <Icon name="lucide:ghost" class="w-12 h-12 mx-auto mb-4 opacity-50" />
-          <p>实验室目前还在筹备中，敬请期待...</p>
+          <p>实验室目前还在筹备中,敬请期待...</p>
         </div>
       )}
     </section>

@@ -8,7 +8,7 @@ import Heading from "./widgets/Heading.astro";
 import PostFilter from "./widgets/PostFilter.astro";
 import PostInfo from "./widgets/PostInfo.astro";
 
-// 👈 将 Astro.props 稍作类型扩展，允许它读取我们写的 cover 字段
+// 👈 将 Astro.props 稍作类型扩展,允许它读取我们写的 cover 字段
 const {
   title,
   image,
@@ -25,7 +25,7 @@ const {
 
 const displayDate = pubDate ? dayjs(pubDate).format(DATE_FORMAT) : "";
 
-// 👈 核心逻辑：优先使用 image，如果没有就用 cover
+// 👈 核心逻辑：优先使用 image,如果没有就用 cover
 const displayImage = image || cover;
 ---
 
