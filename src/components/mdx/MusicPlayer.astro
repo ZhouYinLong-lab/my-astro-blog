@@ -1,0 +1,154 @@
+---
+import { Icon } from "astro-icon/components";
+
+const {
+  title = "未知曲目",
+  artist = "未知艺术家",
+  cover = "/img/default-cover.gif",
+  src = ""
+} = Astro.props;
+---
+
+<div class="music-player-card flex w-full h-[72px] bg-white border border-base-200 rounded-[4px] overflow-hidden shadow-sm my-6">
+  <audio class="audio-element" src={src} preload="metadata"></audio>
+
+  <div class="relative w-[72px] h-[72px] flex-shrink-0 cursor-pointer group play-btn">
+    <img src={cover} alt={title} class="w-full h-full object-cover" />
+    <div class="absolute inset-0 bg-black/30 flex items-center justify-center transition-opacity opacity-80 group-hover:opacity-100">
+      <Icon name="lucide:play-circle" class="w-9 h-9 text-white/90 play-icon transition-transform group-hover:scale-110" />
+      <Icon name="lucide:pause-circle" class="w-9 h-9 text-white/90 hidden pause-icon transition-transform group-hover:scale-110" />
+    </div>
+  </div>
+
+  <div class="flex-1 flex flex-col justify-between px-4 py-2.5 min-w-0 bg-base-100">
+    <div class="text-[14px] text-base-content truncate font-medium">
+      {title} <span class="text-base-content/60 text-[12px] ml-1 font-normal">- {artist}</span>
+    </div>
+
+    <div class="flex items-center gap-3 text-base-content/50">
+      <div class="flex-1 h-[2px] bg-base-300 cursor-pointer relative progress-container flex items-center group/bar">
+        <div class="absolute left-0 h-[2px] bg-primary progress-bar pointer-events-none transition-all duration-75" style="width: 0%;"></div>
+        <div class="absolute inset-0 -top-2 -bottom-2"></div>
+      </div>
+
+      <div class="text-[12px] font-mono time-display whitespace-nowrap">
+        00:00 / 00:00
+      </div>
+
+      <Icon name="lucide:volume-2" class="w-4 h-4 cursor-pointer hover:text-primary transition-colors" />
+      <Icon name="lucide:repeat" class="w-4 h-4 cursor-pointer hover:text-primary transition-colors loop-btn" />
+    </div>
+  </div>
+</div>
+
+<script>
+  // 给 Player 类加上 TypeScript 类型声明，满足强迫症校验
+  class Player {
+    audio: HTMLAudioElement;
+    playBtn: HTMLElement;
+    playIcon: HTMLElement;
+    pauseIcon: HTMLElement;
+    progressContainer: HTMLElement;
+    progressBar: HTMLElement;
+    timeDisplay: HTMLElement;
+    loopBtn: HTMLElement;
+    isPlaying: boolean;
+
+    constructor(container: HTMLElement) {
+      this.audio = container.querySelector('.audio-element') as HTMLAudioElement;
+      this.playBtn = container.querySelector('.play-btn') as HTMLElement;
+      this.playIcon = container.querySelector('.play-icon') as HTMLElement;
+      this.pauseIcon = container.querySelector('.pause-icon') as HTMLElement;
+      this.progressContainer = container.querySelector('.progress-container') as HTMLElement;
+      this.progressBar = container.querySelector('.progress-bar') as HTMLElement;
+      this.timeDisplay = container.querySelector('.time-display') as HTMLElement;
+      this.loopBtn = container.querySelector('.loop-btn') as HTMLElement;
+      this.isPlaying = false;
+      this.init();
+    }
+
+    init() {
+      this.playBtn.addEventListener('click', () => this.togglePlay());
+      this.audio.addEventListener('timeupdate', () => this.updateProgress());
+      this.audio.addEventListener('loadedmetadata', () => this.updateProgress());
+      this.audio.addEventListener('ended', () => {
+        if (!this.audio.loop) {
+          this.isPlaying = false;
+          this.updateUI();
+        }
+      });
+      this.progressContainer.addEventListener('click', (e: MouseEvent) => this.seek(e));
+      this.loopBtn.addEventListener('click', () => this.toggleLoop());
+    }
+
+    formatTime(sec: number) {
+      if (isNaN(sec)) return "00:00";
+      const m = Math.floor(sec / 60).toString().padStart(2, '0');
+      const s = Math.floor(sec % 60).toString().padStart(2, '0');
+      return `${m}:${s}`;
+    }
+
+    togglePlay() {
+      // 播放当前这首时，自动暂停页面上的其他歌曲
+      document.querySelectorAll('audio').forEach(a => {
+        if (a !== this.audio && !a.paused) {
+          a.pause();
+          const parent = a.parentElement;
+          if(parent) {
+            parent.querySelector('.play-icon')?.classList.remove('hidden');
+            parent.querySelector('.pause-icon')?.classList.add('hidden');
+          }
+        }
+      });
+
+      if (this.audio.paused) {
+        this.audio.play();
+        this.isPlaying = true;
+      } else {
+        this.audio.pause();
+        this.isPlaying = false;
+      }
+      this.updateUI();
+    }
+
+    updateUI() {
+      if (this.isPlaying) {
+        this.playIcon.classList.add('hidden');
+        this.pauseIcon.classList.remove('hidden');
+      } else {
+        this.playIcon.classList.remove('hidden');
+        this.pauseIcon.classList.add('hidden');
+      }
+    }
+
+    updateProgress() {
+      const current = this.audio.currentTime;
+      const total = this.audio.duration;
+      if (total) {
+        this.progressBar.style.width = `${(current / total) * 100}%`;
+        this.timeDisplay.textContent = `${this.formatTime(current)} / ${this.formatTime(total)}`;
+      }
+    }
+
+    seek(e: MouseEvent) {
+      const rect = this.progressContainer.getBoundingClientRect();
+      const pos = (e.clientX - rect.left) / rect.width;
+      this.audio.currentTime = pos * this.audio.duration;
+    }
+
+    toggleLoop() {
+      this.audio.loop = !this.audio.loop;
+      this.loopBtn.style.opacity = this.audio.loop ? '1' : '0.5';
+    }
+  }
+
+  // 适配 Astro 的页面切换机制
+  document.addEventListener('astro:page-load', () => {
+    document.querySelectorAll('.music-player-card').forEach(card => {
+      if (!(card as HTMLElement).dataset.init) {
+        new Player(card as HTMLElement);
+        (card as HTMLElement).dataset.init = 'true';
+      }
+    });
+  });
+</script>

@@ -11,6 +11,7 @@ categories:
 image: /img/ghost/ghost1.png  
 ---
 import Info from '@/components/mdx/Info.astro';
+import MusicPlayer from "../../components/mdx/MusicPlayer.astro";
 
 ![开篇第一幕](/img/ghost/ghost2.png)
 
@@ -23,11 +24,12 @@ import Info from '@/components/mdx/Info.astro';
 
 在这个被算法推荐和短视频填满的午后,重温押井守1995年的《攻壳机动队》,绝非一次简单的怀旧。
 
-<div class="music-card bg-gray-100 dark:bg-zinc-800 p-4 rounded-2xl shadow-md my-6">
-  <img src="/music/I-Making of Cyborg.jpg" class="w-full aspect-video object-cover rounded-xl mb-4" />
-  <p class="text-center font-bold mb-2">謡I-Making of Cyborg - 川井宪次</p>
-  <audio controls src="/music/I-Making of Cyborg.mp3" class="w-full"></audio>
-</div>
+<MusicPlayer 
+  title="謡I-Making of Cyborg" 
+  artist="川井宪次" 
+  cover="/music/I-Making of Cyborg.jpg" 
+  src="/music/I-Making of Cyborg.mp3" 
+/>
 
 当川井宪次那首如丧钟般幽怨的《謡I-Making of Cyborg》再次响起,当草薙素子站在新港市的摩天楼顶俯瞰那座被雨水和霓虹腌渍的城市时,我感到一种彻骨的寒意。这寒意不止来自赛博朋克的冰冷金属色调,更来源于对于此种未来日渐迫近的不安。
 
