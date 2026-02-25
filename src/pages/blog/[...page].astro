@@ -1,6 +1,5 @@
 ---
 import PostCard from "@components/PostCard.astro";
-import MainCard from "@/components/MainCard.astro"; // 👈 新增引入大卡片组件
 import CardGroup from "@components/temple/CardGroup.astro";
 import Pagination from "@components/widgets/Pagination.astro";
 import { t } from "@config";
@@ -9,6 +8,7 @@ import BaseLayout from "@layouts/BaseLayout.astro";
 import { generatePageLinks } from "@utils/blogUtils";
 import { getMainBlogPaginationPaths } from "@utils/paginationUtils";
 import { Icon } from "astro-icon/components";
+import MainCard from "@/components/MainCard.astro"; // 👈 新增引入大卡片组件
 
 export async function getStaticPaths({ paginate }: { paginate: any }) {
   return getMainBlogPaginationPaths({ paginate });

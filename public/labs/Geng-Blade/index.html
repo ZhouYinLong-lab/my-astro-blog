@@ -80,8 +80,8 @@
       /* Disable selection */
       canvas {
         touch-action: none;
-        user-select: none;
         -webkit-user-select: none;
+        user-select: none;
       }
     </style>
   </head>
@@ -246,7 +246,7 @@
                   },
                   runningMode: 'VIDEO',
                   numHands: 1,
-                  // 优化：降低检测阈值，让识别更灵敏
+                  // 优化：降低检测阈值,让识别更灵敏
                   minHandDetectionConfidence: 0.3,
                   minHandPresenceConfidence: 0.3,
                   minTrackingConfidence: 0.3,
@@ -1232,7 +1232,7 @@
             
           const currentTime = clock.getElapsedTime();
           
-          // 节流检测频率，限制在 ~20FPS (50ms)
+          // 节流检测频率,限制在 ~20FPS (50ms)
           if (currentTime - lastDetectionRef.current < 0.05) return;
           lastDetectionRef.current = currentTime;
 
@@ -1408,7 +1408,7 @@
                     fontSize: '15px',
                   }}
                 >
-                  为了获得最佳的施法视野，建议您旋转设备。
+                  为了获得最佳的施法视野,建议您旋转设备。
                   <br />
                   <span style={{ fontSize: '12px', opacity: 0.8 }}>
                     (竖屏模式下视角可能受限)
