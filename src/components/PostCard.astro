@@ -8,7 +8,6 @@ import Heading from "./widgets/Heading.astro";
 import PostFilter from "./widgets/PostFilter.astro";
 import PostInfo from "./widgets/PostInfo.astro";
 
-// 👈 将 Astro.props 稍作类型扩展,允许它读取我们写的 cover 字段
 const {
   title,
   image,
@@ -24,14 +23,12 @@ const {
 } = Astro.props as any;
 
 const displayDate = pubDate ? dayjs(pubDate).format(DATE_FORMAT) : "";
-
-// 👈 核心逻辑：优先使用 image,如果没有就用 cover
 const displayImage = image || cover;
 ---
 
-<Card class="overflow-hidden">
-  <div class="flex flex-col lg:flex-row">
-    <div class="flex-1 p-6 overflow-hidden bg-base-100 lg:order-1 order-2 flex flex-col justify-between">
+<Card class="overflow-hidden post-card">
+  <div class="flex flex-col md:flex-row">
+    <div class="flex-1 p-6 overflow-hidden bg-base-100 md:order-1 order-2 flex flex-col justify-between post-content">
       <div>
         <PostInfo pubDate={displayDate} badge={badge} word={word} time={time} />
         <Heading url={url} title={title}>{title}</Heading>
@@ -42,7 +39,7 @@ const displayImage = image || cover;
 
     {
       displayImage && (
-        <a href={url} class="relative lg:w-2/5 aspect-video lg:aspect-auto overflow-hidden lg:order-2 order-1 group">
+        <a href={url} class="relative md:w-1/3 aspect-video md:aspect-auto overflow-hidden md:order-2 order-1 group post-img">
           <div class="absolute inset-0 bg-black/0 group-hover:bg-black/60 z-10 transition-all duration-300 flex items-center justify-center">
             <Icon
               name="lucide:arrow-right"
@@ -60,3 +57,14 @@ const displayImage = image || cover;
     }
   </div>
 </Card>
+
+<style is:global>
+  @media (min-width: 768px) {
+    .post-card:nth-child(even) .post-content {
+      order: 2 !important;
+    }
+    .post-card:nth-child(even) .post-img {
+      order: 1 !important;
+    }
+  }
+</style>
