@@ -1,0 +1,45 @@
+---
+title: "夜鹭心情识别器"
+description: "基于 Vercel Serverless + Gemini AI 打造的情感分析器.输入文字,召唤符合你心情的沙雕夜鹭!"
+date: 2026-02-21 12:00:00
+categories:
+  - 实验室
+tags:
+  - 互动网页
+image: "/img/yelu/1.jpg"
+link: "/labs/my-heron-app/"
+---
+
+import Collapse from "../../components/mdx/Collapse.astro";
+import Diff from "../../components/mdx/Diff.astro";
+import Error from "../../components/mdx/Error.astro";
+import Info from "../../components/mdx/Info.astro";
+import Kbd from "../../components/mdx/Kbd.astro";
+import Success from "../../components/mdx/Success.astro";
+import Warning from "../../components/mdx/Warning.astro";
+import TimeLine from "../../components/mdx/TimeLine.astro";
+import LinkCard from "../../components/mdx/LinkCard.astro";
+
+# 🔝点击上方封面图片进入全屏沉浸式体验
+
+<Warning>如果点击后并未自动跳转,请 [点击这里](/labs/my-heron-app/) 进入</Warning>
+
+****
+
+### 🪶 夜鹭心情识别器
+
+这是一个结合了自然语言处理(NLP)和纯前端 CSS 动画的互动小实验.它通过 Vercel 的 Serverless Function 安全连接了最新的 Gemini 大模型,能够精准读懂你字里行间的情绪!
+
+### 📺 页面内嵌预览版
+
+如果你不想离开当前文章,也可以直接在这里输入心情测试(支持 Q 弹动画哦):
+
+<iframe src="/labs/my-heron-app/" width="100%" height="600px" style="border: none; border-radius: 16px; box-shadow: 0 8px 24px rgba(0,0,0,0.05); margin-top: 20px;"></iframe>
+
+****
+
+### 🛠️ 技术栈揭秘
+* **前端骨架**:纯 HTML + CSS + 原生 JavaScript
+* **交互动效**:CSS `@keyframes` 结合 JS DOM 重排触发果冻回弹动画
+* **后端大脑**:Vercel Serverless Functions (Node.js) 隐藏 API Key 并处理跨域
+* **AI 模型**:`gemini-2.5-flash` 极速语义识别
