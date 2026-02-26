@@ -1,181 +1,153 @@
 ---
-// 这里是组件的参数接收区，不需要写内容
+// 全新响应式 Loading 组件
 ---
 
 <div class="loader-wrapper" id="home-loader">
-  <div class="loader">
-    {/* 👇 引用本地图片的方法：将图片放在 public/img 文件夹下，然后直接用 /img/你的图片.png 绝对路径引用 */}
-    <img src="/favicon.ico" alt="Logo" />
-  </div>
-  <div class="loader-text">
-    <div>L</div>
-    <div>O</div>
-    <div>A</div>
-    <div>D</div>
-    <div>I</div>
-    <div>N</div>
-    <div>G</div>
-    <div></div>
-    <div></div>
-    <div></div>
+  <div class="loader-content">
+    
+    {/* 上方：头像与轨道核心区 */}
+    <div class="avatar-core">
+      {/* 两个反向旋转的能量环 */}
+      <div class="orbit orbit-1"></div>
+      <div class="orbit orbit-2"></div>
+      {/* 居中静止的专属头像 */}
+      <img src="/favicon.ico" alt="Loading" class="core-avatar" />
+    </div>
+
+    {/* 下方：波浪跳动文字区 */}
+    <div class="text-core">
+      <span>L</span><span>O</span><span>A</span><span>D</span><span>I</span><span>N</span><span>G</span>
+      <span class="dot">.</span><span class="dot">.</span><span class="dot">.</span>
+    </div>
+
   </div>
 </div>
 
 <style>
-  /* 修复了前缀警告，并提升了 z-index 确保覆盖全屏 */
+  /* 基础与背景层 */
   * {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
   }
   .loader-wrapper {
     position: fixed;
-    left: 0;
-    top: 0;
-    z-index: 9999; /* 👈 必须是全站最高层级，盖住底图和导航栏 */
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-    background: linear-gradient(45deg,rgb(90,54,148) 0%,rgb(19,189,206) 33%,rgb(0,148,217) 66%,rgb(111,199,181) 100%);
-    background-size: 400%;
-    background-position: 0% 100%;
-    animation: gradient 7.5s ease-in-out infinite;
-    transition: opacity 0.8s ease-out, visibility 0.8s ease-out; /* 👈 消失时的渐隐动画 */
-  }
-  .loader {
-    width: 150px;
-    height: 150px;
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 2;
-    border-radius: 50%;
-    overflow: hidden;
-    border: 3px solid transparent;
-    border-top-color: #fff;
+    inset: 0;
+    z-index: 9999;
     display: flex;
     justify-content: center;
     align-items: center;
-    animation: spin 1.7s linear infinite;
+    /* 保持你喜欢的渐变背景 */
+    background: linear-gradient(45deg,rgb(90,54,148) 0%,rgb(19,189,206) 33%,rgb(0,148,217) 66%,rgb(111,199,181) 100%);
+    background-size: 400%;
+    animation: gradientBG 7.5s ease-in-out infinite;
+    transition: opacity 0.8s ease-out, visibility 0.8s ease-out;
   }
-  .loader::before {
-    content: "";
-    position: absolute;
-    top: 5px;
-    left: 5px;
-    bottom: 5px;
-    right: 5px;
-    border-radius: 50%;
-    border: 3px solid transparent;
-    border-top-color: #fff;
-    animation: spin 0.6s linear infinite reverse;
-  }
-  .loader::after {
-    content: "";
-    position: absolute;
-    top: 15px;
-    left: 15px;
-    bottom: 15px;
-    right: 15px;
-    border-radius: 50%;
-    border: 3px solid transparent;
-    border-top-color: #fff;
-    animation: spin 1s linear infinite;
-  }
-  .loader img {
-    width: 55%;
-    height: 55%;
-    border-radius: 50%;
-    animation: spin 1.7s linear infinite reverse;
-    object-fit: cover;
-  }
-  .loader-text {
-    width: 50%;
-    height: 36px;
-    text-align: center;
-    position: absolute;
-    top: 72%;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 3;
-    -webkit-user-select: none; /* 👈 修复了苹果设备的警告 */
-    user-select: none;
-  }
-  .loader-text div {
-    width: 30px;
-    height: 36px;
-    color: #fff;
-    margin: 0 20px;
-    font-size: 32px;
-    position: absolute;
-    opacity: 0;
-    transform: rotate(180deg);
-    animation: move 2s linear infinite;
-  }
-  .loader-text div:nth-child(8)::before,
-  .loader-text div:nth-child(9)::before,
-  .loader-text div:nth-child(10)::before {
-    content: "";
-    width: 10px;
-    height: 10px;
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    background-color: #fff;
-    border-radius: 50%;
-  }
-  .loader-text div::after {
-    content: "";
-    width: 10px;
-    height: 5px;
-    border-radius: 50%;
-    background-color: rgba(255,255,255,0.15);
-    position: absolute;
-    bottom: -40px;
-    left: 50%;
-    margin-left: -5px;
-  }
-  .loader-text div:nth-child(8)::after,
-  .loader-text div:nth-child(9)::after,
-  .loader-text div:nth-child(10)::after {
-    left: 0;
-    margin-left: 0;
-  }
-  .loader-text div:nth-child(2) { animation-delay: 0.2s; }
-  .loader-text div:nth-child(3) { animation-delay: 0.4s; }
-  .loader-text div:nth-child(4) { animation-delay: 0.6s; }
-  .loader-text div:nth-child(5) { animation-delay: 0.8s; }
-  .loader-text div:nth-child(6) { animation-delay: 1s; }
-  .loader-text div:nth-child(7) { animation-delay: 1.2s; }
-  .loader-text div:nth-child(8) { animation-delay: 1.4s; }
-  .loader-text div:nth-child(9) { animation-delay: 1.6s; }
-  .loader-text div:nth-child(10) { animation-delay: 1.8s; }
 
-  @keyframes gradient {
+  .loader-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px; /* 控制头像和文字的间距 */
+  }
+
+  /* ================= 能量环与头像区 ================= */
+  .avatar-core {
+    position: relative;
+    width: 100px;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .core-avatar {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    object-fit: cover;
+    z-index: 10;
+    border: 2px solid rgba(255, 255, 255, 0.9);
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+  }
+
+  .orbit {
+    position: absolute;
+    border-radius: 50%;
+    border: 3px solid transparent;
+  }
+
+  /* 内圈：顺时针快转 */
+  .orbit-1 {
+    width: 86px;
+    height: 86px;
+    border-top-color: #fff;
+    border-right-color: #fff;
+    animation: spin 1.2s cubic-bezier(0.68, -0.55, 0.265, 1.55) infinite;
+  }
+
+  /* 外圈：逆时针慢转带透明度 */
+  .orbit-2 {
+    width: 104px;
+    height: 104px;
+    border-bottom-color: rgba(255, 255, 255, 0.6);
+    border-left-color: rgba(255, 255, 255, 0.6);
+    animation: spin 2s linear infinite reverse;
+  }
+
+  /* ================= 文字波浪跳动区 ================= */
+  .text-core {
+    display: flex;
+    gap: 8px; /* Flexbox 的 gap 属性完美解决手机端重叠问题 */
+    font-size: 22px;
+    font-weight: 800;
+    color: #fff;
+    letter-spacing: 2px;
+    user-select: none;
+    -webkit-user-select: none;
+  }
+
+  .text-core span {
+    display: inline-block;
+    animation: waveJump 1.5s ease-in-out infinite;
+  }
+
+  /* 为每个字母设置依次递增的延迟，形成波浪效果 */
+  .text-core span:nth-child(1) { animation-delay: 0.1s; }
+  .text-core span:nth-child(2) { animation-delay: 0.2s; }
+  .text-core span:nth-child(3) { animation-delay: 0.3s; }
+  .text-core span:nth-child(4) { animation-delay: 0.4s; }
+  .text-core span:nth-child(5) { animation-delay: 0.5s; }
+  .text-core span:nth-child(6) { animation-delay: 0.6s; }
+  .text-core span:nth-child(7) { animation-delay: 0.7s; }
+  .text-core span:nth-child(8) { animation-delay: 0.8s; }
+  .text-core span:nth-child(9) { animation-delay: 0.9s; }
+  .text-core span:nth-child(10) { animation-delay: 1.0s; }
+
+  /* ================= 关键帧动画 ================= */
+  @keyframes gradientBG {
     50% { background-position: 100% 0%; }
   }
+
   @keyframes spin {
-    0% { transform: translate(-50%, -50%) rotate(0); }
-    100% { transform: translate(-50%, -50%) rotate(360deg); }
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
   }
-  @keyframes move {
-    0% { right: 0; opacity: 0; }
-    35% { right: 41%; opacity: 1; transform: rotate(0); }
-    65% { right: 59%; opacity: 1; transform: rotate(0); }
-    100% { right: 100%; transform: rotate(-180deg); }
+
+  @keyframes waveJump {
+    0%, 100% { transform: translateY(0); opacity: 0.4; }
+    50% { transform: translateY(-8px); opacity: 1; }
   }
 </style>
 
 <script is:inline>
-  // Astro 专属加载逻辑：当这一 page 的元素全部加载完毕后，让动画平滑消失
   document.addEventListener("astro:page-load", () => {
     const loader = document.getElementById("home-loader");
     if (loader) {
-      // 保证动画至少播放 1 秒，让你能欣赏到它，然后让透明度变为 0，最后隐藏
       setTimeout(() => {
         loader.style.opacity = "0";
         loader.style.visibility = "hidden";
-      }, 1000); 
+      }, 1200); // 留出一点时间让访客欣赏这个绝美的开场
     }
   });
 </script>
