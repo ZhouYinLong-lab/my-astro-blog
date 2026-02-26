@@ -6,8 +6,8 @@ import PostInfo from "@components/widgets/PostInfo.astro";
 import { DATE_FORMAT } from "@config";
 import BaseLayout from "@layouts/BaseLayout.astro";
 import dayjs from "@utils/dayjs";
-import MainCard from "@/components/MainCard.astro";
 import Twikoo from "@/components/comments/Twikoo.astro";
+import MainCard from "@/components/MainCard.astro";
 
 export async function getStaticPaths() {
   const posts = await getCollection("blog");
