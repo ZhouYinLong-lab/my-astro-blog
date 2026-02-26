@@ -24,6 +24,7 @@ const blog = defineCollection({
         })
         .optional(),
       featured: z.boolean().optional(),
+      bgImage: z.string().optional(),
     })
     .catchall(z.any()), // 👉 终极魔法：接收并放行任何未来自定义的字段！
 });

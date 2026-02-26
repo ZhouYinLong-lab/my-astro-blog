@@ -18,6 +18,7 @@ import PointerOnNavigation from "astro-vtbot/components/PointerOnNavigation.astr
 const {
   title,
   image,
+  bgImage = "/img/background/1.webp", // 👈 新增：专门用来接收世界名画的传值
   description = SITE_DESCRIPTION,
   headings = [],
   showTOC = false,
@@ -61,7 +62,22 @@ const {
     </script>
   </head>
 
-  <body class="flex flex-col min-h-screen" {...isIndexed ? { "data-pagefind-body": true } : {}}>
+  {/* 👇 加上 relative，确保背景图层乖乖待在最底层 */}
+  <body class="flex flex-col min-h-screen relative" {...isIndexed ? { "data-pagefind-body": true } : {}}>
+    
+    {/* 👇 核心魔法：赛博底层画框！ */}
+    {bgImage && (
+      <div class="fixed inset-0 z-[-10] pointer-events-none">
+        {/* 高清名画原图层 */}
+        <div 
+          class="absolute inset-0 bg-cover bg-center bg-no-repeat transition-opacity duration-1000"
+          style={`background-image: url('${bgImage}');`}
+        ></div>
+        {/* 高级磨砂遮罩层：使用 base-300 适配你的深浅色主题，加上 75% 的不透明度和 8px 毛玻璃模糊 */}
+        <div class="absolute inset-0 bg-base-300/75 backdrop-blur-[8px]"></div>
+      </div>
+    )}
+
     <Navbar />
 
     <div class="max-w-6xl mx-auto w-full flex-grow">
