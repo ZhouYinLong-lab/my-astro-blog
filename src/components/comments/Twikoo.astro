@@ -1,0 +1,65 @@
+---
+// 接收外部传入的 envId，如果没有传入则使用你现成的 Vercel Twikoo 地址
+interface Props {
+  envId?: string;
+}
+
+const { 
+  envId = "https://my-twikoo-server-8x6l.vercel.app" 
+} = Astro.props;
+---
+
+<div class="twikoo-container bg-base-100 p-6 md:p-8 rounded-2xl shadow-sm border border-base-200 mt-10">
+  <h2 class="text-2xl font-bold mb-6 flex items-center gap-2">
+    <span>评论与点赞</span>
+  </h2>
+  
+  {/* Twikoo 渲染的容器 */}
+  <div id="tcomment"></div>
+</div>
+
+{/* 引入 Twikoo 的 CDN 脚本，版本号 1.6.44 与你的后端一致 */}
+<script is:inline src="https://cdn.staticfile.net/twikoo/1.6.44/twikoo.all.min.js"></script>
+
+<script is:inline define:vars={{ envId }}>
+  function initTwikoo() {
+    const container = document.getElementById('tcomment');
+    if (!container) return;
+
+    // 清空上次可能遗留的实例，防止重复渲染
+    container.innerHTML = '';
+
+    if (window.twikoo) {
+      window.twikoo.init({
+        envId: envId,
+        el: '#tcomment',
+      });
+    }
+  }
+
+  // 完美适配 Astro 的 View Transitions 页面切换机制
+  document.addEventListener("astro:page-load", initTwikoo);
+  
+  // 兜底：首次直接打开页面时加载
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initTwikoo);
+  } else {
+    initTwikoo();
+  }
+</script>
+
+<style is:global>
+  /* 微调 Twikoo 的默认样式，让它更符合你的赛博画廊主题 */
+  .twikoo-container .tk-submit {
+    margin-bottom: 2rem;
+  }
+  .twikoo-container .tk-button {
+    background-color: var(--fallback-p,oklch(var(--p)/var(--tw-bg-opacity))) !important;
+    color: var(--fallback-pc,oklch(var(--pc)/var(--tw-text-opacity))) !important;
+    border: none !important;
+    border-radius: 0.5rem !important;
+  }
+  .twikoo-container .tk-avatar {
+    border-radius: 50% !important;
+  }
+</style>

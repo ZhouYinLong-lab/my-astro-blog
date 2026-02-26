@@ -7,6 +7,7 @@ import { DATE_FORMAT } from "@config";
 import BaseLayout from "@layouts/BaseLayout.astro";
 import dayjs from "@utils/dayjs";
 import MainCard from "@/components/MainCard.astro";
+import Twikoo from "@/components/comments/Twikoo.astro";
 
 export async function getStaticPaths() {
   const posts = await getCollection("blog");
@@ -69,5 +70,8 @@ const url = new URL(`/blog/${blog.slug}`, Astro.url.origin);
         />
       </div>
     </div>
+
+    <Twikoo />
+    
   </MainCard>
 </BaseLayout>
