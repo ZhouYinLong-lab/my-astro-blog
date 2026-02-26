@@ -48,7 +48,7 @@ site:
 user:
   name: 柳含知 # 替换成了你的昵称
   site: "https://zylatent.com" # 等以后配好了再换成你自己的域名
-  avatar: /avatar.jpg # 用户头像路径
+  avatar: /avatar.webp # 用户头像路径
   sidebar: # 侧边栏配置
     social:
       - href: "https://github.com/ZhouYinLong-lab/"
