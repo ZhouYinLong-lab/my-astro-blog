@@ -45,8 +45,8 @@ analyzeBtn.addEventListener('click', async () => {
             body: JSON.stringify({ text })
         });
         
-        // 【关键防御】如果 Vercel 根本没有部署 api 文件夹，它会返回一个 HTML 的 404 页面
-        // 这里提前拦截，防止后面的 JSON 解析直接崩溃
+        // 【关键防御】如果 Vercel 根本没有部署 api 文件夹,它会返回一个 HTML 的 404 页面
+        // 这里提前拦截,防止后面的 JSON 解析直接崩溃
         const contentType = response.headers.get("content-type");
         if (!contentType || !contentType.includes("application/json")) {
              throw new Error("后端接口不存在 (404)！Vercel 没有正确部署 api 文件夹。");
@@ -60,13 +60,13 @@ analyzeBtn.addEventListener('click', async () => {
             
             // 倒计时循环
             for (let i = waitTime; i > 0; i--) {
-                statusMsg.textContent = `夜鹭还在云端睡觉，强行唤醒中... 请稍等 ${i} 秒`;
+                statusMsg.textContent = `夜鹭还在云端睡觉,强行唤醒中... 请稍等 ${i} 秒`;
                 await new Promise(resolve => setTimeout(resolve, 1000));
             }
 
-            statusMsg.textContent = "夜鹭醒了，正在光速识别...";
+            statusMsg.textContent = "夜鹭醒了,正在光速识别...";
             
-            // 倒计时结束后，自动发起第二次请求
+            // 倒计时结束后,自动发起第二次请求
             response = await fetch('/api/analyze', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -75,7 +75,7 @@ analyzeBtn.addEventListener('click', async () => {
             data = await response.json();
         }
 
-        // 如果重试后，或第一次请求本身就携带了确切的 error 报错信息
+        // 如果重试后,或第一次请求本身就携带了确切的 error 报错信息
         if (data.error && data.error !== 'cold_start') {
              throw new Error(data.error); 
         }
@@ -104,7 +104,7 @@ analyzeBtn.addEventListener('click', async () => {
         statusMsg.style.color = "red";
         statusMsg.textContent = `🚨 报错啦: ${error.message}`;
     } finally {
-        // --- 替换原本直接恢复按钮的代码，加入 3秒 冷却机制 ---
+        // --- 替换原本直接恢复按钮的代码,加入 3秒 冷却机制 ---
         let cooldown = 3;
         analyzeBtn.textContent = `让夜鹭喘口气 (${cooldown}s)`;
         

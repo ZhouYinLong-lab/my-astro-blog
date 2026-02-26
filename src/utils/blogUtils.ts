@@ -31,7 +31,7 @@ export function sortPostsByDate(
 /**
  * 将文章按置顶和日期排序
  * @param posts 需要排序的文章
- * @returns 排序后的文章 (置顶文章优先，然后是按日期排序)
+ * @returns 排序后的文章 (置顶文章优先,然后是按日期排序)
  */
 export function sortPostsByPinAndDate(
   posts: CollectionEntry<"blog">[],
@@ -191,7 +191,7 @@ export async function getPostsWithStats(
 }
 
 /**
- * 获取标签的颜色类，基于标签频率
+ * 获取标签的颜色类,基于标签频率
  * @param count 标签计数
  * @param max 最大计数
  * @returns 颜色类名
@@ -206,7 +206,7 @@ export function getTagColorClass(count: number, max: number): string {
 }
 
 /**
- * 计算标签的字体大小，基于标签频率
+ * 计算标签的字体大小,基于标签频率
  * @param count 标签计数
  * @param max 最大计数
  * @param min 最小计数

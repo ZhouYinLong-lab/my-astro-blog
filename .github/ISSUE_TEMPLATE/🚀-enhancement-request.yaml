@@ -8,13 +8,13 @@ body:
   - type: markdown
     attributes:
       value: |
-        感谢你花时间提出建议，帮助我们改进项目！
+        感谢你花时间提出建议,帮助我们改进项目！
 
   - type: textarea
     id: description
     attributes:
       label: 功能描述
-      description: 请详细描述你建议的增强功能。解释你希望实现什么新功能或改进，以及为什么它会有用。
+      description: 请详细描述你建议的增强功能。解释你希望实现什么新功能或改进,以及为什么它会有用。
       placeholder: 例如：我希望在用户个人资料页面添加一个“导出数据”的按钮...
     validations:
       required: true
@@ -23,8 +23,8 @@ body:
     id: motivation
     attributes:
       label: 动机
-      description: 为什么需要这个增强功能？它能解决什么问题，或者会给用户体验带来哪些提升？
-      placeholder: 例如：目前用户无法方便地备份自己的数据，这导致了...
+      description: 为什么需要这个增强功能？它能解决什么问题,或者会给用户体验带来哪些提升？
+      placeholder: 例如：目前用户无法方便地备份自己的数据,这导致了...
     validations:
       required: true
 
@@ -32,7 +32,7 @@ body:
     id: proposed-changes
     attributes:
       label: 建议的变更
-      description: 如果你有具体的实现想法，请在这里描述。例如，UI/UX 的改进、性能的提升等。
+      description: 如果你有具体的实现想法,请在这里描述。例如,UI/UX 的改进、性能的提升等。
       placeholder: |
         1. 在 A 组件中添加一个新的 B 属性...
         2. 修改 C 服务的 API 以支持...
@@ -43,8 +43,8 @@ body:
     id: examples
     attributes:
       label: 示例或用例
-      description: 提供任何有助于说明此增强功能的示例。如果可以，请附上模型图、线框图或截图。
-      placeholder: 例如，其他类似的应用（如 X、Y）就是这样做的...
+      description: 提供任何有助于说明此增强功能的示例。如果可以,请附上模型图、线框图或截图。
+      placeholder: 例如,其他类似的应用（如 X、Y）就是这样做的...
     validations:
       required: false
 
@@ -64,4 +64,4 @@ body:
     attributes:
       value: |
         ---
-        我们将会通过你的 GitHub 账户与你联系，无需在此留下个人联系方式。
+        我们将会通过你的 GitHub 账户与你联系,无需在此留下个人联系方式。

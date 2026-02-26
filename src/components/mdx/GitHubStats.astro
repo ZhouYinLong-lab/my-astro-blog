@@ -188,7 +188,7 @@ const repoUrl = repositoryName
         Accept: "application/vnd.github.v3+json",
       };
 
-      // 如果有GitHub令牌，添加到请求头
+      // 如果有GitHub令牌,添加到请求头
       if (this.githubToken) {
         headers["Authorization"] = `token ${this.githubToken}`;
       }
@@ -200,7 +200,7 @@ const repoUrl = repositoryName
       };
     }
 
-    // 添加自动重试逻辑，处理临时错误
+    // 添加自动重试逻辑,处理临时错误
     private async fetchWithRetry(url: string, options: RequestInit, retries = 2): Promise<Response> {
       try {
         const response = await fetch(url, options);
@@ -338,7 +338,7 @@ const repoUrl = repositoryName
         // Get starred repos count - 使用更高效的API获取总仓库数而不是获取所有仓库
         let totalStars = 0;
 
-        // 只获取最多5页仓库，避免过多请求
+        // 只获取最多5页仓库,避免过多请求
         for (let page = 1; page <= 5; page++) {
           const reposUrl = `https://api.github.com/users/${username}/repos?per_page=100&page=${page}`;
           const reposResponse = await this.fetchWithRetry(reposUrl, this.getRequestOptions(signal));
@@ -412,7 +412,7 @@ const repoUrl = repositoryName
       // Update license
       if (data.license && data.license.name) {
         const licenseEl = this.querySelector(".gh-license span:last-child");
-        // 限制显示的许可证名长度，避免过长
+        // 限制显示的许可证名长度,避免过长
         if (licenseEl) {
           const licenseName = data.license.name;
           licenseEl.textContent = licenseName;

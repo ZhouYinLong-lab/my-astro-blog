@@ -10,12 +10,14 @@ categories:
 image: /img/my-2025/world.png
 ---
 import Info from '@/components/mdx/Info.astro';
+import MusicPlayer from "../../components/mdx/MusicPlayer.astro";
 
-<div class="music-card bg-gray-100 dark:bg-zinc-800 p-4 rounded-2xl shadow-md my-6">
-  <img src="/music/sea&dust cover.png" class="w-full aspect-video object-cover rounded-xl mb-4" />
-  <p class="text-center font-bold mb-2">沧海飞尘 - 银临</p>
-  <audio controls src="/music/sea&dust.mp3" class="w-full"></audio>
-</div>
+<MusicPlayer 
+  title="沧海飞尘" 
+  artist="银临" 
+  cover="/music/sea&dust cover.png" 
+  src="/music/sea&dust.mp3" 
+/>
 
 2025年岁末已至,回望这一场浩荡的奔赴,心中竟有一种洗尽铅华的沉静。这一年,曾是我生命地图上标注得最深刻的坐标,如今它已化作身后一串渐行渐远的足迹。
 

@@ -8,7 +8,7 @@ body:
   - type: markdown
     attributes:
       value: |
-        感谢你提交 Bug 报告！请尽可能详细地填写以下信息，以帮助我们快速定位并解决问题。
+        感谢你提交 Bug 报告！请尽可能详细地填写以下信息,以帮助我们快速定位并解决问题。
 
   - type: input
     id: version
@@ -44,7 +44,7 @@ body:
     id: expected-result
     attributes:
       label: 预期结果
-      description: 在没有这个 Bug 的情况下，应该发生什么？
+      description: 在没有这个 Bug 的情况下,应该发生什么？
     validations:
       required: true
 
@@ -52,7 +52,7 @@ body:
     id: actual-result
     attributes:
       label: 实际结果
-      description: 实际发生了什么？如果可以，请附上错误日志。
+      description: 实际发生了什么？如果可以,请附上错误日志。
     validations:
       required: true
 
@@ -60,7 +60,7 @@ body:
     attributes:
       value: |
         **截图或附件**
-        如果可以，请将相关截图、录屏或日志文件直接拖拽到输入框中进行上传。
+        如果可以,请将相关截图、录屏或日志文件直接拖拽到输入框中进行上传。
 
   - type: dropdown
     id: severity
@@ -69,8 +69,8 @@ body:
       description: 你认为这个 Bug 的严重程度是？
       options:
         - 低 - 不影响核心功能
-        - 中 - 影响部分功能，但有替代方案
-        - 高 - 严重影响核心功能，难以使用
+        - 中 - 影响部分功能,但有替代方案
+        - 高 - 严重影响核心功能,难以使用
         - 紧急 - 导致系统崩溃或数据丢失
     validations:
       required: true
@@ -79,4 +79,4 @@ body:
     attributes:
       value: |
         ---
-        我们将会通过你的 GitHub 账户与你联系，无需在此留下个人联系方式。
+        我们将会通过你的 GitHub 账户与你联系,无需在此留下个人联系方式。

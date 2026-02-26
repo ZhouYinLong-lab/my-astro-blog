@@ -20,7 +20,7 @@ const tagMap = getTagsWithCount(allPosts);
 const tagEntries = Array.from(tagMap.entries());
 tagEntries.sort((a, b) => b[1] - a[1]);
 
-// 找到最大和最小计数，用于缩放
+// 找到最大和最小计数,用于缩放
 const maxCount = Math.max(...tagMap.values());
 const minCount = Math.min(...tagMap.values());
 
