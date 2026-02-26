@@ -18,7 +18,7 @@ import PointerOnNavigation from "astro-vtbot/components/PointerOnNavigation.astr
 const {
   title,
   image,
-  bgImage = "/background/1.webp", // 👈 新增：专门用来接收世界名画的传值
+  bgImage = "/background/1.webp",
   description = SITE_DESCRIPTION,
   headings = [],
   showTOC = false,
@@ -34,6 +34,9 @@ const {
     <PointerOnNavigation />
     <Header title={title} description={description} favicon={SITE_FAVICON} image={image} />
     <title>{`${title} - ${SITE_TAB}`}</title>
+    
+    {/* 强制浏览器最高优先级预加载背景图 */}
+    {bgImage && <link rel="preload" as="image" href={bgImage} fetchpriority="high" />}
 
     <script define:vars={{ SITE_THEME }} is:inline>
       (function () {
@@ -62,18 +65,15 @@ const {
     </script>
   </head>
 
-  {/* 👇 加上 relative，确保背景图层乖乖待在最底层 */}
   <body class="flex flex-col min-h-screen relative" {...isIndexed ? { "data-pagefind-body": true } : {}}>
     
-    {/* 👇 核心魔法：赛博底层画框！ */}
+    {/* 赛博底层画框：开启 transform-gpu 强制显卡加速渲染毛玻璃 */}
     {bgImage && (
-      <div class="fixed inset-0 z-[-10] pointer-events-none">
-        {/* 高清名画原图层 */}
+      <div class="fixed inset-0 z-[-10] pointer-events-none transform-gpu">
         <div 
           class="absolute inset-0 bg-cover bg-center bg-no-repeat transition-opacity duration-1000"
           style={`background-image: url('${bgImage}');`}
         ></div>
-        {/* 高级磨砂遮罩层：使用 base-300 适配你的深浅色主题，加上 % 的不透明度和 px 毛玻璃模糊 */}
         <div class="absolute inset-0 bg-base-300/30 backdrop-blur-[4px]"></div>
       </div>
     )}
@@ -112,26 +112,34 @@ const {
 
     <script is:inline>
       document.addEventListener("astro:page-load", () => {
-        document.querySelectorAll(".btn-copy").forEach((button) => {
-          button.addEventListener("click", async () => {
-            const codeBlock = button.closest(".frosti-code");
-            const code = codeBlock.querySelector("code").textContent;
-            const copyIcon = button.querySelector(".frosti-code-toolbar-copy-icon");
-            const successIcon = button.querySelector(".frosti-code-toolbar-copy-success");
-            try {
-              await navigator.clipboard.writeText(code);
-              copyIcon.classList.add("hidden");
-              successIcon.classList.remove("hidden");
-              button.classList.add("copy-success");
-              setTimeout(() => {
-                copyIcon.classList.remove("hidden");
-                successIcon.classList.add("hidden");
-                button.classList.remove("copy-success");
-              }, 2000);
-            } catch (err) {
-              console.error("Failed to copy:", err);
-            }
-          });
+        // 事件委托：只在 document.body 上绑定一次监听器，消灭 TBT 阻塞
+        document.body.addEventListener("click", async (e) => {
+          const button = e.target.closest(".btn-copy");
+          if (!button) return; 
+
+          const codeBlock = button.closest(".frosti-code");
+          if (!codeBlock) return;
+          const codeNode = codeBlock.querySelector("code");
+          if (!codeNode) return;
+
+          const code = codeNode.textContent;
+          const copyIcon = button.querySelector(".frosti-code-toolbar-copy-icon");
+          const successIcon = button.querySelector(".frosti-code-toolbar-copy-success");
+          
+          try {
+            await navigator.clipboard.writeText(code);
+            if(copyIcon) copyIcon.classList.add("hidden");
+            if(successIcon) successIcon.classList.remove("hidden");
+            button.classList.add("copy-success");
+            
+            setTimeout(() => {
+              if(copyIcon) copyIcon.classList.remove("hidden");
+              if(successIcon) successIcon.classList.add("hidden");
+              button.classList.remove("copy-success");
+            }, 2000);
+          } catch (err) {
+            console.error("Failed to copy:", err);
+          }
         });
       });
     </script>
@@ -148,15 +156,9 @@ const {
         color: #10b981;
       }
       @keyframes pulse {
-        0% {
-          transform: scale(1);
-        }
-        50% {
-          transform: scale(1.1);
-        }
-        100% {
-          transform: scale(1);
-        }
+        0% { transform: scale(1); }
+        50% { transform: scale(1.1); }
+        100% { transform: scale(1); }
       }
     </style>
   </body>
