@@ -82,6 +82,8 @@ const {
 
     <Navbar />
 
+    <slot name="fullscreen" />
+
     {/* 👇 新增：这里动态绑定了动画类型 animate-cinematic 或是 animate-fade-up */}
     <div class={`max-w-6xl mx-auto w-full flex-grow animate-${animateType}`}>
       <div class="grid grid-cols-1 md:grid-cols-5 lg:grid-cols-4 gap-4 p-4 h-full">

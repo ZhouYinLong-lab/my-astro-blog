@@ -141,13 +141,27 @@
 </style>
 
 <script is:inline>
+  // 1. 页面一开始加载，立刻给 body 上锁，禁止任何滚动！
+  document.body.style.overflow = 'hidden';
+
   document.addEventListener("astro:page-load", () => {
     const loader = document.getElementById("home-loader");
     if (loader) {
       setTimeout(() => {
+        // 1.2秒后，开始渐隐动画
         loader.style.opacity = "0";
         loader.style.visibility = "hidden";
-      }, 1200); // 留出一点时间让访客欣赏这个绝美的开场
+        loader.style.pointerEvents = "none"; // 穿透点击
+        
+        // 等待渐隐动画(0.8s)结束后，彻底解锁鼠标滚动！
+        setTimeout(() => {
+          document.body.style.overflow = '';
+        }, 800);
+        
+      }, 1200); 
+    } else {
+      // 如果没有加载器（比如在其他页面），确保滚动是解锁状态
+      document.body.style.overflow = '';
     }
   });
 </script>
