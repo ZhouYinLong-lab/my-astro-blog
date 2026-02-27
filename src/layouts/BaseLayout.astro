@@ -154,6 +154,14 @@ const {
 
     {/* 👇 关键：把 loading 兜底和两套入场动画用 style is:global 包裹起来 */}
     <style is:global>
+      /* ================= 全局图片 Loading 兜底魔法 (智能避让版) ================= */
+      /* 精准排除开场动画里的 Logo (.core-avatar)，其他所有图片依然享受 loading 兜底 */
+      img:not(.core-avatar) {
+        background: url('/img/loading.gif') no-repeat center center;
+        background-size: 40px 40px; 
+        background-color: rgba(128, 128, 128, 0.05); 
+      }
+      
       /* --- 你之前的代码复制按钮动画 --- */
       .btn-copy {
         position: relative;
