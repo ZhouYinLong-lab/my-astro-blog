@@ -16,13 +16,13 @@ let lastUpdateStr = "刚刚";
 if (articleCount > 0) {
   // 按日期从新到旧排序
   const sortedPosts = allPosts.sort(
-    (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+    (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
   );
   const latestDate = new Date(sortedPosts[0].data.pubDate);
   const today = new Date();
   const diffTime = Math.abs(today.getTime() - latestDate.getTime());
   const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
-  
+
   if (diffDays === 0) {
     lastUpdateStr = "今天";
   } else {
