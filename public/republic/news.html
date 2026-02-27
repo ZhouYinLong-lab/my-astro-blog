@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>新闻发布厅 - 玄渊共和国</title>
+    <link rel="icon" href="./img/xuanyuan.png" type="image/png">
     <style>
         :root { --gov-bg: #0b0f19; --gov-surface: #151b29; --gov-gold: #cba052; --gov-text: #e2e8f0; --gov-border: #2d3748; }
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -26,11 +27,14 @@
         .news-timeline { list-style: none; display: flex; flex-direction: column; gap: 20px; }
         .news-item { background-color: var(--gov-surface); border: 1px solid var(--gov-border); padding: 25px 30px; border-radius: 4px; display: flex; flex-direction: column; gap: 10px; transition: transform 0.3s; border-left: 3px solid transparent; }
         .news-item:hover { transform: translateX(10px); border-left-color: var(--gov-gold); border-right-color: var(--gov-gold); }
-        .news-meta { font-size: 14px; color: var(--gov-gold); font-family: monospace; }
+        
+        .news-meta { font-size: 14px; color: var(--gov-gold); font-family: monospace; display: flex; align-items: center; gap: 10px; }
+        .news-tag { background: rgba(203, 160, 82, 0.15); color: #fff; padding: 2px 8px; border-radius: 2px; font-size: 12px; letter-spacing: 1px;}
         .news-title { font-size: 18px; color: #fff; letter-spacing: 1px; }
+        .news-desc { font-size: 13px; color: #888; text-align: justify; }
 
         .footer { margin-top: 60px; padding: 30px; text-align: center; border-top: 1px solid var(--gov-border); background-color: var(--gov-surface); }
-
+        .disclaimer { color: #ff8b8b; font-size: 13px; margin-bottom: 15px; }
         .copyright { font-size: 12px; color: #666; }
     </style>
 </head>
@@ -52,7 +56,7 @@
     </header>
 
     <main class="container">
-        <h2 class="page-header">新闻发布厅</h2>
+        <h2 class="page-header">国家全景发布厅</h2>
         <ul class="news-timeline" id="news-page-list"></ul>
     </main>
 
@@ -65,18 +69,43 @@
     <script>
         const newsList = document.getElementById('news-page-list');
         
-        // 核心逻辑：读取数据并按时间（Date）强制降序排列
-        const sortedNews = [...republicData.news].sort((a, b) => {
-            // 将 "2026.02.26" 转换为标准日期进行精确对比
+        // 核心逻辑 1：提取并标准化新闻数据
+        const mappedNews = republicData.news.map(item => ({
+            title: item.title,
+            link: item.link,
+            date: item.date,
+            tag: "国家要闻", // 为新闻补全默认标签
+            desc: ""        // 新闻默认没有摘要
+        }));
+
+        // 核心逻辑 2：提取并标准化文章数据
+        const mappedArticles = republicData.articles.map(item => ({
+            title: item.title,
+            link: item.link,
+            // 如果 data.js 中的 articles 没有 date 属性，默认赋予建国日，以免排序报错
+            date: item.date || "2026.02.27", 
+            tag: item.tag || "中央公报",
+            desc: item.desc || ""
+        }));
+
+        // 核心逻辑 3：合并两个数组并按时间（Date）强制降序排列
+        const combinedData = [...mappedNews, ...mappedArticles].sort((a, b) => {
             return new Date(b.date.replace(/\./g, '/')) - new Date(a.date.replace(/\./g, '/'));
         });
 
-        // 渲染至页面
-        sortedNews.forEach(item => {
+        // 核心逻辑 4：渲染至页面
+        combinedData.forEach(item => {
+            // 如果存在摘要（desc），则渲染摘要节点
+            const descHtml = item.desc ? `<div class="news-desc">${item.desc}</div>` : '';
+            
             newsList.innerHTML += `
                 <li class="news-item">
-                    <div class="news-meta">发布日期：${item.date}</div>
+                    <div class="news-meta">
+                        <span class="news-tag">${item.tag}</span>
+                        发布日期：${item.date}
+                    </div>
                     <a href="${item.link}" class="news-title">${item.title}</a>
+                    ${descHtml}
                 </li>
             `;
         });
