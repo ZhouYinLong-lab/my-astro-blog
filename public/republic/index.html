@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>玄渊共和国 | Republic of Xuan Yuan</title>
+    <link rel="icon" href="./img/xuanyuan.png" type="image/png">
     <style>
         /* ================= 国家级视觉规范 ================= */
         :root {
@@ -28,10 +29,26 @@
             display: flex; justify-content: space-between; align-items: center;
             border-bottom: 1px solid var(--gov-border);
         }
-        .national-brand { display: flex; align-items: center; gap: 20px; }
+        /* ================= 1. 顶部：国徽与导航 优化版 ================= */
+        .national-brand { 
+            display: flex; 
+            align-items: center; /* 确保徽标中心与文字中轴线严格对齐 */
+            gap: 25px; /* 略微增加间距，适配更大的徽标 */
+        }
+
         .emblem {
-            width: 70px; height: 70px; border-radius: 50%; border: 2px solid var(--gov-gold);
-            background: url('/img/xuanyuan.png') center/cover; box-shadow: 0 0 15px rgba(203, 160, 82, 0.2);
+            /* 1. 放大图片大小 */
+            width: 100px; 
+            height: 100px; 
+    
+            /* 2. 去掉金色外围线与圆角约束 */
+            border: none; 
+            border-radius: 0; 
+            box-shadow: none; 
+    
+            /* 3. 图片渲染模式优化 */
+            /* 请确保此处路径正确，'contain' 模式可保证徽标完整且不被裁剪 */
+            background: url('./img/xuanyuan.png') center/contain no-repeat; 
         }
         .national-title h1 { font-size: 28px; font-weight: normal; letter-spacing: 6px; color: #fff; }
         .national-title p { font-size: 12px; letter-spacing: 3px; color: var(--gov-gold); font-family: monospace; }
