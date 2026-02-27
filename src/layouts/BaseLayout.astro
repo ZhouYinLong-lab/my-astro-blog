@@ -97,7 +97,7 @@ const {
           <Sidebar headings={headings} showTOC={showTOC} />
 
           <SiteInfo />
-          
+
           <slot name="sidebar" />
         </aside>
       </div>
@@ -167,16 +167,6 @@ const {
         0% { transform: scale(1); }
         50% { transform: scale(1.1); }
         100% { transform: scale(1); }
-      }
-
-      /* ================= 全局图片 Loading 兜底魔法 ================= */
-      img {
-        /* 在图片未加载出来时，居中显示你的 gif 动图 */
-        background: url('/img/loading.gif') no-repeat center center;
-        /* 强行限制 gif 的大小，防止它跟着外面大图的尺寸被拉伸得畸形 */
-        background-size: 40px 40px; 
-        /* 给未加载的图片区域铺一层极暗的底色，显得更有骨架感 */
-        background-color: rgba(128, 128, 128, 0.05); 
       }
 
       /* ================= 首页：电影级对焦开场 ================= */
