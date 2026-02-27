@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>中央文件 - 玄渊共和国</title>
+    <style>
+        :root { --gov-bg: #0b0f19; --gov-surface: #151b29; --gov-gold: #cba052; --gov-text: #e2e8f0; --gov-border: #2d3748; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: "PingFang SC", "Microsoft YaHei", serif; background-color: var(--gov-bg); color: var(--gov-text); line-height: 1.6; border-top: 4px solid var(--gov-gold); }
+        a { text-decoration: none; color: inherit; transition: all 0.3s; }
+        a:hover { color: var(--gov-gold); }
+
+        .header { max-width: 1200px; margin: 0 auto; padding: 30px 20px 20px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--gov-border); }
+        .national-brand { display: flex; align-items: center; gap: 20px; }
+        .emblem { width: 70px; height: 70px; border-radius: 50%; border: 2px solid var(--gov-gold); background: url('./img/xuanyuan.png') center/cover; box-shadow: 0 0 15px rgba(203, 160, 82, 0.2); }
+        .national-title h1 { font-size: 28px; font-weight: normal; letter-spacing: 6px; color: #fff; }
+        .national-title p { font-size: 12px; letter-spacing: 3px; color: var(--gov-gold); font-family: monospace; }
+        .nav { display: flex; gap: 30px; font-size: 16px; letter-spacing: 2px; }
+        .nav a.active { color: var(--gov-gold); border-bottom: 2px solid var(--gov-gold); padding-bottom: 5px; }
+
+        .container { max-width: 1200px; margin: 50px auto; padding: 0 20px; min-height: 60vh; }
+        .page-header { font-size: 28px; color: #fff; border-left: 4px solid var(--gov-gold); padding-left: 15px; margin-bottom: 40px; font-weight: normal; letter-spacing: 2px; }
+
+        /* 文章网格矩阵 */
+        .article-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 25px; }
+        .article-card { padding: 25px; background-color: var(--gov-surface); border: 1px solid var(--gov-border); transition: transform 0.3s; border-radius: 4px; display: flex; flex-direction: column; }
+        .article-card:hover { transform: translateY(-5px); border-color: var(--gov-gold); box-shadow: 0 10px 20px rgba(0,0,0,0.3); }
+        .card-tag { align-self: flex-start; font-size: 12px; background: rgba(203, 160, 82, 0.1); color: var(--gov-gold); padding: 4px 10px; margin-bottom: 15px; border-radius: 2px; }
+        .card-title { font-size: 20px; color: #fff; margin-bottom: 15px; display: block; letter-spacing: 1px;}
+        .card-desc { font-size: 14px; color: #888; flex-grow: 1; text-align: justify; }
+
+        .footer { margin-top: 60px; padding: 30px; text-align: center; border-top: 1px solid var(--gov-border); background-color: var(--gov-surface); }
+
+        .copyright { font-size: 12px; color: #666; }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="national-brand">
+            <div class="emblem"></div>
+            <div class="national-title">
+                <h1>玄渊共和国</h1>
+                <p>THE REPUBLIC OF XUAN YUAN</p>
+            </div>
+        </div>
+        <nav class="nav">
+            <a href="index.html">政务首页</a>
+            <a href="news.html">新闻发布厅</a>
+            <a href="documents.html" class="active">中央文件</a>
+            <a href="/about">执政官本纪</a>
+        </nav>
+    </header>
+
+    <main class="container">
+        <h2 class="page-header">中央文件与国家公报</h2>
+        <div class="article-grid" id="docs-page-grid"></div>
+    </main>
+
+    <footer class="footer">
+        <div class="disclaimer">⚠️ 本网站（玄渊共和国）为个人世界观设定（World-building）之艺术创作，纯属虚构，无任何现实政治意图。</div>
+        <div class="copyright">Copyright © 2026 The Republic of Xuan Yuan. Designed by Consul ZhouXuanYuan.</div>
+    </footer>
+
+    <script src="data.js"></script>
+    <script>
+        const articleGrid = document.getElementById('docs-page-grid');
+        
+        // 渲染共和国文章矩阵
+        republicData.articles.forEach(item => {
+            articleGrid.innerHTML += `
+                <article class="article-card">
+                    <span class="card-tag">${item.tag}</span>
+                    <a href="${item.link}" class="card-title">${item.title}</a>
+                    <p class="card-desc">${item.desc}</p>
+                </article>
+            `;
+        });
+    </script>
+</body>
+</html>
