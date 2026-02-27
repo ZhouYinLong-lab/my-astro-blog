@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>新闻发布厅 - 玄渊共和国</title>
-    <link rel="icon" href="./img/xuanyuan.png" type="image/png">
+    <link rel="icon" href="../img/xuanyuan.png" type="image/png">
     <style>
         :root { --gov-bg: #0b0f19; --gov-surface: #151b29; --gov-gold: #cba052; --gov-text: #e2e8f0; --gov-border: #2d3748; }
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -14,7 +14,14 @@
 
         .header { max-width: 1200px; margin: 0 auto; padding: 30px 20px 20px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--gov-border); }
         .national-brand { display: flex; align-items: center; gap: 20px; }
-        .emblem { width: 70px; height: 70px; border-radius: 50%; border: 2px solid var(--gov-gold); background: url('./img/xuanyuan.png') center/cover; box-shadow: 0 0 15px rgba(203, 160, 82, 0.2); }
+        .emblem {
+            width: 100px;
+            height: 100px;
+            border: none;
+            border-radius: 0;
+            box-shadow: none;
+            background: url('../img/xuanyuan.png') center/cover no-repeat;
+        }
         .national-title h1 { font-size: 28px; font-weight: normal; letter-spacing: 6px; color: #fff; }
         .national-title p { font-size: 12px; letter-spacing: 3px; color: var(--gov-gold); font-family: monospace; }
         .nav { display: flex; gap: 30px; font-size: 16px; letter-spacing: 2px; }
