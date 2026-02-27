@@ -10,7 +10,7 @@ const republicData = {
             link: "/blog/sovereignty-declaration" // 点击跳转的文章链接
         },
         {
-            image: "/img/avatar.webp", 
+            image: "/img/xuanyuan/shicha.jpg", 
             title: "执政官视察底层代码，强调整洁与秩序",
             link: "/blog/code-inspection"
         },
