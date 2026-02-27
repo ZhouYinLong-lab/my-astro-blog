@@ -1,0 +1,68 @@
+---
+// 引入 Astro 的内容集合，用来统计文章
+import { getCollection } from "astro:content";
+import { Icon } from "astro-icon/components";
+
+// 获取所有公开的博客文章
+const allPosts = await getCollection("blog", ({ data }) => {
+  return import.meta.env.PROD ? !data.draft : true;
+});
+
+// 1. 计算文章总数
+const articleCount = allPosts.length;
+
+// 2. 计算最后更新时间（距离今天几天前）
+let lastUpdateStr = "刚刚";
+if (articleCount > 0) {
+  // 按日期从新到旧排序
+  const sortedPosts = allPosts.sort(
+    (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+  );
+  const latestDate = new Date(sortedPosts[0].data.pubDate);
+  const today = new Date();
+  const diffTime = Math.abs(today.getTime() - latestDate.getTime());
+  const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+  
+  if (diffDays === 0) {
+    lastUpdateStr = "今天";
+  } else {
+    lastUpdateStr = `${diffDays} 天前`;
+  }
+}
+---
+
+<div class="card bg-base-100 shadow-sm border border-base-200 p-5 mt-4">
+  <h2 class="text-lg font-bold mb-4 flex items-center gap-2 text-base-content">
+    <Icon name="lucide:line-chart" class="w-5 h-5 text-primary" />
+    <span>网站信息</span>
+  </h2>
+  
+  <div class="flex flex-col gap-3 text-sm">
+    <div class="flex justify-between items-center">
+      <span class="text-base-content/80">文章数目：</span>
+      <span class="font-mono text-base-content">{articleCount}</span>
+    </div>
+    
+    <div class="flex justify-between items-center">
+      <span class="text-base-content/80">本站访客数：</span>
+      <span class="font-mono text-base-content" id="busuanzi_value_site_uv">
+        <span class="loading loading-spinner loading-xs text-primary/50"></span>
+      </span>
+    </div>
+    
+    <div class="flex justify-between items-center">
+      <span class="text-base-content/80">本站总浏览量：</span>
+      <span class="font-mono text-base-content" id="busuanzi_value_site_pv">
+        <span class="loading loading-spinner loading-xs text-primary/50"></span>
+      </span>
+    </div>
+    
+    <div class="flex justify-between items-center">
+      <span class="text-base-content/80">最后更新时间：</span>
+      <span class="font-mono text-base-content">{lastUpdateStr}</span>
+    </div>
+  </div>
+</div>
+
+{/* 引入不算子统计脚本。加上 data-astro-rerun 完美兼容 Astro 的无刷新跳转 */}
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" data-astro-rerun></script>

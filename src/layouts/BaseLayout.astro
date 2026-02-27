@@ -14,6 +14,7 @@ import {
 } from "@config";
 import ElementCrossing from "astro-vtbot/components/ElementCrossing.astro";
 import PointerOnNavigation from "astro-vtbot/components/PointerOnNavigation.astro";
+import SiteInfo from "@/components/widgets/SiteInfo.astro";
 
 const {
   title,
@@ -94,6 +95,9 @@ const {
         </main>
         <aside class="col-span-1 bg-transparent order-2 md:order-1 md:top-4">
           <Sidebar headings={headings} showTOC={showTOC} />
+
+          <SiteInfo />
+          
           <slot name="sidebar" />
         </aside>
       </div>
