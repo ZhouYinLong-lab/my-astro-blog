@@ -38,18 +38,18 @@
 
         .emblem {
             /* 1. 放大图片大小 */
-            width: 100px; 
-            height: 100px; 
-    
-            /* 2. 去掉金色外围线与圆角约束 */
-            border: none; 
-            border-radius: 0; 
-            box-shadow: none; 
-    
-            /* 3. 图片渲染模式优化 */
-            /* 请确保此处路径正确，'contain' 模式可保证徽标完整且不被裁剪 */
-            background: url('./img/xuanyuan.png') center/contain no-repeat; 
+            width: 100px;
+            height: 100px;
+
+            /* 2. 去掉金色外框线与圆角约束 */
+            border: none;
+            border-radius: 0;
+            box-shadow: none;
+
+            /* 3. 核心修复：重新锚定国徽图像源，使用相对路径向上跳跃一级目录 */
+            background: url('../img/xuanyuan.png') center/cover no-repeat;
         }
+
         .national-title h1 { font-size: 28px; font-weight: normal; letter-spacing: 6px; color: #fff; }
         .national-title p { font-size: 12px; letter-spacing: 3px; color: var(--gov-gold); font-family: monospace; }
         .nav { display: flex; gap: 30px; font-size: 16px; letter-spacing: 2px; }

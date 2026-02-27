@@ -46,10 +46,10 @@ const { bgClass, iconName, borderClass } = typeConfig[type];
   <a href={url} target="_blank" rel="noopener noreferrer">
     <div class={`${bgClass} p-4 flex flex-col items-center`}>
       <div class="avatar mb-3">
-        <div class="w-16 h-16 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2 overflow-hidden">
+        <div class="w-16 h-16 rounded-full overflow-hidden">
           {
             avatar ? (
-              <Image src={avatar} width={64} height={64} format="webp" alt={name} loading="lazy" class="object-cover" />
+              <Image src={avatar} width={64} height={64} format="webp" alt={name} loading="lazy" class="w-full h-full object-cover" />
             ) : (
               <div class="flex items-center justify-center w-full h-full bg-primary">
                 <span class="text-xl font-bold text-primary-content">{name.charAt(0)}</span>
