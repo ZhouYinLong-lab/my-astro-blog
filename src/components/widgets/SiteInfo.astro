@@ -1,23 +1,27 @@
 ---
-// 引入 Astro 的内容集合，用来统计文章
+// 引入类型定义，解决 CI 报错
+import type { CollectionEntry } from "astro:content";
 import { getCollection } from "astro:content";
 import { Icon } from "astro-icon/components";
 
-// 获取所有公开的博客文章
-const allPosts = await getCollection("blog", ({ data }) => {
-  return import.meta.env.PROD ? !data.draft : true;
-});
+// 显式指定 data 的类型
+const allPosts = await getCollection(
+  "blog",
+  ({ data }: CollectionEntry<"blog">) => {
+    return import.meta.env.PROD ? !data.draft : true;
+  },
+);
 
-// 1. 计算文章总数
 const articleCount = allPosts.length;
-
-// 2. 计算最后更新时间（距离今天几天前）
 let lastUpdateStr = "刚刚";
+
 if (articleCount > 0) {
-  // 按日期从新到旧排序
+  // 显式指定 a 和 b 的类型为 CollectionEntry<"blog">，消灭 implicitly 'any' 错误
   const sortedPosts = allPosts.sort(
-    (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+    (a: CollectionEntry<"blog">, b: CollectionEntry<"blog">) =>
+      b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
   );
+
   const latestDate = new Date(sortedPosts[0].data.pubDate);
   const today = new Date();
   const diffTime = Math.abs(today.getTime() - latestDate.getTime());
