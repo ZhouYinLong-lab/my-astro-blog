@@ -32,11 +32,12 @@ if (articleCount > 0) {
 const pathname = decodeURI(Astro.url.pathname);
 
 // 定义允许显示的页面路径
-const isHomePage = pathname === '/' || pathname === '/index.html';
-const isBlogPage = pathname === '/blog' || pathname === '/blog/';
+const isHomePage = pathname === "/" || pathname === "/index.html";
+const isBlogPage = pathname === "/blog" || pathname === "/blog/";
 // 注意：如果你的“居士自序”或“友链”网址后缀不是 about 和 friends，请修改下面单引号里的词！
-const isAboutPage = pathname.includes('/about'); 
-const isFriendsPage = pathname.includes('/friends') || pathname.includes('/links');
+const isAboutPage = pathname.includes("/about");
+const isFriendsPage =
+  pathname.includes("/friends") || pathname.includes("/links");
 
 // 综合判定
 const shouldShow = isHomePage || isBlogPage || isAboutPage || isFriendsPage;
