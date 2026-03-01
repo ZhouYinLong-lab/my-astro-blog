@@ -1,75 +1,82 @@
 ---
-// 引入类型定义，解决 CI 报错
 import type { CollectionEntry } from "astro:content";
 import { getCollection } from "astro:content";
 import { Icon } from "astro-icon/components";
 
-// 显式指定 data 的类型
 const allPosts = await getCollection(
   "blog",
   ({ data }: CollectionEntry<"blog">) => {
     return import.meta.env.PROD ? !data.draft : true;
   },
 );
-
 const articleCount = allPosts.length;
 let lastUpdateStr = "刚刚";
 
 if (articleCount > 0) {
-  // 显式指定 a 和 b 的类型为 CollectionEntry<"blog">，消灭 implicitly 'any' 错误
   const sortedPosts = allPosts.sort(
     (a: CollectionEntry<"blog">, b: CollectionEntry<"blog">) =>
       b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
   );
-
   const latestDate = new Date(sortedPosts[0].data.pubDate);
   const today = new Date();
   const diffTime = Math.abs(today.getTime() - latestDate.getTime());
   const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
-
   if (diffDays === 0) {
     lastUpdateStr = "今天";
   } else {
     lastUpdateStr = `${diffDays} 天前`;
   }
 }
+
+// 👇 显隐逻辑：精准探测当前网址
+const pathname = decodeURI(Astro.url.pathname);
+
+// 定义允许显示的页面路径
+const isHomePage = pathname === '/' || pathname === '/index.html';
+const isBlogPage = pathname === '/blog' || pathname === '/blog/';
+// 注意：如果你的“居士自序”或“友链”网址后缀不是 about 和 friends，请修改下面单引号里的词！
+const isAboutPage = pathname.includes('/about'); 
+const isFriendsPage = pathname.includes('/friends') || pathname.includes('/links');
+
+// 综合判定
+const shouldShow = isHomePage || isBlogPage || isAboutPage || isFriendsPage;
 ---
 
-<div class="card bg-base-100 shadow-sm border border-base-200 p-5 mt-4">
-  <h2 class="text-lg font-bold mb-4 flex items-center gap-2 text-base-content">
-    <Icon name="lucide:line-chart" class="w-5 h-5 text-primary" />
-    <span>网站信息</span>
-  </h2>
-  
-  <div class="flex flex-col gap-3 text-sm">
-    <div class="flex justify-between items-center">
-      <span class="text-base-content/80">文章数目：</span>
-      <span class="font-mono text-base-content">{articleCount}</span>
-    </div>
+{/* 👇 只有判定通过，才渲染这块 UI 面板 */}
+{shouldShow && (
+  <div class="card bg-base-100 shadow-sm border border-base-200 p-5 mt-4">
+    <h2 class="text-lg font-bold mb-4 flex items-center gap-2 text-base-content">
+      <Icon name="lucide:line-chart" class="w-5 h-5 text-primary" />
+      <span>网站信息</span>
+    </h2>
     
-    <div class="flex justify-between items-center">
-      <span class="text-base-content/80">本站访客数：</span>
-      <span class="font-mono text-base-content" id="busuanzi_value_site_uv">
-        <span class="loading loading-spinner loading-xs text-primary/50"></span>
-      </span>
-    </div>
-    
-    <div class="flex justify-between items-center">
-      <span class="text-base-content/80">本站总浏览量：</span>
-      <span class="font-mono text-base-content" id="busuanzi_value_site_pv">
-        <span class="loading loading-spinner loading-xs text-primary/50"></span>
-      </span>
-    </div>
-    
-    <div class="flex justify-between items-center">
-      <span class="text-base-content/80">最后更新时间：</span>
-      <span class="font-mono text-base-content">{lastUpdateStr}</span>
+    <div class="flex flex-col gap-3 text-sm">
+      <div class="flex justify-between items-center">
+        <span class="text-base-content/80">文章数目：</span>
+        <span class="font-mono text-base-content">{articleCount}</span>
+      </div>
+      
+      <div class="flex justify-between items-center">
+        <span class="text-base-content/80">本站访客数：</span>
+        <span class="font-mono text-base-content" id="busuanzi_value_site_uv">
+          <span class="loading loading-spinner loading-xs text-primary/50"></span>
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center">
+        <span class="text-base-content/80">本站总浏览量：</span>
+        <span class="font-mono text-base-content" id="busuanzi_value_site_pv">
+          <span class="loading loading-spinner loading-xs text-primary/50"></span>
+        </span>
+      </div>
+      
+      <div class="flex justify-between items-center">
+        <span class="text-base-content/80">最后更新时间：</span>
+        <span class="font-mono text-base-content">{lastUpdateStr}</span>
+      </div>
     </div>
   </div>
-</div>
+)}
 
-{/* 引入不算子统计脚本。加上 data-astro-rerun 完美兼容 Astro 的无刷新跳转 */}
-<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" data-astro-rerun></script>
-
-{/* 修改后的脚本标签 */}
+{/* 👇 统计脚本必须留在外面，确保全站计数正常运行 */}
 <script is:inline async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" data-astro-rerun></script>

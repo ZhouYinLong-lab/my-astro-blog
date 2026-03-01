@@ -3,6 +3,8 @@ import ProfileBar from "./sidebar/ProfileBar.astro";
 import SearchBar from "./sidebar/SearchBar.astro";
 import TOCBar from "./sidebar/TOCBar.astro";
 import ToolBar from "./sidebar/ToolBar.astro";
+// 👇 精准引入 widgets 文件夹下的 SiteInfo 组件
+import SiteInfo from "./widgets/SiteInfo.astro"; 
 
 interface Props {
   headings?: Array<{
@@ -13,7 +15,6 @@ interface Props {
   showTOC?: boolean;
 }
 
-// Get headings from parent component or page
 const { headings = [], showTOC = true } = Astro.props as Props;
 ---
 
@@ -23,7 +24,12 @@ const { headings = [], showTOC = true } = Astro.props as Props;
 <div class="relative mb-4">
   <SearchBar />
 </div>
-<div class="md:sticky md:top-4">
+
+<div class="md:sticky md:top-4 flex flex-col max-h-[calc(100vh-2rem)] overflow-y-auto pb-4 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+  
   <ToolBar />
   <TOCBar headings={headings} showTOC={showTOC} />
+  
+  <SiteInfo />
+  
 </div>
