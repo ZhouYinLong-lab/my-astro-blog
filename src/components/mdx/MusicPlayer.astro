@@ -13,7 +13,7 @@ const {
   <audio class="audio-element" src={src} preload="metadata"></audio>
 
   <div class="relative w-[72px] h-[72px] flex-shrink-0 cursor-pointer group play-btn">
-    <img src={cover} alt={title} class="w-full h-full object-contain bg-black/10" />
+    <img src={cover} alt={title} class="absolute top-0 left-0 w-full h-full object-cover block m-0 p-0 bg-black/10" />
     <div class="absolute inset-0 bg-black/30 flex items-center justify-center transition-opacity opacity-80 group-hover:opacity-100">
       <Icon name="lucide:play-circle" class="w-9 h-9 text-white/90 play-icon transition-transform group-hover:scale-110" />
       <Icon name="lucide:pause-circle" class="w-9 h-9 text-white/90 hidden pause-icon transition-transform group-hover:scale-110" />
