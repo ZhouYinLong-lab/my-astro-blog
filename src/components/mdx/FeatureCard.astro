@@ -4,6 +4,7 @@ export interface FeatureCardProps {
   description: string;
   icon: string;
   color?: string;
+  url?: string; // 新增：允许接收 url 参数
 }
 
 const {
@@ -11,13 +12,15 @@ const {
   description,
   icon,
   color = "oklch(0.6 0.2 250)", // Default blue color
+  url, // 新增：提取 url
 } = Astro.props as FeatureCardProps;
 
 import { Icon } from "astro-icon/components";
 ---
 
-<div
-  class="card bg-base-100 shadow-md hover:shadow-xl transition-transform duration-300 ease-in-out hover:-translate-y-1 border border-base-200"
+<a
+  href={url || "#"}
+  class="card bg-base-100 shadow-md hover:shadow-xl transition-transform duration-300 ease-in-out hover:-translate-y-1 border border-base-200 block cursor-pointer"
 >
   <div class="card-body p-6">
     <div class="flex flex-col items-center text-center sm:items-start sm:text-left">
@@ -32,4 +35,4 @@ import { Icon } from "astro-icon/components";
       <p class="text-base-content/70">{description}</p>
     </div>
   </div>
-</div>
+</a>
