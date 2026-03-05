@@ -12,124 +12,206 @@ const allPosts = await getCollection(
   },
 );
 
-// 2. 聚合日期数据
-const dateCountMap: Record<string, number> = {};
-allPosts.forEach((post: CollectionEntry<"blog">) => {
+// 2. 将数据重新组装：按日期归类，并提取标题和跳转链接
+// 结构：{ '2026-03-05': [{ title: '...', url: '/blog/slug' }] }
+const postsByDate: Record<string, Array<{ title: string; url: string }>> = {};
+
+allPosts.forEach((post) => {
   const date = new Date(post.data.pubDate);
+  // 补齐两位数，确保格式为 YYYY-MM-DD
   const dateStr = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, "0")}-${String(date.getDate()).padStart(2, "0")}`;
-  dateCountMap[dateStr] = (dateCountMap[dateStr] || 0) + 1;
-});
 
-// 3. 演算近 365 天的赛博时间线
-const today = new Date();
-const ONE_DAY = 24 * 60 * 60 * 1000;
-const startDate = new Date(today.getTime() - 364 * ONE_DAY);
-const startDayOfWeek = startDate.getDay(); // 获取起点是周几
-
-const days = [];
-// 填充首周的空白矩阵
-for (let i = 0; i < startDayOfWeek; i++) {
-  days.push({ dateStr: "", count: -1 });
-}
-// 生成过去一年的矩阵
-for (let i = 0; i <= 364; i++) {
-  const d = new Date(startDate.getTime() + i * ONE_DAY);
-  const dateStr = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
-  days.push({ dateStr, count: dateCountMap[dateStr] || 0 });
-}
-
-// 4. 将时间轴折叠为 7x52 的网格周列
-const weeks: any[] = [];
-let currentWeek: any[] = [];
-days.forEach((day) => {
-  currentWeek.push(day);
-  if (currentWeek.length === 7) {
-    weeks.push(currentWeek);
-    currentWeek = [];
+  if (!postsByDate[dateStr]) {
+    postsByDate[dateStr] = [];
   }
-});
-if (currentWeek.length > 0) weeks.push(currentWeek);
 
-// 计算活跃度等级
-function getLevel(count: number) {
-  if (count === 0) return 0;
-  if (count === 1) return 1;
-  if (count === 2) return 2;
-  return 3;
-}
+  postsByDate[dateStr].push({
+    title: post.data.title || "无题归档",
+    url: `/blog/${post.slug}`, // Astro 默认的博客详情页路由
+  });
+});
 ---
 
-<BaseLayout title="赛博足迹 - 热力图">
-  <MainCard title="赛博足迹" description="记录在数字世界里每一次的思想脉动与敲击。">
+<BaseLayout title="步履不停 - 月度脉动">
+  <MainCard title="步履不停" description="在数字时间的切片中，检索每一次思想的火花。">
     
-    <div class="card bg-base-100/40 backdrop-blur-xl border border-base-200/60 shadow-xl p-8 mt-6">
-      
-      <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-8 gap-4">
+    <div class="card bg-base-100/40 backdrop-blur-xl border border-base-200/60 shadow-xl p-6 md:p-10 mt-6 relative overflow-hidden">
+      <div class="absolute -top-20 -right-20 w-64 h-64 bg-primary/5 rounded-full blur-3xl pointer-events-none"></div>
+
+      <div class="flex items-center justify-between mb-8">
         <h3 class="text-xl font-bold flex items-center gap-3">
-          <Icon name="lucide:activity" class="w-6 h-6 text-primary animate-pulse" />
-          <span class="tracking-widest">思想脉动矩阵</span>
+          <Icon name="lucide:calendar-days" class="w-6 h-6 text-primary" />
+          <span class="tracking-widest">月度脉动</span>
         </h3>
-        <div class="text-xs font-mono bg-base-200/80 px-4 py-1.5 rounded-full text-base-content/80 border border-base-300">
-          Last 365 Days
+        
+        <div class="flex items-center gap-4 bg-base-200/50 p-1.5 rounded-xl border border-base-300">
+          <button id="prev-month" class="btn btn-sm btn-circle btn-ghost text-base-content/70 hover:text-primary">
+            <Icon name="lucide:chevron-left" class="w-5 h-5" />
+          </button>
+          <span id="current-month-display" class="font-mono font-bold w-24 text-center text-base-content tracking-wider">
+            </span>
+          <button id="next-month" class="btn btn-sm btn-circle btn-ghost text-base-content/70 hover:text-primary">
+            <Icon name="lucide:chevron-right" class="w-5 h-5" />
+          </button>
         </div>
       </div>
 
-      <div class="w-full overflow-x-auto pb-8 hide-scrollbar cursor-crosshair">
-        <div class="min-w-[800px] flex gap-[5px] mx-auto justify-center">
-          {
-            weeks.map((week) => (
-              <div class="flex flex-col gap-[5px]">
-                {week.map((day: any) => {
-                  if (day.count === -1) {
-                    // 空白占位符
-                    return <div class="w-3.5 h-3.5 rounded-[3px] bg-transparent" />;
-                  }
-                  
-                  const level = getLevel(day.count);
-                  
-                  return (
-                    // 🌟 核心视觉渲染：随着等级提升，颜色加深，Hover 增加放大与霓虹光晕
-                    <div
-                      class:list={[
-                        "w-3.5 h-3.5 rounded-[3px] transition-all duration-300 hover:scale-150 hover:z-10",
-                        level === 0 && "bg-base-200/70 dark:bg-base-300/50 hover:bg-base-300",
-                        level === 1 && "bg-primary/30 hover:bg-primary/40 hover:ring-2 hover:ring-primary/40",
-                        level === 2 && "bg-primary/60 hover:bg-primary/70 hover:ring-2 hover:ring-primary/60",
-                        level === 3 && "bg-primary hover:bg-primary hover:ring-2 hover:ring-primary hover:shadow-lg hover:shadow-primary/50",
-                      ]}
-                      title={day.count === 0 ? day.dateStr : `${day.dateStr} : 演算了 ${day.count} 篇数据`}
-                    />
-                  );
-                })}
-              </div>
-            ))
-          }
+      <div class="w-full max-w-2xl mx-auto">
+        <div class="grid grid-cols-7 gap-2 mb-2 text-center text-xs font-mono text-base-content/50">
+          <div>SUN</div><div>MON</div><div>TUE</div><div>WED</div><div>THU</div><div>FRI</div><div>SAT</div>
         </div>
+        <div id="calendar-grid" class="grid grid-cols-7 gap-2 sm:gap-3">
+          </div>
       </div>
 
-      <div class="flex justify-end items-center gap-2 mt-2 text-[10px] text-base-content/50 font-mono uppercase tracking-widest">
-        <span>静默 (0)</span>
-        <div class="flex gap-1.5 mx-2">
-          <div class="w-3 h-3 rounded-[2px] bg-base-200/70 dark:bg-base-300/50"></div>
-          <div class="w-3 h-3 rounded-[2px] bg-primary/30"></div>
-          <div class="w-3 h-3 rounded-[2px] bg-primary/60"></div>
-          <div class="w-3 h-3 rounded-[2px] bg-primary"></div>
+      <div id="post-details-panel" class="mt-8 hidden opacity-0 transition-all duration-500 ease-in-out transform translate-y-4">
+        <div class="border-t border-base-300/50 pt-6">
+          <h4 class="text-sm font-mono text-primary mb-4 flex items-center gap-2">
+            <Icon name="lucide:terminal-square" class="w-4 h-4" />
+            <span id="detail-date-title">LOG_DATE: --</span>
+          </h4>
+          <ul id="detail-links-list" class="space-y-2 flex flex-col items-start">
+            </ul>
         </div>
-        <span>狂热 (3+)</span>
       </div>
 
     </div>
-
   </MainCard>
 </BaseLayout>
 
-<style>
-  /* 隐藏丑陋的系统滚动条，保持赛博纯粹感 */
-  .hide-scrollbar::-webkit-scrollbar {
-    display: none;
-  }
-  .hide-scrollbar {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-  }
-</style>
+{/* 👇 将后端组装好的数据传递给前端 JS */}
+<script is:inline define:vars={{ ObjectPostsByDate: postsByDate }}>
+  document.addEventListener('astro:page-load', () => {
+    // === 核心数据与 DOM 节点 ===
+    const postsData = ObjectPostsByDate || {};
+    let currentDisplayDate = new Date(); // 当前正在浏览的月份
+
+    const gridEl = document.getElementById("calendar-grid");
+    const monthDisplayEl = document.getElementById("current-month-display");
+    const prevBtn = document.getElementById("prev-month");
+    const nextBtn = document.getElementById("next-month");
+    
+    const panelEl = document.getElementById("post-details-panel");
+    const detailTitleEl = document.getElementById("detail-date-title");
+    const detailListEl = document.getElementById("detail-links-list");
+
+    if (!gridEl) return;
+
+    // === 活跃度等级计算 ===
+    function getLevel(count) {
+      if (count === 0) return 0;
+      if (count === 1) return 1;
+      if (count === 2) return 2;
+      return 3;
+    }
+
+    // === 渲染日历核心逻辑 ===
+    function renderCalendar() {
+      gridEl.innerHTML = ""; // 清空旧数据
+      
+      const year = currentDisplayDate.getFullYear();
+      const month = currentDisplayDate.getMonth();
+      
+      // 更新标题 (例如：2026-03)
+      monthDisplayEl.textContent = `${year}-${String(month + 1).padStart(2, "0")}`;
+
+      // 计算这个月有多少天，以及第一天是周几
+      const firstDayOfMonth = new Date(year, month, 1).getDay(); // 0(周日) - 6(周六)
+      const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+      // 1. 填充月初的空白占位符
+      for (let i = 0; i < firstDayOfMonth; i++) {
+        const emptyCell = document.createElement("div");
+        emptyCell.className = "aspect-square rounded-xl bg-transparent";
+        gridEl.appendChild(emptyCell);
+      }
+
+      // 2. 渲染这个月的所有天数
+      for (let day = 1; day <= daysInMonth; day++) {
+        const dateStr = `${year}-${String(month + 1).padStart(2, "0")}-${String(day).padStart(2, "0")}`;
+        const dayPosts = postsData[dateStr] || [];
+        const count = dayPosts.length;
+        const level = getLevel(count);
+
+        const cell = document.createElement("button");
+        // 基础样式：圆角矩形，保持和之前热力图类似的玻璃质感
+        cell.className = "aspect-square rounded-lg sm:rounded-xl transition-all duration-300 flex items-center justify-center font-mono text-xs sm:text-sm font-bold relative overflow-hidden group border border-base-200/50 hover:scale-110 hover:z-10";
+        
+        // 文字：如果有文章，文字显眼；如果没有，文字半透明
+        cell.innerHTML = `<span class="z-10 ${count > 0 ? 'text-primary-content' : 'text-base-content/40 group-hover:text-base-content/80'}">${day}</span>`;
+
+        // 根据活跃度铺设底色
+        if (level === 0) {
+          cell.classList.add("bg-base-200/40", "hover:bg-base-300/60");
+        } else if (level === 1) {
+          cell.classList.add("bg-primary/40", "hover:bg-primary/60", "hover:shadow-lg", "hover:shadow-primary/20", "text-white");
+        } else if (level === 2) {
+          cell.classList.add("bg-primary/70", "hover:bg-primary/80", "hover:shadow-lg", "hover:shadow-primary/40", "text-white");
+        } else {
+          cell.classList.add("bg-primary", "hover:bg-primary", "hover:shadow-xl", "hover:shadow-primary/50", "text-white");
+        }
+
+        // 如果当天有文章，加一个小红点/白点作为绝对指示
+        if (count > 0) {
+           const dot = document.createElement("div");
+           dot.className = "absolute top-1.5 right-1.5 w-1.5 h-1.5 rounded-full bg-white/80 animate-pulse";
+           cell.appendChild(dot);
+        }
+
+        // 绑定点击事件：展示文章列表
+        cell.addEventListener("click", () => {
+          showPostsDetails(dateStr, dayPosts);
+        });
+
+        gridEl.appendChild(cell);
+      }
+    }
+
+    // === 展示文章详情逻辑 ===
+    function showPostsDetails(dateStr, posts) {
+      // 重置动画状态
+      panelEl.classList.remove("hidden");
+      // 强制触发重绘
+      void panelEl.offsetWidth; 
+      panelEl.classList.remove("opacity-0", "translate-y-4");
+      panelEl.classList.add("opacity-100", "translate-y-0");
+
+      detailTitleEl.textContent = `LOG_DATE: ${dateStr}`;
+      detailListEl.innerHTML = "";
+
+      if (posts.length === 0) {
+        detailListEl.innerHTML = `<li class="text-sm text-base-content/50 italic py-2">这天似乎很平静，没有留下任何数据。</li>`;
+        return;
+      }
+
+      posts.forEach(post => {
+        const li = document.createElement("li");
+        li.className = "w-full";
+        // 渲染带有悬浮动效的跳转链接
+        li.innerHTML = `
+          <a href="${post.url}" class="group flex items-center justify-between p-3 rounded-lg bg-base-200/50 hover:bg-primary/10 border border-transparent hover:border-primary/30 transition-all cursor-pointer">
+            <span class="text-base-content group-hover:text-primary font-medium transition-colors">${post.title}</span>
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-base-content/30 group-hover:text-primary/70 transition-colors transform group-hover:translate-x-1"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </a>
+        `;
+        detailListEl.appendChild(li);
+      });
+    }
+
+    // === 绑定按钮交互 ===
+    prevBtn.addEventListener("click", () => {
+      currentDisplayDate.setMonth(currentDisplayDate.getMonth() - 1);
+      panelEl.classList.add("hidden", "opacity-0", "translate-y-4"); // 切换月份时隐藏详情
+      renderCalendar();
+    });
+
+    nextBtn.addEventListener("click", () => {
+      currentDisplayDate.setMonth(currentDisplayDate.getMonth() + 1);
+      panelEl.classList.add("hidden", "opacity-0", "translate-y-4");
+      renderCalendar();
+    });
+
+    // 初始化首次渲染
+    renderCalendar();
+  });
+</script>
