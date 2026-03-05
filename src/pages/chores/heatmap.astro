@@ -1,10 +1,10 @@
 ---
-// 👇 引入类型定义
 import { type CollectionEntry, getCollection } from "astro:content";
 import MainCard from "@/components/MainCard.astro";
 import BaseLayout from "@/layouts/BaseLayout.astro";
+import { Icon } from "astro-icon/components";
 
-// 1. 获取所有文章，显式指定 data 类型
+// 1. 获取所有文章
 const allPosts = await getCollection(
   "blog",
   ({ data }: CollectionEntry<"blog">) => {
@@ -12,7 +12,7 @@ const allPosts = await getCollection(
   },
 );
 
-// 2. 将日期聚合，显式指定 post 类型
+// 2. 聚合日期数据
 const dateCountMap: Record<string, number> = {};
 allPosts.forEach((post: CollectionEntry<"blog">) => {
   const date = new Date(post.data.pubDate);
@@ -20,52 +20,116 @@ allPosts.forEach((post: CollectionEntry<"blog">) => {
   dateCountMap[dateStr] = (dateCountMap[dateStr] || 0) + 1;
 });
 
-const heatmapData = Object.entries(dateCountMap);
-const currentYear = new Date().getFullYear().toString();
+// 3. 演算近 365 天的赛博时间线
+const today = new Date();
+const ONE_DAY = 24 * 60 * 60 * 1000;
+const startDate = new Date(today.getTime() - 364 * ONE_DAY);
+const startDayOfWeek = startDate.getDay(); // 获取起点是周几
+
+const days = [];
+// 填充首周的空白矩阵
+for (let i = 0; i < startDayOfWeek; i++) {
+  days.push({ dateStr: "", count: -1 });
+}
+// 生成过去一年的矩阵
+for (let i = 0; i <= 364; i++) {
+  const d = new Date(startDate.getTime() + i * ONE_DAY);
+  const dateStr = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
+  days.push({ dateStr, count: dateCountMap[dateStr] || 0 });
+}
+
+// 4. 将时间轴折叠为 7x52 的网格周列
+const weeks: any[] = [];
+let currentWeek: any[] = [];
+days.forEach((day) => {
+  currentWeek.push(day);
+  if (currentWeek.length === 7) {
+    weeks.push(currentWeek);
+    currentWeek = [];
+  }
+});
+if (currentWeek.length > 0) weeks.push(currentWeek);
+
+// 计算活跃度等级
+function getLevel(count: number) {
+  if (count === 0) return 0;
+  if (count === 1) return 1;
+  if (count === 2) return 2;
+  return 3;
+}
 ---
 
 <BaseLayout title="赛博足迹 - 热力图">
   <MainCard title="赛博足迹" description="记录在数字世界里每一次的思想脉动与敲击。">
-    <div class="w-full overflow-x-auto py-8">
-      <div id="heatmap-container" class="w-full min-w-[800px] h-[250px]"></div>
+    
+    <div class="card bg-base-100/40 backdrop-blur-xl border border-base-200/60 shadow-xl p-8 mt-6">
+      
+      <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-8 gap-4">
+        <h3 class="text-xl font-bold flex items-center gap-3">
+          <Icon name="lucide:activity" class="w-6 h-6 text-primary animate-pulse" />
+          <span class="tracking-widest">思想脉动矩阵</span>
+        </h3>
+        <div class="text-xs font-mono bg-base-200/80 px-4 py-1.5 rounded-full text-base-content/80 border border-base-300">
+          Last 365 Days
+        </div>
+      </div>
+
+      <div class="w-full overflow-x-auto pb-8 hide-scrollbar cursor-crosshair">
+        <div class="min-w-[800px] flex gap-[5px] mx-auto justify-center">
+          {
+            weeks.map((week) => (
+              <div class="flex flex-col gap-[5px]">
+                {week.map((day: any) => {
+                  if (day.count === -1) {
+                    // 空白占位符
+                    return <div class="w-3.5 h-3.5 rounded-[3px] bg-transparent" />;
+                  }
+                  
+                  const level = getLevel(day.count);
+                  
+                  return (
+                    // 🌟 核心视觉渲染：随着等级提升，颜色加深，Hover 增加放大与霓虹光晕
+                    <div
+                      class:list={[
+                        "w-3.5 h-3.5 rounded-[3px] transition-all duration-300 hover:scale-150 hover:z-10",
+                        level === 0 && "bg-base-200/70 dark:bg-base-300/50 hover:bg-base-300",
+                        level === 1 && "bg-primary/30 hover:bg-primary/40 hover:ring-2 hover:ring-primary/40",
+                        level === 2 && "bg-primary/60 hover:bg-primary/70 hover:ring-2 hover:ring-primary/60",
+                        level === 3 && "bg-primary hover:bg-primary hover:ring-2 hover:ring-primary hover:shadow-lg hover:shadow-primary/50",
+                      ]}
+                      title={day.count === 0 ? day.dateStr : `${day.dateStr} : 演算了 ${day.count} 篇数据`}
+                    />
+                  );
+                })}
+              </div>
+            ))
+          }
+        </div>
+      </div>
+
+      <div class="flex justify-end items-center gap-2 mt-2 text-[10px] text-base-content/50 font-mono uppercase tracking-widest">
+        <span>静默 (0)</span>
+        <div class="flex gap-1.5 mx-2">
+          <div class="w-3 h-3 rounded-[2px] bg-base-200/70 dark:bg-base-300/50"></div>
+          <div class="w-3 h-3 rounded-[2px] bg-primary/30"></div>
+          <div class="w-3 h-3 rounded-[2px] bg-primary/60"></div>
+          <div class="w-3 h-3 rounded-[2px] bg-primary"></div>
+        </div>
+        <span>狂热 (3+)</span>
+      </div>
+
     </div>
+
   </MainCard>
 </BaseLayout>
 
-<script is:inline src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
-
-{/* 👇 增加了 is:inline 消除提示 */}
-<script is:inline define:vars={{ heatmapData, currentYear }}>
-  document.addEventListener('astro:page-load', () => {
-    const dom = document.getElementById('heatmap-container');
-    if (!dom || !window.echarts) return;
-    
-    let myChart = echarts.getInstanceByDom(dom);
-    if (myChart) myChart.dispose();
-    myChart = echarts.init(dom);
-    
-    const option = {
-      tooltip: { formatter: function (p) { return p.value[0] + ' : ' + p.value[1] + ' 篇文章'; } },
-      visualMap: {
-        min: 0, max: 4, type: 'piecewise', orient: 'horizontal', left: 'center', top: 0,
-        pieces: [
-          {min: 4, color: '#196127'}, {min: 3, max: 3, color: '#239a3b'},
-          {min: 2, max: 2, color: '#7bc96f'}, {min: 1, max: 1, color: '#c6e48b'}
-        ],
-        outOfRange: { color: '#ebedf0' }, show: false
-      },
-      calendar: {
-        top: 40, left: 40, right: 20, bottom: 20,
-        range: currentYear,
-        cellSize: ['auto', 20],
-        splitLine: { show: false },
-        itemStyle: { borderWidth: 3, borderColor: '#fff', borderRadius: 4 },
-        dayLabel: { nameMap: ['日', '一', '二', '三', '四', '五', '六'] },
-        monthLabel: { nameMap: 'ZH' }
-      },
-      series: { type: 'heatmap', coordinateSystem: 'calendar', data: heatmapData }
-    };
-    myChart.setOption(option);
-    window.addEventListener('resize', () => myChart.resize());
-  });
-</script>
+<style>
+  /* 隐藏丑陋的系统滚动条，保持赛博纯粹感 */
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .hide-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+</style>
