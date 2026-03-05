@@ -1,19 +1,22 @@
 ---
-import BaseLayout from "@/layouts/BaseLayout.astro";
-import MainCard from "@/components/MainCard.astro";
 // 👇 引入类型定义
-import { getCollection, type CollectionEntry } from "astro:content";
+import { type CollectionEntry, getCollection } from "astro:content";
+import MainCard from "@/components/MainCard.astro";
+import BaseLayout from "@/layouts/BaseLayout.astro";
 
 // 1. 获取所有文章，显式指定 data 类型
-const allPosts = await getCollection("blog", ({ data }: CollectionEntry<"blog">) => {
-  return import.meta.env.PROD ? !data.draft : true;
-});
+const allPosts = await getCollection(
+  "blog",
+  ({ data }: CollectionEntry<"blog">) => {
+    return import.meta.env.PROD ? !data.draft : true;
+  },
+);
 
 // 2. 将日期聚合，显式指定 post 类型
 const dateCountMap: Record<string, number> = {};
 allPosts.forEach((post: CollectionEntry<"blog">) => {
   const date = new Date(post.data.pubDate);
-  const dateStr = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`;
+  const dateStr = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, "0")}-${String(date.getDate()).padStart(2, "0")}`;
   dateCountMap[dateStr] = (dateCountMap[dateStr] || 0) + 1;
 });
 
