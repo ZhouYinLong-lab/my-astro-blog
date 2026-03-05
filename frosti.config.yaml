@@ -18,6 +18,16 @@ site:
       href: / 
       svg: "material-symbols:home-outline-rounded"
       target: _self
+    - id: blog
+      text: 博客 # 汉化
+      href: /blog
+      svg: "material-symbols:book-2-outline-rounded"
+      target: _self
+    - id: project
+      text: 实验室 # 汉化
+      href: /project
+      svg: "material-symbols:code-blocks-outline"
+      target: _self
     - id: chores
       text: 别苑杂务 # 🌟 升级为大分支
       href: "#" # 父级菜单通常不需要直接跳转
@@ -39,16 +49,6 @@ site:
           href: /chores/changelog
           svg: "material-symbols:update-rounded"
           target: _self
-    - id: blog
-      text: 博客 # 汉化
-      href: /blog
-      svg: "material-symbols:book-2-outline-rounded"
-      target: _self
-    - id: project
-      text: 实验室 # 汉化
-      href: /project
-      svg: "material-symbols:code-blocks-outline"
-      target: _self
     - id: friend
       text: 友链 # 汉化
       href: /friend
