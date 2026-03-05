@@ -1,6 +1,7 @@
 {
   "extends": "astro/tsconfigs/strict",
-  "compilerOptions": { // 或 "module": "ES6"
+  "compilerOptions": {
+    // 或 "module": "ES6"
     "target": "ESNext",
     "baseUrl": ".",
     "module": "ESNext",

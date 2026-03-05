@@ -189,8 +189,8 @@ const THEMES = {
 let width, height;
 let pixelSize = 5; 
 let touchX = 0, touchY = 0;
-let bubbles = [];
-let zParticles = []; 
+const bubbles = [];
+const zParticles = []; 
 let hasInteracted = false;
 
 // --- 海豹类 ---
@@ -362,7 +362,7 @@ function createBubble(x, y, isSplash, overrideSize) {
 
 function updateBubbles() {
     for (let i = bubbles.length - 1; i >= 0; i--) {
-        let b = bubbles[i];
+        const b = bubbles[i];
         
         if (!b.isSplash) {
             b.vy -= 0.05; 
@@ -414,7 +414,7 @@ function updateZs() {
     ctx.textAlign = "center";
     ctx.textBaseline = "middle";
     for (let i = zParticles.length - 1; i >= 0; i--) {
-        let z = zParticles[i];
+        const z = zParticles[i];
         z.y += z.vy;
         z.x += Math.sin(z.life * 0.1) * 0.5;
         z.life -= 1;
@@ -422,7 +422,7 @@ function updateZs() {
             ctx.fillStyle = `rgba(0, 96, 100, ${z.life/100})`;
             ctx.save();
             ctx.translate(z.x, z.y);
-            let scale = 1 + (100 - z.life) * 0.01;
+            const scale = 1 + (100 - z.life) * 0.01;
             ctx.scale(scale, scale);
             ctx.fillText(z.char, 0, 0);
             ctx.restore();
