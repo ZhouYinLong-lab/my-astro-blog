@@ -33,7 +33,7 @@ site:
       href: "#" # 父级菜单通常不需要直接跳转
       svg: "material-symbols:dashboard-customize-outline-rounded"
       target: _self
-      children: # 🌟 下设三个小分支
+      subItems: # 🌟 下设三个小分支
         - id: about
           text: 居士自序
           href: /about
