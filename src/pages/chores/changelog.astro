@@ -1,20 +1,18 @@
 ---
-import { Icon } from "astro-icon/components";
-import MainCard from "@/components/MainCard.astro";
 import BaseLayout from "@/layouts/BaseLayout.astro";
+import MainCard from "@/components/MainCard.astro";
+import { Icon } from "astro-icon/components";
 
-// ⚠️ 将这里的 owner 和 repo 替换为你的真实 GitHub 用户名和仓库名！
-const GITHUB_OWNER = "ZhouYinLong-lab";
-const GITHUB_REPO = "my-astro-blog";
+// ⚠️ 请确认这里的仓库名是否正确，根据你之前的截图，应该是 my-astro-blog
+const GITHUB_OWNER = "ZhouYinLong-lab"; 
+const GITHUB_REPO = "my-astro-blog"; 
 
-// Astro 会在打包时执行这段拉取，生成静态网页，用户毫无感知卡顿
-let commits = [];
+// 🚀 核心升级：一次性拉取 100 条日志数据放入内存
+let allCommits = [];
 try {
-  const response = await fetch(
-    `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/commits?per_page=15`,
-  );
+  const response = await fetch(`https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/commits?per_page=100`);
   if (response.ok) {
-    commits = await response.json();
+    allCommits = await response.json();
   }
 } catch (error) {
   console.error("无法拉取 GitHub 日志", error);
@@ -22,34 +20,140 @@ try {
 ---
 
 <BaseLayout title="更新日志">
-  <MainCard title="建站日志" description="见证「寒柳别苑」从零到一的每一次版本迭代。">
-    <div class="relative border-l-2 border-primary/30 ml-4 md:ml-6 py-4 space-y-8">
+  <MainCard title="建站日志" description="见证「寒柳别苑」从零到一的每一次版本迭代与赛博修缮。">
+    
+    <div class="relative border-l-2 border-primary/30 ml-4 md:ml-6 py-4 space-y-8 min-h-[400px]" id="changelog-container">
+      </div>
+
+    <div class="flex items-center justify-between mt-10 px-2 md:px-6 pt-6 border-t border-base-200">
+      <button id="btn-prev" class="btn btn-outline btn-sm gap-2 w-28 disabled:opacity-30 disabled:cursor-not-allowed transition-all">
+        <Icon name="lucide:arrow-left" class="w-4 h-4" />
+        上一页
+      </button>
       
-      {commits.map((commit: any) => (
-        <div class="relative pl-6 md:pl-8">
-          <div class="absolute -left-[9px] top-1 w-4 h-4 rounded-full bg-base-100 border-2 border-primary"></div>
-          
-          <div class="flex flex-col gap-1">
-            <span class="text-sm font-mono text-base-content/60">
-              {new Date(commit.commit.author.date).toLocaleString('zh-CN', { hour12: false })}
-            </span>
-            <div class="card bg-base-200/50 p-4 border border-base-300">
-              <h3 class="text-base font-medium flex items-center gap-2">
-                <Icon name="lucide:git-commit" class="w-4 h-4 text-primary" />
-                {commit.commit.message.split('\n')[0]} {/* 提取首行作为标题 */}
-              </h3>
-              <a href={commit.html_url} target="_blank" class="text-xs text-primary/70 hover:underline mt-2 flex items-center gap-1 w-fit">
-                查看哈希: {commit.sha.substring(0, 7)}
-              </a>
-            </div>
-          </div>
-        </div>
-      ))}
-      
-      {commits.length === 0 && (
-        <div class="pl-6 text-base-content/50 italic">暂无日志数据，或拉取失败。</div>
-      )}
-      
+      <div class="text-sm font-mono flex items-center gap-2 bg-base-200/50 px-4 py-1.5 rounded-lg border border-base-300">
+        <Icon name="lucide:layers" class="w-4 h-4 text-primary" />
+        <span class="text-base-content/70">Page</span>
+        <span id="page-current" class="font-bold text-primary">1</span> 
+        <span class="text-base-content/40">/</span> 
+        <span id="page-total" class="text-base-content/70">1</span>
+      </div>
+
+      <button id="btn-next" class="btn btn-outline btn-sm gap-2 w-28 disabled:opacity-30 disabled:cursor-not-allowed transition-all">
+        下一页
+        <Icon name="lucide:arrow-right" class="w-4 h-4" />
+      </button>
     </div>
+
   </MainCard>
 </BaseLayout>
+
+{/* 👇 注入数据并运行客户端分页引擎 */}
+<script is:inline define:vars={{ allCommits }}>
+  document.addEventListener('astro:page-load', () => {
+    const container = document.getElementById('changelog-container');
+    const btnPrev = document.getElementById('btn-prev');
+    const btnNext = document.getElementById('btn-next');
+    const pageCurrentEl = document.getElementById('page-current');
+    const pageTotalEl = document.getElementById('page-total');
+
+    // 异常处理：如果没有抓取到数据
+    if (!container || !allCommits || allCommits.length === 0) {
+      if (container) container.innerHTML = '<div class="pl-6 text-base-content/50 italic flex items-center gap-2"><svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg> 暂无日志数据，或 API 请求受限。</div>';
+      if (btnPrev) btnPrev.style.display = 'none';
+      if (btnNext) btnNext.style.display = 'none';
+      if (pageCurrentEl) pageCurrentEl.parentElement.style.display = 'none';
+      return;
+    }
+
+    // 分页配置
+    const ITEMS_PER_PAGE = 10; // 每页显示 10 条
+    let currentPage = 1;
+    const totalPages = Math.ceil(allCommits.length / ITEMS_PER_PAGE);
+    
+    pageTotalEl.textContent = totalPages;
+
+    // 渲染指定页面的核心逻辑
+    function renderPage(page) {
+      container.innerHTML = ''; // 瞬间清空
+      
+      const startIndex = (page - 1) * ITEMS_PER_PAGE;
+      const endIndex = Math.min(startIndex + ITEMS_PER_PAGE, allCommits.length);
+      const pageData = allCommits.slice(startIndex, endIndex);
+
+      pageData.forEach((commit, index) => {
+        // 格式化时间
+        const date = new Date(commit.commit.author.date).toLocaleString('zh-CN', {
+          year: 'numeric', month: '2-digit', day: '2-digit',
+          hour: '2-digit', minute: '2-digit', hour12: false
+        });
+        const message = commit.commit.message.split('\n')[0]; // 只取首行作为标题
+        const url = commit.html_url;
+        const sha = commit.sha.substring(0, 7);
+
+        // 使用原始 SVG 替换 Astro Icon (因为这是在浏览器端动态生成的 HTML)
+        const commitIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 text-primary"><circle cx="12" cy="12" r="3"/><line x1="3" x2="9" y1="12" y2="12"/><line x1="15" x2="21" y1="12" y2="12"/><line x1="12" x2="12" y1="3" y2="9"/><line x1="12" x2="12" y1="15" y2="21"/></svg>`;
+
+        // 构建单个日志节点（带有阶梯式滑入动画）
+        const itemHTML = `
+          <div class="relative pl-6 md:pl-8 opacity-0" style="animation: slideFadeIn 0.4s ease forwards ${index * 0.05}s;">
+            <div class="absolute -left-[9px] top-1 w-4 h-4 rounded-full bg-base-100 border-2 border-primary z-10 shadow-[0_0_8px_rgba(var(--p),0.5)]"></div>
+            
+            <div class="flex flex-col gap-1.5">
+              <span class="text-sm font-mono text-base-content/60 tracking-wider">${date}</span>
+              <div class="card bg-base-200/40 hover:bg-base-200 p-4 border border-base-300 transition-all hover:shadow-md group">
+                <h3 class="text-base font-medium flex items-center gap-2 text-base-content group-hover:text-primary transition-colors">
+                  ${commitIcon}
+                  <span>${message}</span>
+                </h3>
+                <a href="${url}" target="_blank" class="text-xs font-mono text-primary/60 hover:text-primary hover:underline mt-2 flex items-center gap-1 w-fit transition-colors">
+                  [${sha}] 查看 Diff 详情
+                </a>
+              </div>
+            </div>
+          </div>
+        `;
+        container.insertAdjacentHTML('beforeend', itemHTML);
+      });
+
+      // 更新按钮状态和页码
+      pageCurrentEl.textContent = page;
+      btnPrev.disabled = page === 1;
+      btnNext.disabled = page === totalPages;
+    }
+
+    // 绑定翻页事件
+    btnPrev.addEventListener('click', () => {
+      if (currentPage > 1) {
+        currentPage--;
+        renderPage(currentPage);
+        // 翻页后平滑滚动回顶部
+        container.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+
+    btnNext.addEventListener('click', () => {
+      if (currentPage < totalPages) {
+        currentPage++;
+        renderPage(currentPage);
+        container.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+
+    // 注入动画关键帧（防止 CSS 未加载）
+    if (!document.getElementById('changelog-keyframes')) {
+      const style = document.createElement('style');
+      style.id = 'changelog-keyframes';
+      style.textContent = `
+        @keyframes slideFadeIn {
+          0% { opacity: 0; transform: translateX(-10px); }
+          100% { opacity: 1; transform: translateX(0); }
+        }
+      `;
+      document.head.appendChild(style);
+    }
+
+    // 执行首次渲染
+    renderPage(1);
+  });
+</script>
