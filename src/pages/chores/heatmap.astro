@@ -16,7 +16,7 @@ const allPosts = await getCollection(
 // 结构：{ '2026-03-05': [{ title: '...', url: '/blog/slug' }] }
 const postsByDate: Record<string, Array<{ title: string; url: string }>> = {};
 
-allPosts.forEach((post) => {
+allPosts.forEach((post: CollectionEntry<"blog">) => {
   const date = new Date(post.data.pubDate);
   // 补齐两位数，确保格式为 YYYY-MM-DD
   const dateStr = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, "0")}-${String(date.getDate()).padStart(2, "0")}`;
