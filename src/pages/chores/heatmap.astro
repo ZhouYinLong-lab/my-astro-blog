@@ -1,7 +1,7 @@
 ---
-import BaseLayout from "@/layouts/BaseLayout.astro";
-import MainCard from "@/components/MainCard.astro";
 import { getCollection } from "astro:content";
+import MainCard from "@/components/MainCard.astro";
+import BaseLayout from "@/layouts/BaseLayout.astro";
 
 const allPosts = await getCollection("blog", ({ data }) => {
   return import.meta.env.PROD ? !data.draft : true;
@@ -10,7 +10,7 @@ const allPosts = await getCollection("blog", ({ data }) => {
 const dateCountMap: Record<string, number> = {};
 allPosts.forEach((post) => {
   const date = new Date(post.data.pubDate);
-  const dateStr = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`;
+  const dateStr = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, "0")}-${String(date.getDate()).padStart(2, "0")}`;
   dateCountMap[dateStr] = (dateCountMap[dateStr] || 0) + 1;
 });
 const heatmapData = Object.entries(dateCountMap);
