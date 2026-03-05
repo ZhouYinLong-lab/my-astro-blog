@@ -1,16 +1,18 @@
 ---
-import BaseLayout from "@/layouts/BaseLayout.astro";
-import MainCard from "@/components/MainCard.astro";
 import { Icon } from "astro-icon/components";
+import MainCard from "@/components/MainCard.astro";
+import BaseLayout from "@/layouts/BaseLayout.astro";
 
 // ⚠️ 请确认这里的仓库名是否正确，根据你之前的截图，应该是 my-astro-blog
-const GITHUB_OWNER = "ZhouYinLong-lab"; 
-const GITHUB_REPO = "my-astro-blog"; 
+const GITHUB_OWNER = "ZhouYinLong-lab";
+const GITHUB_REPO = "my-astro-blog";
 
 // 🚀 核心升级：一次性拉取 100 条日志数据放入内存
 let allCommits = [];
 try {
-  const response = await fetch(`https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/commits?per_page=100`);
+  const response = await fetch(
+    `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/commits?per_page=100`,
+  );
   if (response.ok) {
     allCommits = await response.json();
   }
