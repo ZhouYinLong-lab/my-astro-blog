@@ -1,8 +1,8 @@
 ---
 import { type CollectionEntry, getCollection } from "astro:content";
+import { Icon } from "astro-icon/components";
 import MainCard from "@/components/MainCard.astro";
 import BaseLayout from "@/layouts/BaseLayout.astro";
-import { Icon } from "astro-icon/components";
 
 // 1. 获取所有文章
 const allPosts = await getCollection(
