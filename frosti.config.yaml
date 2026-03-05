@@ -18,11 +18,27 @@ site:
       href: / 
       svg: "material-symbols:home-outline-rounded"
       target: _self
-    - id: about
-      text: 居士自序 # 汉化
-      href: /about
-      svg: "material-symbols:info-outline-rounded"
+    - id: chores
+      text: 别苑杂务 # 🌟 升级为大分支
+      href: "#" # 父级菜单通常不需要直接跳转
+      svg: "material-symbols:dashboard-customize-outline-rounded"
       target: _self
+      children: # 🌟 下设三个小分支
+        - id: about
+          text: 居士自序
+          href: /about
+          svg: "material-symbols:info-outline-rounded"
+          target: _self
+        - id: heatmap
+          text: 博客热力图
+          href: /chores/heatmap
+          svg: "material-symbols:local-fire-department-outline-rounded"
+          target: _self
+        - id: changelog
+          text: 更新日志
+          href: /chores/changelog
+          svg: "material-symbols:update-rounded"
+          target: _self
     - id: blog
       text: 博客 # 汉化
       href: /blog

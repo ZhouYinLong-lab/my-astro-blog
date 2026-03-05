@@ -1,0 +1,58 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import MainCard from "@/components/MainCard.astro";
+import { getCollection } from "astro:content";
+
+const allPosts = await getCollection("blog", ({ data }) => {
+  return import.meta.env.PROD ? !data.draft : true;
+});
+
+const dateCountMap: Record<string, number> = {};
+allPosts.forEach((post) => {
+  const date = new Date(post.data.pubDate);
+  const dateStr = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`;
+  dateCountMap[dateStr] = (dateCountMap[dateStr] || 0) + 1;
+});
+const heatmapData = Object.entries(dateCountMap);
+const currentYear = new Date().getFullYear().toString();
+---
+
+<BaseLayout title="步履不停 - 热力图">
+  <MainCard title="步履不停" description="记录在数字世界里每一次思想的律动。">
+    <div class="w-full overflow-x-auto py-8">
+      <div id="heatmap-container" class="w-full min-w-[800px] h-[250px]"></div>
+    </div>
+  </MainCard>
+</BaseLayout>
+
+<script is:inline src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
+<script define:vars={{ heatmapData, currentYear }}>
+  document.addEventListener('astro:page-load', () => {
+    const dom = document.getElementById('heatmap-container');
+    if (!dom || !window.echarts) return;
+    
+    let myChart = echarts.getInstanceByDom(dom);
+    if (myChart) myChart.dispose();
+    myChart = echarts.init(dom);
+    
+    // ... 这里放入我上次给你的 option 配置，只需把 tooltip 和日历尺寸稍微放大一点即可
+    const option = {
+      tooltip: { formatter: function (p) { return p.value[0] + ' : ' + p.value[1] + ' 篇文章'; } },
+      visualMap: {
+        min: 0, max: 4, type: 'piecewise', orient: 'horizontal', left: 'center', top: 0,
+        pieces: [{min: 4, color: '#196127'}, {min: 3, max: 3, color: '#239a3b'}, {min: 2, max: 2, color: '#7bc96f'}, {min: 1, max: 1, color: '#c6e48b'}],
+        show: false
+      },
+      calendar: {
+        top: 40, left: 40, right: 20, bottom: 20, range: currentYear,
+        cellSize: ['auto', 20], splitLine: { show: false },
+        itemStyle: { borderWidth: 3, borderColor: '#fff', borderRadius: 4 },
+        dayLabel: { nameMap: ['日', '一', '二', '三', '四', '五', '六'] },
+        monthLabel: { nameMap: 'ZH' }
+      },
+      series: { type: 'heatmap', coordinateSystem: 'calendar', data: heatmapData }
+    };
+    myChart.setOption(option);
+    window.addEventListener('resize', () => myChart.resize());
+  });
+</script>
