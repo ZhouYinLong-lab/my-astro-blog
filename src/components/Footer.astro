@@ -31,14 +31,16 @@ import { Icon } from "astro-icon/components";
       {
         USER_FOOTER_SOCIAL_ICONS.map((icon) => (
           <div class="tooltip" data-tip={icon.title}>
-            <a tabindex="0" href={icon.href} aria-label={icon.ariaLabel}>
+            {/* 🌟 核心修复：强行写入 target="_blank" */}
+            <a tabindex="0" href={icon.href} aria-label={icon.ariaLabel} target="_blank" rel="noopener noreferrer">
               <Icon name={icon.svg} class="text-2xl md:text-xl" />
             </a>
           </div>
         ))
       }
+      {/* 顺手把 RSS 订阅也改成新窗口打开，体验更好 */}
       <div class="tooltip" data-tip="RSS Feed">
-        <a tabindex="0" href="/rss.xml" aria-label="RSS Feed">
+        <a tabindex="0" href="/rss.xml" aria-label="RSS Feed" target="_blank" rel="noopener noreferrer">
           <Icon name="ri:rss-line" class="text-2xl md:text-xl" />
         </a>
       </div>
