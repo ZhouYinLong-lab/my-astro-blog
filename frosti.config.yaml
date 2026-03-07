@@ -6,7 +6,7 @@ site:
   language: zh # 🌟 关键：告诉浏览器这是一个简体中文网站
   favicon: /favicon.ico # 网站的图标,用于浏览器标签栏和其他地方显示
   theme: # 更多主题 https://daisyui.com/docs/themes/
-    light: winter # 主题的浅色模式
+    light: lemonade # 主题的浅色模式
     dark: forest # 主题的深色模式
     code: github-dark # 代码块的主题 https://expressive-code.com/guides/themes/
   date_format: YYYY年MM月DD日 # 🌟 日期格式也改成了中文习惯
