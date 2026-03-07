@@ -37,10 +37,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    /* 保持你喜欢的渐变背景 */
-    background: linear-gradient(45deg,rgb(90,54,148) 0%,rgb(19,189,206) 33%,rgb(0,148,217) 66%,rgb(111,199,181) 100%);
-    background-size: 400%;
-    animation: gradientBG 7.5s ease-in-out infinite;
+    /* 👇 核心修改：变更为指定的深林灰绿色纯色背景 */
+    background-color: #4F5B4A; 
     transition: opacity 0.8s ease-out, visibility 0.8s ease-out;
   }
 
@@ -98,7 +96,8 @@
   /* ================= 文字波浪跳动区 ================= */
   .text-core {
     display: flex;
-    gap: 8px; /* Flexbox 的 gap 属性完美解决手机端重叠问题 */
+    gap: 8px;
+    /* Flexbox 的 gap 属性完美解决手机端重叠问题 */
     font-size: 22px;
     font-weight: 800;
     color: #fff;
@@ -125,10 +124,6 @@
   .text-core span:nth-child(10) { animation-delay: 1.0s; }
 
   /* ================= 关键帧动画 ================= */
-  @keyframes gradientBG {
-    50% { background-position: 100% 0%; }
-  }
-
   @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
@@ -143,7 +138,6 @@
 <script is:inline>
   // 1. 页面一开始加载，立刻给 body 上锁，禁止任何滚动！
   document.body.style.overflow = 'hidden';
-
   document.addEventListener("astro:page-load", () => {
     const loader = document.getElementById("home-loader");
     if (loader) {
