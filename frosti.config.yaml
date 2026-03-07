@@ -68,36 +68,44 @@ user:
   sidebar: # 侧边栏配置
     social:
       - href: "https://github.com/ZhouYinLong-lab/"
-        ariaLabel: GitHub # 汉化
-        title: GitHub # 汉化
+        ariaLabel: GitHub 
+        title: GitHub 
         svg: "ri:github-line"
+        target: _blank # 👈 新增：新标签页打开
       - href: "https://space.bilibili.com/511060666"
-        ariaLabel: B站 # 汉化
-        title: B站 # 汉化
+        ariaLabel: B站 
+        title: B站 
         svg: "ri:bilibili-line"
-      - href: "/qq.jpg" # 👈 点击后直接在浏览器打开你的 QQ 二维码图片
+        target: _blank # 👈 新增：新标签页打开
+      - href: "/qq.jpg" 
         ariaLabel: QQ联系我
         title: 扫码加我 QQ
         svg: "ri:qq-line"
-      - href: "/wechat.jpg" # 👈 点击后打开公众号二维码图片
+        target: _blank # 👈 新增：新标签页打开
+      - href: "/wechat.jpg" 
         ariaLabel: 微信公众号
         title: 关注我的微信公众号
         svg: "ri:wechat-line"
+        target: _blank # 👈 新增：新标签页打开
   footer:
     social:
       - href: "https://github.com/ZhouYinLong-lab/"
-        ariaLabel: GitHub # 汉化
-        title: GitHub # 汉化
+        ariaLabel: GitHub 
+        title: GitHub 
         svg: "ri:github-line"
+        target: _blank # 👈 新增：新标签页打开
       - href: "https://space.bilibili.com/511060666"
-        ariaLabel: B站 # 汉化
-        title: B站 # 汉化
+        ariaLabel: B站 
+        title: B站 
         svg: "ri:bilibili-line"
-      - href: "/qq.jpg" # 👈 点击后直接在浏览器打开你的 QQ 二维码图片
+        target: _blank # 👈 新增：新标签页打开
+      - href: "/qq.jpg" 
         ariaLabel: QQ联系我
         title: 扫码加我 QQ
         svg: "ri:qq-line"
-      - href: "/wechat.jpg" # 👈 点击后打开公众号二维码图片
+        target: _blank # 👈 新增：新标签页打开
+      - href: "/wechat.jpg" 
         ariaLabel: 微信公众号
         title: 关注我的微信公众号
         svg: "ri:wechat-line"
+        target: _blank # 👈 新增：新标签页打开
