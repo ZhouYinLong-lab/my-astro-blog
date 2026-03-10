@@ -2,7 +2,7 @@
 import { Icon } from "astro-icon/components";
 // 🌟 核心接入：引入 Frosti 主题内置的评论组件
 // 注意：如果你的组件路径报错，请尝试换成 "@/components/widgets/Comment.astro"
-import Comment from "@/components/Comment.astro";
+import Twikoo from "@/components/comments/Twikoo.astro";
 import MainCard from "@/components/MainCard.astro";
 import BaseLayout from "@/layouts/BaseLayout.astro";
 ---
@@ -25,7 +25,7 @@ import BaseLayout from "@/layouts/BaseLayout.astro";
         <div class="card bg-base-200/50 backdrop-blur-md border border-base-300 shadow-inner p-4 md:p-8 rounded-2xl min-h-[300px]">
           
           {/* 👇 魔法发生的地方：一键召唤评论区 👇 */}
-          <Comment />
+          <Twikoo />
 
         </div>
       </section>
