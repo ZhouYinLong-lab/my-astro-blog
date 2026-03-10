@@ -47,10 +47,30 @@ const { envId = "https://my-twikoo-server-8x6l.vercel.app" } = Astro.props;
 </script>
 
 <style is:global>
-  /* 微调 Twikoo 的默认样式，让它更符合你的赛博画廊主题 */
-  .twikoo-container .tk-submit {
-    margin-bottom: 2rem;
+  /* ================= 核心魔法：颠倒 Twikoo 内部顺序 ================= */
+  #tcomment .twikoo {
+    display: flex;
+    flex-direction: column;
   }
+  
+  /* 1. 让大家的评论列表排在第一位 (最上面) */
+  #tcomment .tk-comments {
+    order: 1; 
+  }
+  
+  /* 2. 将输入框（评论卡片）强制调遣到评论列表的下方 */
+  #tcomment .tk-submit {
+    order: 2; 
+    margin-top: 2rem !important; /* 和上方评论拉开呼吸感间距 */
+    margin-bottom: 2rem !important; 
+  }
+  
+  /* 3. 让 Powered by Twikoo 的版权信息乖乖呆在最下面 */
+  #tcomment .tk-footer {
+    order: 3; 
+  }
+
+  /* ================= 保持主题原有的精美微调 ================= */
   .twikoo-container .tk-button {
     background-color: var(--fallback-p,oklch(var(--p)/var(--tw-bg-opacity))) !important;
     color: var(--fallback-pc,oklch(var(--pc)/var(--tw-text-opacity))) !important;
