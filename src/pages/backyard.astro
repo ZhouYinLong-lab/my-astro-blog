@@ -1,12 +1,11 @@
 ---
-import { Icon } from "astro-icon/components";
-import MainCard from "@/components/MainCard.astro";
 import BaseLayout from "@/layouts/BaseLayout.astro";
+import MainCard from "@/components/MainCard.astro";
+import { Icon } from "astro-icon/components";
 
-// ⚠️ 注意：这里需要引入你 Frosti 主题自带的评论组件
-// 通常在 src/components 目录下，可能叫 Comment.astro, Giscus.astro 或类似名字
-// 如果找不到，可以先注释掉下面这行，页面依然能跑
-// import Comment from "@/components/Comment.astro";
+// 🌟 核心接入：引入 Frosti 主题内置的评论组件
+// 注意：如果你的组件路径报错，请尝试换成 "@/components/widgets/Comment.astro"
+import Comment from "@/components/Comment.astro"; 
 ---
 
 <BaseLayout title="后院 - 寒柳别苑">
@@ -21,19 +20,13 @@ import BaseLayout from "@/layouts/BaseLayout.astro";
         </div>
         
         <p class="text-base-content/70 mb-6 pl-10 border-l-2 border-primary/30">
-          欢迎来到后院。不论是技术探讨、灵感碰撞，还是单纯的赛博路过，都请在这里留下你的数字足迹。
+          欢迎来到后院。不论是技术探讨、灵感碰撞，还是单纯的赛博路过，都请在这里留下你的数字足迹。支持直接粘贴图片上传。
         </p>
 
         <div class="card bg-base-200/50 backdrop-blur-md border border-base-300 shadow-inner p-4 md:p-8 rounded-2xl min-h-[300px]">
           
-          {/* 👇 将你的评论组件放在这里 👇 */}
-          {/* <Comment /> */}
-          
-          {/* 如果还没找到评论组件，先显示这个提示语 */}
-          <div class="flex flex-col items-center justify-center h-full text-base-content/40 space-y-4 py-10 opacity-50">
-            <Icon name="lucide:terminal" class="w-12 h-12" />
-            <p class="font-mono text-sm">Waiting for Comment Component Integration...</p>
-          </div>
+          {/* 👇 魔法发生的地方：一键召唤评论区 👇 */}
+          <Comment />
 
         </div>
       </section>
@@ -84,7 +77,7 @@ import BaseLayout from "@/layouts/BaseLayout.astro";
             </div>
             <div>
               <div class="font-bold text-sm">QQ 好友</div>
-              <div class="text-xs text-base-content/60 font-mono mt-0.5">扫描加QQ好友</div>
+              <div class="text-xs text-base-content/60 font-mono mt-0.5">扫码加QQ好友</div>
             </div>
           </a>
 
@@ -94,7 +87,7 @@ import BaseLayout from "@/layouts/BaseLayout.astro";
             </div>
             <div>
               <div class="font-bold text-sm">微信公众号</div>
-              <div class="text-xs text-base-content/60 font-mono mt-0.5">订阅我的微信公众号：柳下语</div>
+              <div class="text-xs text-base-content/60 font-mono mt-0.5">订阅我的微信公众号“柳下语”</div>
             </div>
           </a>
 
