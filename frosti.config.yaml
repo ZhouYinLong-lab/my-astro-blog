@@ -54,10 +54,10 @@ site:
       href: /friend
       svg: "material-symbols:supervisor-account-outline-rounded"
       target: _self
-    - id: contact
-      text: 联系我 # 汉化
-      href: "mailto:Liuhanzhi23@outlook.com"
-      target: _blank # 在新标签页打开
+    - id: backyard
+      text: 后院 # 汉化
+      href: "/backyard"
+      target: _self # 在新标签页打开
       svg: "material-symbols:attach-email-outline-rounded"
 
 # 用户的个人信息
