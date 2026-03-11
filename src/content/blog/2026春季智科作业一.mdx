@@ -164,3 +164,49 @@ public:
   { title: "实战演练", desc: "实现动态数组与链表结构的 Stack。" }
 ]} />
 ```
+
+<style is:global>
+  /* ================= 赛博代码块终极修复补丁 ================= */
+  
+  /* 1. 砸掉绿油油的背景，换成图二的高级深灰（One Dark Pro 风格） */
+  .prose pre,
+  .expressive-code pre,
+  div[data-rehype-pretty-code-figure] pre {
+    background-color: #1e1e1e !important; 
+    border: 1px solid #333 !important;
+    border-radius: 0.75rem !important;
+    margin-top: 1.5em !important;
+    margin-bottom: 1.5em !important;
+    padding: 1rem !important;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3) !important;
+  }
+
+  /* 2. 修复行间距过大：重置被污染的 line-height 和 margin */
+  .prose pre code {
+    background-color: transparent !important;
+    line-height: 1.5 !important; /* 恢复紧凑的行高 */
+    font-family: 'Fira Code', 'Consolas', monospace !important;
+    font-size: 0.9em !important;
+    padding: 0 !important;
+    border-radius: 0 !important;
+  }
+
+  /* 针对具体的代码行，消除多余的垂直空隙 */
+  .prose pre .line,
+  .prose pre .ec-line {
+    min-height: 1.5rem !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  /* 3. 释放颜色控制权：让 Shiki / Expressive Code 的语法高亮重新生效 */
+  .prose pre code span {
+    /* 强行解除主题对 span 颜色的锁定，让内联的彩色代码生效 */
+    background-color: transparent !important;
+  }
+  
+  /* 防止行号和代码挤在一起 (针对含有行号的情况) */
+  .prose pre .code-line {
+    padding-left: 0.5rem !important;
+  }
+</style>
