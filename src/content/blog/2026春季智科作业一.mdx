@@ -1,0 +1,166 @@
+---
+title: C++ 核心机制与面向对象实战 (一)
+description: 深入探讨 C++ 内存管理、内联函数优化及 Stack 的两种底层实现方案。
+pubDate: 2026-03-08
+tags: 
+  - C++
+  - 编程学习
+categories: 
+  - 尺蠖
+image: /img/2025snow/cover.png
+---
+
+import Collapse from "../../components/mdx/Collapse.astro";
+import Diff from "../../components/mdx/Diff.astro";
+import Error from "../../components/mdx/Error.astro";
+import Info from "../../components/mdx/Info.astro";
+import Kbd from "../../components/mdx/Kbd.astro";
+import Success from "../../components/mdx/Success.astro";
+import Warning from "../../components/mdx/Warning.astro";
+import TimeLine from "../../components/mdx/TimeLine.astro";
+import LinkCard from "../../components/mdx/LinkCard.astro";
+
+# C++ 核心机制与面向对象实战 (一)
+
+在 C++ 的学习过程中，理解底层的内存管理、编译机制以及面向对象的基础设计模式至关重要。本文将对近期梳理的几个核心知识点进行系统性总结。
+
+---
+
+## 1. 深入剖析 C++ 程序的四大内存分区
+
+<Info>
+**关键概念**：程序运行时的内存被划分为四个区域，每个区域都有其特定的生命周期和管理方式。
+</Info>
+
+* **代码区（Code Segment）**：存放机器指令，通常是只读的。
+* **全局/静态存储区**：存放全局变量和 `static` 变量。
+* **栈区（Stack）**：由编译器自动分配释放，存放局部变量。
+* **堆区（Heap）**：由程序员通过 `new`/`delete` 手动管理。
+
+---
+
+## 2. 预处理宏定义的陷阱
+
+<Error>
+**注意优先级**：如果宏定义内部缺少括号保护，在复杂运算中会引发逻辑错误。
+</Error>
+
+<Diff>
+```diff
+- #define max_val(x,y) ((x)>(y))?(x):(y)
++ #define max_val(x,y) (((x)>(y))?(x):(y))
+```
+</Diff>
+
+例如在执行 `max_val(10, 5) + 20` 时，由于 `+` 优先级更高，不加外层括号会导致结果变为 10 而非预期的 30。
+
+---
+
+## 3. 常量定义：为何偏爱 const
+
+<Success>
+`const` 相比 `#define` 具备**类型检查**、**作用域控制**以及**调试友好**三大核心优势。
+</Success>
+
+---
+
+## 4. 性能优化：inline 内联函数
+
+内联机制通过将函数代码直接嵌入调用处，消除了函数调用的开销。这在处理高频调用的小规模函数时，是性能优化的利器。
+
+---
+
+## 5. 动态内存管理：new vs malloc
+
+| 特性 | `new` / `delete` | `malloc` / `free` |
+| :--- | :--- | :--- |
+| **属性** | 运算符 | 库函数 |
+| **对象管理** | 自动调用构造/析构函数 | 仅分配/释放内存 |
+| **类型安全** | 返回确切类型指针 | 返回 `void*`，需强转 |
+
+---
+
+## 6. 面向对象实战：Stack 的两种实现
+
+针对栈（Stack）这一经典结构，我们分别探讨**动态数组**与**链表**两种底层实现。
+
+### 方案一：基于动态数组的扩容栈
+利用连续内存，支持快速随机访问，通过容量翻倍机制处理溢出。
+
+```cpp
+class ArrayStack {
+private:
+    int* data;
+    size_t capacity, topIndex;
+    
+    void expand() {
+        size_t newCap = (capacity == 0) ? 1 : capacity * 2;
+        int* newData = new int[newCap];
+        for (size_t i = 0; i < topIndex; ++i) newData[i] = data[i];
+        delete[] data;
+        data = newData;
+        capacity = newCap;
+    }
+public:
+    ArrayStack() : data(nullptr), capacity(0), topIndex(0) {}
+    ~ArrayStack() { delete[] data; }
+    void push(int x) { if (topIndex == capacity) expand(); data[topIndex++] = x; }
+    void pop() { if (topIndex > 0) topIndex--; }
+    int top() const { return data[topIndex - 1]; }
+};
+```
+
+### 方案二：基于链表的动态栈
+通过指针连接节点，天然支持动态增长，操作复杂度稳定在 O(1)。
+
+```cpp
+struct Node {
+    int val;
+    Node* next;
+    Node(int v) : val(v), next(nullptr) {}
+};
+
+class LinkedStack {
+private:
+    Node* head;
+public:
+    LinkedStack() : head(nullptr) {}
+    ~LinkedStack() { while(head) pop(); }
+    void push(int x) {
+        Node* n = new Node(x);
+        n->next = head;
+        head = n;
+    }
+    void pop() {
+        if (!head) return;
+        Node* t = head;
+        head = head->next;
+        delete t;
+    }
+    int top() const { return head->val; }
+};
+```
+
+---
+
+## 7. 银行账户类 (Account) 声明
+
+```cpp
+class Account {
+private:
+    std::string ownerName, accountNum;
+    double balance;
+public:
+    Account(std::string name, std::string acc, double bal);
+    void display() const;
+    void deposit(double amt);
+    bool withdraw(double amt);
+};
+```
+
+<TimeLine items={[
+  { title: "基础语法", desc: "掌握内存分区与宏定义陷阱。" },
+  { title: "机制深入", desc: "理解 const 与 inline 的底层优势。" },
+  { title: "实战演练", desc: "实现动态数组与链表结构的 Stack。" }
+]} />
+```
