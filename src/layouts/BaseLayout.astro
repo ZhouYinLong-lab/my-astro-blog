@@ -30,6 +30,13 @@ const {
 <!doctype html>
 <html lang={SITE_LANGUAGE} class="bg-base-300" data-theme={SITE_THEME.light} data-theme-type="light">
   <head>
+    <!-- 必须作为 head 的第一个元素，确保字符编码正确 -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+
+    <!-- 百度搜索资源平台验证标签 -->
+    <meta name="baidu-site-verification" content="ca8c11081bdd2c1d3e76599f5a0c6ccd" />
+    
     <ClientRouter />
     <ElementCrossing />
     <PointerOnNavigation />
