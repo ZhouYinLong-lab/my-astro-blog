@@ -1,0 +1,235 @@
+---
+// src/components/CyberButton.astro
+export interface Props {
+  href: string;
+  text?: string;
+}
+
+const { href, text = "进入博客" } = Astro.props;
+---
+
+<a href={href} class="cyber-btn-container w-fit no-underline">
+  <!-- 悬停时弹出的上下抽屉 -->
+  <div class="cyber-btn-drawer transition-top">welcome...</div>
+  <div class="cyber-btn-drawer transition-bottom">...to my blog</div>
+
+  <div class="cyber-btn flex items-center gap-2">
+    <!-- 保留了原版的书本图标 -->
+    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-base-content/70" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0" />
+      <path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0" />
+      <path d="M3 6l0 13" />
+      <path d="M12 6l0 13" />
+      <path d="M21 6l0 13" />
+    </svg>
+    <span class="cyber-btn-text">{text}</span>
+  </div>
+
+  <!-- 四角的动态瞄准框 -->
+  <svg class="cyber-btn-corner" xmlns="http://www.w3.org/2000/svg" viewBox="-1 1 32 32">
+    <path d="M32,32C14.355,32,0,17.645,0,0h.985c0,17.102,13.913,31.015,31.015,31.015v.985Z"></path>
+  </svg>
+  <svg class="cyber-btn-corner" xmlns="http://www.w3.org/2000/svg" viewBox="-1 1 32 32">
+    <path d="M32,32C14.355,32,0,17.645,0,0h.985c0,17.102,13.913,31.015,31.015,31.015v.985Z"></path>
+  </svg>
+  <svg class="cyber-btn-corner" xmlns="http://www.w3.org/2000/svg" viewBox="-1 1 32 32">
+    <path d="M32,32C14.355,32,0,17.645,0,0h.985c0,17.102,13.913,31.015,31.015,31.015v.985Z"></path>
+  </svg>
+  <svg class="cyber-btn-corner" xmlns="http://www.w3.org/2000/svg" viewBox="-1 1 32 32">
+    <path d="M32,32C14.355,32,0,17.645,0,0h.985c0,17.102,13.913,31.015,31.015,31.015v.985Z"></path>
+  </svg>
+</a>
+
+<style>
+  /* 严格作用域的 CSS，前缀全部改为 cyber-btn 防止污染 */
+  .cyber-btn-container {
+    --btn-color: #22c55e; /* 👈 改为了接近你原版绿色的 Tailwind green-500，你可以改回 #d8ff7c */
+    --corner-color: rgba(0, 0, 0, 0.15);
+    --corner-dist: 24px;
+    --corner-multiplier: 1.5;
+    --timing-function: cubic-bezier(0, 0, 0, 2.5);
+    --duration: 250ms;
+
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    z-index: 10; /* 确保弹出动画在最上层 */
+  }
+
+  .cyber-btn {
+    position: relative;
+    min-width: 160px;
+    min-height: calc(var(--corner-dist) * 2);
+    border-radius: 16px;
+    border: none;
+    padding: 0.25em 1.5em;
+
+    background: linear-gradient(#fff2, #0001), var(--btn-color);
+    box-shadow:
+      1px 1px 2px -1px #fff inset,
+      0 2px 1px #00000010,
+      0 4px 2px #00000010,
+      0 8px 4px #00000010,
+      0 16px 8px #00000010,
+      0 32px 16px #00000010;
+
+    transition:
+      transform var(--duration) var(--timing-function),
+      filter var(--duration) var(--timing-function);
+    cursor: pointer;
+  }
+
+  .cyber-btn-drawer {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+
+    min-height: 32px;
+    border-radius: 16px;
+    padding: 0.25em 1em;
+    font-size: 0.8em;
+    font-weight: 600;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    color: #0009;
+
+    background: linear-gradient(#fff2, #0001), var(--btn-color);
+    background-color: #fbff13;
+    opacity: 0;
+    pointer-events: none; /* 防止遮挡点击 */
+
+    transition:
+      transform calc(0.5 * var(--duration)) ease,
+      filter var(--duration) var(--timing-function),
+      opacity calc(0.5 * var(--duration)) ease;
+    filter: blur(2px);
+  }
+
+  .transition-top {
+    top: 0;
+    left: 0;
+    border-radius: 12px 12px 0 0;
+    align-items: start;
+  }
+  .transition-bottom {
+    bottom: 0;
+    right: 0;
+    border-radius: 0 0 12px 12px;
+    align-items: end;
+  }
+
+  .cyber-btn-text {
+    display: inline-block;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #000000;
+    
+    /* 文字纹理 */
+    background-image: linear-gradient(#333, #000a);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 1px 0 #fff6) drop-shadow(0 -1px 0 #0006);
+
+    transition:
+      transform var(--duration) var(--timing-function),
+      filter var(--duration) var(--timing-function),
+      color var(--duration) var(--timing-function);
+  }
+
+  .cyber-btn-corner {
+    position: absolute;
+    width: 32px;
+    fill: none;
+    stroke: var(--corner-color);
+    pointer-events: none;
+
+    transition:
+      transform var(--duration) var(--timing-function),
+      filter var(--duration) var(--timing-function);
+  }
+
+  .cyber-btn-corner:nth-of-type(1) {
+    top: 0; left: 0;
+    transform: translate(calc(-1 * var(--corner-dist)), calc(-1 * var(--corner-dist))) rotate(90deg);
+  }
+  .cyber-btn-corner:nth-of-type(2) {
+    top: 0; right: 0;
+    transform: translate(var(--corner-dist), calc(-1 * var(--corner-dist))) rotate(180deg);
+  }
+  .cyber-btn-corner:nth-of-type(3) {
+    bottom: 0; right: 0;
+    transform: translate(var(--corner-dist), var(--corner-dist)) rotate(-90deg);
+  }
+  .cyber-btn-corner:nth-of-type(4) {
+    bottom: 0; left: 0;
+    transform: translate(calc(-1 * var(--corner-dist)), var(--corner-dist)) rotate(0deg);
+  }
+
+  /* 核心交互逻辑：当外层 a 标签被 hover 或 focus 时触发所有子元素动画 */
+  .cyber-btn-container:hover .cyber-btn,
+  .cyber-btn-container:focus-visible .cyber-btn {
+    transform: scale(1.05);
+    filter: drop-shadow(0 16px 16px #0002);
+  }
+
+  .cyber-btn-container:hover .transition-top,
+  .cyber-btn-container:focus-visible .transition-top {
+    transform: translateY(-24px) rotateZ(4deg);
+    filter: blur(0px);
+    animation: hue-anim 3s infinite linear;
+    opacity: 1;
+  }
+  
+  .cyber-btn-container:hover .transition-bottom,
+  .cyber-btn-container:focus-visible .transition-bottom {
+    transform: translateY(24px) rotateZ(4deg);
+    filter: blur(0px);
+    animation: hue-anim 3s infinite linear;
+    opacity: 1;
+  }
+
+  .cyber-btn-container:hover .cyber-btn-text,
+  .cyber-btn-container:focus-visible .cyber-btn-text {
+    filter: drop-shadow(0 1px 0 #fff6) drop-shadow(0 -1px 0 #0006) drop-shadow(0px 6px 2px #0003);
+    transform: scale(1.05);
+  }
+
+  /* 悬停时四个角的动画 */
+  .cyber-btn-container:hover {
+    --corner-color: #0004;
+  }
+  .cyber-btn-container:hover .cyber-btn-corner:nth-of-type(1) {
+    transform: translate(calc(-1 * var(--corner-multiplier) * var(--corner-dist)), calc(-1 * var(--corner-multiplier) * var(--corner-dist))) rotate(90deg);
+    filter: drop-shadow(-10px 10px 1px var(--corner-color)) drop-shadow(-20px 20px 2px var(--corner-color));
+  }
+  .cyber-btn-container:hover .cyber-btn-corner:nth-of-type(2) {
+    transform: translate(calc(var(--corner-multiplier) * var(--corner-dist)), calc(-1 * var(--corner-multiplier) * var(--corner-dist))) rotate(180deg);
+    filter: drop-shadow(-10px 10px 1px var(--corner-color)) drop-shadow(-20px 20px 2px var(--corner-color));
+  }
+  .cyber-btn-container:hover .cyber-btn-corner:nth-of-type(3) {
+    transform: translate(calc(var(--corner-multiplier) * var(--corner-dist)), calc(var(--corner-multiplier) * var(--corner-dist))) rotate(-90deg);
+    filter: drop-shadow(-10px 10px 1px var(--corner-color)) drop-shadow(-20px 20px 2px var(--corner-color));
+  }
+  .cyber-btn-container:hover .cyber-btn-corner:nth-of-type(4) {
+    transform: translate(calc(-1 * var(--corner-multiplier) * var(--corner-dist)), calc(var(--corner-multiplier) * var(--corner-dist))) rotate(0deg);
+    filter: drop-shadow(-10px 10px 1px var(--corner-color)) drop-shadow(-20px 20px 2px var(--corner-color));
+  }
+
+  /* 点击按压效果 */
+  .cyber-btn-container:active .cyber-btn {
+    transform: scale(0.95);
+    filter: drop-shadow(0 10px 4px #0002);
+  }
+  .cyber-btn-container:active .transition-top,
+  .cyber-btn-container:active .transition-bottom {
+    transform: translateY(0px) scale(0.5);
+  }
+
+  @keyframes hue-anim {
+    0%, 100% { filter: hue-rotate(0deg); }
+    50% { filter: hue-rotate(-70deg); }
+  }
+</style>

@@ -4,6 +4,7 @@ import MainCard from "@/components/MainCard.astro";
 import FeatureCard from "@/components/mdx/FeatureCard.astro";
 import HomeLoader from "@/components/widgets/HomeLoader.astro";
 import BaseLayout from "@/layouts/BaseLayout.astro";
+import CyberButton from '@/components/CyberButton.astro';
 ---
 
 <BaseLayout title="Home">
@@ -24,18 +25,24 @@ import BaseLayout from "@/layouts/BaseLayout.astro";
           >
             🛸 寒柳别苑
           </h1>
-          <p class="text-xl text-base-content/80 max-w-3xl mb-8">
+          <p class="text-xl text-base-content/80 max-w-3xl mb-10">
             这里是柳含知的赛博后花园。我是南京大学智能科学专业的大一学生,我喜欢捣鼓一些有趣的东西,如果你有一些有趣的点子或项目,欢迎联系我！
           </p>
-          <div class="flex flex-wrap gap-4 justify-center">
-            <a href="/blog" class="btn btn-primary gap-2 btn-shine-effect">
-              <Icon name="lucide:book-open" class="w-5 h-5" />
-              <span>进入博客</span>
-            </a>
-            <a href="https://space.bilibili.com/511060666" target="_blank" class="btn btn-outline gap-2">
+          
+          {/* 👇 核心修改区域：改为上下排列（flex-col），并加大间距防止动画遮挡 */}
+          <div class="flex flex-col items-center gap-8 mt-2">
+            
+            {/* 放大 1.15 倍，使其成为视觉绝对重心，并给上下动画留出空间 */}
+            <div class="transform scale-[1.15] z-10">
+              <CyberButton href="/blog" />
+            </div>
+
+            {/* B站按钮保持原大小，补充了 rounded-full 使其更加圆润协调 */}
+            <a href="https://space.bilibili.com/511060666" target="_blank" class="btn btn-outline rounded-full gap-2 px-6">
               <Icon name="simple-icons:bilibili" class="w-5 h-5" />
               <span>关注我的B站</span>
             </a>
+            
           </div>
         </div>
       </section>
