@@ -1,26 +1,15 @@
 ---
-// 全新响应式 Loading 组件
+// 全新响应式 Loading 组件 - 彩色动态环版本
 ---
 
 <div class="loader-wrapper" id="home-loader">
-  <div class="loader-content">
-    
-    {/* 上方：头像与轨道核心区 */}
-    <div class="avatar-core">
-      {/* 两个反向旋转的能量环 */}
-      <div class="orbit orbit-1"></div>
-      <div class="orbit orbit-2"></div>
-      {/* 居中静止的专属头像 */}
-      <img src="/favicon.ico" alt="Loading" class="core-avatar" />
-    </div>
-
-    {/* 下方：波浪跳动文字区 */}
-    <div class="text-core">
-      <span>L</span><span>O</span><span>A</span><span>D</span><span>I</span><span>N</span><span>G</span>
-      <span class="dot">.</span><span class="dot">.</span><span class="dot">.</span>
-    </div>
-
-  </div>
+  <!-- 替换为新的 SVG 动画 -->
+  <svg class="pl" width="240" height="240" viewBox="0 0 240 240">
+    <circle class="pl__ring pl__ring--a" cx="120" cy="120" r="105" fill="none" stroke="#000" stroke-width="20" stroke-dasharray="0 660" stroke-dashoffset="-330" stroke-linecap="round"></circle>
+    <circle class="pl__ring pl__ring--b" cx="120" cy="120" r="35" fill="none" stroke="#000" stroke-width="20" stroke-dasharray="0 220" stroke-dashoffset="-110" stroke-linecap="round"></circle>
+    <circle class="pl__ring pl__ring--c" cx="85" cy="120" r="70" fill="none" stroke="#000" stroke-width="20" stroke-dasharray="0 440" stroke-linecap="round"></circle>
+    <circle class="pl__ring pl__ring--d" cx="155" cy="120" r="70" fill="none" stroke="#000" stroke-width="20" stroke-dasharray="0 440" stroke-linecap="round"></circle>
+  </svg>
 </div>
 
 <style>
@@ -30,6 +19,7 @@
     padding: 0;
     box-sizing: border-box;
   }
+  
   .loader-wrapper {
     position: fixed;
     inset: 0;
@@ -37,101 +27,215 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    /* 👇 核心修改：变更为指定的深林灰绿色纯色背景 */
+    /* 保持原有的锈绿色纯色背景 */
     background-color: #4F5B4A; 
     transition: opacity 0.8s ease-out, visibility 0.8s ease-out;
   }
 
-  .loader-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 30px; /* 控制头像和文字的间距 */
+  /* ================= 新增：彩色环动画样式 ================= */
+  .pl {
+    width: 6em;
+    height: 6em;
   }
 
-  /* ================= 能量环与头像区 ================= */
-  .avatar-core {
-    position: relative;
-    width: 100px;
-    height: 100px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  .pl__ring {
+    animation: ringA 2s linear infinite;
   }
 
-  .core-avatar {
-    width: 64px;
-    height: 64px;
-    border-radius: 50%;
-    object-fit: cover;
-    z-index: 10;
-    border: 2px solid rgba(255, 255, 255, 0.9);
-    box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+  .pl__ring--a {
+    stroke: #f42f25;
   }
 
-  .orbit {
-    position: absolute;
-    border-radius: 50%;
-    border: 3px solid transparent;
+  .pl__ring--b {
+    animation-name: ringB;
+    stroke: #f49725;
   }
 
-  /* 内圈：顺时针快转 */
-  .orbit-1 {
-    width: 86px;
-    height: 86px;
-    border-top-color: #fff;
-    border-right-color: #fff;
-    animation: spin 1.2s cubic-bezier(0.68, -0.55, 0.265, 1.55) infinite;
+  .pl__ring--c {
+    animation-name: ringC;
+    stroke: #255ff4;
   }
 
-  /* 外圈：逆时针慢转带透明度 */
-  .orbit-2 {
-    width: 104px;
-    height: 104px;
-    border-bottom-color: rgba(255, 255, 255, 0.6);
-    border-left-color: rgba(255, 255, 255, 0.6);
-    animation: spin 2s linear infinite reverse;
+  .pl__ring--d {
+    animation-name: ringD;
+    stroke: #f42582;
   }
-
-  /* ================= 文字波浪跳动区 ================= */
-  .text-core {
-    display: flex;
-    gap: 8px;
-    /* Flexbox 的 gap 属性完美解决手机端重叠问题 */
-    font-size: 22px;
-    font-weight: 800;
-    color: #fff;
-    letter-spacing: 2px;
-    user-select: none;
-    -webkit-user-select: none;
-  }
-
-  .text-core span {
-    display: inline-block;
-    animation: waveJump 1.5s ease-in-out infinite;
-  }
-
-  /* 为每个字母设置依次递增的延迟，形成波浪效果 */
-  .text-core span:nth-child(1) { animation-delay: 0.1s; }
-  .text-core span:nth-child(2) { animation-delay: 0.2s; }
-  .text-core span:nth-child(3) { animation-delay: 0.3s; }
-  .text-core span:nth-child(4) { animation-delay: 0.4s; }
-  .text-core span:nth-child(5) { animation-delay: 0.5s; }
-  .text-core span:nth-child(6) { animation-delay: 0.6s; }
-  .text-core span:nth-child(7) { animation-delay: 0.7s; }
-  .text-core span:nth-child(8) { animation-delay: 0.8s; }
-  .text-core span:nth-child(9) { animation-delay: 0.9s; }
-  .text-core span:nth-child(10) { animation-delay: 1.0s; }
 
   /* ================= 关键帧动画 ================= */
-  @keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
+  @keyframes ringA {
+    from, 4% {
+      stroke-dasharray: 0 660;
+      stroke-width: 20;
+      stroke-dashoffset: -330;
+    }
+
+    12% {
+      stroke-dasharray: 60 600;
+      stroke-width: 30;
+      stroke-dashoffset: -335;
+    }
+
+    32% {
+      stroke-dasharray: 60 600;
+      stroke-width: 30;
+      stroke-dashoffset: -595;
+    }
+
+    40%, 54% {
+      stroke-dasharray: 0 660;
+      stroke-width: 20;
+      stroke-dashoffset: -660;
+    }
+
+    62% {
+      stroke-dasharray: 60 600;
+      stroke-width: 30;
+      stroke-dashoffset: -665;
+    }
+
+    82% {
+      stroke-dasharray: 60 600;
+      stroke-width: 30;
+      stroke-dashoffset: -925;
+    }
+
+    90%, to {
+      stroke-dasharray: 0 660;
+      stroke-width: 20;
+      stroke-dashoffset: -990;
+    }
   }
 
-  @keyframes waveJump {
-    0%, 100% { transform: translateY(0); opacity: 0.4; }
-    50% { transform: translateY(-8px); opacity: 1; }
+  @keyframes ringB {
+    from, 12% {
+      stroke-dasharray: 0 220;
+      stroke-width: 20;
+      stroke-dashoffset: -110;
+    }
+
+    20% {
+      stroke-dasharray: 20 200;
+      stroke-width: 30;
+      stroke-dashoffset: -115;
+    }
+
+    40% {
+      stroke-dasharray: 20 200;
+      stroke-width: 30;
+      stroke-dashoffset: -195;
+    }
+
+    48%, 62% {
+      stroke-dasharray: 0 220;
+      stroke-width: 20;
+      stroke-dashoffset: -220;
+    }
+
+    70% {
+      stroke-dasharray: 20 200;
+      stroke-width: 30;
+      stroke-dashoffset: -225;
+    }
+
+    90% {
+      stroke-dasharray: 20 200;
+      stroke-width: 30;
+      stroke-dashoffset: -305;
+    }
+
+    98%, to {
+      stroke-dasharray: 0 220;
+      stroke-width: 20;
+      stroke-dashoffset: -330;
+    }
+  }
+
+  @keyframes ringC {
+    from {
+      stroke-dasharray: 0 440;
+      stroke-width: 20;
+      stroke-dashoffset: 0;
+    }
+
+    8% {
+      stroke-dasharray: 40 400;
+      stroke-width: 30;
+      stroke-dashoffset: -5;
+    }
+
+    28% {
+      stroke-dasharray: 40 400;
+      stroke-width: 30;
+      stroke-dashoffset: -175;
+    }
+
+    36%, 58% {
+      stroke-dasharray: 0 440;
+      stroke-width: 20;
+      stroke-dashoffset: -220;
+    }
+
+    66% {
+      stroke-dasharray: 40 400;
+      stroke-width: 30;
+      stroke-dashoffset: -225;
+    }
+
+    86% {
+      stroke-dasharray: 40 400;
+      stroke-width: 30;
+      stroke-dashoffset: -395;
+    }
+
+    94%, to {
+      stroke-dasharray: 0 440;
+      stroke-width: 20;
+      stroke-dashoffset: -440;
+    }
+  }
+
+  @keyframes ringD {
+    from, 8% {
+      stroke-dasharray: 0 440;
+      stroke-width: 20;
+      stroke-dashoffset: 0;
+    }
+
+    16% {
+      stroke-dasharray: 40 400;
+      stroke-width: 30;
+      stroke-dashoffset: -5;
+    }
+
+    36% {
+      stroke-dasharray: 40 400;
+      stroke-width: 30;
+      stroke-dashoffset: -175;
+    }
+
+    44%, 50% {
+      stroke-dasharray: 0 440;
+      stroke-width: 20;
+      stroke-dashoffset: -220;
+    }
+
+    58% {
+      stroke-dasharray: 40 400;
+      stroke-width: 30;
+      stroke-dashoffset: -225;
+    }
+
+    78% {
+      stroke-dasharray: 40 400;
+      stroke-width: 30;
+      stroke-dashoffset: -395;
+    }
+
+    86%, to {
+      stroke-dasharray: 0 440;
+      stroke-width: 20;
+      stroke-dashoffset: -440;
+    }
   }
 </style>
 
