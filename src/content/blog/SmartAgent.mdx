@@ -1,0 +1,60 @@
+---
+title: "Smart Agent: 迷宫寻路实验"
+description: "一个基于 A* 算法与空间折跃机制的交互式路径规划实验。"
+pubDate: 2026-03-18
+categories:
+  - 实验室
+tags:
+  - Godot
+  - 算法
+  - 路径规划
+  - 互动网页
+image: "/img/zawu/image.webp" # 建议放一张小球在迷宫里的截图
+link: "/labs/smart-agent/"   # 对应你导出的 HTML 存放路径
+---
+
+import Collapse from "../../components/mdx/Collapse.astro";
+import Info from "../../components/mdx/Info.astro";
+import Warning from "../../components/mdx/Warning.astro";
+import Success from "../../components/mdx/Success.astro";
+import Kbd from "../../components/mdx/Kbd.astro";
+
+# 🔝 点击上方封面图片进入实验环境 🤖
+
+<Warning>如果点击后并未自动跳转，请 <a href="/labs/smart-agent/" target="_blank" style="text-decoration: underline; font-weight: bold;">点击这里</a> 直接进入实验界面。</Warning>
+
+## 🔬 实验简述
+
+本实验基于 **A* (A-Star) 启发式搜索算法**。智能体（Agent）将在一个 $200 \times 150$ 的离散网格空间内寻找最优路径。除了常规的避障逻辑，实验还引入了“非欧几里得”的空间折跃机制，AI 会自动评估是否通过“虫洞”能获得更短的路径代价。
+
+---
+
+## 🎮 实验操作指南
+
+为了获得最佳的实验体验，请使用鼠标与键盘配合操作：
+
+### 1. 构筑世界
+* **<Kbd>左键拖拽</Kbd>**：**绘制墙壁**。笔刷将以圆形半径覆盖周围格点，将其设为不可通行状态。
+* **背景与颜色**：纯白为可通行区域，黑色为物理墙壁。
+
+### 2. 标定目标
+* **<Kbd>右键点击</Kbd>**：**钦定起点**。绿色方块处将生成手绘风格的智能体。
+* **<Kbd>中键(滚轮)点击</Kbd>**：**放置终点**。红色方块一旦落下，智能体将立刻激活寻路算法。
+
+### 3. 空间折跃 (高级)
+* **<Kbd>Ctrl</Kbd> + <Kbd>左键点击</Kbd>**：**放置虫洞**。
+    * **第一次点击**：放置入口（紫色）。
+    * **第二次点击**：放置出口（青色）。
+    * **AI 逻辑**：智能体在规划路径时，会实时对比“直达”与“跃迁”的步数代价，自动选择最优解。
+
+---
+
+## 🏁 判定逻辑说明
+
+* **成功抵达**：当智能体触碰红色终点，屏幕将弹出 <Success inline>Game Over</Success>。
+* **逻辑死路**：若你用黑墙将终点死死封锁且无虫洞可走，智能体会因“算力无法触达”而弹出 <Warning inline>竟敢耍我？！</Warning>。
+* **自动重置**：无论胜败，在反馈弹窗出现 1.5 秒后，实验环境将自动清空重置，等待下一次算法博弈。
+
+---
+
+<Info>本实验是作者在南京大学智能科学专业学习期间，基于 Godot 4 引擎与 GDScript 编写的算法可视化工程。</Info>
