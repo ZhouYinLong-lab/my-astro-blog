@@ -9,8 +9,8 @@ tags:
   - 算法
   - 路径规划
   - 互动网页
-image: "/img/zawu/image.webp" # 建议放一张小球在迷宫里的截图
-link: "/labs/smart-agent/"   # 对应你导出的 HTML 存放路径
+image: "/img/zawu/image.webp" 
+link: "/labs/smart-agent/"   
 ---
 
 import Collapse from "../../components/mdx/Collapse.astro";
@@ -21,7 +21,18 @@ import Kbd from "../../components/mdx/Kbd.astro";
 
 # 🔝 点击上方封面图片进入实验环境 🤖
 
-<Warning>如果点击后并未自动跳转，请 <a href="/labs/smart-agent/" target="_blank" style="text-decoration: underline; font-weight: bold;">点击这里</a> 直接进入实验界面。</Warning>
+<Warning>如果点击后并未自动跳转，请 <a href="/labs/smart-agent/" target="_blank" style="text-decoration: underline; font-weight: bold;">点击这里</a> 直接进入全屏实验界面。</Warning>
+
+<div style={{ display: 'flex', justifyContent: 'center', margin: '2rem 0' }}>
+  <iframe 
+    src="/labs/smart-agent/index.html" 
+    width="100%" 
+    height="600" 
+    style={{ border: 'none', borderRadius: '8px', boxShadow: '0 4px 12px rgba(0,0,0,0.1)', maxWidth: '800px' }}
+    title="Smart Agent A-Star Pathfinding"
+    allow="fullscreen"
+  ></iframe>
+</div>
 
 ## 🔬 实验简述
 
