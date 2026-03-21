@@ -29,27 +29,19 @@
             display: flex; justify-content: space-between; align-items: center;
             border-bottom: 1px solid var(--gov-border);
         }
-        /* ================= 1. 顶部：国徽与导航 优化版 ================= */
         .national-brand { 
             display: flex; 
-            align-items: center; /* 确保徽标中心与文字中轴线严格对齐 */
-            gap: 25px; /* 略微增加间距，适配更大的徽标 */
+            align-items: center;
+            gap: 25px; 
         }
-
         .emblem {
-            /* 1. 放大图片大小 */
             width: 100px;
             height: 100px;
-
-            /* 2. 去掉金色外框线与圆角约束 */
             border: none;
             border-radius: 0;
             box-shadow: none;
-
-            /* 3. 核心修复：重新锚定国徽图像源，使用相对路径向上跳跃一级目录 */
             background: url('../img/xuanyuan.png') center/cover no-repeat;
         }
-
         .national-title h1 { font-size: 28px; font-weight: normal; letter-spacing: 6px; color: #fff; }
         .national-title p { font-size: 12px; letter-spacing: 3px; color: var(--gov-gold); font-family: monospace; }
         .nav { display: flex; gap: 30px; font-size: 16px; letter-spacing: 2px; }
@@ -61,7 +53,7 @@
         .top-section { display: grid; grid-template-columns: 8fr 4fr; gap: 30px; margin-bottom: 50px; }
         @media (max-width: 900px) { .top-section { grid-template-columns: 1fr; } }
 
-        /* 左侧：全新轮播卡片样式 (上图下字) */
+        /* 左侧：轮播卡片样式 */
         .carousel-container {
             position: relative; height: 400px; border-radius: 4px; overflow: hidden;
             border: 1px solid var(--gov-border); background-color: var(--gov-surface);
@@ -72,15 +64,12 @@
         }
         .slide.active { opacity: 1; z-index: 10; }
         
-        /* 封面大图区 */
         .slide-img { width: 100%; height: 320px; object-fit: cover; }
-        /* 下方标题区 */
         .slide-caption {
             height: 80px; display: flex; align-items: center; padding: 0 25px;
             background-color: var(--gov-surface); color: #fff; font-size: 18px; font-weight: bold;
             border-top: 2px solid var(--gov-gold);
         }
-        /* 指示器上移到大图内部右下角 */
         .carousel-indicators {
             position: absolute; bottom: 95px; right: 20px; z-index: 20; display: flex; gap: 8px;
         }
@@ -113,8 +102,33 @@
 
         .footer { margin-top: 60px; padding: 30px; text-align: center; border-top: 1px solid var(--gov-border); background-color: var(--gov-surface); }
         .disclaimer { color: #ff8b8b; font-size: 13px; margin-bottom: 15px; }
-
         .copyright { font-size: 12px; color: #666; margin-top: 10px; }
+
+        /* ================= 4. 波江座联络终端组件 ================= */
+        .eridani-widget {
+            position: fixed; bottom: 30px; right: 30px;
+            background: var(--gov-surface); border: 1px solid var(--gov-gold);
+            padding: 15px 20px; border-radius: 4px;
+            display: flex; align-items: center; gap: 15px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.5); z-index: 9999;
+        }
+        .status-pulse {
+            width: 12px; height: 12px; border-radius: 50%;
+            background: var(--gov-gold);
+            box-shadow: 0 0 10px var(--gov-gold);
+            animation: pulse 2s infinite;
+        }
+        .comm-text { font-family: monospace; }
+        .comm-header { font-size: 10px; color: #888; margin-bottom: 5px; }
+        .hex-time { font-size: 16px; color: var(--gov-gold); letter-spacing: 2px; }
+        .audio-wave { display: flex; gap: 3px; margin-top: 5px; align-items: flex-end; height: 10px; }
+        .audio-wave span { width: 2px; background: var(--gov-gold); animation: wave 1s infinite; }
+        .audio-wave span:nth-child(2) { animation-delay: 0.2s; }
+        .audio-wave span:nth-child(3) { animation-delay: 0.4s; }
+        .audio-wave span:nth-child(4) { animation-delay: 0.1s; }
+        
+        @keyframes pulse { 0% { opacity: 0.3; } 50% { opacity: 1; box-shadow: 0 0 15px var(--gov-gold); } 100% { opacity: 0.3; } }
+        @keyframes wave { 0% { height: 2px; } 50% { height: 10px; } 100% { height: 2px; } }
     </style>
 </head>
 <body>
@@ -142,7 +156,7 @@
             </div>
 
             <div class="news-panel">
-                <div class="panel-title">国家要闻 <span>更多 &raquo;</span></div>
+                <div class="panel-title">国家要闻 <span><a href="news.html" style="color: inherit;">更多 &raquo;</a></span></div>
                 <ul class="news-list" id="news-list"></ul>
             </div>
         </section>
@@ -158,6 +172,17 @@
         <div class="copyright">Copyright © 2026 The Republic of Xuan Yuan. Designed by Consul ZhouXuanYuan.</div>
     </footer>
 
+    <div id="eridani-terminal" class="eridani-widget">
+        <div class="status-pulse"></div>
+        <div class="comm-text">
+            <div class="comm-header">波江座 40-E 通讯链路连接中...</div>
+            <div id="rocky-time" class="hex-time">00:00:00</div>
+            <div class="audio-wave">
+                <span></span><span></span><span></span><span></span>
+            </div>
+        </div>
+    </div>
+
     <script src="data.js"></script>
     
     <script>
@@ -165,7 +190,6 @@
         const carousel = document.getElementById('carousel');
         const indicators = document.getElementById('indicators');
         republicData.carousel.forEach((item, index) => {
-            // 生成轮播卡片 (大图 + 底部标题)
             const slide = document.createElement('a');
             slide.href = item.link;
             slide.className = `slide ${index === 0 ? 'active' : ''}`;
@@ -175,7 +199,6 @@
             `;
             carousel.appendChild(slide);
 
-            // 生成指示器圆点
             const dot = document.createElement('div');
             dot.className = `dot ${index === 0 ? 'active' : ''}`;
             dot.addEventListener('click', () => goToSlide(index));
@@ -193,7 +216,7 @@
             `;
         });
 
-        // 3. 渲染底部文章矩阵
+        // 3. 渲染底部文章矩阵 (解除所有截断限制，确保全部展示)
         const articleGrid = document.getElementById('article-grid');
         republicData.articles.forEach(item => {
             articleGrid.innerHTML += `
@@ -221,6 +244,16 @@
         setInterval(() => {
             if(slides.length > 0) goToSlide((currentSlide + 1) % slides.length);
         }, 4500);
+
+        // 5. 波江座洛基时间系统 (转换为十六进制显示)
+        function updateRockyTime() {
+            const now = new Date();
+            const hex = (val) => val.toString(16).toUpperCase().padStart(2, '0');
+            document.getElementById('rocky-time').innerText = 
+                `${hex(now.getHours())} : ${hex(now.getMinutes())} : ${hex(now.getSeconds())}`;
+        }
+        setInterval(updateRockyTime, 1000);
+        updateRockyTime(); // 立即初始化时间
     </script>
 </body>
 </html>
