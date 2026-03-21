@@ -1,0 +1,70 @@
+---
+title: "哈基米加密器: 自定义 Base-N 文本隐写实验"
+description: "一个基于 AES-256-GCM 与大数进制转换的纯前端高隐蔽性文本加密工具。"
+pubDate: 2026-03-21
+categories:
+  - 实验室
+tags:
+  - JavaScript
+  - 密码学
+  - 算法
+  - 互动网页
+image: "/img/zawu/renzi.png" 
+link: "/labs/My-Crypto-compiler/"   
+---
+
+import Collapse from "../../components/mdx/Collapse.astro";
+import Info from "../../components/mdx/Info.astro";
+import Warning from "../../components/mdx/Warning.astro";
+import Success from "../../components/mdx/Success.astro";
+import Kbd from "../../components/mdx/Kbd.astro";
+
+# 🔝 点击上方封面图片进入实验环境 🔐
+
+<Warning>如果点击后并未自动跳转，请 <a href="/labs/base-n-crypto/" target="_blank" style="text-decoration: underline; font-weight: bold;">点击这里</a> 直接进入全屏加密终端。</Warning>
+
+<div style={{ display: 'flex', justifyContent: 'center', margin: '2rem 0' }}>
+  <iframe 
+    src="/labs/base-n-crypto/index.html" 
+    width="100%" 
+    height="680" 
+    style={{ border: 'none', borderRadius: '12px', boxShadow: '0 0 15px rgba(255, 69, 0, 0.2)', maxWidth: '650px', backgroundColor: '#0d0d0d' }}
+    title="Custom Base-N Crypto Terminal"
+    allow="fullscreen"
+  ></iframe>
+</div>
+
+## 🔬 实验简述
+
+本实验实现了一种兼具浪漫与高隐蔽性的通讯方式。通过将现代对称加密算法与自定义字典表结合，可以将任何自然语言转化为指定字符集（如“哈基米”）的无规律排列组合。整个加解密过程完全在浏览器前端运行，确保信息仅在发送与接收端流转。
+
+---
+
+## 🎮 终端操作指南
+
+为了确保信息的绝对安全与正确解析，请严格按照以下步骤操作：
+
+### 1. 建立通讯协议
+* **共享私钥**：在“共享私钥”栏位输入双方线下约定的高强度密码。
+* **自定义字典表**：设定用于伪装的 $N$ 个字符（2-16个字，不可重复）。例如输入 `哈基米`，即构建了一个 Base-3 的编码系统。
+
+### 2. 加密隐写 (发送方)
+* 在“加密”区域的文本框中输入需要传递的明文信息。
+* 点击 **<Kbd>生成密文</Kbd>** 按钮。系统将输出一串由字典表字符组成的乱码（如“哈基米哈哈哈米...”）。
+
+### 3. 解密还原 (接收方)
+* 将接收到的乱码完整复制到“解密”区域的文本框中。
+* 确保填入与发送方**完全一致**的私钥与字典表。
+* 点击 **<Kbd>还原明文</Kbd>** 按钮，真正的自然语言信息将显示在输出结果中。
+
+---
+
+## ⚙️ 底层原理解析
+
+看似随意的“发疯文学”背后，是严谨的密码学与数学转换：
+
+1.  **高强度加密**：利用浏览器原生 `window.crypto.subtle` API，通过 PBKDF2 算法对密码进行加盐拉伸，随后使用 **AES-256-GCM** 算法对明文进行加密，生成无法被规律破解的二进制字节流。
+2.  **大数转换**：由于加密后的密文包含初始化向量（IV）与消息认证码（MAC），长度远超普通数字上限。系统将其整体转化为 `BigInt` 以确保精度不丢失，并在头部注入“哨兵位”防止前导零丢失。
+3.  **Base-$N$ 映射**：将该巨大的 `BigInt` 不断对字典表的长度 $N$ 取余，最终映射为纯粹的自定义中文字符串。
+
+---
