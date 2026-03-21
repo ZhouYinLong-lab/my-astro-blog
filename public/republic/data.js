@@ -85,5 +85,12 @@ const republicData = {
       date: "2026.02.27",
       link: "./articles/002.html",
     },
+    { 
+            tag: "异星列传", 
+            title: "《波江与蓝星之挽歌：记绝地之盟》", 
+            desc: "一则沐光而视，一则听音而明。以古风骈文再现《挽救计划》中瑞兰与洛基跨越种族与星际的伟大友谊与绝地牺牲。", 
+            date: "2026.03.21",
+            link: "./articles/hail-mary.html" 
+    },
   ],
 };
