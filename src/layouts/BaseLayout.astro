@@ -14,17 +14,31 @@ import {
 } from "@config";
 import ElementCrossing from "astro-vtbot/components/ElementCrossing.astro";
 import PointerOnNavigation from "astro-vtbot/components/PointerOnNavigation.astro";
+import ReadingProgress from "@/components/widgets/ReadingProgress.astro"; // 👈 引入进度条组件
 
 const {
   title,
   image,
   bgImage = "/background/15.webp",
-  animateType = "fade-up", // 👈 新增：默认为文章页的向上浮现动画
+  animateType = "fade-up",
   description = SITE_DESCRIPTION,
   headings = [],
   showTOC = false,
   isIndexed = true,
+  showProgress = false, // 👈 新增：手动强制开启进度条的 prop
 } = Astro.props;
+
+// 🧠 智能判断：当前是否为具体的“博客文章页”
+const pathname = Astro.url.pathname;
+const isAutoBlogPost =
+  pathname.startsWith("/blog/") &&
+  !pathname.includes("/category") &&
+  !pathname.includes("/tag") &&
+  !pathname.includes("/archives") &&
+  !pathname.includes("/search") &&
+  !/^\/blog\/?(?:\d+\/?)?$/.test(pathname); // 排除 /blog/ 或 /blog/2/ 这种列表分页
+
+const displayProgress = showProgress || isAutoBlogPost;
 ---
 
 <!doctype html>
@@ -75,6 +89,9 @@ const {
 
   <body class="flex flex-col min-h-screen relative" {...isIndexed ? { "data-pagefind-body": true } : {}}>
     
+    {/* 👇 只有在文章页才会渲染这个进度条 */}
+    {displayProgress && <ReadingProgress />}
+
     {/* 赛博底层画框：开启 transform-gpu 强制显卡加速渲染毛玻璃 */}
     {bgImage && (
       <div class="fixed inset-0 z-[-10] pointer-events-none transform-gpu">
@@ -90,7 +107,7 @@ const {
 
     <slot name="fullscreen" />
 
-    {/* 👇 新增：这里动态绑定了动画类型 animate-cinematic 或是 animate-fade-up */}
+    {/* 这里动态绑定了动画类型 animate-cinematic 或是 animate-fade-up */}
     <div class={`max-w-6xl mx-auto w-full flex-grow animate-${animateType}`}>
       <div class="grid grid-cols-1 md:grid-cols-5 lg:grid-cols-4 gap-4 p-4 h-full">
         <main
@@ -155,17 +172,15 @@ const {
       });
     </script>
 
-    {/* 👇 关键：把 loading 兜底和两套入场动画用 style is:global 包裹起来 */}
+    {/* 把 loading 兜底和两套入场动画用 style is:global 包裹起来 */}
     <style is:global>
       /* ================= 全局图片 Loading 兜底魔法 (智能避让版) ================= */
-      /* 精准排除开场动画里的 Logo (.core-avatar)，其他所有图片依然享受 loading 兜底 */
       img:not(.core-avatar) {
         background: url('/img/loading.gif') no-repeat center center;
         background-size: 40px 40px; 
         background-color: rgba(128, 128, 128, 0.05); 
       }
       
-      /* --- 你之前的代码复制按钮动画 --- */
       .btn-copy {
         position: relative;
         overflow: hidden;

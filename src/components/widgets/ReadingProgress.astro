@@ -1,0 +1,53 @@
+---
+// src/components/ReadingProgress.astro
+---
+
+<!-- 进度条 DOM 容器 -->
+<div id="reading-progress-container" class="fixed top-0 left-0 w-full h-[3px] z-[9999] pointer-events-none bg-transparent">
+  <div 
+    id="reading-progress-bar" 
+    class="h-full w-0 bg-primary transition-all duration-150 ease-out"
+    style="box-shadow: 0 0 10px rgba(var(--fallback-p, 34, 197, 94), 0.8), 0 0 5px rgba(var(--fallback-p, 34, 197, 94), 0.5);"
+  ></div>
+</div>
+
+<script is:inline>
+  (function() {
+    // 防止在 Astro 视图切换时重复绑定滚动监听器
+    if (window.__readingProgressInitialized) return;
+    window.__readingProgressInitialized = true;
+
+    // 核心计算逻辑
+    const updateProgress = () => {
+      const progressBar = document.getElementById('reading-progress-bar');
+      const container = document.getElementById('reading-progress-container');
+      
+      if (!progressBar || !container) return;
+
+      // 获取可滚动的总高度 = 整个文档高度 - 当前视口高度
+      const scrollTotal = document.documentElement.scrollHeight - window.innerHeight;
+      
+      // 如果页面很短（不需要滚动），则直接隐藏进度条
+      if (scrollTotal <= 0) {
+        container.style.opacity = '0';
+        progressBar.style.width = '0%';
+        return;
+      } else {
+        container.style.opacity = '1';
+      }
+
+      // 计算当前滚动百分比
+      const scrollProgress = window.scrollY;
+      const progress = (scrollProgress / scrollTotal) * 100;
+      
+      // 更新进度条宽度
+      progressBar.style.width = `${progress}%`;
+    };
+
+    // 监听鼠标滚动事件 (passive: true 提升滚动性能)
+    window.addEventListener('scroll', updateProgress, { passive: true });
+    
+    // Astro 页面切换完成时，立刻重新计算一次（应对点击链接进入新页面的情况）
+    document.addEventListener('astro:page-load', updateProgress);
+  })();
+</script>
