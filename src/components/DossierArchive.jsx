@@ -234,10 +234,12 @@ export default function DossierArchive({
         </button>
       </div>
 
-      <div className="grid grid-cols-1 xl:grid-cols-12 gap-8 items-start">
-        {/* 左侧：智能全屏高度，增加间距 */}
-        <section className="xl:col-span-5 flex flex-col xl:sticky xl:top-4 xl:h-[calc(100vh-8rem)] bg-[#fcfaf2]">
-          <fieldset className="border-4 border-black p-4 md:p-6 relative flex flex-col flex-grow bg-[#fcfaf2]">
+      {/* 🚀 核心修改：改为 items-stretch，左右两侧容器高度自动拉伸至等高 */}
+      <div className="grid grid-cols-1 xl:grid-cols-12 gap-8 items-stretch">
+        
+        {/* 左侧：彻底移除固定高度，改为自然撑开 */}
+        <section className="xl:col-span-5 flex flex-col bg-[#fcfaf2] h-full">
+          <fieldset className="border-4 border-black p-4 md:p-6 relative flex flex-col h-full bg-[#fcfaf2]">
             <legend className="px-3 text-lg font-black tracking-widest bg-[#fcfaf2] text-black">
               思想刻录 〈 ENGRAVE 〉
             </legend>
@@ -246,8 +248,8 @@ export default function DossierArchive({
               ※ 注：可跳过任意题目，留白亦是回答。
             </div>
 
-            {/* 增加了 space-y-10 提升呼吸感 */}
-            <form className="space-y-10 overflow-y-auto pr-4 custom-retro-scroll flex-grow pb-8 bg-[#fcfaf2]">
+            {/* 移除了内部滚动，自然向下延伸 */}
+            <form className="space-y-10 flex-grow pb-8 bg-[#fcfaf2]">
               {questions.map((question, idx) => (
                 <div key={idx} className="space-y-3">
                   <label
@@ -302,9 +304,9 @@ export default function DossierArchive({
           </fieldset>
         </section>
 
-        {/* 右侧：同步改为智能全屏高度，增加间距 */}
-        <section className="xl:col-span-7 flex flex-col xl:h-[calc(100vh-8rem)] overflow-y-auto custom-retro-scroll pr-2 bg-[#fcfaf2]">
-          <fieldset className="border-4 border-black p-4 md:p-6 relative flex flex-col min-h-full bg-[#fcfaf2]">
+        {/* 右侧：同样移除内部滚动，完全跟随左侧拉伸对齐 */}
+        <section className="xl:col-span-7 flex flex-col bg-[#fcfaf2] h-full">
+          <fieldset className="border-4 border-black p-4 md:p-6 relative flex flex-col h-full bg-[#fcfaf2]">
             <legend className="px-3 text-lg font-black tracking-widest bg-[#fcfaf2] text-black">
               历史卷宗 〈 ARCHIVES 〉
             </legend>
@@ -362,25 +364,6 @@ export default function DossierArchive({
           </fieldset>
         </section>
       </div>
-
-      <style
-        dangerouslySetInnerHTML={{
-          __html: `
-        /* 粗犷风滚动条 */
-        .custom-retro-scroll::-webkit-scrollbar {
-          width: 12px;
-        }
-        .custom-retro-scroll::-webkit-scrollbar-track {
-          background: #fcfaf2;
-          border-left: 2px solid #000;
-        }
-        .custom-retro-scroll::-webkit-scrollbar-thumb {
-          background-color: #000;
-          border: 2px solid #fcfaf2;
-        }
-      `,
-        }}
-      />
     </div>
   );
 }
