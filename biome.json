@@ -7,17 +7,15 @@
   },
   "files": {
     "ignoreUnknown": false,
-    "ignore": [
-      "public/**/*",
-      "src/components/DossierArchive.jsx"
-    ],
     "includes": [
       "**",
       "!**/.*",
       "!**/src/**/*.css",
       "!**/src/public/**/*",
+      "!**/public/**/*",
       "!**/dist/**/*",
-      "!**/node_modules/**/*"
+      "!**/node_modules/**/*",
+      "!**/src/components/DossierArchive.jsx"
     ]
   },
   "formatter": {
