@@ -212,13 +212,13 @@ export default function DossierArchive({
   };
 
   return (
-    <div className="bg-[#fcfaf2] text-[#111111] font-mono p-4 md:p-8 my-8 border-4 border-black shadow-[8px_8px_0_0_#111] relative">
+    <div className="bg-[#fcfaf2] text-black font-mono p-4 md:p-8 border-4 border-black shadow-[8px_8px_0_0_#111] relative">
       <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-8 border-b-4 border-black pb-4">
         <div>
-          <h2 className="text-2xl md:text-4xl font-black tracking-widest mb-2 uppercase">
+          <h2 className="text-2xl md:text-4xl font-black tracking-widest mb-2 uppercase text-black">
             『 {title} 』
           </h2>
-          <p className="font-bold text-sm bg-black text-white inline-block px-2 py-1">
+          <p className="font-bold text-sm bg-black text-white inline-block px-3 py-1.5 shadow-[2px_2px_0_0_#ffcc00]">
             {subtitle}
           </p>
         </div>
@@ -235,31 +235,33 @@ export default function DossierArchive({
       </div>
 
       <div className="grid grid-cols-1 xl:grid-cols-12 gap-8 items-start">
-        <section className="xl:col-span-5 h-auto xl:max-h-[800px] flex flex-col xl:sticky xl:top-4">
-          <fieldset className="border-4 border-black p-4 pt-6 relative flex flex-col flex-grow">
-            <legend className="px-3 text-lg font-black tracking-widest bg-[#fcfaf2]">
+        {/* 左侧：智能全屏高度，增加间距 */}
+        <section className="xl:col-span-5 flex flex-col xl:sticky xl:top-4 xl:h-[calc(100vh-8rem)] bg-[#fcfaf2]">
+          <fieldset className="border-4 border-black p-4 md:p-6 relative flex flex-col flex-grow bg-[#fcfaf2]">
+            <legend className="px-3 text-lg font-black tracking-widest bg-[#fcfaf2] text-black">
               思想刻录 〈 ENGRAVE 〉
             </legend>
 
-            <div className="text-xs font-bold text-[#ff3333] mb-4 border-b-2 border-dashed border-black pb-2">
+            <div className="text-xs font-bold text-[#ff3333] mb-6 border-b-2 border-dashed border-black pb-3">
               ※ 注：可跳过任意题目，留白亦是回答。
             </div>
 
-            <form className="space-y-6 overflow-y-auto pr-2 custom-retro-scroll flex-grow">
+            {/* 增加了 space-y-10 提升呼吸感 */}
+            <form className="space-y-10 overflow-y-auto pr-4 custom-retro-scroll flex-grow pb-8 bg-[#fcfaf2]">
               {questions.map((question, idx) => (
-                <div key={idx} className="space-y-2">
+                <div key={idx} className="space-y-3">
                   <label
                     htmlFor={`dossier-q-${idx}`}
-                    className="block text-sm font-bold leading-relaxed cursor-pointer"
+                    className="flex items-start text-base font-bold leading-relaxed cursor-pointer text-black"
                   >
-                    <span className="bg-black text-white px-1 mr-2">
-                      Q{String(idx + 1).padStart(2, "0")}
+                    <span className="bg-black text-white px-2 py-0.5 mr-3 shrink-0 shadow-[2px_2px_0_0_#ffcc00]">
+                      Q {String(idx).padStart(2, "0")}
                     </span>
-                    {question}
+                    <span className="pt-0.5">{question}</span>
                   </label>
                   <textarea
                     id={`dossier-q-${idx}`}
-                    className="w-full bg-white border-2 border-black rounded-none p-3 text-sm focus:outline-none focus:ring-0 focus:shadow-[4px_4px_0_0_#ffcc00] transition-shadow resize-y min-h-[90px]"
+                    className="w-full bg-white text-black border-2 border-black rounded-none p-4 text-base focus:outline-none focus:ring-0 focus:shadow-[6px_6px_0_0_#ffcc00] transition-shadow resize-y min-h-[120px] shadow-[2px_2px_0_0_#000]"
                     placeholder="输入你想说的话..."
                     value={formData[idx]}
                     onChange={(e) => handleInputChange(idx, e.target.value)}
@@ -268,10 +270,10 @@ export default function DossierArchive({
               ))}
             </form>
 
-            <div className="mt-6 pt-6 border-t-4 border-black shrink-0">
+            <div className="mt-6 pt-6 border-t-4 border-black shrink-0 bg-[#fcfaf2]">
               {submitMessage.text && (
                 <div
-                  className={`mb-4 p-2 font-bold text-sm border-2 border-black ${submitMessage.type === "error" ? "bg-[#ff6b6b]" : "bg-[#4ade80]"}`}
+                  className={`mb-4 p-3 font-bold text-sm border-2 border-black text-black ${submitMessage.type === "error" ? "bg-[#ff6b6b]" : "bg-[#4ade80]"}`}
                 >
                   {submitMessage.text}
                 </div>
@@ -300,29 +302,30 @@ export default function DossierArchive({
           </fieldset>
         </section>
 
-        <section className="xl:col-span-7 xl:max-h-[800px] overflow-y-auto custom-retro-scroll pr-2">
-          <fieldset className="border-4 border-black p-4 relative">
-            <legend className="px-3 text-lg font-black tracking-widest bg-[#fcfaf2]">
+        {/* 右侧：同步改为智能全屏高度，增加间距 */}
+        <section className="xl:col-span-7 flex flex-col xl:h-[calc(100vh-8rem)] overflow-y-auto custom-retro-scroll pr-2 bg-[#fcfaf2]">
+          <fieldset className="border-4 border-black p-4 md:p-6 relative flex flex-col min-h-full bg-[#fcfaf2]">
+            <legend className="px-3 text-lg font-black tracking-widest bg-[#fcfaf2] text-black">
               历史卷宗 〈 ARCHIVES 〉
             </legend>
 
             {loadingDb ? (
-              <div className="py-20 text-center font-bold text-lg animate-pulse">
+              <div className="py-20 text-center font-bold text-lg animate-pulse text-black">
                 [系统] 正在同步异星节点数据...
               </div>
             ) : answersFeed.length === 0 ? (
-              <div className="py-20 text-center font-bold border-2 border-dashed border-black">
+              <div className="py-20 text-center font-bold border-2 border-dashed border-black text-black">
                 【 查无记录，等待第一位先驱者 】
               </div>
             ) : (
-              <div className="space-y-8">
+              <div className="space-y-8 pt-4">
                 {answersFeed.map((feed) => (
                   <article
                     key={feed.id}
-                    className="bg-white border-4 border-black shadow-[6px_6px_0_0_#111]"
+                    className="bg-white border-4 border-black shadow-[6px_6px_0_0_#111] overflow-hidden"
                   >
-                    <div className="bg-black text-white px-4 py-2 flex flex-wrap justify-between items-center border-b-4 border-black">
-                      <div className="font-bold tracking-widest">
+                    <div className="bg-black text-white px-5 py-3 flex flex-wrap justify-between items-center border-b-4 border-black">
+                      <div className="font-bold tracking-widest text-sm">
                         [ID:{" "}
                         <span className="text-[#ffcc00]">
                           {feed.userId?.substring(0, 6) || "UNKNOWN"}
@@ -334,14 +337,19 @@ export default function DossierArchive({
                       </div>
                     </div>
 
-                    <div className="p-5 space-y-6">
+                    <div className="p-6 space-y-8">
                       {feed.answers &&
                         feed.answers.map((item, i) => (
-                          <div key={i} className="space-y-2">
-                            <h4 className="text-sm font-bold bg-[#eeeeee] inline-block px-2 py-1 border-2 border-black">
-                              Q: {item.question}
-                            </h4>
-                            <div className="pl-4 border-l-4 border-black text-sm whitespace-pre-wrap leading-relaxed font-medium">
+                          <div key={i} className="space-y-3">
+                            <div className="flex items-start gap-3">
+                              <span className="text-sm font-bold bg-black text-white px-2 py-0.5 shrink-0 shadow-[2px_2px_0_0_#88cc44]">
+                                Q {String(item.qId !== undefined ? item.qId : i).padStart(2, "0")}
+                              </span>
+                              <h4 className="text-sm font-bold text-black leading-relaxed pt-0.5">
+                                {item.question}
+                              </h4>
+                            </div>
+                            <div className="pl-4 border-l-4 border-black text-base whitespace-pre-wrap leading-relaxed font-medium text-gray-800 ml-2">
                               {item.answer}
                             </div>
                           </div>
