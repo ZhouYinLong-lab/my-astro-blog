@@ -12,6 +12,8 @@ import {
   onSnapshot,
   query,
   serverTimestamp,
+  deleteDoc,
+  doc,
 } from "firebase/firestore";
 import { useEffect, useState } from "react";
 
@@ -49,9 +51,20 @@ export default function DossierArchive({
   // 分页与详情状态
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedDossier, setSelectedDossier] = useState(null); 
+  const [deleteConfirmId, setDeleteConfirmId] = useState(null); 
 
-  // 1. 初始化 Auth
+  // --- 上帝模式 (God Mode) 状态 ---
+  const [isAdmin, setIsAdmin] = useState(false);
+  const [adminClickCount, setAdminClickCount] = useState(0);
+  const [showAdminModal, setShowAdminModal] = useState(false);
+  const [adminPwd, setAdminPwd] = useState("");
+
+  // 初始化 Auth 和本地权限
   useEffect(() => {
+    if (localStorage.getItem("dossier_god_mode") === "true") {
+      setIsAdmin(true);
+    }
+
     if (!auth) return;
     const initAuth = async () => {
       try {
@@ -69,7 +82,7 @@ export default function DossierArchive({
     return () => unsubscribe();
   }, []);
 
-  // 2. 监听数据库
+  // 监听数据库
   useEffect(() => {
     if (!user || !db || !archiveId) return;
 
@@ -110,9 +123,9 @@ export default function DossierArchive({
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (isSubmitting) return; // 拦截连点器
+    if (isSubmitting) return; 
     if (!user || !db) {
-      setSubmitMessage({ type: "error", text: "[！通信中断]请稍后再试。" });
+      setSubmitMessage({ type: "error", text: "! 通信中断：请稍后再试。" });
       return;
     }
 
@@ -125,7 +138,7 @@ export default function DossierArchive({
       .filter((item) => item.answer !== "");
 
     if (filledAnswers.length === 0) {
-      setSubmitMessage({ type: "error", text: "[！空白卷宗]请至少作答一问。" });
+      setSubmitMessage({ type: "error", text: "! 空白卷宗：请至少作答一问。" });
       return;
     }
 
@@ -140,14 +153,28 @@ export default function DossierArchive({
         createdAt: serverTimestamp(),
       });
 
-      setSubmitMessage({ type: "success", text: "[√ 封存完毕]已刻录至底层档案。" });
+      setSubmitMessage({ type: "success", text: "√ 封存完毕：已刻录至底层档案。" });
       setFormData(Array(questions.length).fill(""));
-      setCurrentPage(1); // 提交后强制跳回第一页
+      setCurrentPage(1); 
       setTimeout(() => setSubmitMessage({ type: "", text: "" }), 3000);
     } catch (err) {
-      setSubmitMessage({ type: "error", text: `[！封装异常]${err.message}` });
+      setSubmitMessage({ type: "error", text: `! 封装异常：${err.message}` });
     } finally {
       setIsSubmitting(false);
+    }
+  };
+
+  // 销毁卷宗功能
+  const handleDeleteDossier = async (e, docId) => {
+    e.stopPropagation(); 
+    try {
+      await deleteDoc(doc(db, "artifacts", appId, "public", "data", archiveId, docId));
+      setDeleteConfirmId(null);
+      if (selectedDossier?.id === docId) {
+        setSelectedDossier(null);
+      }
+    } catch (err) {
+      console.error("Delete failed:", err);
     }
   };
 
@@ -176,17 +203,28 @@ export default function DossierArchive({
     });
   };
 
-  // --- 幽灵数据防御算法：强制钳制分页 ---
+  // 隐藏的 Admin 触发器：连点 5 次标题
+  const handleTitleClick = () => {
+    if (isAdmin) return;
+    const newCount = adminClickCount + 1;
+    if (newCount >= 5) {
+      setShowAdminModal(true);
+      setAdminClickCount(0);
+    } else {
+      setAdminClickCount(newCount);
+    }
+  };
+
+  // 分页计算
   const totalPages = Math.max(1, Math.ceil(answersFeed.length / ITEMS_PER_PAGE));
   const safePage = Math.min(currentPage, totalPages);
   const currentFeed = answersFeed.slice((safePage - 1) * ITEMS_PER_PAGE, safePage * ITEMS_PER_PAGE);
 
   // ============================================================================
-  // 渲染模式 2：全屏详情页 (模拟跳转新网页的折跃模式)
+  // 渲染模式 2：全屏详情页
   // ============================================================================
   if (selectedDossier) {
     return (
-      // 沉浸式护盾 bg-[#fcfaf2] 彻底遮盖底层所有元素
       <div className="fixed inset-0 z-50 bg-[#fcfaf2] overflow-y-auto font-mono text-black">
         <div className="max-w-4xl mx-auto p-4 md:p-8 min-h-screen flex flex-col">
           {/* 详情页头部 */}
@@ -201,17 +239,31 @@ export default function DossierArchive({
               </svg>
               返回档案库
             </button>
-            <div className="text-left sm:text-right">
+            <div className="text-left sm:text-right flex flex-col items-start sm:items-end">
               <h2 className="text-xl sm:text-2xl font-black tracking-widest uppercase">
                 卷宗代号: {selectedDossier.userId?.substring(0, 6) || "UNKNOWN"}
               </h2>
               <p className="font-bold text-gray-600 mt-1">
                 刻录时间: {formatTime(selectedDossier.createdAt)}
               </p>
+              {/* 【超级权限】如果是本人，或者是已解锁上帝模式的站长 */}
+              {(user?.uid === selectedDossier.userId || isAdmin) && (
+                <div className="mt-4">
+                  {deleteConfirmId === selectedDossier.id ? (
+                    <div className="flex gap-2">
+                      <button type="button" onClick={(e) => handleDeleteDossier(e, selectedDossier.id)} className="bg-red-600 text-white font-bold px-3 py-1.5 border-2 border-black hover:bg-red-500 shadow-[2px_2px_0_0_#000] active:shadow-none active:translate-x-[2px] active:translate-y-[2px] transition-all">确认销毁？</button>
+                      <button type="button" onClick={() => setDeleteConfirmId(null)} className="bg-gray-300 text-black font-bold px-3 py-1.5 border-2 border-black hover:bg-gray-200 shadow-[2px_2px_0_0_#000] active:shadow-none active:translate-x-[2px] active:translate-y-[2px] transition-all">取消</button>
+                    </div>
+                  ) : (
+                    <button type="button" onClick={() => setDeleteConfirmId(selectedDossier.id)} className="bg-[#ff3333] text-white font-bold px-3 py-1.5 border-2 border-black shadow-[2px_2px_0_0_#000] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[1px_1px_0_0_#000] active:shadow-none active:translate-x-[2px] active:translate-y-[2px] transition-all">
+                      [X] 销毁此卷宗 {isAdmin && user?.uid !== selectedDossier.userId && "(管理员强制)"}
+                    </button>
+                  )}
+                </div>
+              )}
             </div>
           </div>
 
-          {/* 详情页问答内容 - 纯净阅读区 */}
           <div className="bg-white border-4 border-black shadow-[12px_12px_0_0_#111] p-6 md:p-12 flex-grow space-y-12">
             {selectedDossier.answers.map((item, i) => (
               <div key={i} className="space-y-4">
@@ -239,13 +291,55 @@ export default function DossierArchive({
   }
 
   // ============================================================================
-  // 渲染模式 1：主页 (左右分栏，弹性拉伸，右侧底部分页)
+  // 渲染模式 1：主页
   // ============================================================================
   return (
     <div className="bg-[#fcfaf2] text-black font-mono p-4 md:p-8 border-4 border-black shadow-[8px_8px_0_0_#111] relative">
+      
+      {/* 隐藏的密码弹窗 */}
+      {showAdminModal && (
+        <div className="fixed inset-0 z-[9999] bg-black/80 flex items-center justify-center p-4">
+          <div className="bg-[#fcfaf2] border-4 border-black p-6 shadow-[8px_8px_0_0_#ffcc00] max-w-sm w-full">
+            <h3 className="text-xl font-black mb-4 uppercase text-black">System Override</h3>
+            <p className="text-sm font-bold mb-4">请输入站长访问密钥：</p>
+            <input
+              type="password"
+              value={adminPwd}
+              onChange={(e) => setAdminPwd(e.target.value)}
+              className="w-full border-2 border-black p-2 mb-4 text-black focus:outline-none focus:shadow-[4px_4px_0_0_#000]"
+              placeholder="Access Code..."
+            />
+            <div className="flex justify-end gap-4 items-center">
+              <button type="button" onClick={() => {setShowAdminModal(false); setAdminPwd("");}} className="font-bold text-gray-500 hover:text-black">取消</button>
+              <button
+                type="button"
+                onClick={() => {
+                  if (adminPwd === "frosti") {
+                    setIsAdmin(true);
+                    localStorage.setItem('dossier_god_mode', 'true');
+                    setShowAdminModal(false);
+                    setAdminPwd("");
+                  } else {
+                    setAdminPwd("");
+                  }
+                }}
+                className="bg-black text-white font-bold px-4 py-2 border-2 border-black hover:translate-x-[2px] hover:translate-y-[2px] shadow-[4px_4px_0_0_#ffcc00] active:shadow-none transition-all"
+              >
+                解锁权限
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
       <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-8 border-b-4 border-black pb-4">
         <div>
-          <h2 className="text-2xl md:text-4xl font-black tracking-widest mb-2 uppercase text-black">
+          {/* 将点击事件绑定在标题上 */}
+          <h2 
+            onClick={handleTitleClick}
+            className="text-2xl md:text-4xl font-black tracking-widest mb-2 uppercase text-black select-none cursor-pointer"
+            title={isAdmin ? "God Mode Activated" : ""}
+          >
             『 {title} 』
           </h2>
           <p className="font-bold text-sm bg-black text-white inline-block px-3 py-1.5 shadow-[2px_2px_0_0_#ffcc00]">
@@ -263,10 +357,8 @@ export default function DossierArchive({
         </button>
       </div>
 
-      {/* 核心布局：左右弹性等高拉伸 items-stretch */}
       <div className="grid grid-cols-1 xl:grid-cols-12 gap-8 items-stretch">
         
-        {/* ============ 左侧：问卷表单 ============ */}
         <section className="xl:col-span-6 flex flex-col bg-[#fcfaf2] h-full">
           <fieldset className="border-4 border-black p-4 md:p-6 relative flex flex-col h-full bg-[#fcfaf2]">
             <legend className="px-3 text-lg font-black tracking-widest bg-[#fcfaf2] text-black">
@@ -298,7 +390,7 @@ export default function DossierArchive({
 
             <div className="mt-6 pt-6 border-t-4 border-black shrink-0">
               {submitMessage.text && (
-                <div className={`mb-4 p-3 font-bold text-sm border-2 border-black ${submitMessage.type === "error" ? "bg-[#ff6b6b]" : "bg-[#4ade80]"}`}>
+                <div className={`mb-4 p-3 font-bold text-sm border-2 border-black text-black ${submitMessage.type === "error" ? "bg-[#ff6b6b]" : "bg-[#4ade80]"}`}>
                   {submitMessage.text}
                 </div>
               )}
@@ -323,7 +415,6 @@ export default function DossierArchive({
           </fieldset>
         </section>
 
-        {/* ============ 右侧：分页长方形卡片 ============ */}
         <section className="xl:col-span-6 flex flex-col bg-[#fcfaf2] h-full">
           <fieldset className="border-4 border-black p-4 md:p-6 relative flex flex-col h-full bg-[#fcfaf2]">
             <legend className="px-3 text-lg font-black tracking-widest bg-[#fcfaf2] text-black">
@@ -332,46 +423,63 @@ export default function DossierArchive({
 
             {loadingDb ? (
               <div className="py-20 text-center font-bold text-lg animate-pulse text-black">
-                [系统] 正在同步异星节点数据...
+                系统正在同步异星节点数据...
               </div>
             ) : answersFeed.length === 0 ? (
               <div className="py-20 text-center font-bold border-2 border-dashed border-black text-black flex-grow flex items-center justify-center">
-                [ 查无记录，等待第一位先驱者 ]
+                查无记录，等待第一位先驱者
               </div>
             ) : (
               <>
-                {/* 固定的卡片列表，高度被 flex-grow 撑开以压住底部的分页栏 */}
                 <div className="flex-grow space-y-5 pt-2">
                   {currentFeed.map((feed) => (
-                    <button
-                      type="button"
+                    <div
                       key={feed.id}
+                      role="button"
+                      tabIndex={0}
                       onClick={() => setSelectedDossier(feed)}
-                      className="w-full text-left bg-white border-4 border-black p-5 shadow-[4px_4px_0_0_#111] hover:-translate-y-1 hover:shadow-[6px_6px_0_0_#ffcc00] active:translate-y-1 active:shadow-[2px_2px_0_0_#ffcc00] transition-all flex flex-col justify-between min-h-[8rem] relative group overflow-hidden"
+                      className={`w-full text-left border-4 border-black p-5 shadow-[4px_4px_0_0_#111] hover:-translate-y-1 hover:shadow-[6px_6px_0_0_#ffcc00] active:translate-y-1 active:shadow-[2px_2px_0_0_#ffcc00] transition-all flex flex-col justify-between min-h-[8rem] relative group overflow-hidden cursor-pointer ${isAdmin ? 'bg-gray-100' : 'bg-white'}`}
                     >
-                      <div className="flex flex-wrap justify-between items-start gap-2">
-                        <div className="font-black text-lg md:text-xl tracking-wider text-black">
+                      <div className="flex flex-wrap justify-between items-start gap-2 relative z-20">
+                        <div className="font-black text-lg md:text-xl tracking-wider text-black group-hover:text-white transition-colors duration-300">
                           ID: {feed.userId?.substring(0, 6) || "UNKNOWN"}
                         </div>
-                        <div className="bg-black text-white text-xs font-bold px-2 py-1 shrink-0">
-                          已密封
+                        <div className="flex items-center gap-2">
+                          
+                          {/* 【超级权限】本人 或 上帝模式 都可以销毁 */}
+                          {(user?.uid === feed.userId || isAdmin) && (
+                            deleteConfirmId === feed.id ? (
+                              <div className="flex gap-1" onClick={(e) => e.stopPropagation()}>
+                                <button type="button" onClick={(e) => handleDeleteDossier(e, feed.id)} className="bg-red-600 text-white text-xs font-bold px-2 py-1 border-2 border-black hover:bg-red-500 shadow-[2px_2px_0_0_#000] hover:translate-x-[1px] hover:translate-y-[1px] hover:shadow-[1px_1px_0_0_#000] active:shadow-none transition-all">确认销毁</button>
+                                <button type="button" onClick={() => setDeleteConfirmId(null)} className="bg-gray-300 text-black text-xs font-bold px-2 py-1 border-2 border-black hover:bg-gray-200 shadow-[2px_2px_0_0_#000] hover:translate-x-[1px] hover:translate-y-[1px] hover:shadow-[1px_1px_0_0_#000] active:shadow-none transition-all">取消</button>
+                              </div>
+                            ) : (
+                              <button type="button" onClick={(e) => { e.stopPropagation(); setDeleteConfirmId(feed.id); }} className="bg-[#ff3333] text-white text-xs font-bold px-2 py-1 border-2 border-black shadow-[2px_2px_0_0_#000] hover:translate-x-[1px] hover:translate-y-[1px] hover:shadow-[1px_1px_0_0_#000] active:shadow-none transition-all">
+                                [X] 销毁
+                              </button>
+                            )
+                          )}
+                          
+                          <div className="bg-black text-white text-xs font-bold px-2 py-1 shrink-0 group-hover:bg-white group-hover:text-black transition-colors duration-300">
+                            已密封
+                          </div>
                         </div>
                       </div>
-                      <div className="text-xs md:text-sm font-bold text-gray-500 mt-4 md:mt-auto">
+                      
+                      <div className="text-xs md:text-sm font-bold text-gray-500 mt-4 md:mt-auto relative z-20 group-hover:text-gray-300 transition-colors duration-300">
                         TIME: {formatTime(feed.createdAt)}
                       </div>
-                      {/* Hover时滑入的“点击查看”提示 */}
-                      <div className="absolute inset-0 bg-black/90 flex items-center justify-center translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                      
+                      <div className="absolute inset-0 bg-black/90 flex items-center justify-center translate-y-full group-hover:translate-y-0 transition-transform duration-300 z-10 pointer-events-none">
                         <span className="text-[#ffcc00] font-black tracking-widest text-lg flex items-center gap-2">
                           <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="3"><path strokeLinecap="round" strokeLinejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /><path strokeLinecap="round" strokeLinejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" /></svg>
                           展开卷宗
                         </span>
                       </div>
-                    </button>
+                    </div>
                   ))}
                 </div>
 
-                {/* 翻页控制器 (强制沉底) */}
                 <div className="mt-6 pt-5 border-t-4 border-black flex flex-wrap justify-between items-center shrink-0 gap-4">
                   <button
                     type="button"
