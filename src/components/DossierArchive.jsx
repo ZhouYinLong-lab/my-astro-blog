@@ -34,7 +34,7 @@ try {
  */
 export default function DossierArchive({
   title = "柳含知的问卷",
-  subtitle = "抛弃碎片的争吵，留下关于人性的结构化思考。",
+  subtitle = "抛弃碎片的争吵，留下关于自己的思考。",
   questions = [],
   archiveId = "default_archive",
 }) {
