@@ -16,6 +16,8 @@ import updateConfig from "./src/integration/updateConfig.ts";
 
 import { remarkReadingTime } from "./src/plugins/remark-reading-time";
 
+import react from "@astrojs/react";
+
 // https://astro.build/config
 export default defineConfig({
   site: USER_SITE,
@@ -25,26 +27,17 @@ export default defineConfig({
       includePaths: ["./src/styles"],
     },
   },
-  integrations: [
-    updateConfig(),
-    expressiveCode({
-      themes: [CODE_THEME],
-      styleOverrides: {
-        borderRadius: "0.75rem",
-      },
-    }),
-    mdx(),
-    icon(),
-    terser({
-      compress: true,
-      mangle: true,
-    }),
-    sitemap(),
-    tailwind({
-      configFile: "./tailwind.config.mjs",
-    }),
-    playformCompress(),
-  ],
+  integrations: [updateConfig(), expressiveCode({
+    themes: [CODE_THEME],
+    styleOverrides: {
+      borderRadius: "0.75rem",
+    },
+  }), mdx(), icon(), terser({
+    compress: true,
+    mangle: true,
+  }), sitemap(), tailwind({
+    configFile: "./tailwind.config.mjs",
+  }), playformCompress(), react()],
   markdown: {
     remarkPlugins: [remarkMath, remarkReadingTime],
     rehypePlugins: [

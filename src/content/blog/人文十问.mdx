@@ -14,7 +14,7 @@ import DossierArchive from '@/components/DossierArchive.jsx';
 
 {/* 👇 核心用法：调用组件并传入你的自定义问题 */}
 <DossierArchive 
-  client:load 
+  client:only="react" 
   title="人文十问"
   archiveId="humanities_questions_v1" 
   questions={[
@@ -28,6 +28,7 @@ import DossierArchive from '@/components/DossierArchive.jsx';
     "浩瀚历史长河中，你最想与之促膝长谈的一个人是谁？",
     "有没有一件事(一个规则/一句话/一个人设)你曾经很确定，但现在想法变了？",
     "你觉得当下的自己，能为世界做的最微小、也最有意义的事是什么？",
-    "附加问题：如果能为10年后的世界留下一句话，你会说什么？"
+    "附加问题1：如果能为10年后的世界留下一句话，你会说什么？",
+    "附加问题2：如果可以，请你留下你感觉有意思的一句话（信手偶得的即可）"
   ]} 
 />
