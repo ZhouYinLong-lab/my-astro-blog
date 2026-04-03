@@ -134,7 +134,10 @@ export default function DossierArchive({
       .filter((item) => item.answer !== "");
 
     if (filledAnswers.length === 0) {
-      setSubmitMessage({ type: "error", text: "【！空白卷宗】请至少作答一问。" });
+      setSubmitMessage({
+        type: "error",
+        text: "【！空白卷宗】请至少作答一问。",
+      });
       return;
     }
 
@@ -210,7 +213,6 @@ export default function DossierArchive({
 
   return (
     <div className="bg-[#fcfaf2] text-[#111111] font-mono p-4 md:p-8 my-8 border-4 border-black shadow-[8px_8px_0_0_#111] relative">
-      
       <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-8 border-b-4 border-black pb-4">
         <div>
           <h2 className="text-2xl md:text-4xl font-black tracking-widest mb-2 uppercase">
@@ -220,8 +222,8 @@ export default function DossierArchive({
             {subtitle}
           </p>
         </div>
-        
-        <button 
+
+        <button
           type="button"
           onClick={handleExportData}
           disabled={answersFeed.length === 0}
@@ -233,14 +235,12 @@ export default function DossierArchive({
       </div>
 
       <div className="grid grid-cols-1 xl:grid-cols-12 gap-8 items-start">
-        
         <section className="xl:col-span-5 h-auto xl:max-h-[800px] flex flex-col xl:sticky xl:top-4">
-          
           <fieldset className="border-4 border-black p-4 pt-6 relative flex flex-col flex-grow">
             <legend className="px-3 text-lg font-black tracking-widest bg-[#fcfaf2]">
               思想刻录 〈 ENGRAVE 〉
             </legend>
-            
+
             <div className="text-xs font-bold text-[#ff3333] mb-4 border-b-2 border-dashed border-black pb-2">
               ※ 注：可跳过任意题目，留白亦是回答。
             </div>
@@ -248,8 +248,13 @@ export default function DossierArchive({
             <form className="space-y-6 overflow-y-auto pr-2 custom-retro-scroll flex-grow">
               {questions.map((question, idx) => (
                 <div key={idx} className="space-y-2">
-                  <label htmlFor={`dossier-q-${idx}`} className="block text-sm font-bold leading-relaxed cursor-pointer">
-                    <span className="bg-black text-white px-1 mr-2">Q{String(idx + 1).padStart(2, "0")}</span>
+                  <label
+                    htmlFor={`dossier-q-${idx}`}
+                    className="block text-sm font-bold leading-relaxed cursor-pointer"
+                  >
+                    <span className="bg-black text-white px-1 mr-2">
+                      Q{String(idx + 1).padStart(2, "0")}
+                    </span>
                     {question}
                   </label>
                   <textarea
@@ -265,11 +270,13 @@ export default function DossierArchive({
 
             <div className="mt-6 pt-6 border-t-4 border-black shrink-0">
               {submitMessage.text && (
-                <div className={`mb-4 p-2 font-bold text-sm border-2 border-black ${submitMessage.type === "error" ? "bg-[#ff6b6b]" : "bg-[#4ade80]"}`}>
+                <div
+                  className={`mb-4 p-2 font-bold text-sm border-2 border-black ${submitMessage.type === "error" ? "bg-[#ff6b6b]" : "bg-[#4ade80]"}`}
+                >
                   {submitMessage.text}
                 </div>
               )}
-              
+
               <div className="flex gap-4">
                 <button
                   type="button"
@@ -279,7 +286,7 @@ export default function DossierArchive({
                 >
                   {isSubmitting ? "正在封存..." : "👉 归档印封 〈 SEAL 〉"}
                 </button>
-                
+
                 <button
                   type="button"
                   onClick={() => setFormData(Array(questions.length).fill(""))}
@@ -294,7 +301,6 @@ export default function DossierArchive({
         </section>
 
         <section className="xl:col-span-7 xl:max-h-[800px] overflow-y-auto custom-retro-scroll pr-2">
-          
           <fieldset className="border-4 border-black p-4 relative">
             <legend className="px-3 text-lg font-black tracking-widest bg-[#fcfaf2]">
               历史卷宗 〈 ARCHIVES 〉
@@ -311,27 +317,35 @@ export default function DossierArchive({
             ) : (
               <div className="space-y-8">
                 {answersFeed.map((feed) => (
-                  <article key={feed.id} className="bg-white border-4 border-black shadow-[6px_6px_0_0_#111]">
+                  <article
+                    key={feed.id}
+                    className="bg-white border-4 border-black shadow-[6px_6px_0_0_#111]"
+                  >
                     <div className="bg-black text-white px-4 py-2 flex flex-wrap justify-between items-center border-b-4 border-black">
                       <div className="font-bold tracking-widest">
-                        [ID: <span className="text-[#ffcc00]">{feed.userId?.substring(0, 6) || "UNKNOWN"}</span>]
+                        [ID:{" "}
+                        <span className="text-[#ffcc00]">
+                          {feed.userId?.substring(0, 6) || "UNKNOWN"}
+                        </span>
+                        ]
                       </div>
                       <div className="text-xs font-bold">
                         TIMESTAMP: {formatTime(feed.createdAt)}
                       </div>
                     </div>
-                    
+
                     <div className="p-5 space-y-6">
-                      {feed.answers && feed.answers.map((item, i) => (
-                        <div key={i} className="space-y-2">
-                          <h4 className="text-sm font-bold bg-[#eeeeee] inline-block px-2 py-1 border-2 border-black">
-                            Q: {item.question}
-                          </h4>
-                          <div className="pl-4 border-l-4 border-black text-sm whitespace-pre-wrap leading-relaxed font-medium">
-                            {item.answer}
+                      {feed.answers &&
+                        feed.answers.map((item, i) => (
+                          <div key={i} className="space-y-2">
+                            <h4 className="text-sm font-bold bg-[#eeeeee] inline-block px-2 py-1 border-2 border-black">
+                              Q: {item.question}
+                            </h4>
+                            <div className="pl-4 border-l-4 border-black text-sm whitespace-pre-wrap leading-relaxed font-medium">
+                              {item.answer}
+                            </div>
                           </div>
-                        </div>
-                      ))}
+                        ))}
                     </div>
                   </article>
                 ))}
@@ -341,7 +355,9 @@ export default function DossierArchive({
         </section>
       </div>
 
-      <style dangerouslySetInnerHTML={{__html: `
+      <style
+        dangerouslySetInnerHTML={{
+          __html: `
         /* 粗犷风滚动条 */
         .custom-retro-scroll::-webkit-scrollbar {
           width: 12px;
@@ -354,7 +370,9 @@ export default function DossierArchive({
           background-color: #000;
           border: 2px solid #fcfaf2;
         }
-      `}} />
+      `,
+        }}
+      />
     </div>
   );
 }
