@@ -36,7 +36,7 @@ try {
   console.error("Firebase config error:", error);
 }
 
-const ITEMS_PER_PAGE = 6;
+const ITEMS_PER_PAGE = 12; // 更新为每页 12 张卡片，平衡左侧高度
 
 export default function DossierArchive({
   title = "柳含知的问卷",
@@ -60,6 +60,9 @@ export default function DossierArchive({
   const [adminClickCount, setAdminClickCount] = useState(0);
   const [showAdminModal, setShowAdminModal] = useState(false);
   const [adminPwd, setAdminPwd] = useState("");
+
+  // 动态定位“你是谁”这道题的索引
+  const whoAreYouIndex = questions.findIndex((q) => q.includes("你是谁"));
 
   useEffect(() => {
     if (localStorage.getItem("dossier_god_mode") === "true") {
@@ -118,6 +121,12 @@ export default function DossierArchive({
     if (isSubmitting) return;
     if (!user || !db) {
       setSubmitMessage({ type: "error", text: "! 通信中断：请稍后再试。" });
+      return;
+    }
+
+    // 核心新增：校验“你是谁”必填项
+    if (whoAreYouIndex !== -1 && formData[whoAreYouIndex].trim() === "") {
+      setSubmitMessage({ type: "error", text: "! 协议拦截：请务必回答「你是谁」作为身份标识。" });
       return;
     }
 
@@ -212,6 +221,10 @@ export default function DossierArchive({
   const currentFeed = answersFeed.slice((safePage - 1) * ITEMS_PER_PAGE, safePage * ITEMS_PER_PAGE);
 
   if (selectedDossier) {
+    // 提取全屏详情页上的“身份”
+    const detailWhoItem = selectedDossier.answers.find((a) => a.question.includes("你是谁"));
+    const detailWhoText = detailWhoItem ? detailWhoItem.answer : "未知节点的旅人";
+
     return (
       <div className="fixed inset-0 z-50 bg-[#fcfaf2] overflow-y-auto font-mono text-black">
         <div className="max-w-4xl mx-auto p-4 md:p-8 min-h-screen flex flex-col">
@@ -228,9 +241,13 @@ export default function DossierArchive({
             </button>
             <div className="text-left sm:text-right flex flex-col items-start sm:items-end">
               <h2 className="text-xl sm:text-2xl font-black tracking-widest uppercase">
-                卷宗代号: {selectedDossier.userId?.substring(0, 6) || "UNKNOWN"}
+                ID: {selectedDossier.userId?.substring(0, 6) || "UNKNOWN"}
               </h2>
-              <p className="font-bold text-gray-600 mt-1">
+              {/* 全屏大厅显示来自哪里 */}
+              <p className="font-black text-gray-800 mt-2 text-lg">
+                来自 {detailWhoText}
+              </p>
+              <p className="font-bold text-gray-500 mt-1">
                 刻录时间: {formatTime(selectedDossier.createdAt)}
               </p>
               {(user?.uid === selectedDossier.userId || isAdmin) && (
@@ -344,7 +361,7 @@ export default function DossierArchive({
               思想刻录 〈 ENGRAVE 〉
             </legend>
             <div className="text-xs font-bold text-[#ff3333] mb-6 border-b-2 border-dashed border-black pb-3">
-              ※ 注：可跳过任意题目，留白亦是回答。
+              ※ 注：带 * 号为必填身份标识，其余题目可自由跳过，留白亦是回答。
             </div>
 
             <form className="space-y-10 flex-grow pb-8">
@@ -354,7 +371,10 @@ export default function DossierArchive({
                     <span className="bg-black text-white px-2 py-0.5 mr-3 shrink-0 shadow-[2px_2px_0_0_#ffcc00]">
                       Q {String(idx).padStart(2, "0")}
                     </span>
-                    <span className="pt-0.5">{question}</span>
+                    <span className="pt-0.5">
+                      {question}
+                      {idx === whoAreYouIndex && <span className="text-[#ff3333] ml-2 font-black">*</span>}
+                    </span>
                   </label>
                   <textarea
                     id={`dossier-q-${idx}`}
@@ -411,49 +431,61 @@ export default function DossierArchive({
             ) : (
               <>
                 <div className="flex-grow space-y-5 pt-2">
-                  {currentFeed.map((feed) => (
-                    <div
-                      key={feed.id}
-                      role="button"
-                      tabIndex={0}
-                      onClick={() => setSelectedDossier(feed)}
-                      className={`w-full text-left border-4 border-black p-5 shadow-[4px_4px_0_0_#111] hover:-translate-y-1 hover:shadow-[6px_6px_0_0_#ffcc00] active:translate-y-1 active:shadow-[2px_2px_0_0_#ffcc00] transition-all flex flex-col justify-between min-h-[8rem] relative group overflow-hidden cursor-pointer ${isAdmin ? "bg-gray-100" : "bg-white"}`}
-                    >
-                      <div className="flex flex-wrap justify-between items-start gap-2 relative z-20">
-                        <div className="font-black text-lg md:text-xl tracking-wider text-black group-hover:text-white transition-colors duration-300">
-                          ID: {feed.userId?.substring(0, 6) || "UNKNOWN"}
-                        </div>
-                        <div className="flex items-center gap-2">
-                          {(user?.uid === feed.userId || isAdmin) && (
-                            deleteConfirmId === feed.id ? (
-                              <div className="flex gap-1" onClick={(e) => e.stopPropagation()}>
-                                <button type="button" onClick={(e) => handleDeleteDossier(e, feed.id)} className="bg-red-600 text-white text-xs font-bold px-2 py-1 border-2 border-black hover:bg-red-500 shadow-[2px_2px_0_0_#000] hover:translate-x-[1px] hover:translate-y-[1px] hover:shadow-[1px_1px_0_0_#000] active:shadow-none transition-all">确认销毁</button>
-                                <button type="button" onClick={() => setDeleteConfirmId(null)} className="bg-gray-300 text-black text-xs font-bold px-2 py-1 border-2 border-black hover:bg-gray-200 shadow-[2px_2px_0_0_#000] hover:translate-x-[1px] hover:translate-y-[1px] hover:shadow-[1px_1px_0_0_#000] active:shadow-none transition-all">取消</button>
-                              </div>
-                            ) : (
-                              <button type="button" onClick={(e) => { e.stopPropagation(); setDeleteConfirmId(feed.id); }} className="bg-[#ff3333] text-white text-xs font-bold px-2 py-1 border-2 border-black shadow-[2px_2px_0_0_#000] hover:translate-x-[1px] hover:translate-y-[1px] hover:shadow-[1px_1px_0_0_#000] active:shadow-none transition-all">
-                                [X] 销毁
-                              </button>
-                            )
-                          )}
-                          <div className="bg-black text-white text-xs font-bold px-2 py-1 shrink-0 group-hover:bg-white group-hover:text-black transition-colors duration-300">
-                            已密封
+                  {currentFeed.map((feed) => {
+                    // 核心修改：动态提取这张卡片里“你是谁”的回答
+                    const whoAnswerItem = feed.answers?.find((a) => a.question.includes("你是谁"));
+                    const whoAnswerText = whoAnswerItem ? whoAnswerItem.answer : "未知节点的旅人";
+
+                    return (
+                      <div
+                        key={feed.id}
+                        role="button"
+                        tabIndex={0}
+                        onClick={() => setSelectedDossier(feed)}
+                        className={`w-full text-left border-4 border-black p-5 shadow-[4px_4px_0_0_#111] hover:-translate-y-1 hover:shadow-[6px_6px_0_0_#ffcc00] active:translate-y-1 active:shadow-[2px_2px_0_0_#ffcc00] transition-all flex flex-col justify-between min-h-[8rem] relative group overflow-hidden cursor-pointer ${isAdmin ? "bg-gray-100" : "bg-white"}`}
+                      >
+                        <div className="flex flex-wrap justify-between items-start gap-2 relative z-20">
+                          
+                          {/* 格式更新：ID 换行 显示“来自xxx” */}
+                          <div className="font-black text-lg md:text-xl tracking-wider text-black group-hover:text-white transition-colors duration-300">
+                            ID: {feed.userId?.substring(0, 6) || "UNKNOWN"}
+                            <div className="text-sm font-bold mt-1 text-gray-600 group-hover:text-gray-300 transition-colors duration-300">
+                              来自 {whoAnswerText}
+                            </div>
+                          </div>
+
+                          <div className="flex items-center gap-2">
+                            {(user?.uid === feed.userId || isAdmin) && (
+                              deleteConfirmId === feed.id ? (
+                                <div className="flex gap-1" onClick={(e) => e.stopPropagation()}>
+                                  <button type="button" onClick={(e) => handleDeleteDossier(e, feed.id)} className="bg-red-600 text-white text-xs font-bold px-2 py-1 border-2 border-black hover:bg-red-500 shadow-[2px_2px_0_0_#000] hover:translate-x-[1px] hover:translate-y-[1px] hover:shadow-[1px_1px_0_0_#000] active:shadow-none transition-all">确认销毁</button>
+                                  <button type="button" onClick={() => setDeleteConfirmId(null)} className="bg-gray-300 text-black text-xs font-bold px-2 py-1 border-2 border-black hover:bg-gray-200 shadow-[2px_2px_0_0_#000] hover:translate-x-[1px] hover:translate-y-[1px] hover:shadow-[1px_1px_0_0_#000] active:shadow-none transition-all">取消</button>
+                                </div>
+                              ) : (
+                                <button type="button" onClick={(e) => { e.stopPropagation(); setDeleteConfirmId(feed.id); }} className="bg-[#ff3333] text-white text-xs font-bold px-2 py-1 border-2 border-black shadow-[2px_2px_0_0_#000] hover:translate-x-[1px] hover:translate-y-[1px] hover:shadow-[1px_1px_0_0_#000] active:shadow-none transition-all">
+                                  [X] 销毁
+                                </button>
+                              )
+                            )}
+                            <div className="bg-black text-white text-xs font-bold px-2 py-1 shrink-0 group-hover:bg-white group-hover:text-black transition-colors duration-300">
+                              已密封
+                            </div>
                           </div>
                         </div>
+                        
+                        <div className="text-xs md:text-sm font-bold text-gray-500 mt-4 md:mt-auto relative z-20 group-hover:text-gray-300 transition-colors duration-300">
+                          TIME: {formatTime(feed.createdAt)}
+                        </div>
+                        
+                        <div className="absolute inset-0 bg-black/90 flex items-center justify-center translate-y-full group-hover:translate-y-0 transition-transform duration-300 z-10 pointer-events-none">
+                          <span className="text-[#ffcc00] font-black tracking-widest text-lg flex items-center gap-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="3"><path strokeLinecap="round" strokeLinejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /><path strokeLinecap="round" strokeLinejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" /></svg>
+                            展开卷宗
+                          </span>
+                        </div>
                       </div>
-                      
-                      <div className="text-xs md:text-sm font-bold text-gray-500 mt-4 md:mt-auto relative z-20 group-hover:text-gray-300 transition-colors duration-300">
-                        TIME: {formatTime(feed.createdAt)}
-                      </div>
-                      
-                      <div className="absolute inset-0 bg-black/90 flex items-center justify-center translate-y-full group-hover:translate-y-0 transition-transform duration-300 z-10 pointer-events-none">
-                        <span className="text-[#ffcc00] font-black tracking-widest text-lg flex items-center gap-2">
-                          <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="3"><path strokeLinecap="round" strokeLinejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /><path strokeLinecap="round" strokeLinejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" /></svg>
-                          展开卷宗
-                        </span>
-                      </div>
-                    </div>
-                  ))}
+                    );
+                  })}
                 </div>
 
                 <div className="mt-6 pt-5 border-t-4 border-black flex flex-wrap justify-between items-center shrink-0 gap-4">
