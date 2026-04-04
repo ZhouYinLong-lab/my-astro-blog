@@ -1,24 +1,23 @@
 import { initializeApp } from "firebase/app";
-import {
-  getAuth,
-  onAuthStateChanged,
-  signInAnonymously,
-  signInWithCustomToken,
-} from "firebase/auth";
+import { getAuth, onAuthStateChanged, signInAnonymously } from "firebase/auth";
 import {
   addDoc,
   collection,
+  deleteDoc,
+  doc,
   getFirestore,
   onSnapshot,
   query,
   serverTimestamp,
-  deleteDoc,
-  doc,
 } from "firebase/firestore";
 import { useEffect, useState } from "react";
 
-// --- Firebase 初始化 (容错装甲) ---
-let app, auth, db, appId;
+// --- Firebase 初始化 (极致纯净版) ---
+let app;
+let auth;
+let db;
+let appId;
+
 try {
   const firebaseConfig = {
     apiKey: "AIzaSyAJlPY7rPbm3C9uwq86ZDudyNXipAbMOW0",
@@ -27,18 +26,17 @@ try {
     storageBucket: "humanities-archive.firebasestorage.app",
     messagingSenderId: "792290793856",
     appId: "1:792290793856:web:81386fdd50f15712fa8965",
-    measurementId: "G-Z011CNZMXP"
+    measurementId: "G-Z011CNZMXP",
   };
-
   app = initializeApp(firebaseConfig);
   auth = getAuth(app);
   db = getFirestore(app);
-  appId = typeof __app_id !== "undefined" ? __app_id : "default-app-id";
+  appId = firebaseConfig.appId;
 } catch (error) {
   console.error("Firebase config error:", error);
 }
 
-const ITEMS_PER_PAGE = 6; // 每页显示 6 张卡片，完美平衡左侧高度
+const ITEMS_PER_PAGE = 6;
 
 export default function DossierArchive({
   title = "柳含知的问卷",
@@ -50,23 +48,19 @@ export default function DossierArchive({
   const [answersFeed, setAnswersFeed] = useState([]);
   const [loadingDb, setLoadingDb] = useState(true);
 
-  // 表单状态
   const [formData, setFormData] = useState(Array(questions.length).fill(""));
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitMessage, setSubmitMessage] = useState({ type: "", text: "" });
 
-  // 分页与详情状态
   const [currentPage, setCurrentPage] = useState(1);
-  const [selectedDossier, setSelectedDossier] = useState(null); 
-  const [deleteConfirmId, setDeleteConfirmId] = useState(null); 
+  const [selectedDossier, setSelectedDossier] = useState(null);
+  const [deleteConfirmId, setDeleteConfirmId] = useState(null);
 
-  // --- 上帝模式 (God Mode) 状态 ---
   const [isAdmin, setIsAdmin] = useState(false);
   const [adminClickCount, setAdminClickCount] = useState(0);
   const [showAdminModal, setShowAdminModal] = useState(false);
   const [adminPwd, setAdminPwd] = useState("");
 
-  // 初始化 Auth 和本地权限
   useEffect(() => {
     if (localStorage.getItem("dossier_god_mode") === "true") {
       setIsAdmin(true);
@@ -75,11 +69,7 @@ export default function DossierArchive({
     if (!auth) return;
     const initAuth = async () => {
       try {
-        if (typeof __initial_auth_token !== "undefined" && __initial_auth_token) {
-          await signInWithCustomToken(auth, __initial_auth_token);
-        } else {
-          await signInAnonymously(auth);
-        }
+        await signInAnonymously(auth);
       } catch (err) {
         console.error("Auth init failed:", err);
       }
@@ -89,10 +79,8 @@ export default function DossierArchive({
     return () => unsubscribe();
   }, []);
 
-  // 监听数据库
   useEffect(() => {
     if (!user || !db || !archiveId) return;
-
     const colRef = collection(db, "artifacts", appId, "public", "data", archiveId);
     const q = query(colRef);
 
@@ -103,22 +91,19 @@ export default function DossierArchive({
           id: doc.id,
           ...doc.data(),
         }));
-
         docs.sort((a, b) => {
           const timeA = a.createdAt?.toMillis ? a.createdAt.toMillis() : a.createdAt || 0;
           const timeB = b.createdAt?.toMillis ? b.createdAt.toMillis() : b.createdAt || 0;
           return timeB - timeA;
         });
-
         setAnswersFeed(docs);
         setLoadingDb(false);
       },
       (error) => {
         console.error("Firestore fetch error:", error);
         setLoadingDb(false);
-      }
+      },
     );
-
     return () => unsubscribe();
   }, [user, archiveId]);
 
@@ -130,7 +115,7 @@ export default function DossierArchive({
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (isSubmitting) return; 
+    if (isSubmitting) return;
     if (!user || !db) {
       setSubmitMessage({ type: "error", text: "! 通信中断：请稍后再试。" });
       return;
@@ -159,10 +144,9 @@ export default function DossierArchive({
         answers: filledAnswers,
         createdAt: serverTimestamp(),
       });
-
       setSubmitMessage({ type: "success", text: "√ 封存完毕：已刻录至底层档案。" });
       setFormData(Array(questions.length).fill(""));
-      setCurrentPage(1); 
+      setCurrentPage(1);
       setTimeout(() => setSubmitMessage({ type: "", text: "" }), 3000);
     } catch (err) {
       setSubmitMessage({ type: "error", text: `! 封装异常：${err.message}` });
@@ -171,9 +155,8 @@ export default function DossierArchive({
     }
   };
 
-  // 销毁卷宗功能
   const handleDeleteDossier = async (e, docId) => {
-    e.stopPropagation(); 
+    e.stopPropagation();
     try {
       await deleteDoc(doc(db, "artifacts", appId, "public", "data", archiveId, docId));
       setDeleteConfirmId(null);
@@ -205,12 +188,14 @@ export default function DossierArchive({
     if (!timestamp) return "时空同步中...";
     const date = timestamp.toDate ? timestamp.toDate() : new Date(timestamp);
     return date.toLocaleString("zh-CN", {
-      year: "numeric", month: "2-digit", day: "2-digit",
-      hour: "2-digit", minute: "2-digit",
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit",
+      hour: "2-digit",
+      minute: "2-digit",
     });
   };
 
-  // 隐藏的 Admin 触发器：连点 5 次标题
   const handleTitleClick = () => {
     if (isAdmin) return;
     const newCount = adminClickCount + 1;
@@ -222,19 +207,14 @@ export default function DossierArchive({
     }
   };
 
-  // 分页计算
   const totalPages = Math.max(1, Math.ceil(answersFeed.length / ITEMS_PER_PAGE));
   const safePage = Math.min(currentPage, totalPages);
   const currentFeed = answersFeed.slice((safePage - 1) * ITEMS_PER_PAGE, safePage * ITEMS_PER_PAGE);
 
-  // ============================================================================
-  // 渲染模式 2：全屏详情页
-  // ============================================================================
   if (selectedDossier) {
     return (
       <div className="fixed inset-0 z-50 bg-[#fcfaf2] overflow-y-auto font-mono text-black">
         <div className="max-w-4xl mx-auto p-4 md:p-8 min-h-screen flex flex-col">
-          {/* 详情页头部 */}
           <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-8 pb-6 border-b-8 border-black gap-4">
             <button
               type="button"
@@ -253,7 +233,6 @@ export default function DossierArchive({
               <p className="font-bold text-gray-600 mt-1">
                 刻录时间: {formatTime(selectedDossier.createdAt)}
               </p>
-              {/* 【超级权限】如果是本人，或者是已解锁上帝模式的站长 */}
               {(user?.uid === selectedDossier.userId || isAdmin) && (
                 <div className="mt-4">
                   {deleteConfirmId === selectedDossier.id ? (
@@ -297,13 +276,8 @@ export default function DossierArchive({
     );
   }
 
-  // ============================================================================
-  // 渲染模式 1：主页
-  // ============================================================================
   return (
     <div className="bg-[#fcfaf2] text-black font-mono p-4 md:p-8 border-4 border-black shadow-[8px_8px_0_0_#111] relative">
-      
-      {/* 隐藏的密码弹窗 */}
       {showAdminModal && (
         <div className="fixed inset-0 z-[9999] bg-black/80 flex items-center justify-center p-4">
           <div className="bg-[#fcfaf2] border-4 border-black p-6 shadow-[8px_8px_0_0_#ffcc00] max-w-sm w-full">
@@ -323,7 +297,7 @@ export default function DossierArchive({
                 onClick={() => {
                   if (adminPwd === "frosti") {
                     setIsAdmin(true);
-                    localStorage.setItem('dossier_god_mode', 'true');
+                    localStorage.setItem("dossier_god_mode", "true");
                     setShowAdminModal(false);
                     setAdminPwd("");
                   } else {
@@ -341,7 +315,6 @@ export default function DossierArchive({
 
       <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-8 border-b-4 border-black pb-4">
         <div>
-          {/* 将点击事件绑定在标题上 */}
           <h2 
             onClick={handleTitleClick}
             className="text-2xl md:text-4xl font-black tracking-widest mb-2 uppercase text-black select-none cursor-pointer"
@@ -365,7 +338,6 @@ export default function DossierArchive({
       </div>
 
       <div className="grid grid-cols-1 xl:grid-cols-12 gap-8 items-stretch">
-        
         <section className="xl:col-span-6 flex flex-col bg-[#fcfaf2] h-full">
           <fieldset className="border-4 border-black p-4 md:p-6 relative flex flex-col h-full bg-[#fcfaf2]">
             <legend className="px-3 text-lg font-black tracking-widest bg-[#fcfaf2] text-black">
@@ -445,15 +417,13 @@ export default function DossierArchive({
                       role="button"
                       tabIndex={0}
                       onClick={() => setSelectedDossier(feed)}
-                      className={`w-full text-left border-4 border-black p-5 shadow-[4px_4px_0_0_#111] hover:-translate-y-1 hover:shadow-[6px_6px_0_0_#ffcc00] active:translate-y-1 active:shadow-[2px_2px_0_0_#ffcc00] transition-all flex flex-col justify-between min-h-[8rem] relative group overflow-hidden cursor-pointer ${isAdmin ? 'bg-gray-100' : 'bg-white'}`}
+                      className={`w-full text-left border-4 border-black p-5 shadow-[4px_4px_0_0_#111] hover:-translate-y-1 hover:shadow-[6px_6px_0_0_#ffcc00] active:translate-y-1 active:shadow-[2px_2px_0_0_#ffcc00] transition-all flex flex-col justify-between min-h-[8rem] relative group overflow-hidden cursor-pointer ${isAdmin ? "bg-gray-100" : "bg-white"}`}
                     >
                       <div className="flex flex-wrap justify-between items-start gap-2 relative z-20">
                         <div className="font-black text-lg md:text-xl tracking-wider text-black group-hover:text-white transition-colors duration-300">
                           ID: {feed.userId?.substring(0, 6) || "UNKNOWN"}
                         </div>
                         <div className="flex items-center gap-2">
-                          
-                          {/* 【超级权限】本人 或 上帝模式 都可以销毁 */}
                           {(user?.uid === feed.userId || isAdmin) && (
                             deleteConfirmId === feed.id ? (
                               <div className="flex gap-1" onClick={(e) => e.stopPropagation()}>
@@ -466,7 +436,6 @@ export default function DossierArchive({
                               </button>
                             )
                           )}
-                          
                           <div className="bg-black text-white text-xs font-bold px-2 py-1 shrink-0 group-hover:bg-white group-hover:text-black transition-colors duration-300">
                             已密封
                           </div>
@@ -512,7 +481,6 @@ export default function DossierArchive({
             )}
           </fieldset>
         </section>
-
       </div>
     </div>
   );
