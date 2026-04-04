@@ -20,9 +20,16 @@ import { useEffect, useState } from "react";
 // --- Firebase 初始化 (容错装甲) ---
 let app, auth, db, appId;
 try {
-  const firebaseConfig = JSON.parse(
-    typeof __firebase_config !== "undefined" ? __firebase_config : "{}",
-  );
+  const firebaseConfig = {
+    apiKey: "AIzaSyAJlPY7rPbm3C9uwq86ZDudyNXipAbMOW0",
+    authDomain: "humanities-archive.firebaseapp.com",
+    projectId: "humanities-archive",
+    storageBucket: "humanities-archive.firebasestorage.app",
+    messagingSenderId: "792290793856",
+    appId: "1:792290793856:web:81386fdd50f15712fa8965",
+    measurementId: "G-Z011CNZMXP"
+  };
+
   app = initializeApp(firebaseConfig);
   auth = getAuth(app);
   db = getFirestore(app);
