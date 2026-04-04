@@ -1,39 +1,15 @@
-import { initializeApp } from "firebase/app";
-import { getAuth, onAuthStateChanged, signInAnonymously } from "firebase/auth";
-import {
-  addDoc,
-  collection,
-  deleteDoc,
-  doc,
-  getFirestore,
-  onSnapshot,
-  query,
-  serverTimestamp,
-} from "firebase/firestore";
+import { createClient } from "@supabase/supabase-js";
 import { useEffect, useState } from "react";
 
-// --- Firebase 初始化 ---
-let app;
-let auth;
-let db;
-let appId;
+// --- Supabase 初始化 (已注入专属密钥) ---
+const supabaseUrl = "https://prlghmvjvggiqygmhvqe.supabase.co";
+const supabaseAnonKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBybGdobXZqdmdnaXF5Z21odnFlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzUyNTUzMTYsImV4cCI6MjA5MDgzMTMxNn0.zrtLqIhh9ix1U0bOzUDB1a6vCFbC6iIUzXbUC63rS8g";
 
+let supabase;
 try {
-  const firebaseConfig = {
-    apiKey: "AIzaSyAJlPY7rPbm3C9uwq86ZDudyNXipAbMOW0",
-    authDomain: "humanities-archive.firebaseapp.com",
-    projectId: "humanities-archive",
-    storageBucket: "humanities-archive.firebasestorage.app",
-    messagingSenderId: "792290793856",
-    appId: "1:792290793856:web:81386fdd50f15712fa8965",
-    measurementId: "G-Z011CNZMXP",
-  };
-  app = initializeApp(firebaseConfig);
-  auth = getAuth(app);
-  db = getFirestore(app);
-  appId = firebaseConfig.appId;
+  supabase = createClient(supabaseUrl, supabaseAnonKey);
 } catch (error) {
-  console.error("Firebase config error:", error);
+  console.error("Supabase config error:", error);
 }
 
 const ITEMS_PER_PAGE = 12;
@@ -63,50 +39,76 @@ export default function DossierArchive({
 
   const whoAreYouIndex = questions.findIndex((q) => q.includes("你是"));
 
+  // 1. Supabase 匿名鉴权
   useEffect(() => {
     if (localStorage.getItem("dossier_god_mode") === "true") {
       setIsAdmin(true);
     }
 
-    if (!auth) return;
+    if (!supabase) return;
+    
     const initAuth = async () => {
-      try {
-        await signInAnonymously(auth);
-      } catch (err) {
-        console.error("Auth init failed:", err);
+      // 检查当前会话
+      const { data: { session } } = await supabase.auth.getSession();
+      if (!session) {
+        // 如果没有登录，则匿名登录
+        const { data, error } = await supabase.auth.signInAnonymously();
+        if (data?.user) setUser(data.user);
+        if (error) console.error("Auth error:", error.message);
+      } else {
+        setUser(session.user);
       }
     };
     initAuth();
-    const unsubscribe = onAuthStateChanged(auth, setUser);
-    return () => unsubscribe();
+
+    // 监听状态变化
+    const { data: authListener } = supabase.auth.onAuthStateChange((event, session) => {
+      setUser(session?.user || null);
+    });
+
+    return () => {
+      authListener.subscription.unsubscribe();
+    };
   }, []);
 
+  // 2. Supabase 实时数据获取
   useEffect(() => {
-    if (!user || !db || !archiveId) return;
-    const colRef = collection(db, "artifacts", appId, "public", "data", archiveId);
-    const q = query(colRef);
+    if (!user || !supabase || !archiveId) return;
 
-    const unsubscribe = onSnapshot(
-      q,
-      (snapshot) => {
-        const docs = snapshot.docs.map((doc) => ({
-          id: doc.id,
-          ...doc.data(),
-        }));
-        docs.sort((a, b) => {
-          const timeA = a.createdAt?.toMillis ? a.createdAt.toMillis() : a.createdAt || 0;
-          const timeB = b.createdAt?.toMillis ? b.createdAt.toMillis() : b.createdAt || 0;
-          return timeB - timeA;
-        });
-        setAnswersFeed(docs);
-        setLoadingDb(false);
-      },
-      (error) => {
-        console.error("Firestore fetch error:", error);
-        setLoadingDb(false);
-      },
-    );
-    return () => unsubscribe();
+    // 拉取初始数据的方法
+    const fetchDossiers = async () => {
+      const { data, error } = await supabase
+        .from("dossiers")
+        .select("*")
+        .eq("archive_id", archiveId)
+        .order("created_at", { ascending: false });
+
+      if (error) {
+        console.error("Fetch error:", error);
+      } else if (data) {
+        setAnswersFeed(data);
+      }
+      setLoadingDb(false);
+    };
+
+    fetchDossiers();
+
+    // 实时监听变更
+    const channel = supabase
+      .channel("dossiers_changes")
+      .on(
+        "postgres_changes",
+        { event: "*", schema: "public", table: "dossiers", filter: `archive_id=eq.${archiveId}` },
+        () => {
+          // 有任何增删改，重新拉取一次以保证排序绝对正确
+          fetchDossiers();
+        }
+      )
+      .subscribe();
+
+    return () => {
+      supabase.removeChannel(channel);
+    };
   }, [user, archiveId]);
 
   const handleInputChange = (index, value) => {
@@ -118,7 +120,7 @@ export default function DossierArchive({
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (isSubmitting) return;
-    if (!user || !db) {
+    if (!user || !supabase) {
       setSubmitMessage({ type: "error", text: "! 通信中断：请稍后再试。" });
       return;
     }
@@ -145,12 +147,14 @@ export default function DossierArchive({
     setSubmitMessage({ type: "", text: "" });
 
     try {
-      const colRef = collection(db, "artifacts", appId, "public", "data", archiveId);
-      await addDoc(colRef, {
-        userId: user.uid,
+      const { error } = await supabase.from("dossiers").insert({
+        user_id: user.id,
+        archive_id: archiveId,
         answers: filledAnswers,
-        createdAt: serverTimestamp(),
       });
+
+      if (error) throw error;
+
       setSubmitMessage({ type: "success", text: "√ 封存完毕：已刻录至底层档案。" });
       setFormData(Array(questions.length).fill(""));
       setCurrentPage(1);
@@ -165,7 +169,9 @@ export default function DossierArchive({
   const handleDeleteDossier = async (e, docId) => {
     e.stopPropagation();
     try {
-      await deleteDoc(doc(db, "artifacts", appId, "public", "data", archiveId, docId));
+      const { error } = await supabase.from("dossiers").delete().eq("id", docId);
+      if (error) throw error;
+      
       setDeleteConfirmId(null);
       if (selectedDossier?.id === docId) {
         setSelectedDossier(null);
@@ -178,8 +184,8 @@ export default function DossierArchive({
   const handleExportData = () => {
     if (answersFeed.length === 0) return;
     const exportData = answersFeed.map((feed) => ({
-      agentId: `Agent_${feed.userId?.substring(0, 6)}`,
-      submittedAt: formatTime(feed.createdAt),
+      agentId: `Agent_${feed.user_id?.substring(0, 6)}`,
+      submittedAt: formatTime(feed.created_at),
       answers: feed.answers.map((a) => ({ question: a.question, answer: a.answer })),
     }));
     const dataStr = `data:text/json;charset=utf-8,${encodeURIComponent(JSON.stringify(exportData, null, 2))}`;
@@ -193,7 +199,7 @@ export default function DossierArchive({
 
   const formatTime = (timestamp) => {
     if (!timestamp) return "时空同步中...";
-    const date = timestamp.toDate ? timestamp.toDate() : new Date(timestamp);
+    const date = new Date(timestamp);
     return date.toLocaleString("zh-CN", {
       year: "numeric",
       month: "2-digit",
@@ -238,15 +244,15 @@ export default function DossierArchive({
             </button>
             <div className="text-left sm:text-right flex flex-col items-start sm:items-end">
               <h2 className="text-xl sm:text-2xl font-black tracking-widest uppercase">
-                ID: {selectedDossier.userId?.substring(0, 6) || "UNKNOWN"}
+                ID: {selectedDossier.user_id?.substring(0, 6) || "UNKNOWN"}
               </h2>
               <p className="font-black text-gray-800 mt-2 text-lg">
                 来自 {detailWhoText}
               </p>
               <p className="font-bold text-gray-500 mt-1">
-                刻录时间: {formatTime(selectedDossier.createdAt)}
+                刻录时间: {formatTime(selectedDossier.created_at)}
               </p>
-              {(user?.uid === selectedDossier.userId || isAdmin) && (
+              {(user?.id === selectedDossier.user_id || isAdmin) && (
                 <div className="mt-4">
                   {deleteConfirmId === selectedDossier.id ? (
                     <div className="flex gap-2">
@@ -255,7 +261,7 @@ export default function DossierArchive({
                     </div>
                   ) : (
                     <button type="button" onClick={() => setDeleteConfirmId(selectedDossier.id)} className="bg-[#ff3333] text-white font-bold px-3 py-1.5 border-2 border-black shadow-[2px_2px_0_0_#000] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[1px_1px_0_0_#000] active:shadow-none active:translate-x-[2px] active:translate-y-[2px] transition-all">
-                      [X] 销毁此卷宗 {isAdmin && user?.uid !== selectedDossier.userId && "(管理员强制)"}
+                      [X] 销毁此卷宗 {isAdmin && user?.id !== selectedDossier.user_id && "(管理员强制)"}
                     </button>
                   )}
                 </div>
@@ -440,17 +446,15 @@ export default function DossierArchive({
                         className={`w-full text-left border-4 border-black p-5 shadow-[4px_4px_0_0_#111] hover:-translate-y-1 hover:shadow-[6px_6px_0_0_#ffcc00] active:translate-y-1 active:shadow-[2px_2px_0_0_#ffcc00] transition-all flex flex-col justify-between min-h-[8rem] relative group overflow-hidden cursor-pointer ${isAdmin ? "bg-gray-100" : "bg-white"}`}
                       >
                         <div className="flex flex-wrap justify-between items-start gap-2 relative z-20">
-                          {/* 💡 核心修复：添加 group-hover:opacity-0 使悬停时文本隐身，添加 line-clamp-2 防爆框 */}
                           <div className="font-black text-lg md:text-xl tracking-wider text-black group-hover:opacity-0 transition-opacity duration-300">
-                            ID: {feed.userId?.substring(0, 6) || "UNKNOWN"}
+                            ID: {feed.user_id?.substring(0, 6) || "UNKNOWN"}
                             <div className="text-sm font-bold mt-1 text-gray-500 line-clamp-2">
                               来自 {whoAnswerText}
                             </div>
                           </div>
 
-                          {/* 按钮不受透明度影响，一直存在 */}
                           <div className="flex items-center gap-2">
-                            {(user?.uid === feed.userId || isAdmin) && (
+                            {(user?.id === feed.user_id || isAdmin) && (
                               deleteConfirmId === feed.id ? (
                                 <div className="flex gap-1" onClick={(e) => e.stopPropagation()}>
                                   <button type="button" onClick={(e) => handleDeleteDossier(e, feed.id)} className="bg-red-600 text-white text-xs font-bold px-2 py-1 border-2 border-black hover:bg-red-500 shadow-[2px_2px_0_0_#000] hover:translate-x-[1px] hover:translate-y-[1px] hover:shadow-[1px_1px_0_0_#000] active:shadow-none transition-all">确认销毁</button>
@@ -468,9 +472,8 @@ export default function DossierArchive({
                           </div>
                         </div>
                         
-                        {/* 💡 核心修复：时间文本同样加上 group-hover:opacity-0 */}
                         <div className="text-xs md:text-sm font-bold text-gray-500 mt-4 md:mt-auto relative z-20 group-hover:opacity-0 transition-opacity duration-300">
-                          TIME: {formatTime(feed.createdAt)}
+                          TIME: {formatTime(feed.created_at)}
                         </div>
                         
                         <div className="absolute inset-0 bg-black/90 flex items-center justify-center translate-y-full group-hover:translate-y-0 transition-transform duration-300 z-10 pointer-events-none">
