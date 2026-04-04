@@ -12,7 +12,7 @@ import {
 } from "firebase/firestore";
 import { useEffect, useState } from "react";
 
-// --- Firebase 初始化 (极致纯净版) ---
+// --- Firebase 初始化 ---
 let app;
 let auth;
 let db;
@@ -36,7 +36,7 @@ try {
   console.error("Firebase config error:", error);
 }
 
-const ITEMS_PER_PAGE = 12; // 更新为每页 12 张卡片，平衡左侧高度
+const ITEMS_PER_PAGE = 12;
 
 export default function DossierArchive({
   title = "柳含知的问卷",
@@ -61,8 +61,8 @@ export default function DossierArchive({
   const [showAdminModal, setShowAdminModal] = useState(false);
   const [adminPwd, setAdminPwd] = useState("");
 
-  // 动态定位“你是谁”这道题的索引
-  const whoAreYouIndex = questions.findIndex((q) => q.includes("你是谁"));
+  // 💡 核心修复：放宽匹配条件，只要题目包含“你是”即可精准定位
+  const whoAreYouIndex = questions.findIndex((q) => q.includes("你是"));
 
   useEffect(() => {
     if (localStorage.getItem("dossier_god_mode") === "true") {
@@ -124,9 +124,9 @@ export default function DossierArchive({
       return;
     }
 
-    // 核心新增：校验“你是谁”必填项
+    // 校验必填项
     if (whoAreYouIndex !== -1 && formData[whoAreYouIndex].trim() === "") {
-      setSubmitMessage({ type: "error", text: "! 协议拦截：请务必回答「你是谁」作为身份标识。" });
+      setSubmitMessage({ type: "error", text: "! 协议拦截：请务必回答身份标识题目。" });
       return;
     }
 
@@ -221,8 +221,8 @@ export default function DossierArchive({
   const currentFeed = answersFeed.slice((safePage - 1) * ITEMS_PER_PAGE, safePage * ITEMS_PER_PAGE);
 
   if (selectedDossier) {
-    // 提取全屏详情页上的“身份”
-    const detailWhoItem = selectedDossier.answers.find((a) => a.question.includes("你是谁"));
+    // 💡 核心修复：全屏详情页提取条件放宽为“你是”
+    const detailWhoItem = selectedDossier.answers.find((a) => a.question.includes("你是"));
     const detailWhoText = detailWhoItem ? detailWhoItem.answer : "未知节点的旅人";
 
     return (
@@ -243,7 +243,6 @@ export default function DossierArchive({
               <h2 className="text-xl sm:text-2xl font-black tracking-widest uppercase">
                 ID: {selectedDossier.userId?.substring(0, 6) || "UNKNOWN"}
               </h2>
-              {/* 全屏大厅显示来自哪里 */}
               <p className="font-black text-gray-800 mt-2 text-lg">
                 来自 {detailWhoText}
               </p>
@@ -432,8 +431,8 @@ export default function DossierArchive({
               <>
                 <div className="flex-grow space-y-5 pt-2">
                   {currentFeed.map((feed) => {
-                    // 核心修改：动态提取这张卡片里“你是谁”的回答
-                    const whoAnswerItem = feed.answers?.find((a) => a.question.includes("你是谁"));
+                    // 💡 核心修复：卡片提取条件放宽为“你是”
+                    const whoAnswerItem = feed.answers?.find((a) => a.question.includes("你是"));
                     const whoAnswerText = whoAnswerItem ? whoAnswerItem.answer : "未知节点的旅人";
 
                     return (
@@ -445,8 +444,6 @@ export default function DossierArchive({
                         className={`w-full text-left border-4 border-black p-5 shadow-[4px_4px_0_0_#111] hover:-translate-y-1 hover:shadow-[6px_6px_0_0_#ffcc00] active:translate-y-1 active:shadow-[2px_2px_0_0_#ffcc00] transition-all flex flex-col justify-between min-h-[8rem] relative group overflow-hidden cursor-pointer ${isAdmin ? "bg-gray-100" : "bg-white"}`}
                       >
                         <div className="flex flex-wrap justify-between items-start gap-2 relative z-20">
-                          
-                          {/* 格式更新：ID 换行 显示“来自xxx” */}
                           <div className="font-black text-lg md:text-xl tracking-wider text-black group-hover:text-white transition-colors duration-300">
                             ID: {feed.userId?.substring(0, 6) || "UNKNOWN"}
                             <div className="text-sm font-bold mt-1 text-gray-600 group-hover:text-gray-300 transition-colors duration-300">
