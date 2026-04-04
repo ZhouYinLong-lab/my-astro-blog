@@ -61,7 +61,6 @@ export default function DossierArchive({
   const [showAdminModal, setShowAdminModal] = useState(false);
   const [adminPwd, setAdminPwd] = useState("");
 
-  // 💡 核心修复：放宽匹配条件，只要题目包含“你是”即可精准定位
   const whoAreYouIndex = questions.findIndex((q) => q.includes("你是"));
 
   useEffect(() => {
@@ -124,7 +123,6 @@ export default function DossierArchive({
       return;
     }
 
-    // 校验必填项
     if (whoAreYouIndex !== -1 && formData[whoAreYouIndex].trim() === "") {
       setSubmitMessage({ type: "error", text: "! 协议拦截：请务必回答身份标识题目。" });
       return;
@@ -221,7 +219,6 @@ export default function DossierArchive({
   const currentFeed = answersFeed.slice((safePage - 1) * ITEMS_PER_PAGE, safePage * ITEMS_PER_PAGE);
 
   if (selectedDossier) {
-    // 💡 核心修复：全屏详情页提取条件放宽为“你是”
     const detailWhoItem = selectedDossier.answers.find((a) => a.question.includes("你是"));
     const detailWhoText = detailWhoItem ? detailWhoItem.answer : "未知节点的旅人";
 
@@ -431,7 +428,6 @@ export default function DossierArchive({
               <>
                 <div className="flex-grow space-y-5 pt-2">
                   {currentFeed.map((feed) => {
-                    // 💡 核心修复：卡片提取条件放宽为“你是”
                     const whoAnswerItem = feed.answers?.find((a) => a.question.includes("你是"));
                     const whoAnswerText = whoAnswerItem ? whoAnswerItem.answer : "未知节点的旅人";
 
@@ -444,13 +440,15 @@ export default function DossierArchive({
                         className={`w-full text-left border-4 border-black p-5 shadow-[4px_4px_0_0_#111] hover:-translate-y-1 hover:shadow-[6px_6px_0_0_#ffcc00] active:translate-y-1 active:shadow-[2px_2px_0_0_#ffcc00] transition-all flex flex-col justify-between min-h-[8rem] relative group overflow-hidden cursor-pointer ${isAdmin ? "bg-gray-100" : "bg-white"}`}
                       >
                         <div className="flex flex-wrap justify-between items-start gap-2 relative z-20">
-                          <div className="font-black text-lg md:text-xl tracking-wider text-black group-hover:text-white transition-colors duration-300">
+                          {/* 💡 核心修复：添加 group-hover:opacity-0 使悬停时文本隐身，添加 line-clamp-2 防爆框 */}
+                          <div className="font-black text-lg md:text-xl tracking-wider text-black group-hover:opacity-0 transition-opacity duration-300">
                             ID: {feed.userId?.substring(0, 6) || "UNKNOWN"}
-                            <div className="text-sm font-bold mt-1 text-gray-600 group-hover:text-gray-300 transition-colors duration-300">
+                            <div className="text-sm font-bold mt-1 text-gray-500 line-clamp-2">
                               来自 {whoAnswerText}
                             </div>
                           </div>
 
+                          {/* 按钮不受透明度影响，一直存在 */}
                           <div className="flex items-center gap-2">
                             {(user?.uid === feed.userId || isAdmin) && (
                               deleteConfirmId === feed.id ? (
@@ -464,13 +462,14 @@ export default function DossierArchive({
                                 </button>
                               )
                             )}
-                            <div className="bg-black text-white text-xs font-bold px-2 py-1 shrink-0 group-hover:bg-white group-hover:text-black transition-colors duration-300">
+                            <div className="bg-black text-white text-xs font-bold px-2 py-1 shrink-0">
                               已密封
                             </div>
                           </div>
                         </div>
                         
-                        <div className="text-xs md:text-sm font-bold text-gray-500 mt-4 md:mt-auto relative z-20 group-hover:text-gray-300 transition-colors duration-300">
+                        {/* 💡 核心修复：时间文本同样加上 group-hover:opacity-0 */}
+                        <div className="text-xs md:text-sm font-bold text-gray-500 mt-4 md:mt-auto relative z-20 group-hover:opacity-0 transition-opacity duration-300">
                           TIME: {formatTime(feed.createdAt)}
                         </div>
                         
