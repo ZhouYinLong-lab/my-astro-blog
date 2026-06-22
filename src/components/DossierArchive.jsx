@@ -1,9 +1,9 @@
 import { createClient } from "@supabase/supabase-js";
 import { useEffect, useState } from "react";
 
-// --- Supabase 初始化 (已注入专属密钥) ---
-const supabaseUrl = "https://prlghmvjvggiqygmhvqe.supabase.co";
-const supabaseAnonKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBybGdobXZqdmdnaXF5Z21odnFlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzUyNTUzMTYsImV4cCI6MjA5MDgzMTMxNn0.zrtLqIhh9ix1U0bOzUDB1a6vCFbC6iIUzXbUC63rS8g";
+// --- Supabase 初始化 ---
+const supabaseUrl = import.meta.env.PUBLIC_SUPABASE_URL || "https://prlghmvjvggiqygmhvqe.supabase.co";
+const supabaseAnonKey = import.meta.env.PUBLIC_SUPABASE_ANON_KEY || "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBybGdobXZqdmdnaXF5Z21odnFlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzUyNTUzMTYsImV4cCI6MjA5MDgzMTMxNn0.zrtLqIhh9ix1U0bOzUDB1a6vCFbC6iIUzXbUC63rS8g";
 
 let supabase;
 try {

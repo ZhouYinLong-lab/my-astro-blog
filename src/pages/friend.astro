@@ -2,10 +2,7 @@
 import { Icon } from "astro-icon/components";
 import MainCard from "@/components/MainCard.astro";
 import FriendCard from "@/components/mdx/FriendCard.astro";
-// 下面这三个组件因为对应的区块被删除了,所以可以直接去掉或注释掉,保持代码整洁
-// import LinkCard from "@/components/mdx/LinkCard.astro";
-// import Showcase from "@/components/mdx/Showcase.astro";
-// import Card from "@/components/temple/Card.astro";
+
 import CardGroup from "@/components/temple/CardGroup.astro";
 import BaseLayout from "@/layouts/BaseLayout.astro";
 ---
@@ -20,7 +17,7 @@ import BaseLayout from "@/layouts/BaseLayout.astro";
     >
       <div class="space-y-10">
         <section>
-          <h2 class="text-2xl font-bold mb-6 flex items- gap-2">
+          <h2 class="text-2xl font-bold mb-6 flex items-center gap-2">
             <Icon name="lucide:users" class="w-6 h-6 text-primary" />
             <span>左邻右舍</span>
           </h2>
@@ -31,7 +28,7 @@ import BaseLayout from "@/layouts/BaseLayout.astro";
               name="玄渊共和国"
               description="脱离庸俗信息的数字主权特区，我的虚拟国家门户"
               avatar="/img/xuanyuan.png"
-              url="/republic/index.html"
+              url="https://xuanyuan.zylatent.com"
             />
 
             <FriendCard

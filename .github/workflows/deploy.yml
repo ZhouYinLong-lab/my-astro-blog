@@ -2,7 +2,7 @@ name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
   workflow_dispatch:
 
 permissions:
@@ -25,18 +25,14 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: 20
-          cache: 'pnpm'
+          node-version: 22
+          cache: pnpm
 
       - name: Install dependencies
-        run: pnpm install
+        run: pnpm install --frozen-lockfile
 
-      - name: Build Astro
+      - name: Build
         run: pnpm build
-
-      # 为 Frosti 生成搜索索引
-      - name: Generate Pagefind Search Index
-        run: npx pagefind --site dist
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3

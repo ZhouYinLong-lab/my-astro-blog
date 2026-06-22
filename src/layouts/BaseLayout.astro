@@ -145,14 +145,14 @@ const displayProgress = showProgress || isAutoBlogPost;
           const button = e.target.closest(".btn-copy");
           if (!button) return; 
 
-          const codeBlock = button.closest(".frosti-code");
+          const codeBlock = button.closest(".blog-code");
           if (!codeBlock) return;
           const codeNode = codeBlock.querySelector("code");
           if (!codeNode) return;
 
           const code = codeNode.textContent;
-          const copyIcon = button.querySelector(".frosti-code-toolbar-copy-icon");
-          const successIcon = button.querySelector(".frosti-code-toolbar-copy-success");
+          const copyIcon = button.querySelector(".blog-code-toolbar-copy-icon");
+          const successIcon = button.querySelector(".blog-code-toolbar-copy-success");
           
           try {
             await navigator.clipboard.writeText(code);
@@ -188,7 +188,7 @@ const displayProgress = showProgress || isAutoBlogPost;
       .copy-success {
         animation: pulse 0.5s ease-in-out;
       }
-      .frosti-code-toolbar-copy-success svg {
+      .blog-code-toolbar-copy-success svg {
         color: #10b981;
       }
       @keyframes pulse {

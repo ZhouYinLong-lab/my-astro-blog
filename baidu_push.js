@@ -12,7 +12,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const SITE = 'https://zylatent.com';
-const TOKEN = 'oKw1XqRXs6vAcFz5'; 
+const TOKEN = process.env.BAIDU_PUSH_TOKEN || 'missing-token';
 const SITEMAP_PATH = path.join(__dirname, 'dist', 'sitemap-0.xml'); 
 
 try {

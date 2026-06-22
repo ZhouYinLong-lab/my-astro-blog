@@ -34,7 +34,7 @@ code {
   }
 }
 
-.frosti-heading {
+.section-heading {
   @apply text-2xl leading-normal pt-0 font-bold text-base-content bg-clip-text bg-gradient-to-r from-primary to-secondary duration-300 hover:text-transparent;
 }
 
@@ -50,7 +50,7 @@ code {
   @apply px-1 text-base-content/80;
 }
 
-.frosti-code {
+.blog-code {
   @apply relative my-6 rounded-xl border border-base-300/20 bg-transparent overflow-hidden;
 
   &-toolbar {
