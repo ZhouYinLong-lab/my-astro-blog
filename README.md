@@ -17,7 +17,7 @@
 > 盖闻乾元资始，令序惟春；二月建卯，苍龙奋伸。
 > 君生吉日，正当雷乃发声之候；气禀清刚，恰是蛰虫始振之辰。
 
-南京大学在读。C / C++ / Python 为主，前端也会一点。B站偶尔更新，荒野乱斗休闲玩家。
+南京大学在读。C / C++ / Python 为主，前端也会一点。B站偶尔更新，魂 塞尔达 p系列玩家。
 
 ## 特性
 
@@ -122,7 +122,7 @@ featured: true         # 精选文章
 - 博客：[zylatent.com](https://zylatent.com)
 - B站：[柳含知](https://space.bilibili.com/511060666)
 - Twitter：[@Liuhanzhi23](https://x.com/Liuhanzhi23)
-- 邮箱：Liuhanzhi23@outlook.com
+- 邮箱：Liuhanzhi23@outlook.com/Liuhanzhi514@gmail.com
 
 ## 许可
 
