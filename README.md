@@ -1,230 +1,136 @@
-<pre align="center">
-A clean, elegant, and fast static blog template! 🚀 Built with Astro
-</pre>
+<p align="center">
+  柳含知发挥想象力和创造力的赛博后花园 🌿
+</p>
 
 <div align="center">
-<img alt="Frosti Logo" src="https://github.com/EveSunMaple/Frosti/blob/main/docs/logo.png" width="280px">
+
+[![license](https://badgen.net/github/license/ZhouYinLong-lab/my-astro-blog)](https://github.com/ZhouYinLong-lab/my-astro-blog/blob/main/LICENSE)
+[![astrolink](https://badgen.net/badge/Astro/5.x/purple)](https://astro.build)
+[![status](https://badgen.net/badge/status/active/green)](https://zylatent.com)
+
 </div>
 
-[![license](https://badgen.net/github/license/EveSunMaple/Frosti)](https://github.com/EveSunMaple/Frosti/blob/main/LICENSE)&nbsp;&nbsp;&nbsp;[![release](https://badgen.net/github/release/EveSunMaple/Frosti)](https://github.com/EveSunMaple/Frosti/releases)&nbsp;&nbsp;&nbsp;[![stackblitz](https://developer.stackblitz.com/img/open_in_stackblitz_small.svg)](https://stackblitz.com/github/EveSunMaple/Frosti)
+## 📝 关于
 
-[**🖥️ Frosti Demo**](https://frosti.saroprock.com)&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;[**🌏 Chinese README**](https://github.com/EveSunMaple/Frosti/blob/main/docs/README.zh-CN.md)&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;[**❤️ My Blog**](https://www.saroprock.com)
+**寒柳别苑** 是柳含知的个人博客，记录技术探索、文学创作与生活随想。
 
-## 📷 Preview
+> 盖闻乾元资始，令序惟春；二月建卯，苍龙奋伸。
+> 君生吉日，正当雷乃发声之候；气禀清刚，恰是蛰虫始振之辰。
 
-![preview](./docs/preview-light.png)
+- 🏫 南京大学
+- 💻 C / C++ / Python / Web
+- 📖 兰波诗歌翻译、散文写作、技术笔记
+- 🎮 荒野乱斗 / B站 UP主
 
-## ✨ Features
+## ✨ 特性
 
-- ✅ **Light** / **Dark** mode available
-- ✅ Super fast performance with excellent SEO
-- ✅ View transition animations (using ClientRouter)
-- ✅ Search functionality for your articles (using Pagefind)
-- ✅ Responsive design built with [Tailwind CSS](https://tailwindcss.com/) and [daisyUI](https://daisyui.com/)
-- ✅ RSS feed support
-- 🛠️ Easy to use blog
-  - Customize your blog content in `frosti.config.yaml`
-  
-## 💬 Comment System
+- 🌗 **浅色 / 深色** 模式 (lemonade + forest)
+- 🌍 **10 种语言** 国际化支持 (zh / en / fr / ja / ko / es / de / ru / pt / it)
+- 🔍 **全文搜索** (Pagefind)
+- 📱 **响应式设计** (TailwindCSS + daisyUI)
+- 📡 **RSS 订阅** 支持
+- 🖼️ **动态 OG 图片** 生成 (satori + sharp)
+- 📐 **KaTeX** 数学公式渲染
+- 💬 **Twikoo** 评论系统
+- 🎨 **MDX** 自定义组件 (时间线、折叠块、GitHub 卡片、音乐播放器等)
+- 🗺️ **站点地图** & SEO 优化
+- 🔄 **页面过渡动画** (Swup / View Transitions)
 
-- **Tutorial (Waline)**
-  - https://frosti.saroprock.com/blog/adding-comment-systems
-- **Custom styles (SCSS)**
-  - This repo provides a default, site-matching comment stylesheet at `src/styles/waline.scss`. You can use it as-is or modify it to fit your needs.
+## 🚀 本地运行
 
-## ✒️ Article Information
-
-|    Name     |       Meaning       | Required |
-| :---------: | :-----------------: | :------: |
-|    title    |    Article title    |   Yes    |
-| description | Article description |   Yes    |
-|   pubDate   |  Publication date   |   Yes    |
-|    image    | Article cover image |    No    |
-| categories  | Article categories  |    No    |
-|    tags     |    Article tags     |    No    |
-|    badge    |    Article badge    |    No    |
-|    draft    |    Draft status     |    No    |
-
-> [!TIP]
->
-> - You can pin your article by setting the `badge` property to `Pin`
-> - Setting `draft: true` will mark the article as a draft, and it won't appear in the article list
-
-## ⬇️ Usage
-
-1. Install pnpm package manager (if you haven't already)
-
-```sh
+```bash
+# 1. 安装 pnpm (如已安装可跳过)
 npm i -g pnpm
-```
 
-2. Clone the project
+# 2. 克隆项目
+git clone git@github.com:ZhouYinLong-lab/my-astro-blog.git
+cd my-astro-blog
 
-```sh
-git clone https://github.com/EveSunMaple/Frosti.git Frosti
-```
-
-3. Enter the project folder
-
-```sh
-cd Frosti
-```
-
-4. Install dependencies
-
-```sh
+# 3. 安装依赖
 pnpm i
-```
 
-### 5. Debug and Run the Project
-
-**On first run or after updating content**, execute `search:index` to generate the search index:
-
-```sh
-# Generate the search index for development use
+# 4. 生成搜索索引（首次运行）
 pnpm run search:index
 
+# 5. 启动开发服务器
 pnpm run dev
 ```
 
-## 🔧 Configuration
+## 📦 构建部署
 
-Frosti uses `frosti.config.yaml` as its configuration file, where you can configure the website's basic information, navigation bar, footer, and more.
+```bash
+pnpm run build    # 构建到 dist/
+pnpm run preview  # 本地预览构建结果
+```
 
-### Website Basic Information (site)
+构建时会自动运行 Pagefind 索引生成。
+
+## 📂 项目结构
+
+```
+my-astro-blog/
+├── src/
+│   ├── content/blog/        # 博客文章 (MDX + MD)
+│   ├── pages/               # 路由页面
+│   │   ├── blog/            # 博客列表 / 文章 / 归档 / 标签 / 分类 / 搜索
+│   │   ├── chores/          # 更新日志 / 博客热力图
+│   │   └── ...              # 关于 / 实验室 / 友链 / 后院 / 人文十问
+│   ├── components/          # Astro 组件
+│   │   ├── mdx/             # 自定义 MDX 组件 (时间线、折叠块、音乐播放器等)
+│   │   ├── widgets/         # 通用组件 (分页、目录、进度条等)
+│   │   └── comments/        # Twikoo 评论
+│   ├── layouts/             # 布局组件
+│   ├── i18n/                # 多语言翻译
+│   ├── styles/              # 全局样式 (SCSS)
+│   └── utils/               # 工具函数
+├── public/                  # 静态资源 (图片、字体等)
+├── frosti.config.yaml       # 站点配置
+├── astro.config.mjs         # Astro 配置
+└── tailwind.config.mjs      # TailwindCSS + daisyUI 配置
+```
+
+## 🛠️ 技术栈
+
+| 类别 | 技术 |
+|------|------|
+| 框架 | Astro 5 |
+| UI | TailwindCSS 3 + daisyUI 4 |
+| 内容 | MDX / Markdown |
+| 评论 | Twikoo |
+| 搜索 | Pagefind |
+| 数据库 | Supabase |
+| 图标 | astro-icon (Lucide / Simple Icons / Material Symbols) |
+| 代码高亮 | Expressive Code |
+| 数学 | KaTeX |
+| 格式化 | Biome |
+
+## 📄 文章 Frontmatter
 
 ```yaml
-site:
-  tab: Frosti # Text displayed in the browser tab
-  title: Frosti # Website title
-  description: A clean, elegant, and fast static blog template! # Website description for SEO
-  language: en # Website language code, e.g., "en" for English, "zh" for Chinese
-  favicon: /favicon.ico # Website favicon path
+---
+title: 文章标题        # 必填
+description: 文章描述   # 必填
+pubDate: 2025-01-01    # 必填 - 发布日期
+image: /img/cover.webp # 可选 - 封面图
+categories: [技术]     # 可选 - 分类
+tags: [Astro, 博客]    # 可选 - 标签
+badge: Pin             # 可选 - 置顶标记
+draft: true            # 可选 - 草稿 (不会出现在列表中)
+featured: true         # 可选 - 精选文章
+---
 ```
 
-### Theme Settings (theme)
+## 🔗 链接
 
-```yaml
-theme:
-  light: winter # Light mode theme, based on daisyUI themes
-  dark: dracula # Dark mode theme, based on daisyUI themes
-  code: github-dark # Code block theme style
-```
+- 🌐 博客：[zylatent.com](https://zylatent.com)
+- 📺 B站：[柳含知](https://space.bilibili.com/511060666)
+- 🐦 Twitter：[@Liuhanzhi23](https://x.com/Liuhanzhi23)
+- 📧 邮箱：Liuhanzhi23@outlook.com
 
-- Themes are based on options provided by [daisyUI](https://daisyui.com/docs/themes/)
-- Code block themes use styles from [Shiki](https://shiki.style/themes)
+## 📜 许可
 
-### Date Format (date_format)
+基于 [Frosti](https://github.com/EveSunMaple/Frosti) 主题构建，使用 [MIT License](LICENSE)。
 
-```yaml
-date_format: ddd MMM DD YYYY # Date display format
-```
+---
 
-### Menu Configuration (menu)
-
-```yaml
-menu:
-  - id: home # Unique identifier for the menu item
-    text: Home # Text displayed in the menu
-    href: / # Link address
-    svg: "material-symbols:home-outline-rounded" # Icon
-    target: _self # Link target
-```
-
-Each menu item includes the following properties:
-
-- `id`: Unique identifier
-- `text`: Displayed text
-- `href`: Link address
-- `svg`: Icon code using [Iconify](https://icon-sets.iconify.design/) icon set
-- `target`: Link target (`_self` for current window or `_blank` for new window)
-
-#### Sub-menu Items (subItems)
-
-You can configure sub-menu items by adding `subItems` with the same format as main menu items.
-
-### User Information (user)
-
-```yaml
-user:
-  name: EveSunMaple # Username
-  site: "https://example.com" # User website
-  avatar: /profile.png # User avatar
-```
-
-### Social Media Configuration (social)
-
-Sidebar and footer can have different social media links:
-
-```yaml
-sidebar:
-  social:
-    - href: "https://github.com/username" # Link address
-      ariaLabel: Github # Accessibility label
-      title: Github # Tooltip on hover
-      svg: "ri:github-line" # Icon code
-```
-
-### Icon Settings (icon)
-
-Frosti uses [Iconify](https://icon-sets.iconify.design/) as its icon library. You can search for icons you like on their website, then copy the icon code to the `svg` field in the configuration file.
-
-### Language Settings (language)
-
-Frosti supports multiple languages, configured through:
-
-1. Setting the default language in `frosti.config.yaml`:
-
-```yaml
-site:
-  language: en # Set to "en" for English, "zh" for Chinese
-```
-
-2. Managing all interface text translations in the `src/i18n/translations.yaml` file:
-
-```yaml
-en: # English translations
-  label:
-    noTag: No tags assigned
-    tagCard: Tags
-    # Other English labels...
-
-zh: # Chinese translations
-  label:
-    noTag: 未分配标签
-    tagCard: 标签
-    # Other Chinese labels...
-```
-
-#### Adding or Modifying Translations
-
-To add new language support or modify existing translations:
-
-1. Add a new language code and corresponding translations in the `translations.yaml` file, or modify existing translations
-2. Change `site.language` in `frosti.config.yaml` to your preferred language code
-
-## 🚀 Automatic Updates
-
-To keep your project up to date with the latest version of Frosti, you can use the provided update script.
-
-```sh
-bash frosti.update.sh
-```
-
-This script will:
-
-1.  **Clone the latest version** of the Frosti repository.
-2.  **Safely update** your project files, adding and overwriting files based on the `.updateignore` file.
-3.  **Intelligently delete** files that have been removed from the official repository, without affecting your ignored files.
-4.  **Clean up** any remaining empty folders and temporary files.
-5.  **Install or update** dependencies using `pnpm`.
-
-## 👀 Issues
-
-If you have any questions or suggestions, you can provide feedback or communicate with the developer by submitting Issues!
-
-## 🎉 Acknowledgements
-
-@[Saicaca](https://github.com/saicaca) Their inspiration was the main reason I created this theme
-
-@[WRXinYue](https://github.com/WRXinYue) They helped me a lot when I was first getting started
+<p align="center">Made with ❤️ by 柳含知</p>
