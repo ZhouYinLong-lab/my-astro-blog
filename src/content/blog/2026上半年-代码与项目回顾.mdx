@@ -1,0 +1,98 @@
+---
+title: 消失的半年：代码、项目与一个智科人的大一春季学期
+description: 智科大一下学期忙得博客长草，但代码仓库没闲着——NanE、Dog-Skills一次迟到的项目回顾。
+pubDate: 2026-06-22
+tags: 
+   - 项目回顾
+categories: 
+   - 似水
+image: /background/2.webp
+---
+
+> 上一次更新博客是什么时候来着？翻了翻提交记录——四月。两个月。
+
+不是不想写。智科大一下学期的密度，虽然不至于到恐怖的地步，不过已经让我没兴趣写博客。
+
+博客就这么搁置了。但 GitHub 没有。
+
+今天刚考完微积分，后面还有高级程序设计和数字系统，等会再复习吧。回头看了一下 `github.com/ZhouYinLong-lab`，这半年居然悄摸摸产出了二十几个仓库。大部分是课程项目和小实验，但有两个东西我花了很多时间，值得认真聊聊。
+
+---
+
+## NanE（南易）：从宿舍群痛点长出来的东西
+
+南大大几千学生住在不同校区不同楼栋里，几乎每个人抽屉里都有只用了两三片的创可贴、只用过一次的碘伏棉签、放着也是放着的退烧贴——但你永远不知道隔壁房间就有人急需你手上那个闲置的东西。
+
+宿舍群的求助是点对点的、不可检索的、看运气的。
+
+于是有了 [NanE（南易）](https://github.com/ZhouYinLong-lab/NanE)——一个面向南大校园的免费互助信息平台。核心逻辑很简单：
+
+- 只做校内互助信息撮合，**不做买卖、不做配送**，也不提供医疗建议
+- 发布内容必须免费共享
+- 按**同楼栋 > 同宿舍群 > 同校区**的优先级排序，替代 GPS
+- 所有物品人工审核后上线，联系方式登录后才能查看
+- 发布→审核→查看联系方式→领取确认→自动下架，全链路闭环
+
+技术栈选择了最轻量的方案：原生 HTML/CSS/JavaScript 写网页端，Node.js 原生 `http` 模块写后端，PostgreSQL 做数据库，Nginx + PM2 + Let's Encrypt 部署在 Azure VM 上。没有前端框架，没有构建工具，连 CSS 都是手写的——就是为了让它尽量轻、尽量好维护。
+
+目前网页端已经上线：[nane.zylatent.com](https://nane.zylatent.com)，微信小程序代码也写好了，等备案完成就能恢复上线。
+
+宣传视频在这里：[bilibili.com/video/BV11gEY6JEXL](https://bilibili.com/video/BV11gEY6JEXL/)
+
+说实话，做这个项目的过程本身就是一次很特别的体验。智科大一还没学 web 开发，后端、数据库、部署、HTTPS、域名备案、邮件服务——几乎每一项都是从零开始摸，遇到坑就搜，搜不到就看文档源码。最后东西跑起来的那一刻，确实很爽。
+
+---
+
+## Dog-Skills：让 AI 协作不再每次从零开始
+
+如果说 NanE 是"让闲置资源流动起来"，那 [Dog-Skills](https://github.com/ZhouYinLong-lab/Dog-Skills) 就是"让 AI 工作流不再重复造轮子"。
+
+这半年写代码的时候我越来越依赖 Claude Code，但很快就发现一个烦人的问题：很多工作流程每次都要从头解释一遍。比如"帮我拆一个任务包给 Claude Code 执行"，或者"帮我生成复习资料"，或者"帮我去除这段文字的 AI 味"——每次都要说一遍上下文、规范、输出格式。
+
+Skills 机制解决了这个问题。一个 skill 就是一个可安装的提示词包，装到 `~/.claude/skills/` 之后，Claude 会自动识别触发场景，不需要再反复解释。
+
+Dog-Skills 是我整理的 11 个 skills 合集：
+
+| Skill | 一句话 |
+|---|---|
+| `cc-dispatch` | Codex 与 Claude Code 的结构化任务分发协议——省 Codex 配额 |
+| `exam-tutor` | 分析课本 PDF 和往年卷，自动生成分章节复习资料和习题课讲义 |
+| `html-video` | 把文章、链接或 GitHub 仓库一键做成动画视频 |
+| `nuwa` | 蒸馏任何人的思维方式变成一个可运行的 AI skill |
+| `claude-to-im` | 把 Claude 连到 Telegram/飞书/QQ/微信，手机随时聊 |
+| `last30days` | 全平台话题调研——Reddit/X/YouTube/TikTok/GitHub…… |
+| `ui-ux-pro-max` | 67 种 UI 风格、161 套配色、57 组字体搭配的设计工具箱 |
+| `find-skills` | 搜索和安装开源社区的各种 skills |
+| `baoyu-skills` | 22 个内容创作 skills（幻灯片/图表/漫画/翻译/图片生成……） |
+| `dbskill` | 21 个商业诊断 skills（商业模式/对标分析/执行诊断……） |
+| `humanizer-zh` | 去除中文文本的 AI 生成痕迹 |
+
+其中 `cc-dispatch` 和 `exam-tutor` 是从零手写的，其他是从社区精选并整理打包的。整个 Dog-Skills 本身也是一个学习过程——理解每个 skill 的设计思路，看看别人是怎么把复杂工作流封装成可复用模块的。
+
+---
+
+## 其他值得一提的
+
+这半年还折腾了不少东西：
+
+**强化学习相关**：[PPO-Balance-Bench](https://github.com/ZhouYinLong-lab/PPO-Balance-Bench) 和 [Bipedal-RL-Lab](https://github.com/ZhouYinLong-lab/Bipedal-RL-Lab)。前者是 PPO 算法让小棍子上的球保持平衡（PyBullet 环境），后者是双足机器人强化学习训练。智科的课程还没教到 RL，但自己稍微翻了翻 Sutton 的书、看了 OpenAI Spinning Up 的教程，一边跑实验一边理解贝尔曼方程到底在算什么。
+
+**[cpp-mental-models](https://github.com/ZhouYinLong-lab/cpp-mental-models)**：用物理直觉来理解 C++ 核心机制的系列代码，配套 B站/YouTube 视频。
+
+**[My-Crypto-compiler](https://github.com/ZhouYinLong-lab/My-Crypto-compiler)**：一个实验性的加密器，哈基米基米基。
+
+还有 [Owlsome](https://github.com/ZhouYinLong-lab/Owlsome)（Python 写的某个想法原型）、[Reddit_Daily](https://github.com/ZhouYinLong-lab/Reddit_Daily)（Reddit 热点抓取）、[dirtyfrag](https://github.com/ZhouYinLong-lab/dirtyfrag)（碎片化学习的实验）、[Learn_llm](https://github.com/ZhouYinLong-lab/Learn_llm)（之前学 LLM 时的笔记和代码）……
+
+还有一些更早的趣味小项目：[GoDot-A_Star-Ball](https://github.com/ZhouYinLong-lab/GoDot-A_Star-Ball)（Godot 写的 A* 寻路小球）、[Huang-draw](https://github.com/ZhouYinLong-lab/Huang-draw)（画板工具）、[Night_Heron-sense-your-feeling](https://github.com/ZhouYinLong-lab/Night_Heron-sense-your-feeling)（夜鹭心情——一个互动情绪页面）、[OnlyToYou](https://github.com/ZhouYinLong-lab/OnlyToYou)、[Fireworks](https://github.com/ZhouYinLong-lab/Fireworks)（新年烟花）——大多是去年秋冬写的小玩意，但回头看每个都承载了一段记忆。
+
+---
+
+## 写在最后
+
+大一下学期结束得比想象中快。回头看这半年，课表上的课程和课表外的项目并行推进，累是真累，但 GitHub 贡献图没有白掉。
+
+NanE 是从宿舍群的真实需求里长出来的，Dog-Skills 是日常写代码过程中自然而然积累的。可能这就是我理解的技术的样子：不一定要改变世界，但至少让自己和周围的人方便一点。
+
+暑假有很多计划——NanE 小程序备案、Dog-Skills 继续收编好用的 skills 等等等等。能不能都做完不知道，但仓库不会空着。
+
+> 博客也许会更新得勤一点。不敢保证。但 GitHub 不会骗人。
