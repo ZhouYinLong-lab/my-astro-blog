@@ -1,6 +1,6 @@
 # Project Folders Structure Blueprint — 寒柳别苑 (hanliu-biyuan)
 
-> **生成日期**: 2026-06-23
+> **更新日期**: 2026-06-25
 > **项目类型**: Astro 5 静态博客 (Node.js)
 > **UI 框架**: TailwindCSS 3 + daisyUI 4
 > **包管理器**: pnpm
@@ -39,39 +39,39 @@ hanliu-biyuan/
 │   ├── background/                  # 背景图 (15 张 .webp/.png)
 │   ├── img/                         # 文章配图 (按主题分目录)
 │   │   ├── 2025snow/
-│   │   ├── Duncon/                  # ⚠️ 首字母大写
-│   │   ├── JiNan/                   # ⚠️ 驼峰命名
-│   │   ├── Rimbaud/                 # ⚠️ 首字母大写
+│   │   ├── duncon/
 │   │   ├── flowers/
 │   │   ├── ghost/
 │   │   ├── hanli/
+│   │   ├── ji-nan/
 │   │   ├── my-2025/
 │   │   ├── question/
 │   │   ├── random/season1/
 │   │   ├── reflection/
+│   │   ├── rimbaud/
 │   │   ├── water/
 │   │   ├── xiaoxiezi/
 │   │   ├── xuanyuan/
 │   │   ├── yelu/
 │   │   └── zawu/
-│   ├── labs/                        # 独立 HTML 实验项目
-│   │   ├── Geng-Blade/              # ⚠️ 驼峰+连字符
-│   │   ├── My-Crypto-compiler/      # ⚠️ 驼峰+连字符
-│   │   ├── YanHua/
+│   ├── labs/                        # 独立 HTML 实验项目 (8个)
+│   │   ├── geng-blade/
 │   │   ├── huang/
+│   │   ├── my-crypto-compiler/
 │   │   ├── my-heron-app/
 │   │   ├── onlyto/
 │   │   ├── seal1/
-│   │   └── smart-agent/
+│   │   ├── smart-agent/
+│   │   └── yan-hua/
 │   ├── music/                       # 音频文件
 │   └── republic/                    # 子站点
 │       └── articles/
 ├── src/
 │   ├── components/
+│   │   ├── cards/                   # 通用卡片组件 (Card, CardGroup)
 │   │   ├── comments/                # Twikoo 评论组件
 │   │   ├── mdx/                     # MDX 自定义组件 (12个)
 │   │   ├── sidebar/                 # 侧边栏子组件
-│   │   ├── temple/                  # ⚠️ 拼写: 应为 templates/
 │   │   └── widgets/                 # 通用 UI 组件
 │   ├── content/
 │   │   └── blog/                    # 博客文章 (50+ .mdx/.md)
@@ -79,10 +79,15 @@ hanliu-biyuan/
 │   ├── integration/                 # Astro 自定义集成
 │   ├── interface/                   # TypeScript 类型定义
 │   ├── layouts/                     # 页面布局
-│   ├── pages/                       # 路由页面
-│   │   ├── blog/                    # 博客相关路由
-│   │   ├── chores/                  # 工具页面
-│   │   └── og/                      # OG 图片生成
+│   ├── pages/                       # 路由页面 (按目录组织)
+│   │   ├── about/                   # → /about
+│   │   ├── backyard/                # → /backyard
+│   │   ├── blog/                    # → /blog/*
+│   │   ├── chores/                  # → /chores/*
+│   │   ├── friend/                  # → /friend
+│   │   ├── humanities-archive/      # → /humanities-archive
+│   │   ├── og/                      # OG 图片生成
+│   │   └── project/                 # → /project (实验室/Labs)
 │   ├── plugins/                     # Remark 插件
 │   ├── styles/                      # 全局 SCSS
 │   └── utils/                       # 工具函数
@@ -104,41 +109,39 @@ hanliu-biyuan/
 
 ## 3. 关键目录分析
 
-### 3.1 `src/pages/` — Astro 路由层 (18 文件)
+### 3.1 `src/pages/` — Astro 路由层 (20 文件)
 
-| 子目录 | 用途 | 文件数 |
-|--------|------|--------|
-| `blog/` | 博客列表、详情、归档、分类、标签、搜索 | 8 |
-| `chores/` | 更新日志、热力图 | 2 |
-| `og/` | 动态 OG 图片生成 (satori + sharp) | 1 |
-| 根目录 | 首页、关于、实验室、友链、后院、人文十问、RSS、robots | 7 |
+| 子目录 | 用途 | URL |
+|--------|------|-----|
+| `blog/` | 博客列表、详情、归档、分类、标签、搜索 | `/blog/*` |
+| `chores/` | 更新日志、热力图 | `/chores/*` |
+| `project/` | 🧪 实验室 (赛博工坊/Labs) — 筛选分类"实验室"的博客 | `/project` |
+| `about/` | 居士自序 (个人介绍) | `/about` |
+| `backyard/` | 后院 (涂鸦墙) | `/backyard` |
+| `friend/` | 友链 | `/friend` |
+| `humanities-archive/` | 人文十问归档 | `/humanities-archive` |
+| `og/` | 动态 OG 图片生成 | `/og/*` |
+| 根目录 | 首页、404、RSS、robots | `/` |
 
-**现状**: 结构合理，路由清晰。
+**现状**: 每个页面独立目录，使用 `index.astro`，URL 干净整洁。
 
 ### 3.2 `src/components/` — 组件层 (30+ 文件)
 
 | 子目录 | 内容 | 评估 |
 |--------|------|------|
-| `mdx/` | AlertBase, Collapse, Diff, Error, FeatureCard, FriendCard, GitHubStats, Info, Kbd, LinkCard, MusicPlayer, Success, TimeLine, Warning | 删除了 3 个死代码，剩余 12 个 |
+| `mdx/` | AlertBase, Collapse, Diff, Error, FeatureCard, FriendCard, GitHubStats, Info, Kbd, LinkCard, MusicPlayer, Success, TimeLine, Warning | 12 个 |
 | `sidebar/` | ProfileBar, SearchBar, TOCBar, ToolBar | ✅ 完整 |
-| `widgets/` | Heading, Pagination, PostFilter, PostInfo, ReadingProgress, ScrollToTop, SiteInfo, ThemeToggle, etc. | ✅ 合理 |
-| `temple/` | Card, CardGroup | ⚠️ 目录名拼写错误，应为 `templates/` |
+| `widgets/` | Heading, License, MobileTOC, Pagination, PostFilter, PostInfo, ReadingProgress, ScrollToTop, SiteInfo, ThemeToggle | ✅ 合理 |
+| `cards/` | Card, CardGroup | ✅ 基础卡片组件 |
 | `comments/` | Twikoo | ✅ |
 
 ### 3.3 `public/img/` — 图片资源 (15 子目录)
 
-**现状问题**:
-- 命名不一致: `Duncon/`（首字母大写）、`JiNan/`（驼峰）、`hanli/`（小写拼音）、`yelu/`（小写拼音）混合
-- `water/` 下有 `water1.jpg` ~ `water15.jpg`，可能未被引用
-- 根 `public/img/` 下有零散文件: `image1.jpg`, `image2.jpg`, `left.png`, `right.png`, `loading.gif`, `moonlight.png`, `stamp.png` 等需审计
-
-**建议**: 统一为全小写+连字符命名（如 `ji-nan/`, `duncon/`, `rimbaud/`）
+全部分类清晰，目录名已统一为 kebab-case。
 
 ### 3.4 `public/labs/` — 实验项目 (8 子目录)
 
-独立 HTML/CSS/JS 实验项目，每个是一个完整小应用。
-
-**现状**: 命名混合（驼峰、连字符、纯小写），建议统一为小写+连字符。
+独立 HTML/CSS/JS 实验项目，每个是完整小应用。目录名已统一为 kebab-case。
 
 ---
 
@@ -146,7 +149,7 @@ hanliu-biyuan/
 
 | 文件类型 | 放置位置 | 命名约定 |
 |----------|----------|----------|
-| 页面路由 | `src/pages/` 或 `src/pages/<section>/` | `.astro` 后缀，文件名即 URL |
+| 页面路由 | `src/pages/<section>/index.astro` | 目录名即 URL |
 | 可复用组件 | `src/components/<domain>/` | PascalCase `.astro` |
 | 博客文章 | `src/content/blog/` | 描述性中文名 `.mdx` |
 | 类型定义 | `src/interface/` | `.ts` 文件 |
@@ -209,26 +212,27 @@ hanliu-biyuan/
 
 | # | 问题 | 当前 | 建议 |
 |---|------|------|------|
-| 1 | `temple/` 目录名拼写错误 | `src/components/temple/` | → `src/components/cards/` |
-| 2 | 图片目录命名不一致 | `Duncon/`, `JiNan/`, `hanli/` | → 全部 `kebab-case` |
-| 3 | labs 目录命名不一致 | `Geng-Blade/`, `My-Crypto-compiler/` | → 全部 `kebab-case` |
+| 1 | `src/interface/` 目录名不规范 | 复数形式 | 考虑改为 `src/types/` |
+| 2 | `public/img/` 零散文件待审计 | `image1.jpg`, `left.png` 等 | 清理未引用文件 |
 
 ### 🟡 建议优化
 
 | # | 问题 | 当前 | 建议 |
 |---|------|------|------|
-| 4 | `public/img/` 零散文件 | `image1.jpg`, `left.png` 等 | 审计后删除未引用文件 |
-| 5 | `public/img/water/` 批量编号 | `water1~15.jpg` | 仅保留被文章引用的 |
-| 6 | `src/interface/` 别名不一致 | `@interfaces/*` → `src/interface/*` | 统一为单数形式 |
+| 3 | 博客文章内嵌图片路径引用 | 分散在各 .mdx 中 | 可考虑统一图片管理 |
+| 4 | `public/img/` 部分子目录 | 数字前缀/拼音混合 | 保持现状，已足够清晰 |
 
 ### 🟢 已修复
 
 | # | 问题 | 状态 |
 |---|------|------|
-| 7 | `docs/` 为上游主题文档 | ✅ 已删除 |
-| 8 | 博客文件名含空格 | ✅ 已改为连字符 |
-| 9 | `waline.scss` 死代码 | ✅ 已删除 |
-| 10 | `.frosti-*` 类名耦合 | ✅ 已改为 `.section-heading` / `.blog-code` |
+| 5 | `docs/` 为上游主题文档 | ✅ 已删除 |
+| 6 | 博客文件名含空格 | ✅ 已改为连字符 |
+| 7 | `waline.scss` 死代码 | ✅ 已删除 |
+| 8 | `.frosti-*` 类名耦合 | ✅ 已改为语义化类名 |
+| 9 | `temple/` → `cards/` 重命名 | ✅ 已修复 |
+| 10 | 图片/labs 目录统一 kebab-case | ✅ 全部统一 |
+| 11 | 页面文件组织为目录结构 | ✅ 每个页面独立目录 |
 
 ---
 
@@ -255,8 +259,8 @@ image: /img/<dir>/<image>.webp
 
 ### 新增页面
 ```
-src/pages/
-└── <route-name>.astro  # 若需要子路由则创建同名目录
+src/pages/<route-name>/
+└── index.astro         # 每个页面独立目录，URL = /<route-name>
 ```
 
 ### 新增 MDX 组件
