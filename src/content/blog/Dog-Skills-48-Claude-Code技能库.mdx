@@ -1,0 +1,499 @@
+---
+title: "Dog-Skills：我整理的 48 个 Claude Code 技能库，从写代码到 AI 唱歌全涵盖"
+description: "从开发流程、品牌设计、深度思考到健康管理和AI音乐生成，48个Claude Code技能的完整指南——含元技能架构图、安装方式和组合推荐。"
+pubDate: 2026-07-03
+categories:
+  - 编程
+tags:
+  - Claude Code
+  - AI
+  - Skill
+  - 效率工具
+  - 开源
+image: "/background/1.webp"
+---
+
+import Info from '../../components/mdx/Info.astro';
+import Warning from '../../components/mdx/Warning.astro';
+import Success from '../../components/mdx/Success.astro';
+
+# Dog-Skills：48 个 Claude Code 技能库
+
+> GitHub: [ZhouYinLong-lab/Dog-Skills](https://github.com/ZhouYinLong-lab/Dog-Skills) · v1.0.0 · MIT
+
+过去两周，我在 Claude Code 的技能生态里疯狂探索——评估了上百个 skill，装了又卸，最后精选 **48 个**沉淀成一个仓库。覆盖范围远超编程：有帮你做品牌设计的、有费曼学习法教练、有体检报告解读、甚至还有让 Claude 唱完 bug 给你听的。
+
+这篇文章逐一介绍每个技能，包括架构（元 skill 会画图）、安装方式和来源。
+
+<Info>
+**什么是 Claude Code Skill？** 本质是一个 `SKILL.md` 文件，里面写了触发关键词和指令流程。放在 `~/.claude/skills/` 下，Claude Code 会自动识别并在匹配时调用。
+</Info>
+
+---
+
+## 🧠 思考与研究（6 个）
+
+### `first-principles` — 第一性原理思考
+> 强制 AI 剥离所有假设，从最基本的事实重新推导。适用于修 BUG、架构设计、商业决策。
+
+**安装**：`cp -r first-principles ~/.claude/skills/first-principles`
+
+---
+
+### `storm-research` — 斯坦福 STORM 深度研究
+> 4 个提示让 Claude 像博士一样做研究。5 分钟产出博士 48 小时级别的研究简报。
+
+**安装**：`cp -r storm-research ~/.claude/skills/storm-research`
+
+---
+
+### `feynman-learning` — 费曼学习法 AI 助手
+> 四步循环——教给别人→发现缺口→回归原始→简化类比——20 分钟深度理解任意概念。
+
+**安装**：`cp -r feynman-learning ~/.claude/skills/feynman-learning`
+
+---
+
+### `nuwa` — 女娲·人物思维蒸馏
+> 输入人名，自动深度调研→提炼思维框架→生成可运行的 AI Skill。已蒸馏 Paul Graham、张一鸣、Karpathy 等。
+
+**安装**：`cp -r nuwa-skill ~/.claude/skills/nuwa`
+
+---
+
+### `last30days` — 社交媒体话题调研
+> 跨 Reddit/X/YouTube/TikTok/HN/Polymarket 等 15+ 平台，按真实互动量（而非 SEO）排序。输入 `/last30days <话题>`。
+
+**安装**：`cp -r last30days-skill ~/.claude/skills/last30days`
+
+---
+
+### `thinking-toolkit` ⭐ 元技能
+
+> **架构**：整合 6 大思考框架为一个入口。
+
+```
+thinking-toolkit
+├── superforecaster     ← 五阶段校准预测（基准率→证据→置信区间）
+├── decision-matrix     ← 多维度量化决策矩阵+敏感度分析
+├── bayesian-reasoning  ← 基于新证据持续更新信念
+├── systems-thinking    ← 反馈回路·杠杆点·涌现行为
+├── scout-mindset       ← 认知偏见审查（你是在求真相还是捍卫观点？）
+└── doctor-strange      ← 多Agent并行模拟不同未来走向
+```
+
+**安装**：`cp -r thinking-toolkit ~/.claude/skills/thinking-toolkit`
+
+---
+
+## 💻 开发流程（11 个）
+
+### `superpowers` — AI 开发方法论
+> 22 万 Star。五步流程：brainstorming（苏格拉底追问）→ worktree 隔离 → 任务规划 → 子 Agent 开发+两级审查 → 分支收尾。
+
+**安装**：`/plugin install superpowers@claude-plugins-official`
+
+---
+
+### `planning-with-files` — 开发规划持久化
+> 把设计决策写入 Markdown 文件，下次开新对话自动恢复状态。解决上下文压缩丢失问题。
+
+**安装**：`/plugin install planning-with-files@claude-plugin-directory`
+
+---
+
+### `code-review` ⭐ 元技能
+
+> **架构**：双模式审查。
+
+```
+code-review
+├── standard 模式    ← 5 Agent 并行（安全·性能·可维护·规范·边界）+置信度过滤
+└── adversarial 模式 ← 恶意用户视角（"我要搞崩你的系统"）逻辑漏洞·隐藏Bug·思维盲点
+```
+
+**安装**：`cp -r code-review ~/.claude/skills/code-review`
+
+---
+
+### `code-simplifier` — 代码二次优化
+> 不改行为，只优化结构。行数通常减少 30-40%，嵌套深度从 4-5 层降到 1-2 层。
+
+**安装**：`/plugin install code-simplifier@claude-plugin-directory`
+
+---
+
+### `webapp-testing` — Playwright 自动化测试
+> Anthropic 官方出品。一句话驱动全流程：写脚本→启动浏览器→执行→截图。
+
+**安装**：`/plugin install webapp-testing@claude-plugin-directory`
+
+---
+
+### `ralph-loop` — 循环开发机制
+> Bash 循环——每轮启动全新 AI 实例（干净上下文），从 PRD 挑未完成任务→实现→测试→提交→标记完成→下一轮。
+
+**安装**：`git clone https://github.com/snarktank/ralph.git`
+
+---
+
+### `mcp-builder` — MCP Server 开发引导
+> Anthropic 官方。四阶段带你从零搭建 MCP Server：定义接口→实现逻辑→错误处理→测试部署。
+
+**安装**：`/plugin install mcp-builder@claude-plugin-directory`
+
+---
+
+### `cc-dispatch` — Codex×Claude 协作协议
+> 把 Codex（PM）和 Claude Code（执行者）的关系变成结构化工单系统：Task Package→Completion Report→验收。
+
+**安装**：`cp -r cc-dispatch ~/.claude/skills/cc-dispatch`
+
+---
+
+### `website-cloner` — AI 网站复刻器
+> 五阶段管线：侦察→基础→规格+构建→组装→QA。把任何网站克隆为 Next.js+shadcn/ui+Tailwind v4。
+
+**安装**：`npx skills add website-cloner -g -y`
+
+---
+
+### `claude-to-im` — Claude→IM 桥接
+> 把 Claude Code 连到 Telegram/Discord/飞书/QQ/微信，手机上跟 Claude 聊天。
+
+**安装**：`cp -r claude-to-im-skill ~/.claude/skills/claude-to-im`
+
+---
+
+### `repo-evaluator` — GitHub 仓库评估器
+> 6 Agent 并行评估任意开源项目：社区健康、维护性、安全性、文档、采纳度、代码质量。
+
+**安装**：`npx skills add maxamillion/skill-oss-project-kpi-evaluation`
+
+---
+
+## 🎨 设计与前端（16 个）
+
+### `ui-ux-pro-max` — 设计智能工具包
+> 67 种 UI 风格 + 161 套配色 + 57 种字体配对 + 99 条 UX 指南 + 16 个技术栈。**已被 dog-frontier 包含，也可独立轻量使用。**
+
+**安装**：`npx uipro-cli init --ai <platform>`
+
+---
+
+### `dog-frontier` ⭐ 元技能
+
+> **架构**：前端全链路元技能（包含 ui-ux-pro-max），19 个专业子技能。
+
+```
+dog-frontier (全栈元技能)
+├── Discovery        ← 多轮对话精确理解需求
+├── Design System    ← 自动生成完整设计系统（风格+配色+字体+效果+反模式）
+├── Implementation   ← 路由到最优技能组合（Vue/React/Tailwind/shadcn）
+├── Handoff          ← 结构化交接格式
+└── Quality Review   ← 6维度30项检查（≥22/30通过）
+    ├── ui-ux-pro-max (设计推荐)
+    ├── shadcn-ui (组件库)
+    ├── css-styling-expert
+    ├── brand (品牌设计)
+    ├── landing-page-generator
+    └── taste-skill (反AI味审查)
+```
+
+**安装**：`npx skills add dog-frontier -g -y`
+
+---
+
+### `html-video` — HTML→视频
+> 把文章链接/GitHub 仓库变成多帧动画 MP4。14 个后端 Agent + 21 套模板 + ffmpeg 渲染。
+
+**安装**：`cp -r html_video ~/.claude/skills/html-video`
+
+---
+
+### `lottie-animation` — Lottie 动画生成
+> 一句话生成轻量 Lottie 动效。内置 Prompt 优化层（FPS/帧数/缓动/镜头运动）。
+
+**安装**：`npx skills add diffusionstudio/lottie`
+
+---
+
+### `brand-workshop` — 品牌全案设计
+> 三阶段：Discovery→Concept→Creation。输出 Logo 多方案+标语+DESIGN.md 设计令牌。
+
+**安装**：`/plugin marketplace add sorawit-w/agent-skills`
+
+---
+
+### `pixel-art` — 像素画工作室
+> 网格对齐的像素画 PNG/SVG。复古游戏/等距视角/角色精灵。
+
+**安装**：`/plugin marketplace add sorawit-w/agent-skills`
+
+---
+
+### `dog-poster` ⭐ 元技能
+
+> **架构**：上游风格询问 + 下游路由。
+
+```
+"帮我做海报"
+      │
+      ▼
+┌─ 上游：三连问 ──────────────┐
+│ ① 内容来源？文章/活动/艺术感  │
+│ ② 视觉风格？信息图/通用/拼贴  │
+│ ③ 使用平台？社媒/印刷/Slack   │
+└──────────┬──────────────────┘
+           │
+  ┌────────┼────────┐
+  ▼        ▼        ▼
+article-  canvas-  torn-paper-
+poster    design   collage
+(信息图)  (通用)   (拼贴)
+```
+
+**安装**：`cp -r dog-poster ~/.claude/skills/dog-poster`
+
+---
+
+### `presentation-design` — 演示设计板
+> 6 页高级演示设计板（亮/暗双模式），合成一张复合预览图。
+
+**安装**：`npx skills add MagicCube/agentara --skill presentation-design -y -g`
+
+---
+
+### `article-poster` — 文章→信息图
+> 从 URL/文本提取要点，生成数据可视化风海报。适合小红书/公众号/Twitter。
+
+**安装**：`npx skills add MagicCube/agentara --skill article-poster -y -g`
+
+---
+
+### `canvas-design` — 程序化画布
+> Anthropic 官方。代码生成高分辨率 PNG/PDF，可直接印刷。
+
+**安装**：`/plugin install example-skills@anthropic-agent-skills`
+
+---
+
+### `algorithmic-art` — p5.js 生成艺术
+> 流场、粒子系统、分形、Perlin 噪声。每段代码都是独一无二的艺术品。
+
+**安装**：`/plugin install example-skills@anthropic-agent-skills`
+
+---
+
+### `slack-gif-creator` — Slack 动图
+> Emoji 128×128、消息 GIF 480×480，自动适配 Slack 限制。
+
+**安装**：`/plugin install example-skills@anthropic-agent-skills`
+
+---
+
+### `theme-factory` — 主题工厂
+> 10 套预设主题+自定义即时生成，一键应用到幻灯片/文档/HTML。亮暗双模式。
+
+**安装**：`/plugin install example-skills@anthropic-agent-skills`
+
+---
+
+### `soviet-storybook-grotesque` — 苏联童书怪诞风
+> 照片→粗糙褪色的东欧儿童绘本插画+荒诞手写押韵诗。
+
+**安装**：`npx skills add MagicCube/agentara --skill soviet-storybook-grotesque -y -g`
+
+---
+
+### `torn-paper-collage-poster` — 撕纸拼贴海报
+> 撕纸层叠+粗糙排版+邮票+胶带+复印机纹理。独立杂志/音乐演出风。
+
+**安装**：`npx skills add MagicCube/agentara --skill torn-paper-collage-poster -y -g`
+
+---
+
+## 📝 内容与写作（6 个）
+
+### `humanizer-zh` — 去 AI 味（改已有）
+> 检测 9 种 AI 写作痕迹：夸大象征、宣传语言、破折号滥用、AI 词汇等。
+
+**安装**：`cp -r humanizer-zh ~/.claude/skills/humanizer-zh`
+
+---
+
+### `ghostwriter` — AI 代笔（从零创作）
+> 分析你的历史消息→用你的语气从零写新内容。零 AI 痕迹。
+
+**安装**：`/plugin marketplace add sorawit-w/agent-skills`
+
+---
+
+<Warning>**humanizer-zh vs ghostwriter**：前者是编辑（改已有文本），后者是创作（从零写新内容）。不要搞混。</Warning>
+
+---
+
+### `writing-assistant` — 结构化写作助手
+> 大纲→草稿→润色→发表前审查，覆盖完整写作流程。
+
+**安装**：`cp -r writing-assistant ~/.claude/skills/writing-assistant`
+
+---
+
+### `scientific-writing-editor` — 科学写作编辑
+> 论文手稿、基金申请、推荐信、审稿回复。学术场景专用。
+
+**安装**：`cp -r scientific-writing-editor ~/.claude/skills/scientific-writing-editor`
+
+---
+
+### `baoyu-skills` — 宝玉技能合集
+> 22 个内容创作技能：幻灯片(17风格)、SVG 图表(9类型)、漫画(6风格)、翻译(3模式)、11 种图片生成后端。
+
+**安装**：`npx skills add JimLiu/baoyu-skills -g --all`
+
+---
+
+### `humanize-ppt` — 演讲级 PPT 系统
+> AST（观众状态转移）大纲→每页视觉增强→3 轮演讲体检→渲染。让 PPT 为演讲而生，不只为了好看。
+
+**安装**：`npx skills add LearnPrompt/humanize-ppt -g`
+
+---
+
+## 📚 学习与教学（3 个）
+
+### `exam-tutor` — 期末复习资料生成器
+> 分析教材 PDF+历年卷→按章节生成教程+习题课讲义+质量审计。双模式（轻量/完整）。
+
+**安装**：`cp -r tutor ~/.claude/skills/exam-tutor`
+
+---
+
+### `dog-tutor` — 智能教程编制系统
+> 6 阶段对话引导→高质量 MkDocs Material 教程。4 级受众自适应+4 种比喻风格。
+
+**安装**：`npx skills add dog-tutor -g -y`
+
+---
+
+### `learning-studio` ⭐ 元技能
+
+> **架构**：4 大学习工具整合。
+
+```
+learning-studio
+├── studyws           ← 任意主题→完整课程：教材+HTML指南+测验+播客脚本
+├── The Knowledge Guy ← PDF/EPUB→可查询书架→跨书对比
+├── ljg-read          ← 中英双语·苏格拉底追问·三段标注(骨/肉/筋)
+└── Aibrary Skills    ← 书籍发现+3种播客(单人/对话/AI分身辩论)+成长计划
+```
+
+**推荐流水线**：`studyws（生成课程框架）→ Knowledge Guy（灌入参考书）→ ljg-read（苏格拉底深读）→ Aibrary（播客输出）`
+
+**安装**：`cp -r learning-studio ~/.claude/skills/learning-studio`
+
+---
+
+## 💼 商业与策略（1 个）
+
+### `dbskill` — 商业诊断工具箱
+> 21 个商业诊断技能，提炼自 12,307 条推文→4,176 个知识原子。商业模式诊断(6 公理)、对标分析、小红书标题优化、AI 写作检测。
+
+**安装**：`npx skills add dontbesilent2025/dbskill -g --all`
+
+---
+
+## 🔍 工具与发现（6 个）
+
+### `find-skills` — Skill 发现引擎
+> 搜索整个生态的 skill，验证质量后一键安装。Vercel Labs 出品，70+ Agent 支持。
+
+**安装**：`npx skills add vercel-labs/agent-skills`
+
+---
+
+### `token-optimizer` — Token 优化器
+> 实测省 90% token（11000→1300），一条命令 30 秒。13 种框架专项模板 + 维护工具链。
+
+**安装**：`npx claude-token-optimizer init`
+
+---
+
+### `weread-skill` — 微信读书助手
+> 连接微信读书账号，搜书、查笔记、分析阅读数据。
+
+**安装**：`npx skills add Tencent/WeChatReading -g`
+
+---
+
+### `handshake` — 协作风格校准
+> 6 维度刻度+RPG 职业分类，让 Claude 真正了解你想怎么协作。
+
+**安装**：`/plugin marketplace add sorawit-w/agent-skills`
+
+---
+
+### `family-doctor` — AI 家庭健康管理
+> 26 个技能覆盖 17 个健康领域。核心差异：跨维度关联分析——血压升高→自动检查钠摄入+睡眠+运动+压力。
+
+<Warning>辅助工具，不替代医生诊断。</Warning>
+
+**安装**：`cp -r family-doctor ~/.claude/skills/family-doctor`
+
+---
+
+### `vibe-sing` — 让 Claude 为你唱歌
+> 读会话记录→Gemini 分析情绪→Google Lyria 3 作曲+人声→自动播放。`/vibe-sing` 30 秒，`/vibe-sing pro` 2 分钟。
+
+**安装**：`git clone https://github.com/harajlim/vibe-sing.git ~/.claude/skills/vibe-sing`（需 Google API Key）
+
+---
+
+## 🧩 推荐组合
+
+### 必装四件套
+```
+token-optimizer → superpowers → planning-with-files → code-review
+```
+省 token + 规范流程 + 持久化规划 + 代码审查。
+
+### 完整开发流水线
+```
+写代码 → code-simplifier → code-review standard → code-review adversarial → webapp-testing → 部署
+```
+
+### 前端项目增强
+```
+必装四件套 + dog-frontier + dog-poster + algorithmic-art
+```
+
+### 学习专用
+```
+learning-studio + feynman-learning + dog-tutor
+```
+
+---
+
+## 📦 一键安装全部
+
+```bash
+git clone https://github.com/ZhouYinLong-lab/Dog-Skills.git
+cd Dog-Skills
+mkdir -p ~/.claude/skills
+for d in */; do
+  if [ -f "${d}SKILL.md" ]; then
+    cp -r "$d" ~/.claude/skills/"${d%/}"
+  fi
+done
+```
+
+---
+
+<Success>
+**仓库地址**：[github.com/ZhouYinLong-lab/Dog-Skills](https://github.com/ZhouYinLong-lab/Dog-Skills)
+
+**48 个 Skill · 7 个分类 · MIT 开源 · v1.0.0**
+
+如果你觉得有用，欢迎 Star ⭐
+</Success>
