@@ -2,14 +2,23 @@ import { createClient } from "@supabase/supabase-js";
 import { useEffect, useState } from "react";
 
 // --- Supabase 初始化 ---
-const supabaseUrl = import.meta.env.PUBLIC_SUPABASE_URL || "https://prlghmvjvggiqygmhvqe.supabase.co";
-const supabaseAnonKey = import.meta.env.PUBLIC_SUPABASE_ANON_KEY || "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBybGdobXZqdmdnaXF5Z21odnFlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzUyNTUzMTYsImV4cCI6MjA5MDgzMTMxNn0.zrtLqIhh9ix1U0bOzUDB1a6vCFbC6iIUzXbUC63rS8g";
+const supabaseUrl = import.meta.env.PUBLIC_SUPABASE_URL;
+const supabaseAnonKey = import.meta.env.PUBLIC_SUPABASE_ANON_KEY;
 
-let supabase;
-try {
-  supabase = createClient(supabaseUrl, supabaseAnonKey);
-} catch (error) {
-  console.error("Supabase config error:", error);
+if (!supabaseUrl || !supabaseAnonKey) {
+  console.error(
+    "[DossierArchive] Missing Supabase environment variables. " +
+    "Set PUBLIC_SUPABASE_URL and PUBLIC_SUPABASE_ANON_KEY in your .env file."
+  );
+}
+
+let supabase = null;
+if (supabaseUrl && supabaseAnonKey) {
+  try {
+    supabase = createClient(supabaseUrl, supabaseAnonKey);
+  } catch (error) {
+    console.error("Supabase config error:", error);
+  }
 }
 
 const ITEMS_PER_PAGE = 12;
@@ -314,7 +323,8 @@ export default function DossierArchive({
               <button
                 type="button"
                 onClick={() => {
-                  if (adminPwd === "frosti") {
+                  // SECURITY: Admin password from env var (not hardcoded in source)
+if (adminPwd === (import.meta.env.PUBLIC_ADMIN_PASSWORD || "")) {
                     setIsAdmin(true);
                     localStorage.setItem("dossier_god_mode", "true");
                     setShowAdminModal(false);

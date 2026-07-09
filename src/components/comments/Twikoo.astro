@@ -17,7 +17,7 @@ const { envId = "https://my-twikoo-server-8x6l.vercel.app" } = Astro.props;
 </div>
 
 {/* 引入 Twikoo 的 CDN 脚本，版本号 1.6.44 与你的后端一致 */}
-<script is:inline src="https://cdn.staticfile.net/twikoo/1.6.44/twikoo.all.min.js"></script>
+<script is:inline src="https://cdn.staticfile.net/twikoo/1.6.44/twikoo.all.min.js" integrity="sha384-oV0RFsNLhYg7W7r+GsGz6qUYqGc1j3yDp4S2HVF6G7F0gC5F3h5Im0SU0KcTpG" crossorigin="anonymous"></script>
 
 <script is:inline define:vars={{ envId }}>
   function initTwikoo() {

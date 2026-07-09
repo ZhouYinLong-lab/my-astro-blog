@@ -153,7 +153,7 @@ const repoUrl = repositoryName
 <script>
   class GitHubStats extends HTMLElement {
     private abortController: AbortController | null = null;
-    private readonly githubToken = import.meta.env.GITHUB_TOKEN || "";
+    // Token removed for security - using unauthenticated GitHub API with rate limit handling
 
     connectedCallback() {
       this.abortController = new AbortController();
@@ -188,10 +188,8 @@ const repoUrl = repositoryName
         Accept: "application/vnd.github.v3+json",
       };
 
-      // 如果有GitHub令牌,添加到请求头
-      if (this.githubToken) {
-        headers["Authorization"] = `token ${this.githubToken}`;
-      }
+      // Token usage removed for security. Using unauthenticated requests.
+      // GitHub API rate limit (60 req/hr for unauthenticated, cached for 24h).
 
       return {
         method: "GET",

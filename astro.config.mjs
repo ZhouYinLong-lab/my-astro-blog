@@ -45,12 +45,40 @@ export default defineConfig({
       [
         rehypeExternalLinks,
         {
+          rel: "noopener noreferrer",
           content: { type: "text", value: "↗" },
         },
       ],
     ],
   },
+  
+  // Content Security Policy
   vite: {
+    plugins: [
+      {
+        name: 'csp-headers',
+        transformIndexHtml() {
+          return [
+            {
+              tag: 'meta',
+              attrs: {
+                'http-equiv': 'Content-Security-Policy',
+                content: [
+                  "default-src 'self'",
+                  "script-src 'self' 'unsafe-inline' 'unsafe-eval' cdn.staticfile.net cdn.jsdelivr.net",
+                  "style-src 'self' 'unsafe-inline' fonts.googleapis.com cdn.staticfile.net",
+                  "img-src 'self' data: https:",
+                  "font-src 'self' fonts.gstatic.com cdn.staticfile.net",
+                  "connect-src 'self' https:",
+                  "frame-src 'self' https:",
+                  "media-src 'self' https:",
+                ].join('; '),
+              },
+            },
+          ];
+        },
+      },
+    ],
     css: {
       preprocessorOptions: {
         scss: {
