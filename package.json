@@ -32,7 +32,7 @@
     "astro-icon": "^1.1.5",
     "astro-vtbot": "^2.1.9",
     "dayjs": "^1.11.19",
-    "js-yaml": "^4.1.1",
+    "js-yaml": "^4.2.0",
     "katex": "^0.16.25",
     "marked": "^14.1.4",
     "mdast-util-to-string": "^4.0.0",
