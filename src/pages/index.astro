@@ -13,7 +13,7 @@ import BaseLayout from "@/layouts/BaseLayout.astro";
 
   <MainCard
     title="寒柳别苑,柳丝舞春,邀君共绘新梦"
-    description="这里是柳含知的赛博后花园。我是南京大学智能科学专业的大一学生,我喜欢捣鼓一些有意思的东西,如果你有有趣的点子或项目,欢迎联系我！"
+    description="这里是柳含知的赛博后花园。南京大学智能科学专业学生,主攻 AI/RL、全栈开发与创意技术。Build in public, learn in public."
     textOverlay="HOME"
     infoIcon="lucide:info"
   >
@@ -26,9 +26,9 @@ import BaseLayout from "@/layouts/BaseLayout.astro";
             🛸 寒柳别苑
           </h1>
           <p class="text-xl text-base-content/80 max-w-3xl mb-10">
-            这里是柳含知的赛博后花园。我是南京大学智能科学专业的大一学生,我喜欢捣鼓一些有趣的东西,如果你有一些有趣的点子或项目,欢迎联系我！
+            这里是柳含知的赛博后花园。我是南京大学智能科学专业的学生,主攻 AI/RL、全栈开发与创意技术。Build in public, learn in public.
           </p>
-          <p class="flex flex-wrap items-center justify-center gap-2 text-base md:text-lg text-base-content/80 mb-10">
+          <p class="flex flex-wrap items-center justify-center gap-2 text-base md:text-lg text-base-content/80 mb-6">
             <Icon name="lucide:mail" class="w-5 h-5 text-primary" />
             <span class="font-semibold">Email:</span>
             <a
@@ -37,6 +37,18 @@ import BaseLayout from "@/layouts/BaseLayout.astro";
             >
               251880158@smail.nju.edu.cn
             </a>
+          </p>
+          <p class="flex flex-wrap items-center justify-center gap-2 text-base md:text-lg text-base-content/80 mb-10">
+            <Icon name="ri:github-line" class="w-5 h-5 text-primary" />
+            <span class="font-semibold">GitHub:</span>
+            <a
+              href="https://github.com/ZhouYinLong-lab"
+              target="_blank"
+              class="link link-primary font-medium"
+            >
+              ZhouYinLong-lab
+            </a>
+            <span class="text-base-content/50 text-sm ml-2">21 仓库 · 947 commits · 11 followers</span>
           </p>
           
           {/* 👇 核心修改区域：改为上下排列（flex-col），并加大间距防止动画遮挡 */}
@@ -53,6 +65,51 @@ import BaseLayout from "@/layouts/BaseLayout.astro";
               <span>关注我的B站</span>
             </a>
             
+          </div>
+        </div>
+      </section>
+
+      <section class="py-6">
+        <h2 class="text-2xl font-bold mb-6 flex items-center gap-2">
+          <Icon name="ri:github-line" class="w-6 h-6 text-primary" />
+          <span>开源工坊</span>
+          <a href="https://github.com/ZhouYinLong-lab" target="_blank" class="text-sm font-normal text-base-content/50 hover:text-primary transition-colors ml-2">@ZhouYinLong-lab →</a>
+        </h2>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          {
+            [
+              { name: "Dog-Skills", desc: "116 个 Claude Code 技能库，覆盖开发/设计/写作/学习/商业/健康", stars: 6, lang: "Markdown", url: "https://github.com/ZhouYinLong-lab/Dog-Skills" },
+              { name: "NanE", desc: "NJU 校园互助平台 — JS/Node.js/PostgreSQL/PWA 全栈应用", stars: 6, lang: "JavaScript", url: "https://github.com/ZhouYinLong-lab/NanE" },
+              { name: "HuaiHai-h5-map", desc: "淮海战役互动 H5 地图 — React/TS/Tailwind/PWA", stars: 2, lang: "TypeScript", url: "https://github.com/ZhouYinLong-lab/HuaiHai-h5-map" },
+              { name: "Dog-LittleTools", desc: "9 个 Bash CLI 开发效率工具", stars: 4, lang: "Shell", url: "https://github.com/ZhouYinLong-lab/Dog-LittleTools" },
+              { name: "nannahelper/docs", desc: "面向初学者的编程教程文档 — MkDocs/CI/CD", stars: 4, lang: "Python", url: "https://github.com/ZhouYinLong-lab/nannahelper" },
+              { name: "my-astro-blog", desc: "本博客源码 — Astro 5 + DaisyUI 静态生成", stars: 3, lang: "Astro", url: "https://github.com/ZhouYinLong-lab/my-astro-blog" },
+            ].map((repo) => (
+              <a href={repo.url} target="_blank" class="card bg-base-200 hover:bg-base-300 transition-all duration-300 group border border-base-300">
+                <div class="card-body p-5">
+                  <div class="flex items-center gap-2 mb-2">
+                    <Icon name="ri:folder-3-line" class="w-4 h-4 text-primary" />
+                    <h3 class="font-bold text-sm group-hover:text-primary transition-colors">{repo.name}</h3>
+                  </div>
+                  <p class="text-xs text-base-content/60 mb-3 line-clamp-2">{repo.desc}</p>
+                  <div class="flex items-center gap-3 text-xs text-base-content/40 mt-auto">
+                    <span class="flex items-center gap-1"><Icon name="ri:star-line" class="w-3 h-3" /> {repo.stars}</span>
+                    <span>{repo.lang}</span>
+                  </div>
+                </div>
+              </a>
+            ))
+          }
+        </div>
+
+        <div class="mt-4 p-4 bg-base-200 rounded-xl border border-base-300">
+          <div class="flex flex-wrap items-center gap-4 text-sm text-base-content/70">
+            <span class="flex items-center gap-1"><Icon name="ri:git-repository-line" class="w-4 h-4 text-primary" /> 21 公开仓库</span>
+            <span class="flex items-center gap-1"><Icon name="ri:star-line" class="w-4 h-4 text-primary" /> 50+ Stars</span>
+            <span class="flex items-center gap-1"><Icon name="ri:git-commit-line" class="w-4 h-4 text-primary" /> 947 过去一年 Commits</span>
+            <span class="flex items-center gap-1"><Icon name="ri:git-pull-request-line" class="w-4 h-4 text-primary" /> 14 合并 PR</span>
+            <span class="text-base-content/50">贡献: Supabase · MUI · MCP · Apache HertzBeat</span>
           </div>
         </div>
       </section>
@@ -82,7 +139,7 @@ import BaseLayout from "@/layouts/BaseLayout.astro";
 
           <FeatureCard
             title="赛博工坊"
-            description="从 NoneBot 机器人的调教到夜鹭心情识别器,这里存放着我所有天马行空、不拘一格的数字实验。"
+            description="从大庚剑阵的手势识别到 SmartAgent 的寻路算法,这里存放着我所有天马行空、不拘一格的数字实验与开源项目。"
             icon="lucide:flask-conical"
             color="oklch(0.6 0.2 160)"
             url="/blog/categories" 

@@ -39,6 +39,13 @@ import BaseLayout from "@/layouts/BaseLayout.astro";
             </a>
           </div>
 
+          <div class="flex flex-wrap gap-2 justify-center md:justify-start mb-4">
+            <span class="badge badge-sm badge-outline">21 仓库</span>
+            <span class="badge badge-sm badge-outline">947 commits/年</span>
+            <span class="badge badge-sm badge-outline">14 合并 PR</span>
+            <span class="badge badge-sm badge-outline">Build in Public</span>
+          </div>
+
           <p class="text-base-content/80 leading-relaxed">
             盖闻乾元资始,令序惟春；二月建卯,苍龙奋伸。<br />
             君生吉日,正当雷乃发声之候；气禀清刚,恰是蛰虫始振之辰。<br />
@@ -81,13 +88,17 @@ import BaseLayout from "@/layouts/BaseLayout.astro";
         <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
           {
             [
-              { name: "C", icon: "simple-icons:c", color: "oklch(0.5 0.2 250)" },
-              { name: "C++", icon: "simple-icons:cplusplus", color: "oklch(0.6 0.2 240)" },
               { name: "Python", icon: "simple-icons:python", color: "oklch(0.7 0.2 250)" },
-              { name: "Astro", icon: "simple-icons:astro", color: "oklch(0.5 0.2 300)" },
-              { name: "HTML5", icon: "simple-icons:html5", color: "oklch(0.7 0.2 30)" },
-              { name: "CSS3", icon: "simple-icons:css3", color: "oklch(0.7 0.2 220)" },
+              { name: "PyTorch", icon: "simple-icons:pytorch", color: "oklch(0.8 0.2 30)" },
+              { name: "C++", icon: "simple-icons:cplusplus", color: "oklch(0.6 0.2 240)" },
+              { name: "TypeScript", icon: "simple-icons:typescript", color: "oklch(0.7 0.2 220)" },
               { name: "JavaScript", icon: "simple-icons:javascript", color: "oklch(0.8 0.2 80)" },
+              { name: "React", icon: "simple-icons:react", color: "oklch(0.7 0.2 200)" },
+              { name: "Vue", icon: "simple-icons:vuedotjs", color: "oklch(0.7 0.2 140)" },
+              { name: "Node.js", icon: "simple-icons:nodedotjs", color: "oklch(0.8 0.2 140)" },
+              { name: "Astro", icon: "simple-icons:astro", color: "oklch(0.5 0.2 300)" },
+              { name: "Godot", icon: "simple-icons:godotengine", color: "oklch(0.7 0.2 240)" },
+              { name: "PostgreSQL", icon: "simple-icons:postgresql", color: "oklch(0.7 0.2 220)" },
               { name: "Git", icon: "simple-icons:git", color: "oklch(0.7 0.2 30)" },
             ].map((tech) => (
               <div class="flex flex-col items-center justify-center p-4 bg-base-200 rounded-lg hover:bg-base-300 transition-colors">

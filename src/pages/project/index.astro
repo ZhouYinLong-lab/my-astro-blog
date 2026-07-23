@@ -35,12 +35,15 @@ const labPosts = allPosts
 
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
         {/* 👉 修复点：这里也为 post 添加了 : any */}
-        {labPosts.map((post: any) => (
-          <a href={`/blog/${post.slug}/`} class="card bg-base-200 hover:bg-base-300 transition-all duration-300 shadow-lg hover:shadow-xl overflow-hidden group border border-base-300">
-            {post.data.cover && (
+        {labPosts.map((post: any) => {
+          const targetUrl = post.data.link || `/blog/${post.slug}/`;
+          const coverImage = post.data.image || post.data.cover;
+          return (
+          <a href={targetUrl} class="card bg-base-200 hover:bg-base-300 transition-all duration-300 shadow-lg hover:shadow-xl overflow-hidden group border border-base-300">
+            {coverImage && (
               <figure class="h-48 overflow-hidden relative">
                 <img
-                  src={post.data.cover}
+                  src={coverImage}
                   alt={post.data.title}
                   class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                 />
@@ -60,7 +63,7 @@ const labPosts = allPosts
               </div>
             </div>
           </a>
-        ))}
+        )})}
       </div>
 
       {labPosts.length === 0 && (
@@ -82,19 +85,29 @@ const labPosts = allPosts
           {
             [
               {
-                project: "Astro",
-                description: "Contributed to performance improvements and bug fixes",
-                url: "https://github.com/withastro/astro",
+                project: "Supabase",
+                description: "Fixed type export path resolution in Postgres module (#47658)",
+                url: "https://github.com/supabase/supabase",
               },
               {
-                project: "TailwindCSS",
-                description: "Added new utility classes and documentation improvements",
-                url: "https://github.com/tailwindlabs/tailwindcss",
+                project: "MUI",
+                description: "Improved component accessibility and ARIA label handling (#48785)",
+                url: "https://github.com/mui/material-ui",
               },
               {
-                project: "DaisyUI",
-                description: "Contributed component enhancements and theme improvements",
-                url: "https://github.com/saadeghi/daisyui",
+                project: "Model Context Protocol",
+                description: "Enhanced documentation and fixed SDK type definitions (#3019)",
+                url: "https://github.com/modelcontextprotocol/specification",
+              },
+              {
+                project: "Apache HertzBeat",
+                description: "Fixed monitoring template configuration parsing (#4187)",
+                url: "https://github.com/apache/hertzbeat",
+              },
+              {
+                project: "Just the Docs",
+                description: "Improved navigation structure for multi-level docs (#1836)",
+                url: "https://github.com/just-the-docs/just-the-docs",
               },
             ].map((contrib) => (
               <li class="flex items-start gap-4">
