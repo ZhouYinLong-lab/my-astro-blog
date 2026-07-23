@@ -76,6 +76,14 @@ updates:
         update-types: ["version-update:semver-major"]
       - dependency-name: "@rollup/plugin-terser"
         update-types: ["version-update:semver-major"]
+      - dependency-name: "@notionhq/client"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "shiki"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "katex"
+        update-types: ["version-update:semver-minor", "version-update:semver-major"]
+      - dependency-name: "satori"
+        update-types: ["version-update:semver-minor", "version-update:semver-major"]
     # Auto-approve patch updates
     open-pull-requests-limit: 10
     versioning-strategy: increase
