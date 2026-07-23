@@ -66,7 +66,7 @@
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
     "daisyui": "^4.12.24",
-    "pagefind": "^1.4.0",
+    "pagefind": "^1.5.2",
     "sass-embedded": "^1.93.3",
     "shiki": "^1.29.2",
     "typescript": "^5.9.3"
