@@ -33,7 +33,7 @@
     "astro-vtbot": "^2.1.9",
     "dayjs": "^1.11.19",
     "js-yaml": "^4.1.1",
-    "katex": "^0.16.25",
+    "katex": "^0.18.1",
     "marked": "^14.1.4",
     "mdast-util-to-string": "^4.0.0",
     "react": "^19.2.4",
