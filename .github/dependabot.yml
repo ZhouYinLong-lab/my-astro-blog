@@ -28,6 +28,32 @@ updates:
         patterns:
           - "@biomejs/*"
           - "typescript"
+      misc:
+        patterns:
+          - "dayjs"
+          - "js-yaml"
+          - "marked"
+          - "katex"
+          - "slugify"
+          - "satori"
+          - "sharp"
+          - "tailwindcss"
+          - "@tailwindcss/*"
+          - "daisyui"
+          - "pagefind"
+          - "@pagefind/*"
+          - "@expressive-code/*"
+          - "astro-expressive-code"
+          - "@supabase/*"
+          - "@swup/*"
+          - "rehype-*"
+          - "remark-*"
+          - "unified"
+          - "vfile"
+          - "mdast-util-to-string"
+          - "@playform/*"
+          - "@rollup/*"
+          - "@notionhq/*"
     # Ignore major version bumps (review manually)
     ignore:
       - dependency-name: "astro"
@@ -47,6 +73,8 @@ updates:
       - dependency-name: "@astrojs/mdx"
         update-types: ["version-update:semver-major"]
       - dependency-name: "@astrojs/react"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "@rollup/plugin-terser"
         update-types: ["version-update:semver-major"]
     # Auto-approve patch updates
     open-pull-requests-limit: 10
