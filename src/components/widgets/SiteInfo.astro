@@ -11,11 +11,6 @@ const allPosts = await getCollection(
 );
 const articleCount = allPosts.length;
 
-// 计算标签数和分类数
-const allTags = new Set(allPosts.flatMap(p => p.data.tags || []));
-const allCategories = new Set(allPosts.flatMap(p => p.data.categories || []));
-
-// 最后更新时间
 let lastUpdateStr = "刚刚";
 if (articleCount > 0) {
   const sortedPosts = allPosts.sort(
@@ -29,7 +24,6 @@ if (articleCount > 0) {
   lastUpdateStr = diffDays === 0 ? "今天" : `${diffDays} 天前`;
 }
 
-// 显隐逻辑
 const pathname = decodeURI(Astro.url.pathname);
 const isHomePage = pathname === "/" || pathname === "/index.html";
 const isBlogPage = pathname === "/blog" || pathname === "/blog/";
@@ -52,8 +46,13 @@ const shouldShow = isHomePage || isBlogPage || isAboutPage || isFriendsPage;
       </div>
 
       <div class="flex justify-between items-center">
-        <span class="text-base-content/80">分类 / 标签</span>
-        <span class="font-mono text-base-content">{allCategories.size} / {allTags.size}</span>
+        <span class="text-base-content/80">本站访客数</span>
+        <span class="font-mono text-base-content" id="site-uv">--</span>
+      </div>
+
+      <div class="flex justify-between items-center">
+        <span class="text-base-content/80">本站总浏览量</span>
+        <span class="font-mono text-base-content" id="site-pv">--</span>
       </div>
 
       <div class="flex justify-between items-center">
@@ -63,3 +62,53 @@ const shouldShow = isHomePage || isBlogPage || isAboutPage || isFriendsPage;
     </div>
   </div>
 )}
+
+<script>
+  // Supabase 自建计数器 — 配好 .env 的 PUBLIC_SUPABASE_URL / PUBLIC_SUPABASE_ANON_KEY 后自动生效
+  import { createClient } from '@supabase/supabase-js';
+
+  const supabaseUrl = import.meta.env.PUBLIC_SUPABASE_URL;
+  const supabaseKey = import.meta.env.PUBLIC_SUPABASE_ANON_KEY;
+
+  if (supabaseUrl && supabaseKey) {
+    const supabase = createClient(supabaseUrl, supabaseKey);
+
+      async function trackAndShow() {
+        const uvEl = document.getElementById('site-uv');
+        const pvEl = document.getElementById('site-pv');
+
+        // PV: 每次访问 +1
+        try {
+          const { data: pv } = await supabase.rpc('increment_site_pv');
+          if (pvEl) pvEl.textContent = pv ?? '--';
+        } catch {
+          if (pvEl) pvEl.textContent = '--';
+        }
+
+        // UV: 检查今日是否已计数 (localStorage 去重)
+        const today = new Date().toISOString().slice(0, 10);
+        const uvKey = 'uv_' + today;
+        if (!localStorage.getItem(uvKey)) {
+          localStorage.setItem(uvKey, '1');
+          try {
+            const { data: uv } = await supabase.rpc('increment_site_uv');
+            if (uvEl) uvEl.textContent = uv ?? '--';
+          } catch {
+            if (uvEl) uvEl.textContent = '--';
+          }
+        } else {
+          // 今日已计数，只读取
+          try {
+            const { data: uv } = await supabase.rpc('get_site_uv');
+            if (uvEl) uvEl.textContent = uv ?? '--';
+          } catch {
+            if (uvEl) uvEl.textContent = '--';
+          }
+        }
+      }
+
+      document.addEventListener('astro:page-load', trackAndShow);
+      trackAndShow();
+    }
+  }
+</script>
