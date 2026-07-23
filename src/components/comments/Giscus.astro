@@ -1,0 +1,65 @@
+---
+// Giscus 评论组件 — 基于 GitHub Discussions, 零服务器维护
+//
+// 首次使用配置（一次性, 2 分钟）：
+// 1. 打开 https://github.com/ZhouYinLong-lab/my-astro-blog/discussions
+// 2. 访问 https://giscus.app/zh-CN 填入仓库名
+// 3. 复制生成的 data-repo-id 和 data-category-id
+// 4. 替换下方 script 中的对应值
+---
+
+<div class="giscus-container bg-base-100 p-6 md:p-8 rounded-2xl shadow-sm border border-base-200 mt-10">
+  <h2 class="text-2xl font-bold mb-6 flex items-center gap-2">
+    <span>评论</span>
+    <span class="text-sm font-normal text-base-content/50">(需 GitHub 账号)</span>
+  </h2>
+
+  <div id="giscus-comments">
+    <div class="text-center py-8 text-base-content/50 text-sm">
+      <p>评论由 GitHub Discussions 驱动</p>
+      <a href="https://github.com/ZhouYinLong-lab/my-astro-blog/discussions" target="_blank" class="link link-primary text-xs mt-1 inline-block">
+        前往 Discussions →
+      </a>
+    </div>
+  </div>
+</div>
+
+<script is:inline>
+  function loadGiscus() {
+    const container = document.getElementById('giscus-comments');
+    if (!container || container.dataset.loaded) return;
+    container.dataset.loaded = 'true';
+    container.innerHTML = ''; // 清除 placeholder
+
+    const script = document.createElement('script');
+    script.src = 'https://giscus.app/client.js';
+    script.setAttribute('data-repo', 'ZhouYinLong-lab/my-astro-blog');
+    script.setAttribute('data-repo-id', 'R_kgDORWFHIw');
+    // 👇 访问 https://giscus.app/ 获取你的 category-id 后替换这里
+    script.setAttribute('data-category', 'Announcements');
+    script.setAttribute('data-category-id', 'REPLACE_ME');
+    script.setAttribute('data-mapping', 'pathname');
+    script.setAttribute('data-strict', '0');
+    script.setAttribute('data-reactions-enabled', '1');
+    script.setAttribute('data-emit-metadata', '0');
+    script.setAttribute('data-input-position', 'top');
+    script.setAttribute('data-theme', document.documentElement.getAttribute('data-theme') === 'forest' ? 'dark' : 'light');
+    script.setAttribute('data-lang', 'zh-CN');
+    script.setAttribute('data-loading', 'lazy');
+    script.setAttribute('crossorigin', 'anonymous');
+    script.async = true;
+    container.appendChild(script);
+  }
+
+  function updateGiscusTheme() {
+    const iframe = document.querySelector('iframe.giscus-frame');
+    if (!iframe) return;
+    const theme = document.documentElement.getAttribute('data-theme') === 'forest' ? 'dark' : 'light';
+    iframe.contentWindow?.postMessage({ giscus: { setConfig: { theme } } }, 'https://giscus.app');
+  }
+
+  document.addEventListener('astro:page-load', loadGiscus);
+  document.addEventListener('astro:after-swap', updateGiscusTheme);
+  document.addEventListener('DOMContentLoaded', loadGiscus);
+  loadGiscus();
+</script>

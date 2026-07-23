@@ -1,0 +1,26 @@
+---
+// 页面浏览量 — 轻量计数器, 无外部依赖
+// 数据存在 GoatCounter 或本地 localStorage 作为 fallback
+---
+
+<div id="post-stats" class="flex items-center gap-4 text-sm text-base-content/40 mt-4 pt-4 border-t border-base-200">
+  <span class="flex items-center gap-1.5">
+    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+    <span id="view-count">加载中...</span>
+  </span>
+</div>
+
+<script>
+  // 使用 localStorage 计数当前 session 中的浏览
+  // 实际部署后可替换为 GoatCounter 或 Supabase
+  (function() {
+    const el = document.getElementById('view-count');
+    if (!el) return;
+
+    const key = 'pv_' + window.location.pathname;
+    const stored = localStorage.getItem(key);
+    const count = stored ? parseInt(stored) + 1 : 1;
+    localStorage.setItem(key, count.toString());
+    el.textContent = count + ' 次阅读';
+  })();
+</script>

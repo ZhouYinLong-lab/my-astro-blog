@@ -6,7 +6,8 @@ import PostInfo from "@components/widgets/PostInfo.astro";
 import { DATE_FORMAT } from "@config";
 import BaseLayout from "@layouts/BaseLayout.astro";
 import dayjs from "@utils/dayjs";
-import Twikoo from "@/components/comments/Twikoo.astro";
+import Giscus from "@/components/comments/Giscus.astro";
+import PageViews from "@/components/widgets/PageViews.astro";
 import MainCard from "@/components/MainCard.astro";
 
 export async function getStaticPaths() {
@@ -71,7 +72,8 @@ const url = new URL(`/blog/${blog.slug}`, Astro.url.origin);
       </div>
     </div>
 
-    <Twikoo />
+    <PageViews />
+    <Giscus />
     
   </MainCard>
 </BaseLayout>
