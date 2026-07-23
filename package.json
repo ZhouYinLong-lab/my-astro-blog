@@ -31,7 +31,7 @@
     "@astrojs/sitemap": "^3.6.0",
     "@astrojs/tailwind": "^6.0.2",
     "@expressive-code/plugin-line-numbers": "^0.41.3",
-    "@notionhq/client": "^2.3.0",
+    "@notionhq/client": "^5.23.2",
     "@playform/compress": "^0.1.9",
     "@rollup/plugin-terser": "^0.4.4",
     "@supabase/supabase-js": "^2.101.1",
