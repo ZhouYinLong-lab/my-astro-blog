@@ -32,7 +32,7 @@
     "@astrojs/tailwind": "^6.0.2",
     "@expressive-code/plugin-line-numbers": "^0.41.3",
     "@notionhq/client": "^2.3.0",
-    "@playform/compress": "^0.1.9",
+    "@playform/compress": "^0.2.3",
     "@rollup/plugin-terser": "^0.4.4",
     "@supabase/supabase-js": "^2.101.1",
     "@swup/astro": "^1.7.0",
