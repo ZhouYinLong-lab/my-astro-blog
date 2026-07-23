@@ -28,6 +28,7 @@ const blog = defineCollection({
       lang: z.string().optional(),
       author: z.string().optional(),
       canonicalURL: z.string().optional(),
+      link: z.string().optional(),
     })
     // catchall intentionally omitted - all frontmatter fields must be explicitly defined
 });

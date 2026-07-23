@@ -4,3 +4,46 @@ updates:
     directory: "/"
     schedule:
       interval: "weekly"
+      day: "monday"
+      time: "09:00"
+      timezone: "Asia/Shanghai"
+    # Group related updates to reduce PR noise
+    groups:
+      astro:
+        patterns:
+          - "astro"
+          - "@astrojs/*"
+          - "astro-*"
+      react:
+        patterns:
+          - "react"
+          - "react-dom"
+          - "@types/react"
+          - "@types/react-dom"
+      iconify:
+        patterns:
+          - "@iconify/*"
+          - "@iconify-json/*"
+      linting:
+        patterns:
+          - "@biomejs/*"
+          - "typescript"
+    # Ignore major version bumps (review manually)
+    ignore:
+      - dependency-name: "astro"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "tailwindcss"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "daisyui"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "js-yaml"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "marked"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "satori"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "@swup/astro"
+        update-types: ["version-update:semver-major"]
+    # Auto-approve patch updates
+    open-pull-requests-limit: 10
+    versioning-strategy: increase

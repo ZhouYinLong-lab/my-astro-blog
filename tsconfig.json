@@ -29,5 +29,9 @@
     "esModuleInterop": true,
     "jsx": "react-jsx",
     "jsxImportSource": "react"
-  }
+  },
+  "exclude": [
+    "public",
+    "dist"
+  ]
 }
