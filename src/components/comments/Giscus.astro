@@ -1,35 +1,33 @@
 ---
-// Giscus 评论组件 — 基于 GitHub Discussions, 零服务器维护
-//
-// 首次使用配置（一次性, 2 分钟）：
-// 1. 打开 https://github.com/ZhouYinLong-lab/my-astro-blog/discussions
-// 2. 访问 https://giscus.app/zh-CN 填入仓库名
-// 3. 复制生成的 data-repo-id 和 data-category-id
-// 4. 替换下方 script 中的对应值
+// Giscus 评论组件 — GitHub Discussions 驱动, 零服务器维护
+// 配置: ZhouYinLong-lab/my-astro-blog · Announcements · pathname 映射
 ---
 
-<div class="giscus-container bg-base-100 p-6 md:p-8 rounded-2xl shadow-sm border border-base-200 mt-10">
+<div id="giscus-wrapper" class="mt-10">
   <h2 class="text-2xl font-bold mb-6 flex items-center gap-2">
     <span>评论</span>
-    <span class="text-sm font-normal text-base-content/50">(需 GitHub 账号)</span>
+    <span class="text-sm font-normal text-base-content/40">(需 GitHub 账号登录)</span>
   </h2>
 
-  <div id="giscus-comments">
-    <div class="text-center py-8 text-base-content/50 text-sm">
-      <p>评论由 GitHub Discussions 驱动</p>
-      <a href="https://github.com/ZhouYinLong-lab/my-astro-blog/discussions" target="_blank" class="link link-primary text-xs mt-1 inline-block">
-        前往 Discussions →
-      </a>
+  <div id="giscus-comments" class="rounded-2xl overflow-hidden border border-base-300">
+    <div class="text-center py-12 text-base-content/50 text-sm">
+      <div class="inline-block w-5 h-5 border-2 border-base-300 border-t-primary rounded-full animate-spin mb-2"></div>
+      <p>正在加载评论...</p>
     </div>
   </div>
 </div>
 
 <script is:inline>
+  function getBlogTheme() {
+    const htmlTheme = document.documentElement.getAttribute('data-theme');
+    return htmlTheme === 'forest' ? 'dark' : 'light';
+  }
+
   function loadGiscus() {
     const container = document.getElementById('giscus-comments');
     if (!container || container.dataset.loaded) return;
     container.dataset.loaded = 'true';
-    container.innerHTML = ''; // 清除 placeholder
+    container.innerHTML = '';
 
     const script = document.createElement('script');
     script.src = 'https://giscus.app/client.js';
@@ -42,7 +40,7 @@
     script.setAttribute('data-reactions-enabled', '1');
     script.setAttribute('data-emit-metadata', '0');
     script.setAttribute('data-input-position', 'top');
-    script.setAttribute('data-theme', 'preferred_color_scheme');
+    script.setAttribute('data-theme', getBlogTheme());
     script.setAttribute('data-lang', 'zh-CN');
     script.setAttribute('data-loading', 'lazy');
     script.setAttribute('crossorigin', 'anonymous');
@@ -50,15 +48,42 @@
     container.appendChild(script);
   }
 
-  function updateGiscusTheme() {
+  function updateGiscusTheme(theme) {
     const iframe = document.querySelector('iframe.giscus-frame');
     if (!iframe) return;
-    const theme = document.documentElement.getAttribute('data-theme') === 'forest' ? 'dark' : 'light';
-    iframe.contentWindow?.postMessage({ giscus: { setConfig: { theme } } }, 'https://giscus.app');
+    iframe.contentWindow?.postMessage(
+      { giscus: { setConfig: { theme } } },
+      'https://giscus.app'
+    );
   }
 
+  // Astro 页面切换
   document.addEventListener('astro:page-load', loadGiscus);
-  document.addEventListener('astro:after-swap', updateGiscusTheme);
+
+  // 监听博客主题切换
+  const observer = new MutationObserver(() => {
+    const newTheme = getBlogTheme();
+    updateGiscusTheme(newTheme);
+  });
+  observer.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+
+  // 首次加载
   document.addEventListener('DOMContentLoaded', loadGiscus);
   loadGiscus();
 </script>
+
+<style is:global>
+  /* 让 Giscus 融入博客风格 */
+  #giscus-comments {
+    background: var(--fallback-b1, oklch(var(--b1)));
+  }
+
+  iframe.giscus-frame {
+    background: transparent !important;
+  }
+
+  /* 评论框内输入区域适配 */
+  .giscus + .giscus-frame {
+    border: none !important;
+  }
+</style>
