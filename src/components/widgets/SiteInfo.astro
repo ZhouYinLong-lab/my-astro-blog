@@ -59,16 +59,12 @@ const shouldShow = isHomePage || isBlogPage || isAboutPage || isFriendsPage;
       
       <div class="flex justify-between items-center">
         <span class="text-base-content/80">本站访客数：</span>
-        <span class="font-mono text-base-content" id="busuanzi_value_site_uv">
-          <span class="loading loading-spinner loading-xs text-primary/50"></span>
-        </span>
+        <span class="font-mono text-base-content" id="busuanzi_value_site_uv"></span>
       </div>
-      
+
       <div class="flex justify-between items-center">
         <span class="text-base-content/80">本站总浏览量：</span>
-        <span class="font-mono text-base-content" id="busuanzi_value_site_pv">
-          <span class="loading loading-spinner loading-xs text-primary/50"></span>
-        </span>
+        <span class="font-mono text-base-content" id="busuanzi_value_site_pv"></span>
       </div>
       
       <div class="flex justify-between items-center">
@@ -79,5 +75,16 @@ const shouldShow = isHomePage || isBlogPage || isAboutPage || isFriendsPage;
   </div>
 )}
 
-{/* 👇 统计脚本必须留在外面，确保全站计数正常运行 */}
-<script is:inline async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" data-astro-rerun></script>
+{/* 不蒜子计数器 - 全站 UV/PV 统计 */}
+<script is:inline async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script is:inline>
+  // 降级处理: 5 秒后还没加载出数据就显示提示
+  setTimeout(() => {
+    ['busuanzi_value_site_uv', 'busuanzi_value_site_pv'].forEach(id => {
+      const el = document.getElementById(id);
+      if (el && el.textContent === '--') {
+        el.textContent = '加载中...';
+      }
+    });
+  }, 3000);
+</script>
