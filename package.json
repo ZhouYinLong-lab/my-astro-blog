@@ -78,7 +78,7 @@
     "daisyui": "^4.12.24",
     "pagefind": "^1.4.0",
     "sass-embedded": "^1.93.3",
-    "shiki": "^1.29.2",
+    "shiki": "^4.3.1",
     "typescript": "^5.9.3"
   }
 }
