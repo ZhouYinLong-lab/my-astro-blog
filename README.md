@@ -1,23 +1,31 @@
 <p align="center">
-  柳含知发挥想象力和创造力的赛博后花园
+  <b>寒柳别苑</b> · 柳含知的个人博客 · Build in Public, Learn in Public
 </p>
 
 <div align="center">
 
-[![license](https://badgen.net/github/license/ZhouYinLong-lab/my-astro-blog)](https://github.com/ZhouYinLong-lab/my-astro-blog/blob/main/LICENSE)
-[![astrolink](https://badgen.net/badge/Astro/5.x/purple)](https://astro.build)
-[![status](https://badgen.net/badge/status/active/green)](https://zylatent.com)
+[![Blog](https://badgen.net/badge/🌐/zylatent.com/blue)](https://zylatent.com)
+[![Astro](https://badgen.net/badge/Astro/5.x/purple)](https://astro.build)
+[![License](https://badgen.net/badge/license/MIT/green)](https://github.com/ZhouYinLong-lab/my-astro-blog/blob/main/LICENSE)
+[![Status](https://badgen.net/badge/status/active/green)](https://github.com/ZhouYinLong-lab/my-astro-blog/actions)
+[![GitHub stars](https://badgen.net/github/stars/ZhouYinLong-lab/my-astro-blog)](https://github.com/ZhouYinLong-lab/my-astro-blog/stargazers)
+[![Made with Love](https://badgen.net/badge/made%20with/❤️/ff69b4)](https://zylatent.com)
 
 </div>
 
 ## 关于
 
-寒柳别苑，柳含知的个人博客。写代码、翻译兰波、偶尔散文——差不多就是这些。
+**寒柳别苑** — 柳含知的个人技术博客。南京大学智能科学与技术专业在读，主攻 AI/RL、全栈开发与创意技术。
+
+写代码、翻译兰波、做互动网页、偶尔散文。Build in public, learn in public.
 
 > 盖闻乾元资始，令序惟春；二月建卯，苍龙奋伸。
 > 君生吉日，正当雷乃发声之候；气禀清刚，恰是蛰虫始振之辰。
 
-南京大学在读。C / C++ / Python 为主，前端也会一点。B站偶尔更新，魂 塞尔达 p系列玩家。
+- 🏠 博客：[zylatent.com](https://zylatent.com)
+- 🔧 GitHub：[ZhouYinLong-lab](https://github.com/ZhouYinLong-lab)
+- 📺 B站：[柳含知](https://space.bilibili.com/511060666)
+- ✉️ Email：Liuhanzhi23@outlook.com
 
 ## 特性
 
