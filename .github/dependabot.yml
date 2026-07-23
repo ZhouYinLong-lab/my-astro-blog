@@ -44,6 +44,10 @@ updates:
         update-types: ["version-update:semver-major"]
       - dependency-name: "@swup/astro"
         update-types: ["version-update:semver-major"]
+      - dependency-name: "@astrojs/mdx"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "@astrojs/react"
+        update-types: ["version-update:semver-major"]
     # Auto-approve patch updates
     open-pull-requests-limit: 10
     versioning-strategy: increase
