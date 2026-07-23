@@ -1,6 +1,5 @@
 ---
 import { Icon } from "astro-icon/components";
-import CyberButton from "@/components/CyberButton.astro";
 import MainCard from "@/components/MainCard.astro";
 import FeatureCard from "@/components/mdx/FeatureCard.astro";
 import HomeLoader from "@/components/widgets/HomeLoader.astro";
@@ -12,163 +11,212 @@ import BaseLayout from "@/layouts/BaseLayout.astro";
   <HomeLoader slot="fullscreen" />
 
   <MainCard
-    title="寒柳别苑,柳丝舞春,邀君共绘新梦"
-    description="这里是柳含知的赛博后花园。南京大学智能科学专业学生,主攻 AI/RL、全栈开发与创意技术。Build in public, learn in public."
+    title="柳含知 · Liu HanZhi"
+    description="NJU Student · AI / RL · Full-Stack · Developer Tools · Open Source"
     textOverlay="HOME"
     infoIcon="lucide:info"
   >
     <div class="space-y-8">
+      <!-- Hero -->
       <section class="py-6">
         <div class="flex flex-col items-center text-center">
-          <h1
-            class="text-4xl font-bold mb-4 bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent leading-loose"
-          >
-            🛸 寒柳别苑
+          <h1 class="text-4xl font-bold mb-4 bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent leading-loose">
+            柳含知 · Liu HanZhi
           </h1>
-          <p class="text-xl text-base-content/80 max-w-3xl mb-10">
-            这里是柳含知的赛博后花园。我是南京大学智能科学专业的学生,主攻 AI/RL、全栈开发与创意技术。Build in public, learn in public.
+          <p class="text-xl text-base-content/80 max-w-3xl mb-4">
+            Nanjing University Student · AI / RL · Full-Stack · Developer Tools · Open Source
           </p>
-          <p class="flex flex-wrap items-center justify-center gap-2 text-base md:text-lg text-base-content/80 mb-6">
-            <Icon name="lucide:mail" class="w-5 h-5 text-primary" />
-            <span class="font-semibold">Email:</span>
-            <a
-              href="mailto:251880158@smail.nju.edu.cn"
-              class="link link-primary font-medium break-all"
-            >
-              251880158@smail.nju.edu.cn
-            </a>
+          <p class="text-lg text-base-content/60 max-w-2xl mb-8 italic">
+            "用代码研究智能，也用代码做真正有意思的产品。"
           </p>
-          <p class="flex flex-wrap items-center justify-center gap-2 text-base md:text-lg text-base-content/80 mb-10">
-            <Icon name="ri:github-line" class="w-5 h-5 text-primary" />
-            <span class="font-semibold">GitHub:</span>
-            <a
-              href="https://github.com/ZhouYinLong-lab"
-              target="_blank"
-              class="link link-primary font-medium"
-            >
-              ZhouYinLong-lab
-            </a>
-            <span class="text-base-content/50 text-sm ml-2">21 仓库 · 947 commits · 11 followers</span>
-          </p>
-          
-          {/* 👇 核心修改区域：改为上下排列（flex-col），并加大间距防止动画遮挡 */}
-          <div class="flex flex-col items-center gap-12 mt-2">
-            
-            {/* 放大 1.15 倍，使其成为视觉绝对重心，并给上下动画留出空间 */}
-            <div class="transform scale-[1.15] z-10">
-              <CyberButton href="/blog" />
-            </div>
 
-            {/* B站按钮保持原大小，补充了 rounded-full 使其更加圆润协调 */}
-            <a href="https://space.bilibili.com/511060666" target="_blank" class="btn btn-outline rounded-full gap-2 px-6">
-              <Icon name="simple-icons:bilibili" class="w-5 h-5" />
-              <span>关注我的B站</span>
+          <!-- Badges -->
+          <div class="flex flex-wrap items-center justify-center gap-3 mb-8">
+            <a href="https://zylatent.com" target="_blank" class="badge badge-lg badge-primary gap-1 px-3 py-4 hover:opacity-80 transition-opacity">
+              <Icon name="lucide:globe" class="w-3.5 h-3.5" />
+              zylatent.com
             </a>
-            
+            <a href="mailto:liuhanzhi514@gmail.com" class="badge badge-lg badge-error gap-1 px-3 py-4 hover:opacity-80 transition-opacity">
+              <Icon name="lucide:mail" class="w-3.5 h-3.5" />
+              Contact
+            </a>
+            <a href="https://space.bilibili.com/511060666" target="_blank" class="badge badge-lg badge-info gap-1 px-3 py-4 hover:opacity-80 transition-opacity">
+              <Icon name="simple-icons:bilibili" class="w-3.5 h-3.5" />
+              周玄渊
+            </a>
           </div>
         </div>
       </section>
 
+      <!-- 关于我 -->
       <section class="py-6">
         <h2 class="text-2xl font-bold mb-6 flex items-center gap-2">
-          <Icon name="ri:github-line" class="w-6 h-6 text-primary" />
-          <span>开源工坊</span>
-          <a href="https://github.com/ZhouYinLong-lab" target="_blank" class="text-sm font-normal text-base-content/50 hover:text-primary transition-colors ml-2">@ZhouYinLong-lab →</a>
+          <Icon name="lucide:user" class="w-6 h-6 text-primary" />
+          <span>关于我</span>
+        </h2>
+
+        <div class="prose prose-base max-w-none text-base-content/80">
+          <p>
+            我是 <strong>柳含知 (Liu HanZhi)</strong>，南京大学<strong>智能科学与技术</strong>专业在读。本名周胤龙，"柳含知"是常用的网络身份，"周玄渊"用于B站、微信等内容平台。
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-6">
+          {[
+            { icon: "lucide:brain", title: "智能系统", desc: "强化学习 · 机器人控制 · LLM 应用 · Prompt Engineering", color: "oklch(0.6 0.2 280)" },
+            { icon: "lucide:code-2", title: "工程与开源", desc: "全栈产品 · 开发者工具 · Claude Code Skills · 开源协作", color: "oklch(0.6 0.2 160)" },
+            { icon: "lucide:palette", title: "创意技术", desc: "游戏开发 · 交互叙事 · 创意编程 · 技术写作", color: "oklch(0.7 0.2 60)" },
+          ].map((area) => (
+            <div class="card bg-base-200 border border-base-300">
+              <div class="card-body p-5">
+                <h3 class="card-title text-base flex items-center gap-2" style={`color: ${area.color}`}>
+                  <Icon name={area.icon} class="w-5 h-5" />
+                  {area.title}
+                </h3>
+                <p class="text-sm text-base-content/60">{area.desc}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <p class="text-sm text-base-content/50 mt-4 italic text-center">Build in public, learn in public.</p>
+      </section>
+
+      <!-- 精选项目 -->
+      <section class="py-6">
+        <h2 class="text-2xl font-bold mb-6 flex items-center gap-2">
+          <Icon name="lucide:star" class="w-6 h-6 text-primary" />
+          <span>精选项目</span>
         </h2>
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {
-            [
-              { name: "Dog-Skills", desc: "116 个 Claude Code 技能库，覆盖开发/设计/写作/学习/商业/健康", stars: 6, lang: "Markdown", url: "https://github.com/ZhouYinLong-lab/Dog-Skills" },
-              { name: "NanE", desc: "NJU 校园互助平台 — JS/Node.js/PostgreSQL/PWA 全栈应用", stars: 6, lang: "JavaScript", url: "https://github.com/ZhouYinLong-lab/NanE" },
-              { name: "HuaiHai-h5-map", desc: "淮海战役互动 H5 地图 — React/TS/Tailwind/PWA", stars: 2, lang: "TypeScript", url: "https://github.com/ZhouYinLong-lab/HuaiHai-h5-map" },
-              { name: "Dog-LittleTools", desc: "9 个 Bash CLI 开发效率工具", stars: 4, lang: "Shell", url: "https://github.com/ZhouYinLong-lab/Dog-LittleTools" },
-              { name: "nannahelper/docs", desc: "面向初学者的编程教程文档 — MkDocs/CI/CD", stars: 4, lang: "Python", url: "https://github.com/ZhouYinLong-lab/nannahelper" },
-              { name: "my-astro-blog", desc: "本博客源码 — Astro 5 + DaisyUI 静态生成", stars: 3, lang: "Astro", url: "https://github.com/ZhouYinLong-lab/my-astro-blog" },
-            ].map((repo) => (
-              <a href={repo.url} target="_blank" class="card bg-base-200 hover:bg-base-300 transition-all duration-300 group border border-base-300">
-                <div class="card-body p-5">
-                  <div class="flex items-center gap-2 mb-2">
-                    <Icon name="ri:folder-3-line" class="w-4 h-4 text-primary" />
-                    <h3 class="font-bold text-sm group-hover:text-primary transition-colors">{repo.name}</h3>
-                  </div>
-                  <p class="text-xs text-base-content/60 mb-3 line-clamp-2">{repo.desc}</p>
-                  <div class="flex items-center gap-3 text-xs text-base-content/40 mt-auto">
-                    <span class="flex items-center gap-1"><Icon name="ri:star-line" class="w-3 h-3" /> {repo.stars}</span>
-                    <span>{repo.lang}</span>
-                  </div>
+          {[
+            { name: "Dog-Skills", desc: "116 个 Claude Code Skills，覆盖开发/设计/写作/学习/商业/健康", tags: "Claude Code · AI Tools · Automation", url: "https://github.com/ZhouYinLong-lab/Dog-Skills" },
+            { name: "NanE", desc: "NJU 校园互助平台 — 应急物品共享、信息核验、同楼栋优先匹配", tags: "JavaScript · Node.js · PostgreSQL · PWA", url: "https://github.com/ZhouYinLong-lab/NanE" },
+            { name: "HuaiHai-h5-map", desc: "淮海战役互动地图 — 16 个历史节点、三阶段时间轴、离线 PWA", tags: "React · TypeScript · Tailwind CSS · PWA", url: "https://github.com/ZhouYinLong-lab/HuaiHai-h5-map" },
+            { name: "nannahelper/docs", desc: "面向编程初学者的技术文档 — 覆盖 20+ 主题, MkDocs + GitHub Actions 自动部署", tags: "MkDocs · Documentation · CI/CD", url: "https://github.com/nannahelper/docs" },
+            { name: "Dog-Babble", desc: "纯前端加密实验 — PBKDF2 + AES-256-GCM + 自定义字典编码, 零依赖", tags: "JavaScript · Encryption · Web Crypto", url: "https://github.com/ZhouYinLong-lab/Dog-Babble" },
+            { name: "my-astro-blog", desc: "本博客源码 — Astro 构建的个人数字花园, 记录技术实践与持续学习", tags: "Astro · Blog · SSG", url: "https://github.com/ZhouYinLong-lab/my-astro-blog" },
+          ].map((repo) => (
+            <a href={repo.url} target="_blank" class="card bg-base-200 hover:bg-base-300 transition-all duration-300 group border border-base-300">
+              <div class="card-body p-5">
+                <div class="flex items-center gap-2 mb-2">
+                  <Icon name="ri:folder-3-line" class="w-4 h-4 text-primary" />
+                  <h3 class="font-bold text-sm group-hover:text-primary transition-colors">{repo.name}</h3>
                 </div>
-              </a>
-            ))
-          }
-        </div>
-
-        <div class="mt-4 p-4 bg-base-200 rounded-xl border border-base-300">
-          <div class="flex flex-wrap items-center gap-4 text-sm text-base-content/70">
-            <span class="flex items-center gap-1"><Icon name="ri:git-repository-line" class="w-4 h-4 text-primary" /> 21 公开仓库</span>
-            <span class="flex items-center gap-1"><Icon name="ri:star-line" class="w-4 h-4 text-primary" /> 50+ Stars</span>
-            <span class="flex items-center gap-1"><Icon name="ri:git-commit-line" class="w-4 h-4 text-primary" /> 947 过去一年 Commits</span>
-            <span class="flex items-center gap-1"><Icon name="ri:git-pull-request-line" class="w-4 h-4 text-primary" /> 14 合并 PR</span>
-            <span class="text-base-content/50">贡献: Supabase · MUI · MCP · Apache HertzBeat</span>
-          </div>
+                <p class="text-xs text-base-content/60 mb-3 line-clamp-2">{repo.desc}</p>
+                <div class="text-xs text-base-content/40">{repo.tags}</div>
+              </div>
+            </a>
+          ))}
         </div>
       </section>
 
+      <!-- 开源贡献 -->
       <section class="py-6">
         <h2 class="text-2xl font-bold mb-6 flex items-center gap-2">
-          <Icon name="lucide:compass" class="w-6 h-6 text-primary" />
-          <span>内容罗盘</span>
+          <Icon name="lucide:git-pull-request" class="w-6 h-6 text-primary" />
+          <span>开源贡献</span>
         </h2>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          <FeatureCard
-            title="见微知著"
-            description="记录对社会现象的独立思考与深度剖析。用理性的视角解构复杂的现实,拒绝人云亦云的喧嚣。"
-            icon="lucide:newspaper"
-            color="oklch(0.6 0.2 240)"
-            url="/blog/categories" 
-          />
-
-          <FeatureCard
-            title="岁月留温"
-            description="褪去极客的冰冷外壳,写下那些触动人心的柔软瞬间。关于热爱、关于生活,以及每一份真挚的情感。"
-            icon="lucide:feather"
-            color="oklch(0.7 0.2 30)"
-            url="/blog/categories" 
-          />
-
-          <FeatureCard
-            title="赛博工坊"
-            description="从大庚剑阵的手势识别到 SmartAgent 的寻路算法,这里存放着我所有天马行空、不拘一格的数字实验与开源项目。"
-            icon="lucide:flask-conical"
-            color="oklch(0.6 0.2 160)"
-            url="/blog/categories" 
-          />
-
-          <FeatureCard
-            title="碎片档案馆"
-            description="吹奏 EWI 时的呼吸起伏,沉浸在《阿基拉》与交界地里的时光,以及在南大校园里捕捉到的点滴趣事。"
-            icon="lucide:camera"
-            color="oklch(0.7 0.2 80)"
-            url="/blog/categories" 
-          />
-
-          <FeatureCard
-            title="异乡人诗抄"
-            description="跨越语言的边界,翻译与品读阿蒂尔·兰波等诗人的杰作,在字里行间寻找自由与蓬勃的生机。"
-            icon="lucide:wind"
-            color="oklch(0.5 0.2 300)"
-            url="/blog/categories" 
-          />
-
-          <FeatureCard
-            title="步履不停"
-            description="记录一次次微小的顿悟与迷茫。这里没有一蹴而就的神话,只有一个普通人一步一个脚印的踏实前行。"
-            icon="lucide:milestone"
-            color="oklch(0.6 0.2 200)"
-            url="/blog/categories" 
-          />
+        <div class="overflow-x-auto">
+          <table class="table table-sm">
+            <thead>
+              <tr>
+                <th>项目</th>
+                <th>PR</th>
+                <th>描述</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><a href="https://github.com/supabase/supabase" target="_blank" class="link link-primary">Supabase</a></td>
+                <td><a href="https://github.com/supabase/supabase/pull/47658" target="_blank" class="link">#47658</a></td>
+                <td class="text-base-content/60">修复故障排除文档中的拼写错误</td>
+              </tr>
+              <tr>
+                <td><a href="https://github.com/mui/material-ui" target="_blank" class="link link-primary">MUI</a></td>
+                <td><a href="https://github.com/mui/material-ui/pull/48785" target="_blank" class="link">#48785</a></td>
+                <td class="text-base-content/60">修正 CHANGELOG 中的英文拼写问题</td>
+              </tr>
+              <tr>
+                <td><a href="https://github.com/just-the-docs/just-the-docs" target="_blank" class="link link-primary">Just the Docs</a></td>
+                <td><a href="https://github.com/just-the-docs/just-the-docs/pull/1836" target="_blank" class="link">#1836</a></td>
+                <td class="text-base-content/60">修复 Ruby strftime 文档链接</td>
+              </tr>
+              <tr>
+                <td><a href="https://github.com/modelcontextprotocol/specification" target="_blank" class="link link-primary">Model Context Protocol</a></td>
+                <td><a href="https://github.com/modelcontextprotocol/specification/pull/3019" target="_blank" class="link">#3019</a></td>
+                <td class="text-base-content/60">更新 Goose 集成文档链接</td>
+              </tr>
+              <tr>
+                <td><a href="https://github.com/apache/hertzbeat" target="_blank" class="link link-primary">Apache HertzBeat</a></td>
+                <td><a href="https://github.com/apache/hertzbeat/pull/4187" target="_blank" class="link">#4187</a></td>
+                <td class="text-base-content/60">跨 16 个文件修正 13 处文档和代码注释</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
+      </section>
+
+      <!-- 技术版图 -->
+      <section class="py-6">
+        <h2 class="text-2xl font-bold mb-6 flex items-center gap-2">
+          <Icon name="lucide:map" class="w-6 h-6 text-primary" />
+          <span>技术版图</span>
+        </h2>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          {[
+            { title: "AI / RL", items: "Python · PyTorch · PyBullet · Jupyter · LLM Applications" },
+            { title: "Web Engineering", items: "TypeScript · JavaScript · Vue · React · Node.js · Astro" },
+            { title: "Systems & Creative Coding", items: "C++ · Godot · Linux · Git · PWA" },
+            { title: "Developer Experience", items: "Claude Code · GitHub Actions · Documentation · Automation" },
+          ].map((col) => (
+            <div class="card bg-base-200 border border-base-300">
+              <div class="card-body p-5">
+                <h3 class="font-bold text-sm mb-2 text-primary">{col.title}</h3>
+                <p class="text-sm text-base-content/60">{col.items}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <!-- GitHub 数据 -->
+      <section class="py-6">
+        <h2 class="text-2xl font-bold mb-6 flex items-center gap-2">
+          <Icon name="lucide:bar-chart-3" class="w-6 h-6 text-primary" />
+          <span>GitHub 数据</span>
+          <span class="text-sm font-normal text-base-content/50 ml-2">每周自动更新</span>
+        </h2>
+
+        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
+          {[
+            { value: "38", label: "公开仓库" },
+            { value: "50+", label: "Stars" },
+            { value: "947", label: "过去一年 Commits" },
+            { value: "14", label: "合并 PR" },
+            { value: "11", label: "Followers" },
+          ].map((stat) => (
+            <div class="card bg-base-200 border border-base-300 text-center">
+              <div class="card-body p-4">
+                <div class="text-3xl font-bold text-primary">{stat.value}</div>
+                <div class="text-xs text-base-content/50 mt-1">{stat.label}</div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <!-- 底部 -->
+      <section class="py-6 text-center">
+        <p class="text-base-content/70">
+          正在寻找实习、研究合作与有意义的开源协作机会。
+        </p>
+        <p class="text-sm text-base-content/50 mt-2">
+          对 AI/RL、开发者工具或创意技术感兴趣？<a href="mailto:liuhanzhi514@gmail.com" class="link link-primary">联系我 →</a>
+        </p>
       </section>
     </div>
   </MainCard>
