@@ -107,8 +107,7 @@ const shouldShow = isHomePage || isBlogPage || isAboutPage || isFriendsPage;
         }
       }
 
-      document.addEventListener('astro:page-load', trackAndShow);
-      trackAndShow();
-    }
+    document.addEventListener('astro:page-load', trackAndShow);
+    trackAndShow();
   }
 </script>
