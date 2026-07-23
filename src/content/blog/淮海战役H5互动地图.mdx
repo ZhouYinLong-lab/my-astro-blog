@@ -1,22 +1,152 @@
 ---
-title: "淮海战役 H5 互动地图"
-description: "基于 TypeScript 的移动端历史战役可视化平台，还原淮海战役 16 处历史遗迹，支持时间轴、遗迹档案与 PWA 离线访问。"
+title: "淮海战役 H5 互动地图：当红色文化遇见前端技术"
+description: "作为徐州本地人，用 React + TypeScript 为淮海战役 16 处遗址搭建了一座可交互的数字纪念馆——泛黄地图、三阶段时间轴、PWA 离线访问。"
 pubDate: 2026-07-23
 categories:
   - 实验室
 tags:
   - TypeScript
+  - React
   - H5
   - 地图
   - 历史
   - 互动网页
+  - 社会实践
+image: "/img/zawu/renzi.png"
 link: "https://github.com/ZhouYinLong-lab/HuaiHai-h5-map"
 ---
 
-# 🗺️ 淮海战役 H5 互动地图
+import Info from '../../components/mdx/Info.astro';
+import Warning from '../../components/mdx/Warning.astro';
+import Success from '../../components/mdx/Success.astro';
 
-一个面向移动端（H5）的历史战役交互式地图平台，以复古地图风格还原淮海战役 16 处历史遗迹。支持战役时间轴、遗迹档案浏览，并具备 PWA 离线访问能力。
+# 淮海战役 H5 互动地图
+
+> 一个徐州本地人的红色文化数字化实践。
+
+我是徐州人。从小在淮海战役纪念馆的坦克旁边跑来跑去，听过太多关于这场战役的故事——碾庄、双堆集、陈官庄，这些地名对别人来说可能只是历史课本上的几行字，对我来说却是家门口的坐标。
+
+大一寒假的社会实践，我把"写代码"和"讲家乡故事"这两件事合在了一起。成果就是这个 **淮海战役红色文化 H5 互动地图**——一个面向手机、平板和电脑的数字化展示平台。
+
+🔗 **在线体验**：[huaihai.zylatent.com](https://huaihai.zylatent.com)
 
 ---
 
-🔗 [查看源代码 (GitHub)](https://github.com/ZhouYinLong-lab/HuaiHai-h5-map)
+## 🎯 项目定位
+
+<Info>
+本平台是社会实践成果展示，**不是**专业旅游导航或历史数据库。所有遗址信息均来自公开权威资料，底图依据公开史料重新绘制。
+</Info>
+
+核心视觉是一张**泛黄的历史地图**，上面分布着 16 处红色地标——战场旧址、指挥所、起义地点、纪念场馆。点击任何一个节点，都会展开一份图文档案。
+
+---
+
+## ✨ 功能概览
+
+| 模块 | 说明 |
+|------|------|
+| 📜 卷轴开场动画 | 首次进入时，红色文化主题的卷轴式展开 |
+| 🗺️ 战役态势底图 | 依据公开资料重绘的原创示意图 |
+| 📍 16 处地标节点 | 覆盖战场、指挥部、起义地、纪念设施 |
+| ⏳ 三阶段时间线 | 第一阶段 / 第二阶段 / 第三阶段 + 纪念场馆筛选 |
+| 🔍 遗址搜索 | 按名称、地区（江苏/安徽/河南）、类型检索 |
+| 📖 图文档案 | 每处遗址包含封面图、历史文字、照片廊、来源链接、视频槽位 |
+| 🎬 视频支持 | 跳转 B站或权威平台视频链接 |
+| 🗺️ 高德地图 | 一键跳转遗址地理位置 |
+| 📱 响应式适配 | 手机底部导航 / 平板网格 / 桌面侧边栏，320px ~ 1440px 全覆盖 |
+| 📴 PWA 离线 | Service Worker + Web App Manifest，离线可访问外壳 |
+
+### 多端截图
+
+<div style="display: grid; grid-cols-1 md:grid-cols-2 gap-4; margin: 1rem 0;">
+
+<div style="text-align: center;">
+  <img src="https://raw.githubusercontent.com/ZhouYinLong-lab/HuaiHai-h5-map/main/docs/qa/qa-desktop-map.png" alt="桌面端地图展示" style="border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);" />
+  <p style="font-size: 0.85rem; color: #888; margin-top: 0.5rem;">桌面端地图展示</p>
+</div>
+
+<div style="text-align: center;">
+  <img src="https://raw.githubusercontent.com/ZhouYinLong-lab/HuaiHai-h5-map/main/docs/qa/qa-mobile-directory.png" alt="手机端遗址名录" style="border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);" />
+  <p style="font-size: 0.85rem; color: #888; margin-top: 0.5rem;">手机端遗址名录</p>
+</div>
+
+<div style="text-align: center;">
+  <img src="https://raw.githubusercontent.com/ZhouYinLong-lab/HuaiHai-h5-map/main/docs/qa/qa-desktop-directory.png" alt="桌面端遗址名录" style="border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);" />
+  <p style="font-size: 0.85rem; color: #888; margin-top: 0.5rem;">桌面端遗址名录</p>
+</div>
+
+</div>
+
+---
+
+## 🛠️ 技术栈
+
+| 技术 | 说明 |
+|------|------|
+| React 18 | 组件化 UI |
+| Vite 8 | 构建工具 |
+| TypeScript 5.6 | 类型安全 |
+| Tailwind CSS 3 | 样式系统 |
+| react-zoom-pan-pinch | 地图拖拽、双指缩放、滚轮缩放 |
+| 高德开放平台 JS API 2.0 | 可选的地图增强（需配置 Key） |
+| PWA | Service Worker 离线缓存 |
+| Azure Static Web Apps | 托管部署 |
+
+<Info>
+**纯静态前端**：不使用数据库、后台服务、用户系统或权限系统。所有遗址数据存储在 `src/data/sites.json` 中，坐标采用相对于底图的百分比定位，非经纬度。
+</Info>
+
+---
+
+## 📂 项目结构
+
+```
+HuaiHai-h5-map/
+├── public/
+│   ├── archive-map.svg              # 原创战役态势底图
+│   ├── site-placeholder.svg         # 遗址封面占位图
+│   ├── manifest.webmanifest
+│   ├── sw.js
+│   └── staticwebapp.config.json
+├── src/
+│   ├── components/                  # 导航、地图、时间线、名录、详情
+│   ├── data/sites.json              # 遗址数据唯一入口
+│   ├── styles/                      # 设计令牌和全局样式
+│   └── types/
+├── docs/
+│   ├── material-checklist.md        # 资料收集清单
+│   ├── content-guide.md             # 内容替换说明
+│   ├── qa-report.md                 # 多端验收结果
+│   └── qa/                          # 截图
+├── scripts/validate-content.mjs     # 内容校验脚本
+└── design-system/MASTER.md          # 设计系统文档
+```
+
+---
+
+## 📋 完成度
+
+<Success>React H5 基础工程、16 处地标结构、三阶段时间线、地图交互、搜索筛选、图文档案、PWA 离线、Azure 部署 —— 全部已完成。</Success>
+
+<Warning>遗址史料细节：11/16 已核实。历史照片和专题视频：持续补充中。</Warning>
+
+---
+
+## 📜 内容原则
+
+- 不编造遗址名称、战役经过、人物、日期和伤亡数据
+- 史料优先采用纪念馆、政府、党史部门和正式出版物
+- 所有图片标注来源、作者/收藏机构、版权状态和说明
+- 底图为依据公开资料重新绘制的原创示意图
+- 视频不自行托管，优先使用权威平台或 B站链接
+
+---
+
+## 🌐 部署
+
+项目部署在 Azure Static Web Apps，配置了自定义域名 `huaihai.zylatent.com`。每次 `main` 分支 push 自动构建部署。
+
+---
+
+🔗 [查看源代码 (GitHub)](https://github.com/ZhouYinLong-lab/HuaiHai-h5-map) · 🌐 [在线体验](https://huaihai.zylatent.com)
