@@ -29,6 +29,19 @@ const blog = defineCollection({
       author: z.string().optional(),
       canonicalURL: z.string().optional(),
       link: z.string().optional(),
+      project: z
+        .object({
+          order: z.number().int().positive(),
+          role: z.string(),
+          challenge: z.string(),
+          decision: z.string(),
+          outcome: z.string(),
+          source: z.string().url(),
+          demo: z.string().url().optional(),
+          metric: z.string(),
+          metricLabel: z.string(),
+        })
+        .optional(),
     })
     // catchall intentionally omitted - all frontmatter fields must be explicitly defined
 });

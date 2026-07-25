@@ -1,221 +1,237 @@
 ---
+import { getCollection } from "astro:content";
 import { Icon } from "astro-icon/components";
 import MainCard from "@/components/MainCard.astro";
+import ProjectCaseCard from "@/components/ProjectCaseCard.astro";
 import HomeLoader from "@/components/widgets/HomeLoader.astro";
 import BaseLayout from "@/layouts/BaseLayout.astro";
+
+const featuredProjects = (await getCollection("blog"))
+  .filter((post) => post.data.featured && post.data.project)
+  .sort((a, b) => a.data.project!.order - b.data.project!.order);
+
+const outcomes = featuredProjects.map((post) => ({
+  value: post.data.project!.metric,
+  label: post.data.project!.metricLabel,
+}));
 ---
 
-<BaseLayout title="Home">
-
+<BaseLayout
+  title="柳含知 | 智能系统与软件工程"
+  description="柳含知（Zhou Yinlong），南京大学智能科学与技术专业学生，关注智能系统、开发者工具与完整工程交付。"
+  fullTitle={true}
+>
   <HomeLoader slot="fullscreen" />
 
   <MainCard
-    title="柳含知 · Liu HanZhi"
-    description="NJU Student · AI / RL · Full-Stack · Developer Tools · Open Source"
-    textOverlay="HOME"
+    title="柳含知 / Zhou Yinlong"
+    description="智能系统与开发者工具方向的工程学生"
+    textOverlay="BUILD"
     infoIcon="lucide:info"
   >
-    <div class="space-y-8">
-      <!-- Hero -->
-      <section class="py-6">
-        <div class="flex flex-col items-center text-center">
-          <h1 class="text-4xl font-bold mb-4 bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent leading-loose">
-            柳含知 · Liu HanZhi
-          </h1>
-          <p class="text-xl text-base-content/80 max-w-3xl mb-4">
-            Nanjing University Student · AI / RL · Full-Stack · Developer Tools · Open Source
-          </p>
-          <p class="text-lg text-base-content/60 max-w-2xl mb-8 italic">
-            "用代码研究智能，也用代码做真正有意思的产品。"
-          </p>
+    <div class="space-y-14">
+      <section class="py-6 text-center" aria-labelledby="home-positioning">
+        <p class="mb-3 font-mono text-xs font-bold uppercase tracking-[0.28em] text-primary">
+          Online as Liu Hanzhi
+        </p>
+        <h2 id="home-positioning" class="mx-auto max-w-3xl break-words text-2xl font-black leading-tight sm:text-4xl">
+          用工程方法构建智能系统与开发者工具
+        </h2>
+        <p class="mx-auto mt-5 max-w-2xl text-base leading-7 text-base-content/65 sm:text-lg">
+          南京大学智能科学与技术专业在读。关注 AI 系统、Agent 工作流与强化学习，
+          并用全栈工程把问题推进到可运行、可部署、可复盘的产品。
+        </p>
 
-          <!-- Badges -->
-          <div class="flex flex-wrap items-center justify-center gap-3 mb-8">
-            <a href="https://zylatent.com" target="_blank" class="badge badge-lg badge-primary gap-1 px-3 py-4 hover:opacity-80 transition-opacity">
-              <Icon name="lucide:globe" class="w-3.5 h-3.5" />
-              zylatent.com
-            </a>
-            <a href="mailto:liuhanzhi514@gmail.com" class="badge badge-lg badge-error gap-1 px-3 py-4 hover:opacity-80 transition-opacity">
-              <Icon name="lucide:mail" class="w-3.5 h-3.5" />
-              Contact
-            </a>
-            <a href="https://space.bilibili.com/511060666" target="_blank" class="badge badge-lg badge-info gap-1 px-3 py-4 hover:opacity-80 transition-opacity">
-              <Icon name="simple-icons:bilibili" class="w-3.5 h-3.5" />
-              周玄渊
-            </a>
+        <div class="mx-auto mt-7 flex max-w-xs flex-col items-stretch justify-center gap-3 sm:max-w-none sm:flex-row sm:flex-wrap sm:items-center">
+          <a href="#case-studies" class="btn btn-primary gap-2">
+            查看代表项目
+            <Icon name="lucide:arrow-down" class="h-4 w-4" />
+          </a>
+          <a href="https://github.com/ZhouYinLong-lab" target="_blank" rel="noopener noreferrer" class="btn btn-outline gap-2">
+            <Icon name="lucide:github" class="h-4 w-4" />
+            GitHub
+          </a>
+          <a href="mailto:liuhanzhi514@gmail.com" class="btn btn-ghost gap-2">
+            <Icon name="lucide:mail" class="h-4 w-4" />
+            联系我
+          </a>
+        </div>
+      </section>
+
+      <section aria-labelledby="capabilities-title">
+        <div class="mb-6 flex items-end justify-between gap-4">
+          <div>
+            <p class="font-mono text-xs uppercase tracking-[0.2em] text-base-content/40">Capabilities</p>
+            <h2 id="capabilities-title" class="mt-1 text-2xl font-bold">一条主线，三组能力</h2>
+          </div>
+          <p class="hidden max-w-sm text-right text-sm text-base-content/50 md:block">
+            技术栈是解决问题的工具，不是彼此并列的身份标签。
+          </p>
+        </div>
+
+        <div class="grid gap-4 md:grid-cols-3">
+          {[
+            {
+              index: "01",
+              icon: "lucide:brain-circuit",
+              title: "智能系统",
+              desc: "强化学习实验、Agent Workflows、LLM Evaluation 与机器人控制。",
+            },
+            {
+              index: "02",
+              icon: "lucide:blocks",
+              title: "工程交付",
+              desc: "从需求、架构和实现，到数据库、部署、PWA 与线上维护。",
+            },
+            {
+              index: "03",
+              icon: "lucide:wrench",
+              title: "开发者工具",
+              desc: "AI 工作流封装、文档系统、自动化维护与开源协作。",
+            },
+          ].map((area) => (
+            <article class="rounded-2xl border border-base-300 bg-base-200 p-6">
+              <div class="flex items-center justify-between">
+                <Icon name={area.icon} class="h-6 w-6 text-primary" />
+                <span class="font-mono text-xs text-base-content/35">{area.index}</span>
+              </div>
+              <h3 class="mt-5 text-lg font-bold">{area.title}</h3>
+              <p class="mt-2 text-sm leading-6 text-base-content/60">{area.desc}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section id="case-studies" class="scroll-mt-24" aria-labelledby="case-studies-title">
+        <div class="mb-7">
+          <p class="font-mono text-xs uppercase tracking-[0.2em] text-base-content/40">Selected work</p>
+          <h2 id="case-studies-title" class="mt-1 text-2xl font-bold">代表项目与技术决策</h2>
+          <p class="mt-2 max-w-2xl text-sm leading-6 text-base-content/55">
+            先解释问题、个人职责和关键决策，再提供源码。项目价值不由仓库数量代替。
+          </p>
+        </div>
+
+        <div class="space-y-5">
+          {featuredProjects.map((post) => {
+            const project = post.data.project!;
+            return (
+              <ProjectCaseCard
+                order={project.order}
+                title={post.data.title}
+                description={post.data.description}
+                role={project.role}
+                challenge={project.challenge}
+                decision={project.decision}
+                outcome={project.outcome}
+                metric={project.metric}
+                metricLabel={project.metricLabel}
+                articleUrl={`/blog/${post.slug}/`}
+                sourceUrl={project.source}
+                demoUrl={project.demo}
+                tags={post.data.tags}
+              />
+            );
+          })}
+        </div>
+      </section>
+
+      <section aria-labelledby="evidence-title">
+        <div class="rounded-2xl border border-base-300 bg-base-200 p-6 sm:p-8">
+          <div class="grid gap-8 lg:grid-cols-[1fr_1.4fr]">
+            <div>
+              <p class="font-mono text-xs uppercase tracking-[0.2em] text-primary">How I build</p>
+              <h2 id="evidence-title" class="mt-2 text-2xl font-bold">从问题到复盘</h2>
+              <p class="mt-3 text-sm leading-6 text-base-content/60">
+                我更看重能否把模糊需求推进到真实环境，并诚实记录取舍、失败与后续判断。
+              </p>
+            </div>
+
+            <ol class="grid grid-cols-2 gap-3 sm:grid-cols-5">
+              {[
+                ["01", "定义问题"],
+                ["02", "约束边界"],
+                ["03", "实现交付"],
+                ["04", "验证运行"],
+                ["05", "公开复盘"],
+              ].map(([step, label]) => (
+                <li class="rounded-xl border border-base-300 bg-base-100 p-4">
+                  <span class="font-mono text-xs font-bold text-primary">{step}</span>
+                  <p class="mt-3 text-sm font-semibold">{label}</p>
+                </li>
+              ))}
+            </ol>
           </div>
         </div>
       </section>
 
-      <!-- 关于我 -->
-      <section class="py-6">
-        <h2 class="text-2xl font-bold mb-6 flex items-center gap-2">
-          <Icon name="lucide:user" class="w-6 h-6 text-primary" />
-          <span>关于我</span>
-        </h2>
-
-        <div class="prose prose-base max-w-none text-base-content/80">
-          <p>
-            我是 <strong>柳含知 (Liu HanZhi)</strong>，南京大学<strong>智能科学与技术</strong>专业在读。本名周胤龙，"柳含知"是常用的网络身份，"周玄渊"用于B站、微信等内容平台。
-          </p>
+      <section aria-labelledby="outcomes-title">
+        <div class="mb-6">
+          <p class="font-mono text-xs uppercase tracking-[0.2em] text-base-content/40">Evidence</p>
+          <h2 id="outcomes-title" class="mt-1 text-2xl font-bold">可验证的交付结果</h2>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-6">
-          {[
-            { icon: "lucide:brain", title: "智能系统", desc: "强化学习 · 机器人控制 · LLM 应用 · Prompt Engineering", color: "oklch(0.6 0.2 280)" },
-            { icon: "lucide:code-2", title: "工程与开源", desc: "全栈产品 · 开发者工具 · Claude Code Skills · 开源协作", color: "oklch(0.6 0.2 160)" },
-            { icon: "lucide:palette", title: "创意技术", desc: "游戏开发 · 交互叙事 · 创意编程 · 技术写作", color: "oklch(0.7 0.2 60)" },
-          ].map((area) => (
-            <div class="card bg-base-200 border border-base-300">
-              <div class="card-body p-5">
-                <h3 class="card-title text-base flex items-center gap-2" style={`color: ${area.color}`}>
-                  <Icon name={area.icon} class="w-5 h-5" />
-                  {area.title}
-                </h3>
-                <p class="text-sm text-base-content/60">{area.desc}</p>
-              </div>
+        <div class="grid gap-4 sm:grid-cols-3">
+          {outcomes.map((outcome) => (
+            <div class="rounded-2xl border border-base-300 bg-base-100 p-6 text-center">
+              <div class="text-4xl font-black text-primary">{outcome.value}</div>
+              <div class="mt-2 text-sm text-base-content/55">{outcome.label}</div>
             </div>
           ))}
         </div>
-
-        <p class="text-sm text-base-content/50 mt-4 italic text-center">Build in public, learn in public.</p>
       </section>
 
-      <!-- 精选项目 -->
-      <section class="py-6">
-        <h2 class="text-2xl font-bold mb-6 flex items-center gap-2">
-          <Icon name="lucide:star" class="w-6 h-6 text-primary" />
-          <span>精选项目</span>
-        </h2>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {[
-            { name: "Dog-Skills", desc: "116 个 Claude Code Skills，覆盖开发/设计/写作/学习/商业/健康", tags: "Claude Code · AI Tools · Automation", url: "https://github.com/ZhouYinLong-lab/Dog-Skills" },
-            { name: "NanE", desc: "NJU 校园互助平台 — 应急物品共享、信息核验、同楼栋优先匹配", tags: "JavaScript · Node.js · PostgreSQL · PWA", url: "https://github.com/ZhouYinLong-lab/NanE" },
-            { name: "HuaiHai-h5-map", desc: "淮海战役互动地图 — 16 个历史节点、三阶段时间轴、离线 PWA", tags: "React · TypeScript · Tailwind CSS · PWA", url: "https://github.com/ZhouYinLong-lab/HuaiHai-h5-map" },
-            { name: "nannahelper/docs", desc: "面向编程初学者的技术文档 — 覆盖 20+ 主题, MkDocs + GitHub Actions 自动部署", tags: "MkDocs · Documentation · CI/CD", url: "https://github.com/nannahelper/docs" },
-            { name: "Dog-Babble", desc: "纯前端加密实验 — PBKDF2 + AES-256-GCM + 自定义字典编码, 零依赖", tags: "JavaScript · Encryption · Web Crypto", url: "https://github.com/ZhouYinLong-lab/Dog-Babble" },
-            { name: "my-astro-blog", desc: "本博客源码 — Astro 构建的个人数字花园, 记录技术实践与持续学习", tags: "Astro · Blog · SSG", url: "https://github.com/ZhouYinLong-lab/my-astro-blog" },
-          ].map((repo) => (
-            <a href={repo.url} target="_blank" class="card bg-base-200 hover:bg-base-300 transition-all duration-300 group border border-base-300">
-              <div class="card-body p-5">
-                <div class="flex items-center gap-2 mb-2">
-                  <Icon name="ri:folder-3-line" class="w-4 h-4 text-primary" />
-                  <h3 class="font-bold text-sm group-hover:text-primary transition-colors">{repo.name}</h3>
-                </div>
-                <p class="text-xs text-base-content/60 mb-3 line-clamp-2">{repo.desc}</p>
-                <div class="text-xs text-base-content/40">{repo.tags}</div>
-              </div>
-            </a>
-          ))}
+      <section aria-labelledby="opensource-title">
+        <div class="mb-6">
+          <p class="font-mono text-xs uppercase tracking-[0.2em] text-base-content/40">Collaboration</p>
+          <h2 id="opensource-title" class="mt-1 text-2xl font-bold">开源协作记录</h2>
+          <p class="mt-2 max-w-2xl text-sm leading-6 text-base-content/55">
+            这些记录证明我走通过发现问题、提交修改和接受 Review 的完整流程；贡献范围按实际修改说明。
+          </p>
         </div>
-      </section>
 
-      <!-- 开源贡献 -->
-      <section class="py-6">
-        <h2 class="text-2xl font-bold mb-6 flex items-center gap-2">
-          <Icon name="lucide:git-pull-request" class="w-6 h-6 text-primary" />
-          <span>开源贡献</span>
-        </h2>
-
-        <div class="overflow-x-auto">
-          <table class="table table-sm">
+        <div class="overflow-x-auto rounded-2xl border border-base-300">
+          <table class="table table-sm bg-base-100">
             <thead>
               <tr>
                 <th>项目</th>
                 <th>PR</th>
-                <th>描述</th>
+                <th>实际修改</th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <td><a href="https://github.com/supabase/supabase" target="_blank" class="link link-primary">Supabase</a></td>
-                <td><a href="https://github.com/supabase/supabase/pull/47658" target="_blank" class="link">#47658</a></td>
+                <td class="font-semibold">Apache HertzBeat</td>
+                <td><a href="https://github.com/apache/hertzbeat/pull/4187" target="_blank" rel="noopener noreferrer" class="link">#4187</a></td>
+                <td class="text-base-content/60">跨 16 个文件修正 13 处文档和代码注释</td>
+              </tr>
+              <tr>
+                <td class="font-semibold">Supabase</td>
+                <td><a href="https://github.com/supabase/supabase/pull/47658" target="_blank" rel="noopener noreferrer" class="link">#47658</a></td>
                 <td class="text-base-content/60">修复故障排除文档中的拼写错误</td>
               </tr>
               <tr>
-                <td><a href="https://github.com/mui/material-ui" target="_blank" class="link link-primary">MUI</a></td>
-                <td><a href="https://github.com/mui/material-ui/pull/48785" target="_blank" class="link">#48785</a></td>
+                <td class="font-semibold">MUI</td>
+                <td><a href="https://github.com/mui/material-ui/pull/48785" target="_blank" rel="noopener noreferrer" class="link">#48785</a></td>
                 <td class="text-base-content/60">修正 CHANGELOG 中的英文拼写问题</td>
-              </tr>
-              <tr>
-                <td><a href="https://github.com/just-the-docs/just-the-docs" target="_blank" class="link link-primary">Just the Docs</a></td>
-                <td><a href="https://github.com/just-the-docs/just-the-docs/pull/1836" target="_blank" class="link">#1836</a></td>
-                <td class="text-base-content/60">修复 Ruby strftime 文档链接</td>
-              </tr>
-              <tr>
-                <td><a href="https://github.com/modelcontextprotocol/modelcontextprotocol" target="_blank" class="link link-primary">Model Context Protocol</a></td>
-                <td><a href="https://github.com/modelcontextprotocol/modelcontextprotocol/pull/3019" target="_blank" class="link">#3019</a></td>
-                <td class="text-base-content/60">更新 Goose 集成文档链接</td>
-              </tr>
-              <tr>
-                <td><a href="https://github.com/apache/hertzbeat" target="_blank" class="link link-primary">Apache HertzBeat</a></td>
-                <td><a href="https://github.com/apache/hertzbeat/pull/4187" target="_blank" class="link">#4187</a></td>
-                <td class="text-base-content/60">跨 16 个文件修正 13 处文档和代码注释</td>
               </tr>
             </tbody>
           </table>
         </div>
+        <a href="/project/#open-source" class="btn btn-sm btn-ghost mt-4 gap-2">
+          查看全部协作记录
+          <Icon name="lucide:arrow-right" class="h-4 w-4" />
+        </a>
       </section>
 
-      <!-- 技术版图 -->
-      <section class="py-6">
-        <h2 class="text-2xl font-bold mb-6 flex items-center gap-2">
-          <Icon name="lucide:map" class="w-6 h-6 text-primary" />
-          <span>技术版图</span>
-        </h2>
-
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          {[
-            { title: "AI / RL", items: "Python · PyTorch · PyBullet · Jupyter · LLM Applications" },
-            { title: "Web Engineering", items: "TypeScript · JavaScript · Vue · React · Node.js · Astro" },
-            { title: "Systems & Creative Coding", items: "C++ · Godot · Linux · Git · PWA" },
-            { title: "Developer Experience", items: "Claude Code · GitHub Actions · Documentation · Automation" },
-          ].map((col) => (
-            <div class="card bg-base-200 border border-base-300">
-              <div class="card-body p-5">
-                <h3 class="font-bold text-sm mb-2 text-primary">{col.title}</h3>
-                <p class="text-sm text-base-content/60">{col.items}</p>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      <!-- GitHub 数据 -->
-      <section class="py-6">
-        <h2 class="text-2xl font-bold mb-6 flex items-center gap-2">
-          <Icon name="lucide:bar-chart-3" class="w-6 h-6 text-primary" />
-          <span>GitHub 数据</span>
-          <span class="text-sm font-normal text-base-content/50 ml-2">每周自动更新</span>
-        </h2>
-
-        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
-          {[
-            { value: "38", label: "公开仓库" },
-            { value: "50+", label: "Stars" },
-            { value: "947", label: "过去一年 Commits" },
-            { value: "14", label: "合并 PR" },
-            { value: "11", label: "Followers" },
-          ].map((stat) => (
-            <div class="card bg-base-200 border border-base-300 text-center">
-              <div class="card-body p-4">
-                <div class="text-3xl font-bold text-primary">{stat.value}</div>
-                <div class="text-xs text-base-content/50 mt-1">{stat.label}</div>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      <!-- 底部 -->
-      <section class="py-6 text-center">
-        <p class="text-base-content/70">
-          正在寻找实习、研究合作与有意义的开源协作机会。
+      <section class="rounded-2xl border border-primary/25 bg-primary/5 px-6 py-8 text-center">
+        <h2 class="text-2xl font-bold">寻找实习、研究合作与有意义的开源协作</h2>
+        <p class="mx-auto mt-3 max-w-2xl text-sm leading-6 text-base-content/60">
+          如果你正在构建智能系统、Agent 工具或需要完整工程交付的产品，欢迎联系我。
         </p>
-        <p class="text-sm text-base-content/50 mt-2">
-          对 AI/RL、开发者工具或创意技术感兴趣？<a href="mailto:liuhanzhi514@gmail.com" class="link link-primary">联系我 →</a>
-        </p>
+        <a href="mailto:liuhanzhi514@gmail.com" class="btn btn-primary mt-5 gap-2">
+          <Icon name="lucide:send" class="h-4 w-4" />
+          发邮件给我
+        </a>
       </section>
     </div>
   </MainCard>

@@ -2,137 +2,187 @@
 import { getCollection } from "astro:content";
 import { Icon } from "astro-icon/components";
 import MainCard from "@/components/MainCard.astro";
+import ProjectCaseCard from "@/components/ProjectCaseCard.astro";
 import BaseLayout from "@/layouts/BaseLayout.astro";
 
-// 1. 获取所有的博客文章
 const allPosts = await getCollection("blog");
 
-// 2. 筛选出分类包含“实验室”的文章,并按日期倒序排列
-// 👉 修复点：这里为 post, a, b 添加了 : any,完美绕过 TypeScript 报错
+const featuredProjects = allPosts
+  .filter((post) => post.data.featured && post.data.project)
+  .sort((a, b) => a.data.project!.order - b.data.project!.order);
+
 const labPosts = allPosts
-  .filter((post: any) => {
-    // 兼容 categories 数组和 category 字符串两种写法
-    const cats = post.data.categories || [post.data.category];
-    return cats.flat().includes("实验室");
+  .filter((post) => {
+    const categories = post.data.categories ?? [];
+    return categories.includes("实验室") && !post.data.featured;
   })
-  .sort(
-    (a: any, b: any) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
-  );
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+
+const contributions = [
+  {
+    project: "Apache HertzBeat",
+    pr: "#4187",
+    scope: "跨 16 个文件修正 13 处文档和代码注释",
+    process: "定位重复问题，批量修正后按 Review 意见完善提交。",
+    url: "https://github.com/apache/hertzbeat/pull/4187",
+  },
+  {
+    project: "Supabase",
+    pr: "#47658",
+    scope: "修复故障排除文档中的拼写错误",
+    process: "在阅读故障排除文档时发现问题并提交最小修正。",
+    url: "https://github.com/supabase/supabase/pull/47658",
+  },
+  {
+    project: "MUI",
+    pr: "#48785",
+    scope: "修正 CHANGELOG 中的英文拼写问题",
+    process: "核对上下文后提交文档修正并完成 Review 流程。",
+    url: "https://github.com/mui/material-ui/pull/48785",
+  },
+  {
+    project: "Just the Docs",
+    pr: "#1836",
+    scope: "修复 Ruby strftime 文档链接",
+    process: "验证失效链接并替换为正确的官方文档地址。",
+    url: "https://github.com/just-the-docs/just-the-docs/pull/1836",
+  },
+  {
+    project: "Model Context Protocol",
+    pr: "#3019",
+    scope: "更新 Goose 集成文档链接",
+    process: "确认目标地址变化后更新集成文档。",
+    url: "https://github.com/modelcontextprotocol/modelcontextprotocol/pull/3019",
+  },
+];
 ---
 
-<BaseLayout title="实验室项目">
+<BaseLayout
+  title="项目与开源协作"
+  description="柳含知的代表项目、技术决策、实验作品与开源协作记录。"
+>
   <MainCard
-    title="赛博工坊 (Labs)"
-    description="这里存放着我所有天马行空、不拘一格的数字实验与互动项目。"
-    textOverlay="LABS"
+    title="项目与开源协作"
+    description="从问题、技术决策与结果出发，而不只是一组仓库链接。"
+    textOverlay="WORK"
     infoIcon="lucide:flask-conical"
   >
-    <section class="py-4">
-      <h2 class="text-2xl font-bold mb-6 flex items-center gap-2">
-        <Icon name="lucide:rocket" class="w-6 h-6 text-primary" />
-        <span>实验档案</span>
-      </h2>
-
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {/* 👉 修复点：这里也为 post 添加了 : any */}
-        {labPosts.map((post: any) => {
-          const targetUrl = post.data.link || `/blog/${post.slug}/`;
-          const coverImage = post.data.image || post.data.cover;
-          return (
-          <a href={targetUrl} class="card bg-base-200 hover:bg-base-300 transition-all duration-300 shadow-lg hover:shadow-xl overflow-hidden group border border-base-300">
-            {coverImage && (
-              <figure class="h-48 overflow-hidden relative">
-                <img
-                  src={coverImage}
-                  alt={post.data.title}
-                  class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                />
-                <div class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors duration-300"></div>
-              </figure>
-            )}
-            <div class="card-body p-6">
-              <h3 class="card-title text-xl mb-2 group-hover:text-primary transition-colors">
-                {post.data.title}
-              </h3>
-              <p class="text-base-content/70 text-sm mb-4 line-clamp-2">
-                {post.data.description}
-              </p>
-              <div class="mt-auto flex items-center text-primary text-sm font-bold">
-                <span>进入实验</span>
-                <Icon name="lucide:arrow-right" class="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
-              </div>
-            </div>
-          </a>
-        )})}
-      </div>
-
-      {labPosts.length === 0 && (
-        <div class="text-center py-16 text-base-content/50 bg-base-200 rounded-2xl border border-dashed border-base-300 mt-4">
-          <Icon name="lucide:ghost" class="w-12 h-12 mx-auto mb-4 opacity-50" />
-          <p>实验室目前还在筹备中,敬请期待...</p>
+    <div class="space-y-14">
+      <section aria-labelledby="featured-projects-title">
+        <div class="mb-7">
+          <p class="font-mono text-xs uppercase tracking-[0.2em] text-primary">Case studies</p>
+          <h2 id="featured-projects-title" class="mt-1 text-2xl font-bold">代表项目</h2>
+          <p class="mt-2 max-w-2xl text-sm leading-6 text-base-content/55">
+            每个项目都包含个人职责、关键约束、技术选择和结果复盘。
+          </p>
         </div>
-      )}
-    </section>
 
-    <section class="py-4">
-      <h2 class="text-2xl font-bold mb-6 flex items-center gap-2">
-        <Icon name="lucide:git-pull-request" class="w-6 h-6 text-primary" />
-        <span>Open Source Contributions</span>
-      </h2>
+        <div class="space-y-5">
+          {featuredProjects.map((post) => {
+            const project = post.data.project!;
+            return (
+              <ProjectCaseCard
+                order={project.order}
+                title={post.data.title}
+                description={post.data.description}
+                role={project.role}
+                challenge={project.challenge}
+                decision={project.decision}
+                outcome={project.outcome}
+                metric={project.metric}
+                metricLabel={project.metricLabel}
+                articleUrl={`/blog/${post.slug}/`}
+                sourceUrl={project.source}
+                demoUrl={project.demo}
+                tags={post.data.tags}
+              />
+            );
+          })}
+        </div>
+      </section>
 
-      <div class="card bg-base-200 p-6">
-        <ul class="space-y-6">
-          {
-            [
-              {
-                project: "Supabase",
-                description: "Fixed type export path resolution in Postgres module (#47658)",
-                url: "https://github.com/supabase/supabase",
-              },
-              {
-                project: "MUI",
-                description: "Improved component accessibility and ARIA label handling (#48785)",
-                url: "https://github.com/mui/material-ui",
-              },
-              {
-                project: "Model Context Protocol",
-                description: "Enhanced documentation and fixed SDK type definitions (#3019)",
-                url: "https://github.com/modelcontextprotocol/modelcontextprotocol",
-              },
-              {
-                project: "Apache HertzBeat",
-                description: "Fixed monitoring template configuration parsing (#4187)",
-                url: "https://github.com/apache/hertzbeat",
-              },
-              {
-                project: "Just the Docs",
-                description: "Improved navigation structure for multi-level docs (#1836)",
-                url: "https://github.com/just-the-docs/just-the-docs",
-              },
-            ].map((contrib) => (
-              <li class="flex items-start gap-4">
-                <div class="flex-shrink-0 bg-base-300 p-2 rounded-full">
-                  <Icon name="lucide:git-commit" class="w-6 h-6 text-primary" />
-                </div>
-                <div>
-                  <h3 class="text-lg font-bold">
-                    <a
-                      href={contrib.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      class="hover:text-primary transition-colors flex items-center gap-1"
-                    >
-                      {contrib.project}
-                      <Icon name="lucide:external-link" class="w-4 h-4" />
+      <section aria-labelledby="experiments-title">
+        <div class="mb-6">
+          <p class="font-mono text-xs uppercase tracking-[0.2em] text-base-content/40">Experiments</p>
+          <h2 id="experiments-title" class="mt-1 text-2xl font-bold">实验档案</h2>
+          <p class="mt-2 text-sm text-base-content/55">
+            游戏、算法与交互叙事保留在这里，作为探索广度，而不与职业主线争夺层级。
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 gap-5 md:grid-cols-2">
+          {labPosts.map((post) => {
+            const targetUrl = `/blog/${post.slug}/`;
+            const coverImage = post.data.image;
+            return (
+              <article class="card overflow-hidden border border-base-300 bg-base-200 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
+                {coverImage && (
+                  <figure class="relative h-44 overflow-hidden">
+                    <img
+                      src={coverImage}
+                      alt=""
+                      class="h-full w-full object-cover transition-transform duration-500 hover:scale-105"
+                      loading="lazy"
+                    />
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/45 to-transparent"></div>
+                  </figure>
+                )}
+                <div class="card-body p-5">
+                  <h3 class="card-title text-lg">{post.data.title}</h3>
+                  <p class="line-clamp-2 text-sm leading-6 text-base-content/65">
+                    {post.data.description}
+                  </p>
+                  <div class="card-actions mt-2">
+                    <a href={targetUrl} class="btn btn-sm btn-ghost gap-2">
+                      查看实验记录
+                      <Icon name="lucide:arrow-right" class="h-4 w-4" />
                     </a>
-                  </h3>
-                  <p class="text-base-content/80">{contrib.description}</p>
+                  </div>
                 </div>
-              </li>
-            ))
-          }
-        </ul>
-      </div>
-    </section>
+              </article>
+            );
+          })}
+        </div>
+      </section>
+
+      <section id="open-source" class="scroll-mt-24" aria-labelledby="open-source-title">
+        <div class="mb-6">
+          <p class="font-mono text-xs uppercase tracking-[0.2em] text-primary">Collaboration log</p>
+          <h2 id="open-source-title" class="mt-1 text-2xl font-bold">开源协作记录</h2>
+          <p class="mt-2 max-w-3xl text-sm leading-6 text-base-content/55">
+            这些贡献的价值在于走通发现、验证、提交和 Review 流程。修改范围按实际内容陈述，
+            不借上游项目知名度放大贡献。
+          </p>
+        </div>
+
+        <div class="space-y-3">
+          {contributions.map((contribution, index) => (
+            <article class="grid gap-4 rounded-xl border border-base-300 bg-base-200 p-5 md:grid-cols-[2.5rem_10rem_1fr_auto] md:items-center">
+              <span class="font-mono text-xs text-base-content/35">
+                {String(index + 1).padStart(2, "0")}
+              </span>
+              <div>
+                <h3 class="font-bold">{contribution.project}</h3>
+                <span class="font-mono text-xs text-primary">{contribution.pr}</span>
+              </div>
+              <div>
+                <p class="text-sm font-medium text-base-content/80">{contribution.scope}</p>
+                <p class="mt-1 text-xs leading-5 text-base-content/50">{contribution.process}</p>
+              </div>
+              <a
+                href={contribution.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="btn btn-sm btn-ghost gap-2"
+                aria-label={`查看 ${contribution.project} ${contribution.pr}`}
+              >
+                查看 PR
+                <Icon name="lucide:external-link" class="h-4 w-4" />
+              </a>
+            </article>
+          ))}
+        </div>
+      </section>
+    </div>
   </MainCard>
 </BaseLayout>

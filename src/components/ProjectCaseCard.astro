@@ -1,0 +1,120 @@
+---
+import { Icon } from "astro-icon/components";
+
+interface Props {
+  order: number;
+  title: string;
+  description: string;
+  role: string;
+  challenge: string;
+  decision: string;
+  outcome: string;
+  metric: string;
+  metricLabel: string;
+  articleUrl: string;
+  sourceUrl: string;
+  demoUrl?: string;
+  tags?: string[];
+}
+
+const {
+  order,
+  title,
+  description,
+  role,
+  challenge,
+  decision,
+  outcome,
+  metric,
+  metricLabel,
+  articleUrl,
+  sourceUrl,
+  demoUrl,
+  tags = [],
+} = Astro.props;
+---
+
+<article class="case-study group relative overflow-hidden rounded-2xl border border-base-300 bg-base-200">
+  <div class="absolute inset-y-0 left-0 w-1 bg-gradient-to-b from-primary via-secondary to-accent"></div>
+
+  <div class="grid gap-6 p-6 lg:grid-cols-[minmax(0,1fr)_12rem] lg:p-7">
+    <div>
+      <div class="mb-4 flex flex-wrap items-center gap-3">
+        <span class="font-mono text-xs font-bold tracking-[0.2em] text-primary">
+          CASE {String(order).padStart(2, "0")}
+        </span>
+        <span class="rounded-full border border-base-300 bg-base-100 px-3 py-1 text-xs text-base-content/70">
+          {role}
+        </span>
+      </div>
+
+      <h3 class="text-xl font-bold transition-colors group-hover:text-primary sm:text-2xl">
+        {title}
+      </h3>
+      <p class="mt-2 max-w-3xl text-sm leading-6 text-base-content/65">{description}</p>
+
+      <dl class="mt-6 grid gap-4 text-sm md:grid-cols-3">
+        <div>
+          <dt class="mb-1 font-mono text-xs font-bold uppercase tracking-wider text-base-content/45">Problem</dt>
+          <dd class="leading-6 text-base-content/80">{challenge}</dd>
+        </div>
+        <div>
+          <dt class="mb-1 font-mono text-xs font-bold uppercase tracking-wider text-base-content/45">Decision</dt>
+          <dd class="leading-6 text-base-content/80">{decision}</dd>
+        </div>
+        <div>
+          <dt class="mb-1 font-mono text-xs font-bold uppercase tracking-wider text-base-content/45">Result</dt>
+          <dd class="leading-6 text-base-content/80">{outcome}</dd>
+        </div>
+      </dl>
+
+      {tags.length > 0 && (
+        <div class="mt-5 flex flex-wrap gap-2">
+          {tags.slice(0, 5).map((tag) => (
+            <span class="badge badge-sm badge-outline">{tag}</span>
+          ))}
+        </div>
+      )}
+
+      <div class="mt-6 flex flex-wrap gap-3">
+        <a href={articleUrl} class="btn btn-sm btn-primary gap-2">
+          阅读项目复盘
+          <Icon name="lucide:arrow-right" class="h-4 w-4" />
+        </a>
+        {demoUrl && (
+          <a href={demoUrl} target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-outline gap-2">
+            在线体验
+            <Icon name="lucide:external-link" class="h-4 w-4" />
+          </a>
+        )}
+        <a href={sourceUrl} target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-ghost gap-2">
+          源码
+          <Icon name="lucide:github" class="h-4 w-4" />
+        </a>
+      </div>
+    </div>
+
+    <div class="flex min-h-32 flex-col justify-between rounded-xl border border-primary/20 bg-base-100 p-5 lg:text-right">
+      <Icon name="lucide:chart-no-axes-combined" class="h-5 w-5 text-primary lg:ml-auto" />
+      <div>
+        <div class="text-4xl font-black text-primary">{metric}</div>
+        <div class="mt-1 text-xs leading-5 text-base-content/55">{metricLabel}</div>
+      </div>
+    </div>
+  </div>
+</article>
+
+<style>
+  .case-study {
+    transition:
+      transform 220ms ease,
+      border-color 220ms ease,
+      box-shadow 220ms ease;
+  }
+
+  .case-study:hover {
+    transform: translateY(-2px);
+    border-color: color-mix(in oklab, oklch(var(--p)) 45%, transparent);
+    box-shadow: 0 18px 45px rgb(0 0 0 / 0.1);
+  }
+</style>

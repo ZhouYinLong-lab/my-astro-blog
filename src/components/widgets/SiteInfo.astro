@@ -30,6 +30,10 @@ const isBlogPage = pathname === "/blog" || pathname === "/blog/";
 const isAboutPage = pathname.includes("/about");
 const isFriendsPage = pathname.includes("/friends") || pathname.includes("/links");
 const shouldShow = isHomePage || isBlogPage || isAboutPage || isFriendsPage;
+const analyticsEnabled = Boolean(
+  import.meta.env.PUBLIC_SUPABASE_URL &&
+  import.meta.env.PUBLIC_SUPABASE_ANON_KEY,
+);
 ---
 
 {shouldShow && (
@@ -45,15 +49,19 @@ const shouldShow = isHomePage || isBlogPage || isAboutPage || isFriendsPage;
         <span class="font-mono text-base-content font-bold">{articleCount}</span>
       </div>
 
-      <div class="flex justify-between items-center">
-        <span class="text-base-content/80">本站访客数</span>
-        <span class="font-mono text-base-content" id="site-uv">--</span>
-      </div>
+      {analyticsEnabled && (
+        <>
+          <div class="hidden justify-between items-center" data-analytics-row="uv">
+            <span class="text-base-content/80">本站访客数</span>
+            <span class="font-mono text-base-content" id="site-uv"></span>
+          </div>
 
-      <div class="flex justify-between items-center">
-        <span class="text-base-content/80">本站总浏览量</span>
-        <span class="font-mono text-base-content" id="site-pv">--</span>
-      </div>
+          <div class="hidden justify-between items-center" data-analytics-row="pv">
+            <span class="text-base-content/80">本站总浏览量</span>
+            <span class="font-mono text-base-content" id="site-pv"></span>
+          </div>
+        </>
+      )}
 
       <div class="flex justify-between items-center">
         <span class="text-base-content/80">最后更新</span>
@@ -80,9 +88,12 @@ const shouldShow = isHomePage || isBlogPage || isAboutPage || isFriendsPage;
         // PV: 每次访问 +1
         try {
           const { data: pv } = await supabase.rpc('increment_site_pv');
-          if (pvEl) pvEl.textContent = pv ?? '--';
+          if (pvEl && pv != null) {
+            pvEl.textContent = String(pv);
+            document.querySelector('[data-analytics-row="pv"]')?.classList.replace('hidden', 'flex');
+          }
         } catch {
-          if (pvEl) pvEl.textContent = '--';
+          document.querySelector('[data-analytics-row="pv"]')?.classList.add('hidden');
         }
 
         // UV: 检查今日是否已计数 (localStorage 去重)
@@ -92,17 +103,23 @@ const shouldShow = isHomePage || isBlogPage || isAboutPage || isFriendsPage;
           localStorage.setItem(uvKey, '1');
           try {
             const { data: uv } = await supabase.rpc('increment_site_uv');
-            if (uvEl) uvEl.textContent = uv ?? '--';
+            if (uvEl && uv != null) {
+              uvEl.textContent = String(uv);
+              document.querySelector('[data-analytics-row="uv"]')?.classList.replace('hidden', 'flex');
+            }
           } catch {
-            if (uvEl) uvEl.textContent = '--';
+            document.querySelector('[data-analytics-row="uv"]')?.classList.add('hidden');
           }
         } else {
           // 今日已计数，只读取
           try {
             const { data: uv } = await supabase.rpc('get_site_uv');
-            if (uvEl) uvEl.textContent = uv ?? '--';
+            if (uvEl && uv != null) {
+              uvEl.textContent = String(uv);
+              document.querySelector('[data-analytics-row="uv"]')?.classList.replace('hidden', 'flex');
+            }
           } catch {
-            if (uvEl) uvEl.textContent = '--';
+            document.querySelector('[data-analytics-row="uv"]')?.classList.add('hidden');
           }
         }
       }
