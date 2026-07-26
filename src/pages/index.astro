@@ -27,6 +27,7 @@ const outcomes = featuredProjects.map((post) => ({
     title="柳含知 / Zhou Yinlong"
     description="智能系统与开发者工具方向的工程学生"
     textOverlay="BUILD"
+    headerImage="/portfolio/hero-build.webp"
     infoIcon="lucide:info"
   >
     <div class="space-y-14">
@@ -37,7 +38,7 @@ const outcomes = featuredProjects.map((post) => ({
         <h2 id="home-positioning" class="mx-auto max-w-3xl break-words text-2xl font-black leading-tight sm:text-4xl">
           用工程方法构建智能系统与开发者工具
         </h2>
-        <p class="mx-auto mt-5 max-w-2xl text-base leading-7 text-base-content/65 sm:text-lg">
+        <p class="mx-auto mt-5 max-w-2xl break-words text-base leading-7 text-base-content/65 sm:text-lg">
           南京大学智能科学与技术专业在读。关注 AI 系统、Agent 工作流与强化学习，
           并用全栈工程把问题推进到可运行、可部署、可复盘的产品。
         </p>
@@ -129,6 +130,7 @@ const outcomes = featuredProjects.map((post) => ({
                 sourceUrl={project.source}
                 demoUrl={project.demo}
                 tags={post.data.tags}
+                cover={post.data.image}
               />
             );
           })}

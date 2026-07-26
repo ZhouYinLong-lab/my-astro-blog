@@ -65,6 +65,7 @@ const contributions = [
     title="项目与开源协作"
     description="从问题、技术决策与结果出发，而不只是一组仓库链接。"
     textOverlay="WORK"
+    headerImage="/portfolio/hero-work.webp"
     infoIcon="lucide:flask-conical"
   >
     <div class="space-y-14">
@@ -95,6 +96,7 @@ const contributions = [
                 sourceUrl={project.source}
                 demoUrl={project.demo}
                 tags={post.data.tags}
+                cover={post.data.image}
               />
             );
           })}

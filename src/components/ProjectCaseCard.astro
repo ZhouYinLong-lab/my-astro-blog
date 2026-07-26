@@ -15,6 +15,7 @@ interface Props {
   sourceUrl: string;
   demoUrl?: string;
   tags?: string[];
+  cover?: string;
 }
 
 const {
@@ -31,11 +32,22 @@ const {
   sourceUrl,
   demoUrl,
   tags = [],
+  cover,
 } = Astro.props;
 ---
 
 <article class="case-study group relative overflow-hidden rounded-2xl border border-base-300 bg-base-200">
   <div class="absolute inset-y-0 left-0 w-1 bg-gradient-to-b from-primary via-secondary to-accent"></div>
+
+  {cover && (
+    <div class="relative h-48 overflow-hidden border-b border-base-300 sm:h-56">
+      <img src={cover} alt={`${title} 项目封面`} class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" loading="lazy" />
+      <div class="absolute inset-0 bg-gradient-to-t from-black/65 via-black/10 to-transparent"></div>
+      <span class="absolute bottom-4 left-6 rounded-full border border-white/30 bg-black/35 px-3 py-1 font-mono text-xs tracking-[0.2em] text-white backdrop-blur-sm">
+        PROJECT COVER
+      </span>
+    </div>
+  )}
 
   <div class="grid gap-6 p-6 lg:grid-cols-[minmax(0,1fr)_12rem] lg:p-7">
     <div>
