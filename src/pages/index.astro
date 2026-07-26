@@ -18,6 +18,8 @@ const recentPosts = (await getCollection("blog"))
     description="记录学习、制作与思考。"
     textOverlay="COURTYARD"
     textOverlayClass="whitespace-nowrap text-[clamp(2.5rem,7vw,10rem)]"
+    headerImageDark="/portfolio/bg-dark.webp"
+    headerImageLight="/portfolio/bg-light.webp"
     infoIcon="lucide:home"
   >
     <div class="space-y-14">
@@ -31,6 +33,29 @@ const recentPosts = (await getCollection("blog"))
         <p class="mx-auto mt-5 max-w-2xl text-base leading-7 text-base-content/65 sm:text-lg">
           这里有文章、实验、项目，也有一些不太容易归类的杂务。随意走走，看看最近留下了什么。
         </p>
+      </section>
+
+      <section aria-labelledby="host-intro" class="rounded-2xl border border-base-300 bg-base-200 p-6 sm:p-8">
+        <div class="grid gap-8 md:grid-cols-[0.85fr_1.5fr] md:items-end">
+          <div>
+            <p class="font-mono text-xs font-bold uppercase tracking-[0.24em] text-primary">About the host</p>
+            <h2 id="host-intro" class="mt-3 text-2xl font-black sm:text-3xl">柳含知 / Zhou Yinlong</h2>
+            <p class="mt-2 text-sm text-base-content/55">Online as Liu Hanzhi</p>
+          </div>
+          <div>
+            <p class="text-base leading-7 text-base-content/75 sm:text-lg">
+              我在南京大学学习智能科学与技术，平时在智能系统、Agent 工作流、机器人控制和开发者工具之间游走。
+            </p>
+            <p class="mt-3 text-sm leading-6 text-base-content/55">
+              这座别苑是我的公开记录：把做过的东西、读过的文字和还没想清楚的实验放在一起，慢慢整理，也慢慢长出来。
+            </p>
+            <div class="mt-5 flex flex-wrap gap-2">
+              <span class="badge badge-outline">南京大学</span>
+              <span class="badge badge-outline">智能科学与技术</span>
+              <span class="badge badge-outline">Build in Public</span>
+            </div>
+          </div>
+        </div>
       </section>
 
       <section aria-labelledby="courtyard-links">
@@ -112,14 +137,13 @@ const recentPosts = (await getCollection("blog"))
         </div>
       </section>
 
-      <section class="rounded-2xl border border-base-300 bg-base-200 px-6 py-8 text-center sm:px-8">
+      <section class="rounded-2xl border border-primary/25 bg-primary/5 px-6 py-8 text-center sm:px-8">
         <p class="mx-auto max-w-2xl text-sm leading-7 text-base-content/65">
-          我是柳含知，在线上也使用 Liu Hanzhi。正在南京大学学习智能科学与技术，偶尔写代码，偶尔写字。
+          如果你想聊一个项目、一篇文章，或者某个还没有答案的问题，欢迎给我写信。
         </p>
         <div class="mt-5 flex flex-wrap justify-center gap-3">
-          <a href="/about/" class="btn btn-sm btn-outline">认识我</a>
           <a href="mailto:liuhanzhi514@gmail.com" class="btn btn-sm btn-ghost gap-2">
-            联系我
+            写一封信
             <Icon name="lucide:mail" class="h-4 w-4" />
           </a>
         </div>
