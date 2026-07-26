@@ -26,7 +26,6 @@ const {
   showTOC = false,
   isIndexed = true,
   showProgress = false, // 👈 新增：手动强制开启进度条的 prop
-  fullTitle = false,
 } = Astro.props;
 
 // 🧠 智能判断：当前是否为具体的“博客文章页”
@@ -56,7 +55,7 @@ const displayProgress = showProgress || isAutoBlogPost;
     <ElementCrossing />
     <PointerOnNavigation />
     <Header title={title} description={description} favicon={SITE_FAVICON} image={image} />
-    <title>{fullTitle ? title : `${title} - ${SITE_TAB}`}</title>
+    <title>{`${title} | ${SITE_TAB}`}</title>
     
     {/* 强制浏览器最高优先级预加载背景图 */}
     {bgImage && <link rel="preload" as="image" href={bgImage} fetchpriority="high" />}
