@@ -20,6 +20,8 @@ const {
   title,
   image,
   bgImage = "/background/15.webp",
+  bgImageLight = "/portfolio/bg-light.webp",
+  bgImageDark,
   animateType = "fade-up",
   description = SITE_DESCRIPTION,
   headings = [],
@@ -39,6 +41,7 @@ const isAutoBlogPost =
   !/^\/blog\/?(?:\d+\/?)?$/.test(pathname); // 排除 /blog/ 或 /blog/2/ 这种列表分页
 
 const displayProgress = showProgress || isAutoBlogPost;
+const resolvedBgImageDark = bgImageDark ?? bgImage;
 ---
 
 <!doctype html>
@@ -58,7 +61,8 @@ const displayProgress = showProgress || isAutoBlogPost;
     <title>{`${title} | ${SITE_TAB}`}</title>
     
     {/* 强制浏览器最高优先级预加载背景图 */}
-    {bgImage && <link rel="preload" as="image" href={bgImage} fetchpriority="high" />}
+    {resolvedBgImageDark && <link rel="preload" as="image" href={resolvedBgImageDark} fetchpriority="high" />}
+    {bgImageLight && <link rel="preload" as="image" href={bgImageLight} fetchpriority="high" />}
 
     <script define:vars={{ SITE_THEME }} is:inline>
       (function () {
@@ -93,12 +97,20 @@ const displayProgress = showProgress || isAutoBlogPost;
     {displayProgress && <ReadingProgress />}
 
     {/* 赛博底层画框：开启 transform-gpu 强制显卡加速渲染毛玻璃 */}
-    {bgImage && (
+    {(resolvedBgImageDark || bgImageLight) && (
       <div class="fixed inset-0 z-[-10] pointer-events-none transform-gpu">
-        <div 
-          class="absolute inset-0 bg-cover bg-center bg-no-repeat transition-opacity duration-1000"
-          style={`background-image: url('${bgImage}');`}
-        ></div>
+        {resolvedBgImageDark && (
+          <div
+            class="absolute inset-0 bg-cover bg-center bg-no-repeat transition-opacity duration-1000 site-background-dark"
+            style={`background-image: url('${resolvedBgImageDark}');`}
+          ></div>
+        )}
+        {bgImageLight && (
+          <div
+            class="absolute inset-0 bg-cover bg-center bg-no-repeat transition-opacity duration-1000 site-background-light"
+            style={`background-image: url('${bgImageLight}');`}
+          ></div>
+        )}
         <div class="absolute inset-0 bg-base-300/30 backdrop-blur-[4px]"></div>
       </div>
     )}
@@ -179,6 +191,21 @@ const displayProgress = showProgress || isAutoBlogPost;
         background: url('/img/loading.gif') no-repeat center center;
         background-size: 40px 40px; 
         background-color: rgba(128, 128, 128, 0.05); 
+      }
+
+      .theme-image-light,
+      .site-background-light {
+        display: none;
+      }
+
+      html[data-theme-type="light"] .theme-image-dark,
+      html[data-theme-type="light"] .site-background-dark {
+        display: none;
+      }
+
+      html[data-theme-type="light"] .theme-image-light,
+      html[data-theme-type="light"] .site-background-light {
+        display: block;
       }
       
       .btn-copy {

@@ -12,6 +12,8 @@ export interface MainCardProps extends PostData {
   showTextBackground?: boolean;
   headerClass?: string;
   headerImage?: string;
+  headerImageLight?: string;
+  headerImageDark?: string;
   extraClasses?: string;
   link?: string; // 👉 接收我们自定义的 link 字段
 }
@@ -26,11 +28,15 @@ const {
   showTextBackground = true,
   headerClass = "",
   headerImage,
+  headerImageLight,
+  headerImageDark,
   extraClasses = "",
   link, // 👉 提取 link 字段
 } = Astro.props as MainCardProps;
 
 const accessibleHelpText = `${helpText}: ${title}`;
+const resolvedHeaderImageDark = headerImageDark ?? headerImage;
+const hasThemeHeader = Boolean(resolvedHeaderImageDark && headerImageLight);
 ---
 
 <Card class={`min-w-0 w-full overflow-hidden ${extraClasses}`}>
@@ -106,12 +112,19 @@ const accessibleHelpText = `${helpText}: ${title}`;
       </div>
     ) : textOverlay ? (
       <div class="relative group">
-        <div
-          class={`aspect-video w-full overflow-hidden bg-gradient-to-br from-base-300 to-base-100 bg-cover bg-center ${headerClass}`}
-          style={headerImage
-            ? `background-image: linear-gradient(180deg, rgba(0, 0, 0, 0.02), rgba(0, 0, 0, 0.48)), url('${headerImage}');`
-            : undefined}
-        >
+        <div class={`relative aspect-video w-full overflow-hidden bg-gradient-to-br from-base-300 to-base-100 ${headerClass}`}>
+          {resolvedHeaderImageDark && (
+            <div
+              class={`absolute inset-0 bg-cover bg-center ${hasThemeHeader ? "theme-image-dark" : ""}`}
+              style={`background-image: linear-gradient(180deg, rgba(0, 0, 0, 0.02), rgba(0, 0, 0, 0.48)), url('${resolvedHeaderImageDark}');`}
+            ></div>
+          )}
+          {headerImageLight && (
+            <div
+              class={`absolute inset-0 bg-cover bg-center ${hasThemeHeader ? "theme-image-light" : ""}`}
+              style={`background-image: linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.2)), url('${headerImageLight}');`}
+            ></div>
+          )}
           {showTextBackground && textOverlay && (
             <div class="absolute inset-0 w-full h-full error-animation-container">
               <div class="text-7xl sm:text-9xl md:text-[12rem] font-bold text-primary opacity-20 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
