@@ -34,6 +34,11 @@ site:
       svg: "material-symbols:dashboard-customize-outline-rounded"
       target: _self
       subItems: # 🌟 下设三个小分支
+        - id: making
+          text: 造物录
+          href: /chores/making
+          svg: "material-symbols:code-blocks-outline-rounded"
+          target: _self
         - id: about
           text: 居士自序
           href: /about

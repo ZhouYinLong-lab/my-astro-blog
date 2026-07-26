@@ -1,0 +1,232 @@
+---
+import { getCollection } from "astro:content";
+import { Icon } from "astro-icon/components";
+import MainCard from "@/components/MainCard.astro";
+import ProjectCaseCard from "@/components/ProjectCaseCard.astro";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+
+const featuredProjects = (await getCollection("blog"))
+  .filter((post) => post.data.featured && post.data.project)
+  .sort((a, b) => a.data.project!.order - b.data.project!.order);
+
+const outcomes = featuredProjects.map((post) => ({
+  value: post.data.project!.metric,
+  label: post.data.project!.metricLabel,
+}));
+---
+
+<BaseLayout
+  title="造物录"
+  description="记录柳含知如何构建智能系统、开发者工具与完整工程项目。"
+>
+  <MainCard
+    title="造物录"
+    description="记录项目、工具与实验如何被做出来。"
+    textOverlay="MAKING"
+    headerImageDark="/portfolio/hero-build.webp"
+    headerImageLight="/portfolio/hero-build-light.webp"
+    infoIcon="lucide:hammer"
+  >
+    <div class="space-y-14">
+      <section class="py-6 text-center" aria-labelledby="making-positioning">
+        <p class="mb-3 font-mono text-xs font-bold uppercase tracking-[0.28em] text-primary">
+          How things get made
+        </p>
+        <h2 id="making-positioning" class="mx-auto max-w-3xl break-words text-2xl font-black leading-tight sm:text-4xl">
+          用工程方法把想法推进到真实环境
+        </h2>
+        <p class="mx-auto mt-5 max-w-2xl break-words text-base leading-7 text-base-content/65 sm:text-lg">
+          这里记录智能系统、Agent 工具、全栈产品和其他正在成形的东西：为什么开始，如何取舍，最后留下了什么。
+        </p>
+
+        <div class="mx-auto mt-7 flex max-w-xs flex-col items-stretch justify-center gap-3 sm:max-w-none sm:flex-row sm:flex-wrap sm:items-center">
+          <a href="#case-studies" class="btn btn-primary gap-2">
+            查看代表项目
+            <Icon name="lucide:arrow-down" class="h-4 w-4" />
+          </a>
+          <a href="https://github.com/ZhouYinLong-lab" target="_blank" rel="noopener noreferrer" class="btn btn-outline gap-2">
+            <Icon name="lucide:github" class="h-4 w-4" />
+            GitHub
+          </a>
+        </div>
+      </section>
+
+      <section aria-labelledby="capabilities-title">
+        <div class="mb-6 flex items-end justify-between gap-4">
+          <div>
+            <p class="font-mono text-xs uppercase tracking-[0.2em] text-base-content/40">Capabilities</p>
+            <h2 id="capabilities-title" class="mt-1 text-2xl font-bold">一条主线，三组能力</h2>
+          </div>
+          <p class="hidden max-w-sm text-right text-sm text-base-content/50 md:block">
+            技术栈是解决问题的工具，不是彼此并列的身份标签。
+          </p>
+        </div>
+
+        <div class="grid gap-4 md:grid-cols-3">
+          {[
+            {
+              index: "01",
+              icon: "lucide:brain-circuit",
+              title: "智能系统",
+              desc: "强化学习实验、Agent Workflows、LLM Evaluation 与机器人控制。",
+            },
+            {
+              index: "02",
+              icon: "lucide:blocks",
+              title: "工程交付",
+              desc: "从需求、架构和实现，到数据库、部署、PWA 与线上维护。",
+            },
+            {
+              index: "03",
+              icon: "lucide:wrench",
+              title: "开发者工具",
+              desc: "AI 工作流封装、文档系统、自动化维护与开源协作。",
+            },
+          ].map((area) => (
+            <article class="rounded-2xl border border-base-300 bg-base-200 p-6">
+              <div class="flex items-center justify-between">
+                <Icon name={area.icon} class="h-6 w-6 text-primary" />
+                <span class="font-mono text-xs text-base-content/35">{area.index}</span>
+              </div>
+              <h3 class="mt-5 text-lg font-bold">{area.title}</h3>
+              <p class="mt-2 text-sm leading-6 text-base-content/60">{area.desc}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section id="case-studies" class="scroll-mt-24" aria-labelledby="case-studies-title">
+        <div class="mb-7">
+          <p class="font-mono text-xs uppercase tracking-[0.2em] text-base-content/40">Selected work</p>
+          <h2 id="case-studies-title" class="mt-1 text-2xl font-bold">代表项目与技术决策</h2>
+          <p class="mt-2 max-w-2xl text-sm leading-6 text-base-content/55">
+            先解释问题、个人职责和关键决策，再提供源码。项目价值不由仓库数量代替。
+          </p>
+        </div>
+
+        <div class="space-y-5">
+          {featuredProjects.map((post) => {
+            const project = post.data.project!;
+            return (
+              <ProjectCaseCard
+                order={project.order}
+                title={post.data.title}
+                description={post.data.description}
+                role={project.role}
+                challenge={project.challenge}
+                decision={project.decision}
+                outcome={project.outcome}
+                metric={project.metric}
+                metricLabel={project.metricLabel}
+                articleUrl={`/blog/${post.slug}/`}
+                sourceUrl={project.source}
+                demoUrl={project.demo}
+                tags={post.data.tags}
+                cover={post.data.image}
+              />
+            );
+          })}
+        </div>
+      </section>
+
+      <section aria-labelledby="evidence-title">
+        <div class="rounded-2xl border border-base-300 bg-base-200 p-6 sm:p-8">
+          <div class="grid gap-8 lg:grid-cols-[1fr_1.4fr]">
+            <div>
+              <p class="font-mono text-xs uppercase tracking-[0.2em] text-primary">How I build</p>
+              <h2 id="evidence-title" class="mt-2 text-2xl font-bold">从问题到复盘</h2>
+              <p class="mt-3 text-sm leading-6 text-base-content/60">
+                我更看重能否把模糊需求推进到真实环境，并诚实记录取舍、失败与后续判断。
+              </p>
+            </div>
+
+            <ol class="grid grid-cols-2 gap-3 sm:grid-cols-5">
+              {[
+                ["01", "定义问题"],
+                ["02", "约束边界"],
+                ["03", "实现交付"],
+                ["04", "验证运行"],
+                ["05", "公开复盘"],
+              ].map(([step, label]) => (
+                <li class="rounded-xl border border-base-300 bg-base-100 p-4">
+                  <span class="font-mono text-xs font-bold text-primary">{step}</span>
+                  <p class="mt-3 text-sm font-semibold">{label}</p>
+                </li>
+              ))}
+            </ol>
+          </div>
+        </div>
+      </section>
+
+      <section aria-labelledby="outcomes-title">
+        <div class="mb-6">
+          <p class="font-mono text-xs uppercase tracking-[0.2em] text-base-content/40">Evidence</p>
+          <h2 id="outcomes-title" class="mt-1 text-2xl font-bold">可验证的交付结果</h2>
+        </div>
+
+        <div class="grid gap-4 sm:grid-cols-3">
+          {outcomes.map((outcome) => (
+            <div class="rounded-2xl border border-base-300 bg-base-100 p-6 text-center">
+              <div class="text-4xl font-black text-primary">{outcome.value}</div>
+              <div class="mt-2 text-sm text-base-content/55">{outcome.label}</div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section id="open-source" aria-labelledby="opensource-title">
+        <div class="mb-6">
+          <p class="font-mono text-xs uppercase tracking-[0.2em] text-base-content/40">Collaboration</p>
+          <h2 id="opensource-title" class="mt-1 text-2xl font-bold">开源协作记录</h2>
+          <p class="mt-2 max-w-2xl text-sm leading-6 text-base-content/55">
+            这些记录证明我走通过发现问题、提交修改和接受 Review 的完整流程；贡献范围按实际修改说明。
+          </p>
+        </div>
+
+        <div class="overflow-x-auto rounded-2xl border border-base-300">
+          <table class="table table-sm bg-base-100">
+            <thead>
+              <tr>
+                <th>项目</th>
+                <th>PR</th>
+                <th>实际修改</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="font-semibold">Apache HertzBeat</td>
+                <td><a href="https://github.com/apache/hertzbeat/pull/4187" target="_blank" rel="noopener noreferrer" class="link">#4187</a></td>
+                <td class="text-base-content/60">跨 16 个文件修正 13 处文档和代码注释</td>
+              </tr>
+              <tr>
+                <td class="font-semibold">Supabase</td>
+                <td><a href="https://github.com/supabase/supabase/pull/47658" target="_blank" rel="noopener noreferrer" class="link">#47658</a></td>
+                <td class="text-base-content/60">修复故障排除文档中的拼写错误</td>
+              </tr>
+              <tr>
+                <td class="font-semibold">MUI</td>
+                <td><a href="https://github.com/mui/material-ui/pull/48785" target="_blank" rel="noopener noreferrer" class="link">#48785</a></td>
+                <td class="text-base-content/60">修正 CHANGELOG 中的英文拼写问题</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <a href="/project/#open-source" class="btn btn-sm btn-ghost mt-4 gap-2">
+          查看全部协作记录
+          <Icon name="lucide:arrow-right" class="h-4 w-4" />
+        </a>
+      </section>
+
+      <section class="rounded-2xl border border-primary/25 bg-primary/5 px-6 py-8 text-center">
+        <h2 class="text-2xl font-bold">寻找实习、研究合作与有意义的开源协作</h2>
+        <p class="mx-auto mt-3 max-w-2xl text-sm leading-6 text-base-content/60">
+          如果你正在构建智能系统、Agent 工具或需要完整工程交付的产品，欢迎联系我。
+        </p>
+        <a href="mailto:liuhanzhi514@gmail.com" class="btn btn-primary mt-5 gap-2">
+          <Icon name="lucide:send" class="h-4 w-4" />
+          发邮件给我
+        </a>
+      </section>
+    </div>
+  </MainCard>
+</BaseLayout>
