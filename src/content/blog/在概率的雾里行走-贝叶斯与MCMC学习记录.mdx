@@ -1,0 +1,372 @@
+---
+title: "在概率的雾里行走：从贝叶斯更新到 MCMC"
+description: "记录阅读《Probabilistic Programming and Bayesian Methods for Hackers》前 3 章的收获：如何用概率描述不确定性，用 PyMC 构造模型，再用 MCMC 从后验分布中取出答案。"
+pubDate: 2026-07-27
+categories:
+  - 尺蠖
+tags:
+  - 贝叶斯推断
+  - MCMC
+  - PyMC
+  - 数学建模
+  - 概率编程
+image: /img/bayes/the-astronomer.jpg
+---
+
+我最近在读 [《Probabilistic Programming and Bayesian Methods for Hackers》](https://github.com/CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers)，并把前 3 章整理成了几份中文学习记录。
+
+这本书最吸引我的地方，不是它介绍了多少个概率分布，而是它不断追问一个很实际的问题：**当数据不完整、测量有噪声、答案无法被直接算出来时，我们应该怎样做判断？**
+
+我的理解可以压缩成一句话：
+
+> 现实问题 → 概率模型 → 后验分布 → 用样本表达不确定性 → 做决策。
+
+这篇文章不是逐页翻译，而是把 Ch1 到 Ch3 串成一条学习路径。
+
+## 1. 贝叶斯方法不是“算出一个答案”
+
+频率统计通常会问：在重复实验中，一个参数的估计会怎样变化？贝叶斯方法则允许直接谈论参数本身的不确定性：在看到数据之后，我认为这个参数落在某个区间内的概率是多少？
+
+贝叶斯定理给出了更新规则：
+
+$$
+P(\theta \mid X) \propto P(X \mid \theta)P(\theta)
+$$
+
+其中：
+
+- $P(\theta)$ 是先验，表示观察数据之前的合理猜测；
+- $P(X \mid \theta)$ 是似然，表示某个参数能生成当前数据的程度；
+- $P(\theta \mid X)$ 是后验，表示看过数据之后更新的信念。
+
+硬币抛掷是最直观的例子。假设 $p$ 是硬币出现正面的概率，先给它一个 Beta 先验；每观察一次抛掷结果，就用新的证据更新这个分布。下面把这个例子完整跑一遍。
+
+## 2. 一个完整例子：抛硬币如何更新后验
+
+设硬币出现正面的概率是 $p$。在完全不了解硬币的情况下，可以使用均匀先验：
+
+$$
+p \sim \text{Beta}(1, 1)
+$$
+
+每次抛掷的结果服从 Bernoulli 分布。观察到 $h$ 次正面、$t$ 次反面后，后验仍然是 Beta 分布：
+
+$$
+p \mid X \sim \text{Beta}(1+h, 1+t)
+$$
+
+下面的代码用固定随机种子生成 100 次模拟抛掷，并画出先验以及观察 10、30、100 次后的后验。真实概率只在模拟时已知，现实问题中通常并不知道它。
+
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+from scipy.stats import beta
+
+# 固定随机种子，让读者每次运行都能得到同一组演示数据。
+rng = np.random.default_rng(20260727)
+true_p = 0.70  # 只用于生成模拟数据；推断时不把它交给模型
+tosses = rng.binomial(1, true_p, size=100)
+
+# Beta(1, 1) 是均匀先验：0 到 1 之间的概率一开始同样可能。
+prior_alpha, prior_beta = 1, 1
+checkpoints = [0, 10, 30, 100]
+grid = np.linspace(0.001, 0.999, 500)
+
+fig, axes = plt.subplots(2, 2, figsize=(12, 7), sharex=True, sharey=True)
+
+for ax, n in zip(axes.ravel(), checkpoints):
+    observed = tosses[:n]
+    heads = int(observed.sum())
+    tails = n - heads
+
+    # 二项分布的共轭更新：正面加到 alpha，反面加到 beta。
+    alpha = prior_alpha + heads
+    beta_parameter = prior_beta + tails
+    posterior = beta(alpha, beta_parameter)
+    density = posterior.pdf(grid)
+
+    # 画后验密度；n=0 时它就是原来的均匀先验。
+    ax.plot(grid, density, color="#386fa4", linewidth=2)
+    ax.fill_between(grid, density, color="#386fa4", alpha=0.15)
+    ax.axvline(true_p, color="#b24c3f", linestyle="--", linewidth=1.3)
+    ax.set_title(f"n={n}, heads={heads}, tails={tails}")
+    ax.set_xlabel("p: probability of heads")
+    ax.set_ylabel("density")
+
+fig.suptitle("Bayesian update for a coin toss", fontsize=17)
+fig.tight_layout()
+fig.savefig("coin-bayesian-update.png", dpi=180, bbox_inches="tight")
+
+final_posterior = beta(1 + int(tosses.sum()), 1 + 100 - int(tosses.sum()))
+print("posterior mean:", final_posterior.mean())
+print("95% credible interval:", final_posterior.ppf([0.025, 0.975]))
+```
+
+本次固定种子生成了 67 次正面和 33 次反面，因此最终后验是 $\text{Beta}(68, 34)$。后验均值约为 $0.667$，95% 可信区间约为 $[0.573, 0.754]$。注意，均值没有直接等于模拟时的 $0.70$，这正是有限样本和不确定性的体现。
+
+![抛硬币的贝叶斯后验更新](/img/bayes/coin-bayesian-update.png)
+
+这让我意识到，贝叶斯推断的结果不应该只写成“$p=0.51$”。更完整的表达应该包括：中心位置、可信区间，以及这个区间为什么会是现在的形状。图中曲线随着数据增加逐渐变窄，但它并没有假装自己已经百分之百确定。
+
+### 这张图应该怎样读？
+
+- 横轴是硬币出现正面的概率 $p$，纵轴是这个概率附近的相对可信程度，也就是后验密度；
+- 蓝色曲线是我们在不同观测量下对 $p$ 的更新结果。左上角几乎是平的，表示一开始没有偏好的概率；
+- 红色虚线是生成模拟数据时使用的 $p=0.70$。它帮助我们检查模拟效果，但现实数据分析时通常没有这条“真值线”；
+- 金色半透明区域是近似 95% 可信区间。样本从 10 个增加到 100 个后，曲线变窄，说明不确定性下降，而不是说明模型突然变得绝对正确；
+- 第 30 次抛掷的结果暂时偏向 $0.7$ 以上，第 100 次则回到约 $0.67$。这正是为什么不能把少量观测直接等同于真实参数。
+
+## 3. Ch1：用变点模型寻找行为变化
+
+第一章的核心案例是短信数量变化检测。现在有一位用户连续 74 天的每日短信数，问题是：他的短信习惯是否在某一天发生了突然变化？
+
+可以把每天的短信数建模为泊松分布：
+
+$$
+C_i \sim \text{Poisson}(\lambda)
+$$
+
+再加入一个变点 $\tau$，让变点前后使用不同的平均速率：
+
+$$
+\lambda_i =
+\begin{cases}
+\lambda_1 & i < \tau \\
+\lambda_2 & i \geq \tau
+\end{cases}
+$$
+
+模型中需要推断的不是一个参数，而是 $\lambda_1$、$\lambda_2$ 和 $\tau$。我在笔记中给它们设置了指数先验和离散均匀先验，然后交给 PyMC 采样。
+
+结果大致呈现出这样的结构：
+
+| 参数 | 后验均值（约） | 解释 |
+| --- | ---: | --- |
+| $\lambda_1$ | 18 | 变点之前的日均短信数 |
+| $\lambda_2$ | 23 | 变点之后的日均短信数 |
+| $\tau$ | 第 45 天附近 | 最可能的行为变化位置 |
+
+这个案例让我第一次感受到“后验分布”比一个确定日期更有用。$\tau$ 的分布集中在某个区域，意味着模型认为那里最可能发生变化，但仍然保留了不确定性；而 $\lambda_1$ 与 $\lambda_2$ 的后验明显分离，则说明变化不太可能只是随机波动。
+
+这里还有一个重要的计算事实：后验分布的形式可以写出来，但归一化常数往往很难直接积分。概率编程的价值就在于，我们可以把模型写成代码，让采样器处理这部分计算。
+
+## 4. Ch2：建模首先是选择假设
+
+第二章把重点从“怎么运行模型”移到了“模型是否合理”。我把建模过程记成四步：
+
+1. 根据数据生成机制选择似然；
+2. 为未知参数设定先验；
+3. 通过观测得到后验；
+4. 从后验生成新数据，检查模型能否解释原始数据。
+
+### 3.1 正态分布并不总是好用
+
+书中的另一个案例研究蟋蟀鸣叫次数与温度的关系。最初可以用一个简单的正态线性回归：
+
+$$
+C_i \sim \text{Normal}(\alpha + \beta T_i, \sigma)
+$$
+
+问题是，正态分布的尾巴比较薄。数据中只要出现一个异常值，它就可能把整条回归线拉偏，因为模型会努力解释这个“极不可能”的观测。
+
+改用 Student-t 分布后，模型拥有一个自由度参数 $\nu$ 来控制尾部厚度：
+
+$$
+C_i \sim \text{StudentT}(\mu_i, \sigma, \nu)
+$$
+
+胖尾似然并不是把异常值删除，而是允许模型承认：现实数据里偶尔会出现不符合主体规律的点。这个选择通常比先清洗数据、再假设剩下的数据完美服从正态分布更诚实。
+
+### 3.2 用后验预测检查模型
+
+一个模型拟合得很好，不代表它真的理解了数据。后验预测检查（Posterior Predictive Check，PPC）的做法是：
+
+1. 从后验分布中抽取一组参数；
+2. 用这组参数重新生成一份“假数据”；
+3. 重复很多次，得到假数据的统计量分布；
+4. 比较原始数据和这些假数据是否具有相似的均值、方差、极值或整体形状。
+
+如果真实数据的统计量总是落在假数据分布的尾部，说明模型可能遗漏了某种结构。PPC 让我看到，模型验证并不是只看一张回归线，而是要问：**如果这个模型是真的，它应该能生成什么样的数据？**
+
+### 3.3 分层模型与“部分共享”
+
+当数据来自多个地区、年份或群体时，有三种直觉方案：把所有组混在一起、每个组完全独立，或者让各组共享一个更高层的分布。
+
+第三种就是 partial pooling，也就是分层模型。每个组有自己的参数，但这些参数又来自共同的顶层分布：
+
+$$
+\mu_i \sim \text{Normal}(\mu_{global}, \tau_{global})
+$$
+
+它产生了很有用的“收缩效应”：样本多的组主要听自己的数据，样本少的组则适度向全局均值靠拢。这样既不抹平组间差异，也不会让小样本组因为偶然波动而产生极端结论。
+
+## 5. Ch3：打开 MCMC 的黑箱
+
+贝叶斯公式的问题不在于写不出来，而在于后验通常还要除以一个高维积分：
+
+$$
+P(\theta \mid X) = \frac{P(X \mid \theta)P(\theta)}{P(X)}
+$$
+
+当参数维度升高时，直接求 $P(X)$ 往往不可行。MCMC 的思路很巧妙：**不去完整计算后验密度，而是从后验中抽取很多样本。**
+
+有了这些样本，就可以用样本均值近似期望，用分位数近似可信区间，用满足某个条件的样本比例近似概率。
+
+### 5.1 Metropolis-Hastings 的三步
+
+Metropolis-Hastings 可以理解成在概率地形上行走：高概率的地方多停留，低概率的地方偶尔经过。
+
+```text
+从当前参数 θ_current 出发
+    ↓
+随机提出一个新位置 θ_proposed
+    ↓
+计算 r = f(θ_proposed) / f(θ_current)
+    ↓
+如果 r >= 1，一定接受；否则以 r 的概率接受
+    ↓
+记录当前位置，继续下一步
+```
+
+这里的 $f(\theta)$ 只需要与未归一化后验成正比：
+
+$$
+f(\theta) = P(X \mid \theta)P(\theta)
+$$
+
+因为接受概率只比较新旧两个位置，归一化常数会在比值中抵消。这就是 MCMC 最关键的“计算魔法”。
+
+### 5.2 从头写一个最小采样器
+
+我在笔记中用带噪声的正态数据推断真实均值 $\mu$。下面是压缩后的核心实现：
+
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+
+# 我们假设观测数据来自 N(mu=1, sigma=1)，但只把数据交给模型。
+rng = np.random.default_rng(20260727)
+data = rng.normal(loc=1.0, scale=1.0, size=20)
+
+def log_unnormalized_posterior(mu):
+    """返回 log(似然 × 先验)，这里使用平坦先验。"""
+    # 直接把 20 个概率相乘容易下溢；在 log 空间中改成求和更稳定。
+    log_likelihood = -0.5 * np.sum((data - mu) ** 2)
+    log_prior = 0.0  # 平坦先验：在比较时是一个常数
+    return log_likelihood + log_prior
+
+mu_current = 0.0  # 从一个不一定合理的起点开始
+log_current = log_unnormalized_posterior(mu_current)
+samples = []
+accepted = 0
+
+for _ in range(50_000):
+    # 提议：在当前位置附近随机走一步，0.5 是提议分布的标准差。
+    mu_proposed = mu_current + rng.normal(0, 0.5)
+    log_proposed = log_unnormalized_posterior(mu_proposed)
+
+    # 接受概率是后验密度之比；用 log 后只需要做减法。
+    log_accept_ratio = log_proposed - log_current
+    if np.log(rng.random()) < min(0.0, log_accept_ratio):
+        mu_current = mu_proposed
+        log_current = log_proposed
+        accepted += 1
+
+    # 无论接受还是拒绝，都要记录当前位置。
+    samples.append(mu_current)
+
+burn_in = 5_000
+posterior_samples = np.asarray(samples[burn_in:])
+print("acceptance rate:", accepted / 50_000)
+print("posterior mean:", posterior_samples.mean())
+print("posterior std:", posterior_samples.std())
+
+# 迹图检查链是否已经稳定；直方图近似后验分布。
+fig, (trace_ax, hist_ax) = plt.subplots(1, 2, figsize=(13, 5))
+trace_ax.plot(posterior_samples, linewidth=0.35, alpha=0.7)
+trace_ax.set_title("Trace after burn-in")
+trace_ax.set_xlabel("iteration")
+trace_ax.set_ylabel("mu")
+
+hist_ax.hist(posterior_samples, bins=50, density=True, alpha=0.65)
+hist_ax.axvline(1.0, color="crimson", linestyle="--", label="simulation truth")
+hist_ax.set_title("Posterior samples for mu")
+hist_ax.set_xlabel("mu")
+hist_ax.set_ylabel("density")
+hist_ax.legend(frameon=False)
+
+fig.tight_layout()
+fig.savefig("mh-posterior-sampler.png", dpi=180, bbox_inches="tight")
+```
+
+这个例子非常小，但已经包含了 MCMC 的完整骨架：提议、比较、接受或拒绝、记录，再丢掉前期尚未稳定的样本。用当前固定种子运行，接受率约为 $46.8\%$，后验均值约为 $0.865$，95% 区间约为 $[0.431, 1.306]$。
+
+![Metropolis-Hastings 的迹图与后验样本](/img/bayes/mh-posterior-sampler.png)
+
+左图没有明显趋势，说明 burn-in 之后链已经围绕稳定区域波动；右图则把这些样本汇总成了一个分布。真实均值 $\mu=1$ 落在可信区间内，但后验均值略低，说明 20 个观测仍然不足以消除随机误差。
+
+### 这张图应该怎样读？
+
+- 左图的每一个点都是一次 MCMC 迭代留下的当前位置。它不是一条要被拟合的回归线，而是观察采样链有没有持续漂移、卡住或突然跳到另一片区域；
+- 左图在 burn-in 之后围绕一个稳定范围快速上下波动，像“毛茸茸的毛毛虫”，说明这条链基本混合起来了；
+- 右图的柱子是后验样本的直方图，黑线是一个便于比较的正态近似，红色虚线是模拟时的真实均值，金色区域是样本计算出的 95% 区间；
+- 红线不需要正好穿过最高的柱子。数据只有 20 个点，后验均值约为 $0.865$，它仍然包含真值 $1$，这比强行报告“均值就是 1”更诚实；
+- 如果左图出现明显的斜坡、长时间水平线，或右图出现多个彼此分离的峰，就不能只看最终均值，而应该增加采样、调整提议步长，或者回头检查模型本身。
+
+## 6. 采样出来之后，还要先问它是否可信
+
+“能跑完”不等于“已经收敛”。我的笔记把诊断工具归纳成四类：
+
+### 5.1 Warm-up 与迹图
+
+链刚开始时会受到初始值影响，需要把前面一段样本作为 warm-up 或 burn-in 丢弃。迹图是最直观的检查：健康的链应该像一条没有明显趋势的“毛茸茸毛毛虫”，而不是持续向上、持续向下，或长时间卡在一条水平线上。
+
+### 5.2 自相关与有效样本量
+
+MCMC 样本不是独立同分布的，相邻样本往往很相似。自相关衰减得越慢，说明有效信息越少。真正需要关注的不是样本总数，而是有效样本量（ESS）。
+
+过去常用 thinning 每隔 $k$ 步保留一个样本来降低自相关，但这会直接丢掉计算结果。若目标只是估计后验均值，保留所有样本通常更合理；thinning 更适合存储压力很大或需要绘制密度图的场景。
+
+### 5.3 多链与 $\hat{R}$
+
+从不同初始值并行运行多条链，再比较链内和链间的方差。如果不同链最终都混合到同一个区域，$\hat{R}$ 应该接近 1；如果仍然明显大于 1，就说明链之间还没有达成一致，需要继续采样或重新检查模型。
+
+这比只看一条“看起来还行”的迹图更可靠：一条链可能只是困在了某个局部区域，多链才能暴露这个问题。
+
+## 7. 从随机游走到 NUTS
+
+Metropolis-Hastings 的提议步长存在一个 Goldilocks 问题：太小，链移动得很慢；太大，提议几乎都会被拒绝。高维空间里，这个问题会变得更加严重。
+
+后续算法试图更有效地探索后验：
+
+| 算法 | 直觉 | 特点 |
+| --- | --- | --- |
+| Metropolis-Hastings | 随机试探新位置 | 简单，但高维效率低 |
+| Gibbs | 一次更新一个参数 | 需要知道条件分布 |
+| HMC | 借助梯度进行物理式滑行 | 高维表现更好 |
+| NUTS | 自动判断何时停止滑行 | 减少手动调参 |
+
+PyMC 让这些算法被封装在统一接口之后，使用者不必从第一天起手调所有采样参数。但这不意味着可以跳过诊断：自动化的是采样过程，不是模型判断。
+
+## 8. 这三章给我的几个提醒
+
+### 7.1 建模选择比算法名称更重要
+
+同一份数据，使用正态似然还是 Student-t 似然，使用完全独立的组参数还是分层参数，可能比选择哪个采样器更影响结论。算法只能忠实地计算你写下的假设。
+
+### 7.2 不确定性不是结果的瑕疵
+
+后验分布较宽，并不代表模型失败；它可能只是诚实地告诉我们数据还不够。把可信区间压成一个漂亮的单点，反而会丢失决策中最重要的信息。
+
+### 7.3 诊断是建模的一部分
+
+迹图、$\hat{R}$、ESS 和 PPC 不是采样结束后的装饰，而是判断“这个模型是否值得相信”的证据。尤其是 PPC，它把问题从“参数拟合得好不好”转成了“模型生成的数据像不像现实”。
+
+### 7.4 下一步要把模型带到真实问题里
+
+目前这几章更像是建立一套语言：先验、似然、后验、采样、诊断。下一步我想尝试把它用于更贴近实际的序列数据或智能系统中的不确定性估计，并记录模型假设如何影响最终决策。
+
+## 参考与配图
+
+- 学习原书：[Probabilistic Programming and Bayesian Methods for Hackers](https://github.com/CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers)
+- 配图：约翰内斯·维米尔，《天文学家》（约 1668），[Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Jan_Vermeer_-_The_Astronomer.JPG)，页面标注为 Public Domain。
