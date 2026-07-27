@@ -6,7 +6,8 @@
 
 [![Blog](https://badgen.net/badge/🌐/zylatent.com/blue)](https://zylatent.com)
 [![Astro](https://badgen.net/badge/Astro/5.x/purple)](https://astro.build)
-[![License](https://badgen.net/badge/license/MIT/green)](https://github.com/ZhouYinLong-lab/my-astro-blog/blob/main/LICENSE)
+[![Code License](https://badgen.net/badge/code%20license/MIT/green)](https://github.com/ZhouYinLong-lab/my-astro-blog/blob/main/LICENSE)
+[![Content License](https://badgen.net/badge/content%20license/CC%20BY--NC--SA%204.0/blue)](https://github.com/ZhouYinLong-lab/my-astro-blog/blob/main/LICENSE-CONTENT.md)
 [![Status](https://badgen.net/badge/status/active/green)](https://github.com/ZhouYinLong-lab/my-astro-blog/actions)
 [![GitHub stars](https://badgen.net/github/stars/ZhouYinLong-lab/my-astro-blog)](https://github.com/ZhouYinLong-lab/my-astro-blog/stargazers)
 [![Made with Love](https://badgen.net/badge/made%20with/❤️/ff69b4)](https://zylatent.com)
@@ -134,7 +135,10 @@ featured: true         # 精选文章
 
 ## 许可
 
-基于 [Frosti](https://github.com/EveSunMaple/Frosti) 主题构建，MIT License。
+- **代码**：本项目的原创代码与修改部分采用 MIT License。根目录 `LICENSE` 同时保留了模板代码所需的上游版权声明。
+- **文章与原创图表**：除另有说明外，采用 [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/)，详情见 [`LICENSE-CONTENT.md`](LICENSE-CONTENT.md)。
+- **第三方素材**：遵循各自的原始许可；文章或资源中的具体说明优先于仓库默认许可。
+- 本站基于 [Frosti](https://github.com/EveSunMaple/Frosti) 主题构建。
 
 ---
 
