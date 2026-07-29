@@ -163,8 +163,8 @@ class SiteProfile(BaseModel):
 SITE_PROFILE = SiteProfile(
     name="寒柳别苑",
     domain="zylatent.com",
-    description="记录学习、制作与思考。",
-    topics=["Python", "AI", "软件工程", "写作"],
+    description="记录学习、工作与思考。",
+    topics=["Python", "C++", "Claude Code Skills", "诗歌", "写作"],
 )
 
 
@@ -185,8 +185,8 @@ curl.exe http://127.0.0.1:8000/api/site
 {
   "name": "寒柳别苑",
   "domain": "zylatent.com",
-  "description": "记录学习、制作与思考。",
-  "topics": ["Python", "AI", "软件工程", "写作"]
+  "description": "记录学习、工作与思考。",
+  "topics": ["Python", "C++", "Claude Code Skills", "诗歌", "写作"]
 }
 ```
 
@@ -194,9 +194,12 @@ curl.exe http://127.0.0.1:8000/api/site
 
 ## 6. 路径参数和查询参数：查询文章列表
 
-接下来把示例扩展成一个简化的文章 API。为了保持重点在 FastAPI，这里暂时使用内存列表，不接数据库：
+接下来把示例扩展成一个简化的文章 API。与其把文章摘要继续写死在 `main.py`，不如单独维护一个 JSON 文件：接口负责读取它，新增文章时只需要增加一条记录。
 
 ```python
+import json
+from pathlib import Path
+
 from fastapi import Query
 
 
@@ -207,20 +210,19 @@ class PostSummary(BaseModel):
     tags: list[str]
 
 
-POSTS = [
-    PostSummary(
-        slug="fastapi-basics",
-        title="FastAPI 入门：给寒柳别苑搭一个小型 API",
-        category="尺蠖",
-        tags=["Python", "FastAPI"],
-    ),
-    PostSummary(
-        slug="cpp-memory-ownership-raii",
-        title="谁拥有这块内存：一次 C++ 资源管理实验",
-        category="尺蠖",
-        tags=["C++", "内存管理"],
-    ),
-]
+class PostDetail(PostSummary):
+    content: str
+
+
+POSTS_FILE = Path(__file__).parent / "data" / "posts.json"
+
+
+def load_posts() -> list[PostDetail]:
+    with POSTS_FILE.open(encoding="utf-8") as file:
+        return [PostDetail.model_validate(item) for item in json.load(file)]
+
+
+POSTS = load_posts()
 
 
 @app.get("/api/posts", response_model=list[PostSummary])
@@ -236,6 +238,22 @@ def list_posts(
 
     return result[offset : offset + limit]
 ```
+
+对应的 `api/data/posts.json` 可以这样写：
+
+```json
+[
+  {
+    "slug": "fastapi-basics",
+    "title": "FastAPI 入门：给寒柳别苑搭一个小型 API",
+    "category": "尺蠖",
+    "tags": ["Python", "FastAPI"],
+    "content": "这是一篇 FastAPI 学习记录。"
+  }
+]
+```
+
+这样，写完一篇新文章后，只要把摘要追加到 JSON，重新部署 API，文章列表就会同步更新。后续如果接入数据库，还可以把这个文件替换成数据库查询，而不必改变调用方的接口格式。
 
 这里出现了三种不同来源的参数：
 
@@ -265,23 +283,14 @@ class PostDetail(PostSummary):
     content: str
 
 
-POST_CONTENT = {
-    "fastapi-basics": "这是一篇 FastAPI 学习记录。",
-    "cpp-memory-ownership-raii": "这是一篇 C++ 内存管理学习记录。",
-}
-
-
 @app.get("/api/posts/{slug}", response_model=PostDetail)
 def get_post(slug: str):
-    summary = next((post for post in POSTS if post.slug == slug), None)
+    post = next((post for post in POSTS if post.slug == slug), None)
 
-    if summary is None:
+    if post is None:
         raise HTTPException(status_code=404, detail="文章不存在")
 
-    return PostDetail(
-        **summary.model_dump(),
-        content=POST_CONTENT.get(slug, ""),
-    )
+    return post
 ```
 
 访问：
@@ -439,7 +448,7 @@ console.log(site.name);
 
 ## 11. 从示例代码到真实项目，还缺什么
 
-上面的代码把所有内容放在一个 `main.py` 中，是为了在一篇入门文章里看清完整链路。真实项目可以进一步拆分：
+为了在一篇入门文章里看清完整链路，接口逻辑暂时集中在 `main.py`，文章数据已经单独放到 JSON。真实项目可以进一步拆分：
 
 ```text
 fastapi-zylatent/
@@ -503,6 +512,42 @@ const site = await response.json();
 
 console.log(site);
 ```
+
+如果你更熟悉 Python，也可以直接运行下面的脚本。先安装一个轻量的 HTTP 客户端：
+
+```bash
+python -m pip install requests
+```
+
+然后保存为 `try_zylatent_api.py`：
+
+```python
+import requests
+
+
+BASE_URL = "https://api.zylatent.com"
+
+
+def get_json(path: str, **kwargs):
+    response = requests.get(f"{BASE_URL}{path}", timeout=10, **kwargs)
+    response.raise_for_status()
+    return response.json()
+
+
+site = get_json("/api/site")
+print(f"{site['name']}：{site['description']}")
+print("主题：", "、".join(site["topics"]))
+
+posts = get_json(
+    "/api/posts",
+    params={"category": "尺蠖", "limit": 10},
+)
+
+for index, post in enumerate(posts, start=1):
+    print(f"{index}. {post['title']} [{post['slug']}]")
+```
+
+这个例子对应的就是一次普通的 `GET` 请求：Python 负责发出请求和解析 JSON，FastAPI 负责读取文章文件、筛选参数并返回结构化响应。你也可以把 `/api/posts` 换成 `/api/posts/fastapi-basics`，进一步试试路径参数。
 
 也可以在终端里调用同一个接口：
 

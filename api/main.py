@@ -1,4 +1,6 @@
+import json
 from datetime import datetime, timezone
+from pathlib import Path
 
 from fastapi import FastAPI, HTTPException, Query
 from fastapi.middleware.cors import CORSMiddleware
@@ -7,7 +9,7 @@ from pydantic import BaseModel, Field
 
 app = FastAPI(
     title="寒柳别苑 API",
-    description="为 zylatent.com 提供的学习型接口",
+    description="记录学习、工作与思考。",
     version="0.1.0",
 )
 
@@ -34,8 +36,8 @@ class SiteProfile(BaseModel):
 SITE_PROFILE = SiteProfile(
     name="寒柳别苑",
     domain="zylatent.com",
-    description="记录学习、制作与思考。",
-    topics=["Python", "AI", "软件工程", "写作"],
+    description="记录学习、工作与思考。",
+    topics=["Python", "C++", "Claude Code Skills", "诗歌", "写作"],
 )
 
 
@@ -46,30 +48,20 @@ class PostSummary(BaseModel):
     tags: list[str]
 
 
-POSTS = [
-    PostSummary(
-        slug="fastapi-basics",
-        title="FastAPI 入门：给寒柳别苑搭一个小型 API",
-        category="尺蠖",
-        tags=["Python", "FastAPI"],
-    ),
-    PostSummary(
-        slug="cpp-memory-ownership-raii",
-        title="谁拥有这块内存：一次 C++ 资源管理实验",
-        category="尺蠖",
-        tags=["C++", "内存管理"],
-    ),
-]
-
-
 class PostDetail(PostSummary):
     content: str
 
 
-POST_CONTENT = {
-    "fastapi-basics": "这是一篇 FastAPI 学习记录。",
-    "cpp-memory-ownership-raii": "这是一篇 C++ 内存管理学习记录。",
-}
+POSTS_FILE = Path(__file__).parent / "data" / "posts.json"
+
+
+def load_posts() -> list[PostDetail]:
+    """从 JSON 加载文章，新增文章时只需要维护这个文件。"""
+    with POSTS_FILE.open(encoding="utf-8") as file:
+        return [PostDetail.model_validate(item) for item in json.load(file)]
+
+
+POSTS = load_posts()
 
 
 class FeedbackCreate(BaseModel):
@@ -115,14 +107,11 @@ def list_posts(
 
 @app.get("/api/posts/{slug}", response_model=PostDetail, tags=["posts"])
 def get_post(slug: str):
-    summary = next((post for post in POSTS if post.slug == slug), None)
-    if summary is None:
+    post = next((post for post in POSTS if post.slug == slug), None)
+    if post is None:
         raise HTTPException(status_code=404, detail="文章不存在")
 
-    return PostDetail(
-        **summary.model_dump(),
-        content=POST_CONTENT.get(slug, ""),
-    )
+    return post
 
 
 @app.post("/api/feedback", response_model=FeedbackOut, status_code=201, tags=["feedback"])

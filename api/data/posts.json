@@ -1,0 +1,16 @@
+[
+  {
+    "slug": "fastapi-basics",
+    "title": "FastAPI 入门：给寒柳别苑搭一个小型 API",
+    "category": "尺蠖",
+    "tags": ["Python", "FastAPI"],
+    "content": "这是一篇 FastAPI 学习记录。"
+  },
+  {
+    "slug": "cpp-memory-ownership-raii",
+    "title": "谁拥有这块内存：一次 C++ 资源管理实验",
+    "category": "尺蠖",
+    "tags": ["C++", "内存管理"],
+    "content": "这是一篇 C++ 内存管理学习记录。"
+  }
+]
