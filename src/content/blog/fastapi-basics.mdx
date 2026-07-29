@@ -1,0 +1,501 @@
+---
+title: FastAPI 入门：给寒柳别苑搭一个小型 API
+description: 从一个最小接口开始，使用 FastAPI 为 zylatent.com 设计站点资料、文章查询和留言接口，理解路由、参数校验、自动文档与跨域配置。
+pubDate: 2026-07-29
+tags:
+  - Python
+  - FastAPI
+  - 后端
+  - API
+  - 编程学习
+categories:
+  - 尺蠖
+image: /img/paintings/raphael-school-of-athens.jpg
+---
+
+import Collapse from "../../components/mdx/Collapse.astro";
+import Info from "../../components/mdx/Info.astro";
+import Success from "../../components/mdx/Success.astro";
+import TimeLine from "../../components/mdx/TimeLine.astro";
+import Warning from "../../components/mdx/Warning.astro";
+
+# FastAPI 入门：给寒柳别苑搭一个小型 API
+
+最近开始系统学习 FastAPI。与其把知识点停留在“会写一个 Hello World”，不如给一个具体的网站设计一组接口。
+
+所以这篇学习记录选择 `zylatent.com` 作为例子，假设我们要为寒柳别苑提供一层轻量的 API：
+
+- 返回站点基本信息；
+- 查询文章列表和文章详情；
+- 接收访客留言；
+- 自动生成接口文档；
+- 让前端能够明确知道请求格式和错误原因。
+
+这里的域名只是公开示例，不代表这些接口已经部署在线上。真正部署时，可以把 API 放在 `api.zylatent.com`，也可以通过反向代理挂在 `zylatent.com/api` 下。
+
+## 1. FastAPI 解决的是什么问题
+
+如果不用框架，单纯用 Python 内置的 `http.server` 写一个接口，需要自己处理很多与业务无关的细节：
+
+1. 判断请求方法和路径；
+2. 读取请求体；
+3. 解析 JSON；
+4. 检查字段是否存在、类型是否正确；
+5. 设置状态码和响应头；
+6. 把 Python 对象序列化成 JSON；
+7. 为每个接口补充说明文档。
+
+真正的业务可能只有一句话：访问 `/api/site`，返回站点信息。
+
+FastAPI 的价值就在于把这些通用工作收拢起来，让我们用 Python 类型标注和装饰器描述接口。它建立在 Starlette 和 Pydantic 之上：前者负责 Web 层能力，后者负责数据模型与校验。
+
+<Info>
+FastAPI 不是“完全不需要理解 HTTP”的魔法。路由、方法、状态码、请求体和响应体仍然存在，只是框架把重复的胶水代码替我们组织好了。
+</Info>
+
+## 2. 创建项目和运行环境
+
+FastAPI 官方目前推荐使用 `uv` 管理项目和虚拟环境。使用 `pip` 和 `venv` 也可以，关键是不要把项目依赖直接装进系统 Python。
+
+### 使用 uv
+
+```bash
+uv init fastapi-zylatent --bare
+cd fastapi-zylatent
+uv add "fastapi[standard]"
+```
+
+`fastapi[standard]` 会安装 FastAPI 的标准依赖，其中包括运行服务的 Uvicorn 和提供 `fastapi` 命令的 CLI。
+
+### 使用 venv 和 pip
+
+```bash
+python -m venv .venv
+
+# Windows PowerShell
+.\.venv\Scripts\Activate.ps1
+
+# macOS / Linux
+source .venv/bin/activate
+
+pip install "fastapi[standard]"
+```
+
+如果你已经在使用 Conda，也可以把环境隔离交给 Conda，只要保证 FastAPI 和项目其他依赖安装在同一个环境中即可。
+
+## 3. 第一个接口：让服务先跑起来
+
+在项目根目录新建 `main.py`：
+
+```python
+from fastapi import FastAPI
+
+app = FastAPI(
+    title="寒柳别苑 API",
+    description="为 zylatent.com 提供的学习型接口",
+    version="0.1.0",
+)
+
+
+@app.get("/")
+def read_root():
+    return {"message": "寒柳别苑 API 正在运行"}
+```
+
+启动开发服务器：
+
+```bash
+# 使用 uv
+uv run fastapi dev
+
+# 如果已经激活虚拟环境，也可以直接运行
+fastapi dev
+```
+
+默认情况下，服务会监听 `http://127.0.0.1:8000`。浏览器访问根路径，可以看到：
+
+```json
+{
+  "message": "寒柳别苑 API 正在运行"
+}
+```
+
+这里的 `@app.get("/")` 是一个路径操作声明：当请求方法是 `GET`、路径是 `/` 时，调用下面的 `read_root` 函数。
+
+## 4. `/docs`：接口文档不是额外工作
+
+启动服务后，打开：
+
+```text
+http://127.0.0.1:8000/docs
+```
+
+可以看到 Swagger UI。它会根据代码里的路由、类型标注和 Pydantic 模型自动生成：
+
+- 接口列表；
+- 请求参数结构；
+- 响应格式；
+- 状态码说明；
+- 可以直接执行的测试表单。
+
+FastAPI 同时会生成 OpenAPI Schema。也就是说，文档不是额外维护的一份 Markdown，而是从接口代码中派生出来的描述。
+
+<Success>
+对个人项目来说，`/docs` 很适合充当第一版内部后台：先让自己和前端能够看懂、调用 API，再决定是否需要单独制作一套文档页面。
+</Success>
+
+## 5. 用一个站点接口理解响应模型
+
+先定义站点资料模型。这里使用 Pydantic 的 `BaseModel` 作为响应模型：
+
+```python
+from pydantic import BaseModel
+
+
+class SiteProfile(BaseModel):
+    name: str
+    domain: str
+    description: str
+    topics: list[str]
+
+
+SITE_PROFILE = SiteProfile(
+    name="寒柳别苑",
+    domain="zylatent.com",
+    description="记录学习、制作与思考。",
+    topics=["Python", "AI", "软件工程", "写作"],
+)
+
+
+@app.get("/api/site", response_model=SiteProfile)
+def read_site_profile():
+    return SITE_PROFILE
+```
+
+请求：
+
+```bash
+curl.exe http://127.0.0.1:8000/api/site
+```
+
+响应：
+
+```json
+{
+  "name": "寒柳别苑",
+  "domain": "zylatent.com",
+  "description": "记录学习、制作与思考。",
+  "topics": ["Python", "AI", "软件工程", "写作"]
+}
+```
+
+`response_model` 的作用不只是给编辑器看。它还会参与响应数据的校验和 OpenAPI 文档生成，帮助我们明确“接口允许返回什么”。
+
+## 6. 路径参数和查询参数：查询文章列表
+
+接下来把示例扩展成一个简化的文章 API。为了保持重点在 FastAPI，这里暂时使用内存列表，不接数据库：
+
+```python
+from fastapi import Query
+
+
+class PostSummary(BaseModel):
+    slug: str
+    title: str
+    category: str
+    tags: list[str]
+
+
+POSTS = [
+    PostSummary(
+        slug="fastapi-basics",
+        title="FastAPI 入门：给寒柳别苑搭一个小型 API",
+        category="尺蠖",
+        tags=["Python", "FastAPI"],
+    ),
+    PostSummary(
+        slug="cpp-memory-ownership-raii",
+        title="谁拥有这块内存：一次 C++ 资源管理实验",
+        category="尺蠖",
+        tags=["C++", "内存管理"],
+    ),
+]
+
+
+@app.get("/api/posts", response_model=list[PostSummary])
+def list_posts(
+    category: str | None = None,
+    limit: int = Query(default=10, ge=1, le=50),
+    offset: int = Query(default=0, ge=0),
+):
+    result = POSTS
+
+    if category is not None:
+        result = [post for post in result if post.category == category]
+
+    return result[offset : offset + limit]
+```
+
+这里出现了三种不同来源的参数：
+
+| 参数 | 例子 | FastAPI 的判断方式 |
+| --- | --- | --- |
+| 路径参数 | `/api/posts/{slug}` | 参数名出现在路径模板中 |
+| 查询参数 | `?category=尺蠖&limit=10` | 普通函数参数，且不属于路径 |
+| 请求体 | `{"message": "..."}` | 参数类型是 Pydantic 模型 |
+
+查询接口可以这样调用：
+
+```bash
+curl.exe "http://127.0.0.1:8000/api/posts?category=尺蠖&limit=10"
+```
+
+`Query(ge=1, le=50)` 表示 `limit` 的最小值是 1，最大值是 50。如果传入 `limit=0`，FastAPI 会自动返回 422，而不是让错误参数继续进入业务逻辑。
+
+## 7. 路径参数和 404：文章详情接口
+
+列表接口只能返回摘要，详情接口需要根据 slug 找到一篇文章：
+
+```python
+from fastapi import HTTPException
+
+
+class PostDetail(PostSummary):
+    content: str
+
+
+POST_CONTENT = {
+    "fastapi-basics": "这是一篇 FastAPI 学习记录。",
+    "cpp-memory-ownership-raii": "这是一篇 C++ 内存管理学习记录。",
+}
+
+
+@app.get("/api/posts/{slug}", response_model=PostDetail)
+def get_post(slug: str):
+    summary = next((post for post in POSTS if post.slug == slug), None)
+
+    if summary is None:
+        raise HTTPException(status_code=404, detail="文章不存在")
+
+    return PostDetail(
+        **summary.model_dump(),
+        content=POST_CONTENT.get(slug, ""),
+    )
+```
+
+访问：
+
+```bash
+curl.exe http://127.0.0.1:8000/api/posts/fastapi-basics
+```
+
+不存在的 slug：
+
+```bash
+curl.exe http://127.0.0.1:8000/api/posts/not-found
+```
+
+服务会返回：
+
+```json
+{
+  "detail": "文章不存在"
+}
+```
+
+这比在函数里直接返回一个空字典更好，因为调用方能通过 `404` 明确知道资源不存在。
+
+## 8. POST 请求：给网站加入留言接口
+
+GET 主要用于读取资源，POST 常用于提交新数据。现在设计一个简化的留言接口：
+
+```python
+from datetime import datetime, timezone
+from pydantic import Field
+
+
+class FeedbackCreate(BaseModel):
+    name: str = Field(min_length=1, max_length=30)
+    message: str = Field(min_length=1, max_length=1000)
+    page: str = Field(default="/", pattern=r"^/")
+
+
+class FeedbackOut(FeedbackCreate):
+    id: int
+    created_at: datetime
+
+
+FEEDBACKS: list[FeedbackOut] = []
+
+
+@app.post("/api/feedback", response_model=FeedbackOut, status_code=201)
+def create_feedback(payload: FeedbackCreate):
+    feedback = FeedbackOut(
+        id=len(FEEDBACKS) + 1,
+        created_at=datetime.now(timezone.utc),
+        **payload.model_dump(),
+    )
+    FEEDBACKS.append(feedback)
+    return feedback
+```
+
+提交请求：
+
+```bash
+curl.exe -X POST http://127.0.0.1:8000/api/feedback `
+  -H "Content-Type: application/json" `
+  -d '{"name":"访客","message":"这篇文章很有帮助。","page":"/blog/fastapi-basics/"}'
+```
+
+PowerShell 中反引号用于换行。如果不想处理换行，也可以直接写成一行。
+
+这个模型同时承担三项工作：
+
+1. 把 JSON 请求体解析成 Python 对象；
+2. 校验字符串长度和 `page` 的格式；
+3. 把请求结构显示在 `/docs` 中。
+
+<Warning>
+这个示例把留言放在内存列表里，服务重启后数据会消失，也没有验证码、频率限制和持久化存储。它适合学习请求模型，不适合直接作为公开留言系统上线。
+</Warning>
+
+## 9. 422、404 和 500：错误应该怎么读
+
+### 422：请求格式不符合模型
+
+例如漏掉 `message`：
+
+```bash
+curl.exe -X POST http://127.0.0.1:8000/api/feedback `
+  -H "Content-Type: application/json" `
+  -d '{"name":"访客"}'
+```
+
+这是请求方的问题。FastAPI 会在业务函数执行前完成校验，并返回 422 以及具体字段的位置。
+
+### 404：资源不存在
+
+这是我们主动通过 `HTTPException` 返回的明确结果，常见于文章、用户或文件找不到的情况。
+
+### 500：服务端代码真的出错了
+
+如果把 `payload.message` 手误写成 `payload.msg`，程序会触发属性错误。开发环境中可以查看 traceback；生产环境中不应该把完整堆栈返回给访客。
+
+读 traceback 时，我会先看最后一行，再回到自己代码的文件名和行号：
+
+1. 最后一行通常告诉你错误类型和直接原因；
+2. 往上找到项目目录中的代码行；
+3. 再判断是请求数据不对，还是服务内部状态不对。
+
+报错不是事故本身，而是定位事故的线索。
+
+## 10. 让 `zylatent.com` 调用 API：CORS 与部署边界
+
+如果前端和 API 使用同一个 origin，例如：
+
+```text
+https://zylatent.com        前端
+https://zylatent.com/api    FastAPI 反向代理
+```
+
+浏览器通常不需要额外的跨域配置。
+
+如果以后把 API 单独部署在：
+
+```text
+https://api.zylatent.com
+```
+
+那么前端从 `zylatent.com` 请求 `api.zylatent.com` 就属于跨域，需要显式配置允许的 origin：
+
+```python
+from fastapi.middleware.cors import CORSMiddleware
+
+
+origins = [
+    "https://zylatent.com",
+    "https://www.zylatent.com",
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["GET", "POST"],
+    allow_headers=["Content-Type"],
+)
+```
+
+前端调用可以是：
+
+```javascript
+const response = await fetch("https://api.zylatent.com/api/site");
+const site = await response.json();
+console.log(site.name);
+```
+
+不要在学习阶段直接写 `allow_origins=["*"]` 然后忘记收紧。公开 API 的 origin、认证、速率限制和日志策略，都应该随着部署环境明确配置。
+
+## 11. 从示例代码到真实项目，还缺什么
+
+上面的代码把所有内容放在一个 `main.py` 中，是为了在一篇入门文章里看清完整链路。真实项目可以进一步拆分：
+
+```text
+fastapi-zylatent/
+├── app/
+│   ├── main.py          # 创建 FastAPI 应用
+│   ├── models.py        # Pydantic 请求和响应模型
+│   ├── routers/
+│   │   ├── site.py      # 站点接口
+│   │   ├── posts.py     # 文章接口
+│   │   └── feedback.py  # 留言接口
+│   ├── services/        # 业务逻辑
+│   └── db.py            # 数据库连接
+├── tests/
+├── pyproject.toml
+└── uv.lock
+```
+
+下一步通常是：
+
+- 用 SQLModel 或 SQLAlchemy 接入数据库；
+- 用依赖注入共享数据库会话；
+- 为接口添加测试；
+- 加入认证和权限；
+- 配置生产服务器与反向代理；
+- 用环境变量管理域名、密钥和数据库连接串。
+
+这些内容不应该在第一篇入门文章里全部展开。先把“请求如何进入路由，数据如何被校验，响应如何返回”这条链路走通，后续的数据库和认证才有落脚点。
+
+## 12. 学习记录
+
+这次学习让我对 FastAPI 的理解从“一个写 API 的 Python 框架”变得更具体：
+
+1. 路由装饰器把 HTTP 方法和路径绑定到 Python 函数；
+2. 类型标注让路径参数、查询参数和请求体的边界变得清楚；
+3. Pydantic 模型把数据合约、校验和接口文档连接起来；
+4. `HTTPException` 让错误成为 API 合约的一部分；
+5. `/docs` 让接口可以在没有额外前端页面的情况下被观察和测试；
+6. 域名只是访问入口，真正的部署还需要服务器、反向代理、跨域和安全配置。
+
+对我来说，比较有价值的不是记住几条命令，而是把一个熟悉的网站想象成一组可以被其他程序调用的资源：站点资料、文章列表和留言，都可以先用清晰的接口表达出来。
+
+<TimeLine items={[
+  { year: "最小服务", event: "用 FastAPI 创建应用，通过一个 GET 路由返回 JSON。" },
+  { year: "数据合约", event: "使用 Pydantic 模型定义站点资料、文章摘要和留言请求。" },
+  { year: "接口边界", event: "区分路径参数、查询参数和请求体，并用 404 与 422 表达不同错误。" },
+  { year: "真实场景", event: "围绕 zylatent.com 设计站点、文章和留言 API，同时意识到内存存储不能直接用于生产。" },
+  { year: "下一步", event: "继续接入数据库、测试、认证和生产部署。" }
+]} />
+
+## 封面说明
+
+本文封面使用拉斐尔（Raphael）的《雅典学院》（The School of Athens，1509–1511）。我把它放在 `public/img/paintings/` 中，作为之后文章封面的公版名画素材库的一部分。作品及本次使用的图像复制版本来自 [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Raphael_School_of_Athens.jpg)，页面标注为 Public Domain。
+
+## 参考资料
+
+- [FastAPI 官方文档](https://fastapi.tiangolo.com/)
+- [FastAPI First Steps](https://fastapi.tiangolo.com/tutorial/first-steps/)
+- [FastAPI Request Body](https://fastapi.tiangolo.com/tutorial/body/)
+- [FastAPI Query Parameters](https://fastapi.tiangolo.com/tutorial/query-params/)
+- [FastAPI CORS](https://fastapi.tiangolo.com/tutorial/cors/)
