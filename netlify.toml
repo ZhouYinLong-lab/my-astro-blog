@@ -14,6 +14,11 @@
   status = 200
 
 [[redirects]]
+  from = "/blog/2026春季智科作业一"
+  to = "/blog/cpp-memory-ownership-raii/"
+  status = 301
+
+[[redirects]]
   from = "/*"
   to = "/404.html"
   status = 404

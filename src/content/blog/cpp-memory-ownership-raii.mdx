@@ -1,0 +1,459 @@
+---
+title: 谁拥有这块内存：一次 C++ 资源管理实验
+description: 以一个动态栈为实验对象，追踪 C++ 堆内存从分配、复制、移动到释放的完整生命周期，并与 C、Go、Java 和 Rust 的资源管理方式进行对照。
+pubDate: 2026-03-08
+tags:
+  - C++
+  - 编程学习
+  - 内存管理
+categories:
+  - 尺蠖
+image: /background/7.webp
+---
+
+import Collapse from "../../components/mdx/Collapse.astro";
+import Info from "../../components/mdx/Info.astro";
+import Success from "../../components/mdx/Success.astro";
+import TimeLine from "../../components/mdx/TimeLine.astro";
+import Warning from "../../components/mdx/Warning.astro";
+
+# 谁拥有这块内存：一次 C++ 资源管理实验
+
+这篇文章来自一次 C++ 课程作业，但我不想把它继续写成一份知识点目录。
+
+原来的版本同时讨论了内存分区、宏、`const`、`inline`、`new/delete`、Stack 和面向对象封装。每个部分单独看都没有问题，放在一起却很难回答一个更重要的问题：**一段 C++ 代码到底由谁负责释放资源？**
+
+所以这次重构只保留一个实验对象：一个使用动态内存的整数栈。
+
+我会沿着一块堆内存的生命周期走一遍：它如何出生，如何被复制，如何转移所有权，在哪些地方可能泄漏或重复释放，以及怎样用 RAII 把这些责任交给对象本身。
+
+这里的“综合”不是把更多名词塞进同一篇文章，而是围绕同一个问题寻找不同答案：C 依靠程序员记住释放，带垃圾回收的语言把一部分责任交给运行时，Rust 把所有权写进编译器，而 C++ 允许我们在控制力和安全性之间自己做选择。
+
+<Info>
+本文中的栈只存储 `int`，目标不是实现一个可以替代标准库的通用容器，而是把 C++ 资源管理中的几个关键问题暴露出来：所有权、对象生命周期、异常安全和移动语义。
+</Info>
+
+## 1. 先把问题说清楚：`new` 到底做了什么
+
+很多初学者会把 `new` 理解成“申请一块内存”，但对 C++ 对象来说，它至少包含两个动作：
+
+1. 向分配器申请一块足够大的原始存储空间；
+2. 在这块空间上构造对象。
+
+对应地，`delete` 也包含两个动作：
+
+1. 调用对象的析构函数；
+2. 把存储空间归还给分配器。
+
+对于 `int` 这种简单类型，构造和析构几乎没有可见效果，因此容易让人忽视这两个阶段。但如果元素换成 `std::string`、文件句柄或网络连接，跳过析构就不再是一个抽象问题。
+
+`malloc/free` 只负责原始字节，不负责 C++ 对象的构造和析构。这也是 `new/delete` 与 `malloc/free` 不能混用的根本原因。
+
+<Warning>
+`new[]` 必须和 `delete[]` 配对，`new` 必须和 `delete` 配对。它们不是风格问题，而是分配器协议的一部分。混用会让程序进入未定义行为。
+</Warning>
+
+## 2. 同一个资源问题，在不同语言里长什么样
+
+“谁负责释放”并不是 C++ 独有的问题。不同语言只是把这项责任放在了不同位置：程序员、编译器、运行时，或者它们的组合。
+
+| 语言 / 模型 | 内存回收方式 | 所有权通常如何表达 | 需要特别注意的地方 |
+| --- | --- | --- | --- |
+| C | `malloc/free` 手动管理 | 依靠约定、文档和代码审查 | 释放遗漏、重复释放和越界都不会被语言自动阻止 |
+| C++ | 手动管理与 RAII 并存 | 裸指针、智能指针、拷贝/移动语义 | 既可以接近底层，也必须主动设计资源责任 |
+| Java / C# | 垃圾回收器管理对象内存 | 引用语义，外部资源通常使用显式作用域 API | GC 只能回收内存，不能替代文件关闭、锁释放和网络连接清理 |
+| Go | 垃圾回收器管理对象内存 | 值、指针、接口和切片组合 | 文件等外部资源仍需 `defer Close()`，不能把 GC 当作析构函数 |
+| Rust | 编译器检查所有权和借用 | 移动、借用、生命周期与 `Drop` | 约束更强，换来更早发现悬空引用和数据竞争 |
+
+这张表不能用来简单判断哪种语言“更好”。它更像一张责任分布图：C++ 的独特之处在于，它既保留了手动控制内存的能力，也提供了 `unique_ptr`、`shared_ptr`、容器和 RAII 等更安全的抽象。自由度越高，设计所有权的责任也越不能省略。
+
+## 3. 第一个版本：它能运行，但不知道谁拥有数据
+
+先写一个最直接的动态数组栈。栈满了，就申请一块两倍大小的新空间，把旧元素复制过去，再释放旧空间。
+
+```cpp
+#include <cstddef>
+
+class RawStack {
+private:
+    int* data_ = nullptr;       // 指向堆上的元素数组
+    std::size_t size_ = 0;      // 当前元素数量
+    std::size_t capacity_ = 0;  // 已申请的容量
+
+public:
+    ~RawStack() {
+        // data_ 可能为空，delete[] nullptr 是安全的。
+        delete[] data_;
+    }
+
+    void push(int value) {
+        if (size_ == capacity_) {
+            const std::size_t nextCapacity =
+                capacity_ == 0 ? 1 : capacity_ * 2;
+
+            // 先申请新空间，再复制旧数据。
+            int* nextData = new int[nextCapacity];
+            for (std::size_t i = 0; i < size_; ++i) {
+                nextData[i] = data_[i];
+            }
+
+            // 新空间准备好后，旧空间才可以释放。
+            delete[] data_;
+            data_ = nextData;
+            capacity_ = nextCapacity;
+        }
+
+        data_[size_++] = value;
+    }
+};
+```
+
+这段代码在单个对象、单线程、只调用 `push` 的情况下看起来没有问题。但它遗漏了一条非常关键的事实：**类里有一个裸指针，意味着类拥有一项资源责任。**
+
+现在复制它：
+
+```cpp
+RawStack original;
+original.push(42);
+
+RawStack copy = original;
+```
+
+如果我们没有手写拷贝构造函数，编译器会逐成员复制。两个对象的 `data_` 会指向同一块堆内存：
+
+```text
+original.data_ ─┐
+                ├──> [42]
+copy.data_    ──┘
+```
+
+当 `copy` 和 `original` 依次析构时，它们会对同一个地址执行两次 `delete[]`。第一次释放已经是危险的，第二次则可能触发 double free。
+
+问题不在 `push`，而在于这个类没有定义清楚复制之后的所有权关系。
+
+## 4. 裸指针带来的三种典型事故
+
+### 3.1 浅拷贝：两个对象指向同一个资源
+
+默认拷贝只复制指针的数值，不复制指针指向的内容。对于不拥有资源的观察指针，这可能是合理的；对于拥有资源的指针，这通常意味着两个对象会争抢同一个释放责任。
+
+### 3.2 提前释放：悬空指针仍然看起来像一个地址
+
+`delete[] data_` 之后，指针变量本身不会自动变成不可用的特殊值。它仍然保存着原来的地址，但那块地址已经不属于当前对象。继续读取或写入它，就是通过悬空指针访问内存。
+
+### 3.3 所有权遗漏：析构函数没有执行
+
+如果对象被放进一个复杂的控制流中，中途发生异常或提前返回，依赖手动 `delete[]` 的代码很容易漏掉清理路径。资源管理代码越分散，越难确认每条路径都完成了释放。
+
+这三个问题可以归结为同一个词：**ownership，所有权**。
+
+## 5. 第一次修复：让复制拥有独立的资源
+
+如果继续使用裸指针，就必须遵守 Rule of 3：只要类需要自定义析构函数、拷贝构造函数或拷贝赋值运算符中的一个，通常就需要认真考虑另外两个。
+
+对于 `RawStack`，正确的拷贝构造应该申请一块新的数组，再复制元素：
+
+```cpp
+RawStack(const RawStack& other)
+    : data_(other.capacity_ == 0 ? nullptr : new int[other.capacity_]),
+      size_(other.size_),
+      capacity_(other.capacity_) {
+    for (std::size_t i = 0; i < size_; ++i) {
+        data_[i] = other.data_[i];
+    }
+}
+```
+
+此时复制关系变成：
+
+```text
+original.data_ ──> [42]
+
+copy.data_     ──> [42]
+```
+
+两个对象拥有不同的存储空间，因此可以各自负责释放。
+
+但只补拷贝构造还不够。赋值操作也必须处理自赋值、旧资源释放和申请失败：
+
+```cpp
+RawStack& operator=(const RawStack& other) {
+    if (this == &other) {
+        return *this;
+    }
+
+    int* nextData = other.capacity_ == 0
+        ? nullptr
+        : new int[other.capacity_];
+
+    for (std::size_t i = 0; i < other.size_; ++i) {
+        nextData[i] = other.data_[i];
+    }
+
+    delete[] data_;
+    data_ = nextData;
+    size_ = other.size_;
+    capacity_ = other.capacity_;
+    return *this;
+}
+```
+
+这已经比默认行为可靠，但手动维护的状态仍然很多：`data_`、`size_`、`capacity_` 必须始终保持一致，所有提前返回和异常路径也都要考虑。
+
+## 6. 第二次修复：把释放责任交给 RAII
+
+RAII 的核心不是“少写几行 `delete`”，而是把资源的生命周期绑定到对象的生命周期：对象构造成功，就拥有资源；对象离开作用域，就自动释放资源。
+
+对于动态数组，可以让 `std::unique_ptr<int[]>` 成为唯一所有者。它不能被复制，只能被移动，这个限制正好把所有权规则写进了类型系统。
+
+```cpp
+#include <algorithm>
+#include <cstddef>
+#include <memory>
+#include <stdexcept>
+#include <utility>
+
+class IntStack {
+private:
+    std::unique_ptr<int[]> data_;
+    std::size_t size_ = 0;
+    std::size_t capacity_ = 0;
+
+    void grow() {
+        const std::size_t nextCapacity =
+            capacity_ == 0 ? 1 : capacity_ * 2;
+
+        // 如果申请失败，异常会在这里抛出，旧数据仍然完整。
+        auto nextData = std::make_unique<int[]>(nextCapacity);
+
+        if (size_ > 0) {
+            std::copy_n(data_.get(), size_, nextData.get());
+        }
+
+        // 新数组准备好后，移动 unique_ptr，旧数组自动释放。
+        data_ = std::move(nextData);
+        capacity_ = nextCapacity;
+    }
+
+public:
+    IntStack() = default;
+
+    // 深拷贝：每个栈都拥有自己的数组。
+    IntStack(const IntStack& other)
+        : data_(other.capacity_ == 0
+            ? nullptr
+            : std::make_unique<int[]>(other.capacity_)),
+          size_(other.size_),
+          capacity_(other.capacity_) {
+        if (size_ > 0) {
+            std::copy_n(other.data_.get(), size_, data_.get());
+        }
+    }
+
+    // 使用临时副本完成赋值，确保复制失败时原对象不被破坏。
+    IntStack& operator=(const IntStack& other) {
+        if (this == &other) {
+            return *this;
+        }
+
+        IntStack copy(other);
+        swap(copy);
+        return *this;
+    }
+
+    // 移动只转移所有权，不复制数组内容。
+    IntStack(IntStack&& other) noexcept
+        : data_(std::move(other.data_)),
+          size_(other.size_),
+          capacity_(other.capacity_) {
+        other.size_ = 0;
+        other.capacity_ = 0;
+    }
+
+    IntStack& operator=(IntStack&& other) noexcept {
+        if (this == &other) {
+            return *this;
+        }
+
+        data_ = std::move(other.data_);
+        size_ = other.size_;
+        capacity_ = other.capacity_;
+        other.size_ = 0;
+        other.capacity_ = 0;
+        return *this;
+    }
+
+    void swap(IntStack& other) noexcept {
+        using std::swap;
+        swap(data_, other.data_);
+        swap(size_, other.size_);
+        swap(capacity_, other.capacity_);
+    }
+
+    void push(int value) {
+        if (size_ == capacity_) {
+            grow();
+        }
+        data_[size_++] = value;
+    }
+
+    void pop() {
+        if (empty()) {
+            throw std::out_of_range("pop() called on an empty stack");
+        }
+        --size_;
+    }
+
+    int top() const {
+        if (empty()) {
+            throw std::out_of_range("top() called on an empty stack");
+        }
+        return data_[size_ - 1];
+    }
+
+    [[nodiscard]] std::size_t size() const noexcept {
+        return size_;
+    }
+
+    [[nodiscard]] bool empty() const noexcept {
+        return size_ == 0;
+    }
+};
+```
+
+这里最重要的变化不是语法更现代，而是所有权变得明确：
+
+- `IntStack` 独占 `data_`；
+- `unique_ptr` 不允许两个对象隐式共享同一个数组；
+- 复制时显式深拷贝；
+- 移动时只转移所有权；
+- 扩容申请失败时，旧数据仍由原对象管理；
+- 析构函数不再需要手写。
+
+<Success>
+这就是我对 RAII 的实际理解：不是把清理代码藏起来，而是让“谁负责清理”变成对象类型和生命周期的一部分。
+</Success>
+
+## 7. 为什么扩容策略也属于内存管理
+
+每次容量耗尽时只增加一个位置，代码很直观，但会反复复制旧数组。连续插入 $N$ 个元素时，复制次数会接近：
+
+$$
+1 + 2 + 3 + \cdots + (N-1) = O(N^2)
+$$
+
+采用容量翻倍：
+
+```text
+1 → 2 → 4 → 8 → 16 → 32 → ...
+```
+
+某一次扩容确实需要 $O(N)$ 的复制，但扩容后的空间可以支持大量 $O(1)$ 的普通插入，因此 `push` 的均摊复杂度是 $O(1)$。
+
+这不是单纯的算法技巧。它直接决定了程序会申请多少次堆内存、会制造多少次临时数组，以及会把多少数据搬来搬去。
+
+<Collapse title="为什么数组栈通常比链表栈更适合高频操作？">
+链表栈每次 `push` 都要为新节点申请一小块堆内存，节点之间通过指针连接。数组栈则把元素放在连续空间中，扩容时才整体搬迁。
+
+数组的连续布局更容易命中 CPU Cache，也减少了每个节点额外保存 `next` 指针的空间开销。链表并不是“更高级”的动态结构，它只是把扩容成本换成了更多次的小额分配和更差的空间局部性。
+
+因此，选择哪种结构，不能只看每个操作的渐进复杂度，还要看分配次数、内存局部性和实际访问模式。
+</Collapse>
+
+## 8. 同一个 LIFO 接口，不同的内存模型
+
+栈只规定了后进先出，并没有规定底层必须使用哪一种数据结构。把接口和存储结构分开，是理解 `std::stack` 的关键。
+
+| 实现 | 内存布局 | 优点 | 代价 |
+| --- | --- | --- | --- |
+| 固定数组 | 一块预先确定大小的连续空间 | 无扩容、访问局部性好、分配次数少 | 容量固定，空间估小会溢出，估大又浪费 |
+| 动态数组 / `std::vector` | 连续堆空间，满后整体搬迁 | Cache 友好，尾部操作均摊 $O(1)$ | 扩容时需要申请新空间并复制或移动元素 |
+| 单链表 | 每个节点独立分配，通过指针连接 | 不需要整体搬迁，容量按节点增长 | 每次插入都可能分配，指针带来额外空间和 Cache Miss |
+| `std::deque` | 分段连续的块 | 两端插入稳定，扩容不必搬迁全部元素 | 不像 `vector` 那样完全连续，结构更复杂 |
+
+`std::stack` 本身是一个容器适配器。默认底层容器通常是 `std::deque`，也可以明确指定为 `std::vector`：
+
+```cpp
+#include <stack>
+#include <vector>
+
+std::stack<int, std::vector<int>> values;
+```
+
+因此，“栈的 `push` 是 $O(1)$”还不够完整。我们还要追问：它的底层容器如何申请内存？元素搬迁时是否需要调用拷贝构造？一个节点是否额外携带指针？
+
+这也是这次实验比单纯实现一个 LIFO 接口更有价值的地方：**数据结构的抽象复杂度，和内存系统的实际行为，并不是同一件事。**
+
+## 9. 用测试确认所有权关系
+
+重构之后，至少应该验证这些场景：
+
+```cpp
+#include <cassert>
+
+int main() {
+    IntStack original;
+    original.push(10);
+    original.push(20);
+
+    // 深拷贝：修改 copy 不应影响 original。
+    IntStack copy = original;
+    copy.pop();
+    assert(copy.top() == 10);
+    assert(original.top() == 20);
+
+    // 移动：数组所有权转移，不需要复制元素。
+    IntStack moved = std::move(original);
+    assert(moved.top() == 20);
+    assert(original.empty());
+
+    // 反复扩容，验证旧数据仍然保持顺序。
+    for (int i = 0; i < 1000; ++i) {
+        moved.push(i);
+    }
+    assert(moved.size() == 1002);
+    assert(moved.top() == 999);
+}
+```
+
+这些断言验证的不是“栈能不能工作”，而是更具体的资源契约：
+
+- 复制后是否拥有独立存储；
+- 移动后原对象是否处于可析构、可继续使用的空状态；
+- 扩容后元素是否仍然有效；
+- 所有权转移后是否会出现重复释放。
+
+如果再用 AddressSanitizer 运行测试，还可以把内存泄漏、越界访问和 use-after-free 交给工具检查：
+
+```bash
+g++ -std=c++17 -Wall -Wextra -fsanitize=address,undefined -g stack.cpp -o stack
+./stack
+```
+
+## 10. 这次作业真正留下的东西
+
+我原来把 C++ 的难点理解成很多零散的机制：栈区、堆区、指针、析构函数、拷贝构造、移动构造、异常安全。
+
+这次重构之后，它们可以被压缩成一个更清晰的问题：
+
+> 一项资源从诞生到消亡，整个过程中，责任是否始终明确？
+
+如果答案是否定的，就会出现泄漏、悬空指针、double free 或异常路径上的状态损坏。
+
+C++ 的内存管理并不是“记住什么时候写 `delete`”。更可靠的做法是：
+
+1. 先明确资源的唯一所有者；
+2. 把资源生命周期绑定到对象生命周期；
+3. 让复制和移动语义符合所有权关系；
+4. 用异常安全的顺序更新状态；
+5. 用测试和 Sanitizer 验证假设。
+
+这比单独背诵 `new/delete` 的配对规则更接近真实的工程实践。
+
+<TimeLine items={[
+  { year: "问题", event: "一个使用裸指针的动态栈可以正常运行，却无法说明复制后谁拥有那块数组。" },
+  { year: "事故", event: "默认浅拷贝可能导致两个对象共享资源，最终触发悬空指针或 double free。" },
+  { year: "修复", event: "通过深拷贝、移动语义和 copy-and-swap 明确复制与转移的边界。" },
+  { year: "重构", event: "使用 unique_ptr 和 RAII 绑定资源生命周期，把释放责任交给对象本身。" },
+  { year: "验证", event: "通过扩容、复制、移动和 Sanitizer 测试，确认内存管理契约确实成立。" }
+]} />

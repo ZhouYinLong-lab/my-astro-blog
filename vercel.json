@@ -1,4 +1,11 @@
 {
+  "redirects": [
+    {
+      "source": "/blog/2026春季智科作业一",
+      "destination": "/blog/cpp-memory-ownership-raii/",
+      "permanent": true
+    }
+  ],
   "rewrites": [
     {
       "source": "/labs/:path*",
