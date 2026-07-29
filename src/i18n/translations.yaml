@@ -36,6 +36,7 @@ en:
     search: Search
     searchPlaceholder: Type to search...
     tableOfContents: Table of Contents
+    scrollToTop: Back to top
     noContents: No headings available
     404title: Page Not Found
     404description: "Looks like you've ventured into the unknown. The page you're looking for doesn't exist or has been moved to another dimension."
@@ -99,6 +100,7 @@ zh:
     search: 搜索
     searchPlaceholder: 输入关键词搜索...
     tableOfContents: 目录
+    scrollToTop: 回到顶部
     noContents: 无可用标题
     404title: 页面未找到
     404description: 看起来您已经进入了未知领域。您查找的页面不存在或已被转移到另一个维度。
@@ -162,6 +164,7 @@ fr:
     search: Rechercher
     searchPlaceholder: Tapez pour rechercher...
     tableOfContents: Table des matières
+    scrollToTop: Retour en haut
     noContents: Aucun titre disponible
     404title: Page introuvable
     404description: "Il semble que vous vous soyez aventuré dans l'inconnu. La page que vous cherchez n'existe pas ou a été déplacée dans une autre dimension."
@@ -225,6 +228,7 @@ ja:
     search: 検索
     searchPlaceholder: 検索する文字を入力...
     tableOfContents: 目次
+    scrollToTop: ページ上部へ戻る
     noContents: 利用可能な見出しがありません
     404title: ページが見つかりません
     404description: 知られざる領域に踏み込んでしまったようです。お探しのページは存在しないか、別の次元に移されてしまいました。
@@ -288,6 +292,7 @@ ko:
     search: 검색
     searchPlaceholder: 검색어 입력...
     tableOfContents: 목차
+    scrollToTop: 맨 위로 이동
     noContents: 사용 가능한 제목 없음
     404title: 페이지를 찾을 수 없음
     404description: 미지의 영역에 들어선 것 같습니다. 찾으시는 페이지는 존재하지 않거나 다른 차원으로 이동되었습니다.
@@ -351,6 +356,7 @@ es:
     search: Buscar
     searchPlaceholder: Escribe para buscar...
     tableOfContents: Tabla de contenidos
+    scrollToTop: Volver arriba
     noContents: No hay encabezados disponibles
     404title: Página no encontrada
     404description: Parece que te has aventurado en lo desconocido. La página que buscas no existe o ha sido movida a otra dimensión.
@@ -414,6 +420,7 @@ de:
     search: Suchen
     searchPlaceholder: Zum Suchen tippen...
     tableOfContents: Inhaltsverzeichnis
+    scrollToTop: Nach oben
     noContents: Keine Überschriften verfügbar
     404title: Seite nicht gefunden
     404description: "Es scheint, als hättest du dich ins Unbekannte gewagt. Die Seite, die du suchst, existiert nicht oder wurde in eine andere Dimension verschoben."
@@ -477,6 +484,7 @@ ru:
     search: Поиск
     searchPlaceholder: Введите для поиска...
     tableOfContents: Оглавление
+    scrollToTop: Вернуться наверх
     noContents: Нет доступных заголовков
     404title: Страница не найдена
     404description: "Кажется, вы забрели в неизведанное. Страница, которую вы ищете, не существует или была перенесена в другое измерение."
@@ -540,6 +548,7 @@ pt:
     search: Pesquisar
     searchPlaceholder: Digite para pesquisar...
     tableOfContents: Sumário
+    scrollToTop: Voltar ao topo
     noContents: Nenhum título disponível
     404title: Página não encontrada
     404description: Parece que você se aventurou no desconhecido. A página que você procura não existe ou foi movida para outra dimensão.
@@ -603,6 +612,7 @@ it:
     search: Cerca
     searchPlaceholder: Digita per cercare...
     tableOfContents: Sommario
+    scrollToTop: Torna in cima
     noContents: Nessun titolo disponibile
     404title: Pagina non trovata
     404description: "Sembra che ti sia avventurato nell'ignoto. La pagina che cerchi non esiste o è stata spostata in un'altra dimensione."

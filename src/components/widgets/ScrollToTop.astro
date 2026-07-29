@@ -1,44 +1,62 @@
 ---
+import { t } from "@config";
 import { Icon } from "astro-icon/components";
 ---
 
 <button
   id="scroll-to-top"
-  aria-label="Scroll to top"
-  class="btn btn-circle btn-md fixed bottom-6 right-6 z-50 bg-base-100 shadow-lg opacity-0 invisible transition-all hover:scale-110"
+  type="button"
+  aria-label={t("label.scrollToTop")}
+  title={t("label.scrollToTop")}
+  aria-hidden="true"
+  tabindex="-1"
+  class="btn btn-circle btn-md fixed bottom-6 right-6 z-50 border border-base-content/10 bg-base-100 shadow-lg opacity-0 invisible pointer-events-none transition-all duration-300 hover:scale-110 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
 >
-  <Icon name="material-symbols:arrow-upward-rounded" class="h-5 w-5" />
+  <Icon name="lucide:arrow-up" class="h-5 w-5" />
 </button>
 
 <script>
   document.addEventListener("astro:page-load", () => {
     const scrollButton = document.getElementById("scroll-to-top");
 
-    if (scrollButton) {
-      // Show button when user scrolls down 300px
-      const toggleVisibility = () => {
-        if (window.scrollY > 300) {
-          scrollButton.classList.remove("opacity-0", "invisible");
-          scrollButton.classList.add("opacity-100", "visible");
-        } else {
-          scrollButton.classList.remove("opacity-100", "visible");
-          scrollButton.classList.add("opacity-0", "invisible");
-        }
-      };
+    if (!scrollButton || scrollButton.dataset.initialized === "true") return;
 
-      // Initial check
-      toggleVisibility();
+    scrollButton.dataset.initialized = "true";
+    let frameId: number | null = null;
 
-      // Add scroll event listener
-      window.addEventListener("scroll", toggleVisibility);
+    const toggleVisibility = () => {
+      frameId = null;
+      const isVisible = window.scrollY > 300;
 
-      // Scroll to top with smooth animation
-      scrollButton.addEventListener("click", () => {
-        window.scrollTo({
-          top: 0,
-          behavior: "smooth",
-        });
-      });
-    }
+      scrollButton.classList.toggle("opacity-0", !isVisible);
+      scrollButton.classList.toggle("invisible", !isVisible);
+      scrollButton.classList.toggle("pointer-events-none", !isVisible);
+      scrollButton.classList.toggle("opacity-100", isVisible);
+      scrollButton.classList.toggle("visible", isVisible);
+      scrollButton.tabIndex = isVisible ? 0 : -1;
+      scrollButton.setAttribute("aria-hidden", String(!isVisible));
+    };
+
+    const handleScroll = () => {
+      if (frameId === null) {
+        frameId = window.requestAnimationFrame(toggleVisibility);
+      }
+    };
+
+    const handleClick = () => {
+      const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      window.scrollTo({ top: 0, behavior: prefersReducedMotion ? "auto" : "smooth" });
+    };
+
+    const cleanup = () => {
+      window.removeEventListener("scroll", handleScroll);
+      scrollButton.removeEventListener("click", handleClick);
+      if (frameId !== null) window.cancelAnimationFrame(frameId);
+    };
+
+    toggleVisibility();
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    scrollButton.addEventListener("click", handleClick);
+    document.addEventListener("astro:before-swap", cleanup, { once: true });
   });
 </script>

@@ -5,6 +5,7 @@ import Header from "@components/Header.astro";
 import Navbar from "@components/Navbar.astro";
 import Sidebar from "@components/Sidebar.astro";
 import MobileTOC from "@components/widgets/MobileTOC.astro";
+import ScrollToTop from "@components/widgets/ScrollToTop.astro";
 import {
   SITE_DESCRIPTION,
   SITE_FAVICON,
@@ -138,6 +139,7 @@ const resolvedBgImageDark = bgImageDark ?? bgImage;
     </div>
 
     <MobileTOC headings={headings} showTOC={showTOC} />
+    <ScrollToTop />
 
     <script define:vars={{ SITE_THEME }} is:inline>
       document.addEventListener("astro:after-swap", () => {
