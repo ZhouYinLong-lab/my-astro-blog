@@ -1,6 +1,7 @@
 ---
 import "../styles/global.scss";
 import "/node_modules/katex/dist/katex.min.css";
+import { SITE_TITLE } from "@config";
 import type { HeaderProps } from "@interfaces/data";
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
@@ -18,3 +19,13 @@ const { title, description, favicon, image } = Astro.props as HeaderProps;
 <meta property="og:description" content={description} />
 {image && <meta property="og:image" content={image} />}
 <link rel="canonical" href={canonicalURL.toString()} />
+
+<script is:inline type="application/ld+json" set:html={JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "@id": `${Astro.site}#website`,
+  url: Astro.site,
+  name: SITE_TITLE,
+  description,
+  inLanguage: "zh-CN",
+})} />

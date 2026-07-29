@@ -25,6 +25,7 @@ const {
   bgImageDark,
   animateType = "fade-up",
   description = SITE_DESCRIPTION,
+  seoDescription = description,
   headings = [],
   showTOC = false,
   isIndexed = true,
@@ -58,7 +59,7 @@ const resolvedBgImageDark = bgImageDark ?? bgImage;
     <ClientRouter />
     <ElementCrossing />
     <PointerOnNavigation />
-    <Header title={title} description={description} favicon={SITE_FAVICON} image={image} />
+    <Header title={title} description={seoDescription} favicon={SITE_FAVICON} image={image} />
     <title>{`${title} | ${SITE_TAB}`}</title>
     
     {/* 强制浏览器最高优先级预加载背景图 */}

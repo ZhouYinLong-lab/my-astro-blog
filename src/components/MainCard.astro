@@ -129,7 +129,7 @@ const hasThemeHeader = Boolean(resolvedHeaderImageDark && headerImageLight);
           )}
           {showTextBackground && textOverlay && (
             <div class="absolute inset-0 w-full h-full error-animation-container">
-              <div class={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 font-bold text-primary opacity-20 ${textOverlayClass || "text-7xl sm:text-9xl md:text-[12rem]"}`}>
+              <div data-nosnippet class={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 font-bold text-primary opacity-20 ${textOverlayClass || "text-7xl sm:text-9xl md:text-[12rem]"}`}>
                 {textOverlay}
               </div>
             </div>

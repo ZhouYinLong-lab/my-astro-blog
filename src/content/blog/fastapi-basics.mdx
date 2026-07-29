@@ -113,7 +113,7 @@ uv run fastapi dev
 fastapi dev
 ```
 
-默认情况下，服务会监听 `http://127.0.0.1:8000`。浏览器访问根路径，可以看到：
+本地开发时，服务默认监听 `http://127.0.0.1:8000`。浏览器访问根路径，可以看到：
 
 ```json
 {
@@ -121,11 +121,26 @@ fastapi dev
 }
 ```
 
+这篇文章对应的学习 API 已经部署在 `api.zylatent.com`。线上访问使用 HTTPS 的 443 端口，外部请求由 Nginx 转发到服务器内部的 FastAPI `8000` 端口；读者不需要直接访问或暴露内部端口，可以直接运行：
+
+```bash
+curl.exe https://api.zylatent.com/health
+curl.exe https://api.zylatent.com/api/site
+```
+
+如果你看到 `{"status":"ok"}`，说明请求已经从命令行经过域名、HTTPS 和反向代理抵达 FastAPI。
+
 这里的 `@app.get("/")` 是一个路径操作声明：当请求方法是 `GET`、路径是 `/` 时，调用下面的 `read_root` 函数。
 
 ## 4. `/docs`：接口文档不是额外工作
 
-启动服务后，打开：
+线上体验可以直接打开：
+
+```text
+https://api.zylatent.com/docs
+```
+
+如果你是在自己的电脑上启动开发服务，再使用本地地址：
 
 ```text
 http://127.0.0.1:8000/docs
@@ -176,7 +191,7 @@ def read_site_profile():
 请求：
 
 ```bash
-curl.exe http://127.0.0.1:8000/api/site
+curl.exe https://api.zylatent.com/api/site
 ```
 
 响应：
@@ -266,7 +281,7 @@ def list_posts(
 查询接口可以这样调用：
 
 ```bash
-curl.exe "http://127.0.0.1:8000/api/posts?category=尺蠖&limit=10"
+curl.exe "https://api.zylatent.com/api/posts?category=尺蠖&limit=10"
 ```
 
 `Query(ge=1, le=50)` 表示 `limit` 的最小值是 1，最大值是 50。如果传入 `limit=0`，FastAPI 会自动返回 422，而不是让错误参数继续进入业务逻辑。
@@ -296,13 +311,13 @@ def get_post(slug: str):
 访问：
 
 ```bash
-curl.exe http://127.0.0.1:8000/api/posts/fastapi-basics
+curl.exe https://api.zylatent.com/api/posts/fastapi-basics
 ```
 
 不存在的 slug：
 
 ```bash
-curl.exe http://127.0.0.1:8000/api/posts/not-found
+curl.exe https://api.zylatent.com/api/posts/not-found
 ```
 
 服务会返回：
@@ -352,7 +367,7 @@ def create_feedback(payload: FeedbackCreate):
 提交请求：
 
 ```bash
-curl.exe -X POST http://127.0.0.1:8000/api/feedback `
+curl.exe -X POST https://api.zylatent.com/api/feedback `
   -H "Content-Type: application/json" `
   -d '{"name":"访客","message":"这篇文章很有帮助。","page":"/blog/fastapi-basics/"}'
 ```
@@ -376,12 +391,12 @@ PowerShell 中反引号用于换行。如果不想处理换行，也可以直接
 例如漏掉 `message`：
 
 ```bash
-curl.exe -X POST http://127.0.0.1:8000/api/feedback `
+curl.exe -X POST https://api.zylatent.com/api/feedback `
   -H "Content-Type: application/json" `
   -d '{"name":"访客"}'
 ```
 
-这是请求方的问题。FastAPI 会在业务函数执行前完成校验，并返回 422 以及具体字段的位置。
+这是请求方的问题。FastAPI 会在业务函数执行前完成校验，并返回 422 以及具体字段的位置。你可以直接对线上演示接口运行上面的命令，不会创建留言。
 
 ### 404：资源不存在
 
@@ -556,7 +571,7 @@ curl.exe https://api.zylatent.com/health
 curl.exe "https://api.zylatent.com/api/posts?category=尺蠖&limit=10"
 ```
 
-为了让这个公开演示保持简单，页面暂时只调用 `GET` 接口；留言接口仍然保留在 `/docs` 中供本地测试。真正接收公开留言前，还需要增加数据库、验证码、频率限制和内容审核。
+为了让这个公开演示保持简单，页面暂时只调用 `GET` 接口；读者可以通过线上 `/docs` 或命令行体验留言接口。当前留言只保存在服务器进程的内存中，重启后会消失，也没有验证码、频率限制和内容审核，因此它仍然只是学习演示，不应直接当作正式留言系统使用。
 
 ## 参考资料
 
