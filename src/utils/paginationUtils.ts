@@ -47,7 +47,9 @@ export async function getMainBlogPaginationPaths({
   paginate: any;
 }) {
   const allPosts = await getAllPosts();
-  const sortedPosts = sortPostsByPinAndDate(allPosts);
+  // Project case studies belong to WORK and should not be mixed into the blog feed.
+  const blogPosts = allPosts.filter((post) => !post.data.project);
+  const sortedPosts = sortPostsByPinAndDate(blogPosts);
   const postsWithStats = await getPostsWithStats(sortedPosts);
 
   return paginate(postsWithStats, { pageSize: BLOG_PAGE_SIZE });
