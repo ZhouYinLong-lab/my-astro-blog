@@ -14,6 +14,7 @@ image: /img/paintings/raphael-school-of-athens.jpg
 ---
 
 import Collapse from "../../components/mdx/Collapse.astro";
+import FastApiPlayground from "../../components/mdx/FastApiPlayground.jsx";
 import Info from "../../components/mdx/Info.astro";
 import Success from "../../components/mdx/Success.astro";
 import TimeLine from "../../components/mdx/TimeLine.astro";
@@ -487,6 +488,30 @@ fastapi-zylatent/
   { year: "真实场景", event: "围绕 zylatent.com 设计站点、文章和留言 API，同时意识到内存存储不能直接用于生产。" },
   { year: "下一步", event: "继续接入数据库、测试、认证和生产部署。" }
 ]} />
+
+## 13. 让读者实际调用一次
+
+如果 API 已经部署，浏览器端可以直接调用它。下面这个小面板只开放读取接口，点击按钮后会把真实响应显示出来：
+
+<FastApiPlayground client:load />
+
+它本质上就是下面这段 JavaScript：
+
+```javascript
+const response = await fetch("https://api.zylatent.com/api/site");
+const site = await response.json();
+
+console.log(site);
+```
+
+也可以在终端里调用同一个接口：
+
+```bash
+curl.exe https://api.zylatent.com/health
+curl.exe "https://api.zylatent.com/api/posts?category=尺蠖&limit=10"
+```
+
+为了让这个公开演示保持简单，页面暂时只调用 `GET` 接口；留言接口仍然保留在 `/docs` 中供本地测试。真正接收公开留言前，还需要增加数据库、验证码、频率限制和内容审核。
 
 ## 封面说明
 
