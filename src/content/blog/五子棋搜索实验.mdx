@@ -1,0 +1,160 @@
+---
+title: "从五子棋作业到搜索实验：用第五章的方法拆开一个 Agent"
+description: "以《人工智能：一种现代方法》第五章的对抗搜索为主线，把一次五子棋课程作业重构成可比较、可复现的搜索实验。"
+pubDate: 2026-07-31
+categories:
+  - 实验室
+tags:
+  - Python
+  - 人工智能
+  - 对抗搜索
+  - Minimax
+  - Alpha-Beta
+  - MCTS
+image: "/img/gomoku/search-architecture.svg"
+link: "https://github.com/ZhouYinLong-lab/Gomoku"
+---
+
+这原本是一份《人工智能导论》的五子棋作业。
+
+作业要求给 Agent 一个棋盘，让它返回下一步落子的位置。最开始的版本其实很直接：从合法位置里选一个，完成对局，交上去。后来我不太满足于“能下棋”这件事，想把它变成一个更适合学习的实验：如果把决策过程一层层拆开，随机、贪心、Minimax 和 Alpha-Beta 到底分别改变了什么？
+
+于是有了现在的 **Gomoku Search Lab**。
+
+它不是一个追求棋力的完整引擎，而是沿着《人工智能：一种现代方法》（Artificial Intelligence: A Modern Approach）第五章“对抗搜索”的路线，把一个小项目整理成一组可以运行、比较和复现的 Agent。
+
+![Gomoku Search Lab 的整体结构](/img/gomoku/search-architecture.svg)
+
+## 先把五子棋写成一个博弈问题
+
+第五章讲的是二人、零和、确定性、完全信息博弈。五子棋正好可以用这套语言描述：
+
+| 书里的概念 | 项目里的实现 |
+| --- | --- |
+| 状态 `state` | 当前棋盘 |
+| 当前玩家 `player` | 正在落子的 Agent |
+| 合法动作 `actions(s)` | 所有可以落子的空位 |
+| 结果 `result(s, a)` | 在棋盘副本上执行一步落子 |
+| 终止测试 `terminal_test(s)` | 五连、棋盘填满或无合法位置 |
+| 效用 `utility(s, p)` | 胜利为正，失败为负，平局为零 |
+
+这样一来，Agent 就不只是一个“会返回坐标的类”。它是在状态空间里选择动作，而对手会尽量让这个选择变差。项目里还保留了课程作业额外加入的技能标记；不过在做算法比较时，我会关闭它们，让实验回到标准的二人零和博弈。
+
+## 从随机落子开始
+
+随机 Agent 的作用不是凑数，而是提供一个下界。它从所有空位中随机选一个，不看自己能不能赢，也不管对手下一步会做什么。
+
+```python
+class Agent:
+    def make_move(self, board):
+        empty_cells = [
+            (row, col)
+            for row in range(len(board))
+            for col in range(len(board))
+            if board[row][col] == 0
+        ]
+        return random.choice(empty_cells), None
+```
+
+后面的算法都使用同一个 `Search.make_move(board)` 接口。接口不变，替换的只是“如何选择动作”。这对课程实验很重要：如果每个算法都改一套规则，最后比较的就不只是搜索方法了。
+
+## 贪心：先解决眼前的问题
+
+贪心 Agent 只看当前局面，决策顺序大致是：
+
+1. 这一步能不能直接获胜？
+2. 对手下一步能不能获胜？如果能，先堵住。
+3. 如果都不能，就选择局面评分较高的位置。
+
+它已经比随机强很多，但仍然没有真正“往后看”。它可能为了形成一个看起来不错的棋型，忽略两步之后必然出现的攻击。贪心和 Minimax 的差别，不是代码长短，而是它有没有把对手的选择纳入自己的决策。
+
+## Minimax：轮到谁，就站在谁的立场上
+
+Minimax 把棋局展开成一棵树：我的回合选择估值最大的分支，对手的回合选择估值最小的分支。
+
+```text
+我的回合：max(value(child))
+对手回合：min(value(child))
+```
+
+固定深度的 Minimax 版本故意保持简单，不做剪枝。这样更容易观察递归结构，也能直接看到一个问题：五子棋的合法动作很多，树的深度稍微增加，节点数量就会迅速膨胀。
+
+完整搜索几乎不可行，所以项目使用深度截断。在没有走到终局时，不再返回真正的胜负，而是用启发式函数估计局面，例如连续棋子数量和两端是否开放。这个估值函数不是“棋力真理”，只是给有限搜索提供一个可用的近似。
+
+## Alpha-Beta：不改变答案，只少走一些路
+
+Alpha-Beta 剪枝和 Minimax 使用的是同一个决策原则，区别在于它会记录已经知道的上下界。如果某个分支无论如何都不可能改变当前最优结果，就不再继续展开。
+
+项目里把剪枝次数和搜索节点数记录了下来，因此可以验证它到底做了什么，而不是只在代码里看见两个变量名：
+
+![7×7 棋盘上的可复现对战基准](/img/gomoku/benchmark-terminal.svg)
+
+在一组 7×7 棋盘、关闭额外技能、每步 0.03 秒、每个匹配 8 局的实验中：
+
+| Agent | 对局 | 胜率 | 平均节点/步 | 剪枝次数 |
+| --- | ---: | ---: | ---: | ---: |
+| Random | 32 | 0.0% | 0.0 | 0 |
+| Greedy | 32 | 87.5% | 0.0 | 0 |
+| Minimax | 32 | 50.0% | 78.1 | 0 |
+| Alpha-Beta | 32 | 87.5% | 55.9 | 2891 |
+
+这组结果不能被解读成“Alpha-Beta 一定比所有算法强”。小棋盘、较短对局和贪心的立即胜利/防守规则都会影响胜率。但它至少说明了一件比较具体的事：在这组条件下，Alpha-Beta 访问的节点比 Minimax 少，同时保留了相同的对抗搜索框架。
+
+真正影响剪枝效果的还有走法顺序。项目会优先考虑立即获胜、堵截对手、靠近已有棋子和靠近中心的动作。剪枝本身不改变理论答案，但好的顺序会让“坏分支”更早暴露，从而更早被剪掉。
+
+## MCTS 是扩展，不是捷径
+
+项目还加入了一个教学性质的 MCTS 扩展。它不把搜索固定在一棵完整的深度树上，而是反复执行：
+
+```text
+Selection → Expansion → Simulation → Backpropagation
+```
+
+这条路线与 Alpha-Beta 很不一样：Alpha-Beta 依靠评价函数、深度和剪枝；MCTS 依靠模拟次数和 rollout 策略。当前实现加入了简单的战术感知：模拟时优先检查立即胜点和立即防守点，否则再从局部候选位置中采样。
+
+但在当前小规模实验里，MCTS 的胜率只有 25.0%，平均每步约完成 8.8 次模拟。随着棋盘变大，固定 200 次模拟的耗时也明显上升：5×5 棋盘约 86.7 毫秒/步，11×11 棋盘约 1378.1 毫秒/步。
+
+这反而是有价值的结果。MCTS 不是因为名字更“现代”就自然优于 Alpha-Beta。搜索方法、模拟策略、预算和问题规模必须放在一起比较。
+
+## 这次重构真正留下的东西
+
+我最想保留的不是某一个 Agent 的胜率，而是这条学习路径：
+
+```text
+随机基线
+  → 立即胜利与防守
+  → Minimax 的多步对抗
+  → Alpha-Beta 的有效剪枝
+  → 启发式评估与截断搜索
+  → MCTS 的模拟式扩展
+```
+
+它把第五章里相对抽象的概念，落到了几个可以运行的 Python 模块上。`state / action / result / terminal_test / utility` 不再只是教材里的名词，`alpha`、`beta`、节点数和剪枝次数也不再只是代码里的参数。
+
+当然，这个实验还有明显边界：样本量不大，棋盘尺寸有限，运行时间受机器影响，MCTS 也没有使用神经网络策略或价值网络。因此我不会把这组结果包装成五子棋实力排名。下一步更值得做的是增加对局数量，统一节点预算，记录 Elo 变化，并专门设计一些开局和强制防守局面。
+
+对我来说，这次作业的变化是：我不再只关心“程序能不能赢”，而开始追问它为什么在这个位置落子，以及为了得到这个答案，它究竟搜索了多少东西。
+
+## 运行与源码
+
+安装依赖后，可以直接比较不同 Agent：
+
+```powershell
+python -m pip install -e .
+python -m unittest discover -s tests -v
+
+python gomoku.py --player1 alphabeta --player2 minimax --size 9 --skills off
+python gomoku.py --player1 mcts --player2 alphabeta --size 9 --skills off
+```
+
+运行基准实验：
+
+```powershell
+python benchmark.py --agents random greedy minimax alphabeta mcts --games 8 --size 7 --time-limit 0.03 --mcts-iterations 80 --skills off --seed 20260730
+```
+
+🔗 [查看 Gomoku Search Lab 源码](https://github.com/ZhouYinLong-lab/Gomoku)
+
+项目中的算法演进说明：[SEARCH_EVOLUTION.md](https://github.com/ZhouYinLong-lab/Gomoku/blob/main/SEARCH_EVOLUTION.md)
+
+实验报告与完整数据：[EXPERIMENT_REPORT.md](https://github.com/ZhouYinLong-lab/Gomoku/blob/main/EXPERIMENT_REPORT.md)

@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="780" viewBox="0 0 1400 780" role="img" aria-labelledby="title desc">
+  <title id="title">Gomoku Search Lab architecture</title>
+  <desc id="desc">A layered architecture showing the CLI and benchmark feeding a common Agent interface, five algorithms, a textbook game model and shared rules, followed by metrics and experiment reports.</desc>
+  <defs>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M 40 0 L 0 0 0 40" fill="none" stroke="#1e293b" stroke-width="1"/></pattern>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#94a3b8"/></marker>
+    <filter id="glow"><feGaussianBlur stdDeviation="3" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+  </defs>
+  <rect width="1400" height="780" fill="#020617"/>
+  <rect width="1400" height="780" fill="url(#grid)" opacity=".55"/>
+  <text x="70" y="64" fill="#f8fafc" font-family="Arial, sans-serif" font-size="30" font-weight="700">Gomoku Search Lab</text>
+  <text x="70" y="96" fill="#94a3b8" font-family="Arial, sans-serif" font-size="16">AIMA Chapter 5 · from weak baselines to explainable adversarial search</text>
+
+  <rect x="70" y="145" width="1260" height="105" rx="14" fill="#0f172a" stroke="#fbbf24" stroke-width="2" stroke-dasharray="8 5"/>
+  <text x="94" y="177" fill="#fbbf24" font-family="Arial, sans-serif" font-size="14" font-weight="700">ENTRY POINTS</text>
+  <rect x="94" y="192" width="250" height="38" rx="8" fill="#172554" stroke="#60a5fa"/>
+  <text x="219" y="217" fill="#dbeafe" text-anchor="middle" font-family="Arial, sans-serif" font-size="15">gomoku CLI</text>
+  <rect x="370" y="192" width="250" height="38" rx="8" fill="#172554" stroke="#60a5fa"/>
+  <text x="495" y="217" fill="#dbeafe" text-anchor="middle" font-family="Arial, sans-serif" font-size="15">gomoku-benchmark</text>
+  <rect x="646" y="192" width="250" height="38" rx="8" fill="#172554" stroke="#60a5fa"/>
+  <text x="771" y="217" fill="#dbeafe" text-anchor="middle" font-family="Arial, sans-serif" font-size="15">examples/</text>
+  <text x="1080" y="216" fill="#cbd5e1" text-anchor="middle" font-family="Arial, sans-serif" font-size="14">same rules · same Agent protocol</text>
+
+  <line x1="495" y1="250" x2="495" y2="303" stroke="#94a3b8" stroke-width="2" marker-end="url(#arrow)"/>
+  <line x1="219" y1="250" x2="219" y2="303" stroke="#94a3b8" stroke-width="2" marker-end="url(#arrow)"/>
+  <line x1="771" y1="250" x2="771" y2="303" stroke="#94a3b8" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <rect x="70" y="303" width="1260" height="230" rx="14" fill="#0f172a" stroke="#22d3ee" stroke-width="2"/>
+  <text x="94" y="335" fill="#22d3ee" font-family="Arial, sans-serif" font-size="14" font-weight="700">COMMON AGENT LAYER</text>
+  <text x="1235" y="335" fill="#64748b" text-anchor="end" font-family="Arial, sans-serif" font-size="13">make_move(board) → (move, skill_target)</text>
+
+  <g font-family="Arial, sans-serif" text-anchor="middle">
+    <rect x="100" y="370" width="190" height="105" rx="10" fill="#172554" stroke="#60a5fa"/>
+    <text x="195" y="410" fill="#bfdbfe" font-size="17" font-weight="700">Random</text><text x="195" y="436" fill="#93c5fd" font-size="13">agent.py</text><text x="195" y="458" fill="#64748b" font-size="12">baseline</text>
+    <rect x="325" y="370" width="190" height="105" rx="10" fill="#052e16" stroke="#34d399"/>
+    <text x="420" y="410" fill="#bbf7d0" font-size="17" font-weight="700">Greedy</text><text x="420" y="436" fill="#86efac" font-size="13">greedy.py</text><text x="420" y="458" fill="#64748b" font-size="12">win / block / score</text>
+    <rect x="550" y="370" width="190" height="105" rx="10" fill="#312e81" stroke="#818cf8"/>
+    <text x="645" y="410" fill="#e0e7ff" font-size="17" font-weight="700">Minimax</text><text x="645" y="436" fill="#c7d2fe" font-size="13">minimax.py</text><text x="645" y="458" fill="#64748b" font-size="12">fixed-depth tree</text>
+    <rect x="775" y="370" width="220" height="105" rx="10" fill="#4c1d95" stroke="#a78bfa" filter="url(#glow)"/>
+    <text x="885" y="405" fill="#ede9fe" font-size="17" font-weight="700">Alpha-Beta</text><text x="885" y="431" fill="#ddd6fe" font-size="13">alphabeta.py</text><text x="885" y="453" fill="#c4b5fd" font-size="12">TT · quiescence · heuristics</text>
+    <rect x="1030" y="370" width="220" height="105" rx="10" fill="#7c2d12" stroke="#fb923c"/>
+    <text x="1140" y="405" fill="#ffedd5" font-size="17" font-weight="700">MCTS</text><text x="1140" y="431" fill="#fed7aa" font-size="13">mcts.py</text><text x="1140" y="453" fill="#fdba74" font-size="12">tactical / random rollout</text>
+  </g>
+
+  <line x1="70" y1="533" x2="70" y2="590" stroke="#94a3b8" stroke-width="2" marker-end="url(#arrow)"/>
+  <line x1="1330" y1="533" x2="1330" y2="590" stroke="#94a3b8" stroke-width="2" marker-end="url(#arrow)"/>
+  <rect x="70" y="590" width="610" height="125" rx="14" fill="#0f172a" stroke="#34d399" stroke-width="2"/>
+  <text x="96" y="625" fill="#34d399" font-family="Arial, sans-serif" font-size="14" font-weight="700">GAME MODEL &amp; RULES</text>
+  <text x="96" y="656" fill="#e2e8f0" font-family="Arial, sans-serif" font-size="16">game_model.py</text>
+  <text x="96" y="683" fill="#94a3b8" font-family="Arial, sans-serif" font-size="14">state · actions · result · terminal_test · utility</text>
+  <text x="96" y="704" fill="#64748b" font-family="Arial, sans-serif" font-size="13">gomoku.py · search_core.py · check_win()</text>
+  <rect x="720" y="590" width="610" height="125" rx="14" fill="#0f172a" stroke="#fbbf24" stroke-width="2"/>
+  <text x="746" y="625" fill="#fbbf24" font-family="Arial, sans-serif" font-size="14" font-weight="700">MEASUREMENT &amp; TEACHING ARTIFACTS</text>
+  <text x="746" y="656" fill="#e2e8f0" font-family="Arial, sans-serif" font-size="16">benchmark.py → JSON / CSV / SE / node metrics</text>
+  <text x="746" y="683" fill="#94a3b8" font-family="Arial, sans-serif" font-size="14">RESULTS.md · EXPERIMENT_REPORT.md · tests/</text>
+  <text x="746" y="704" fill="#64748b" font-family="Arial, sans-serif" font-size="13">reproducible comparisons and ablations</text>
+</svg>

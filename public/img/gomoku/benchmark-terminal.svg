@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="690" viewBox="0 0 1200 690" role="img" aria-labelledby="title desc">
+  <title id="title">Gomoku benchmark terminal screenshot</title>
+  <desc id="desc">A terminal-style rendering of the checked-in 7 by 7 round-robin benchmark results.</desc>
+  <rect width="1200" height="690" rx="16" fill="#0b1120"/>
+  <rect width="1200" height="46" rx="16" fill="#1e293b"/>
+  <rect y="30" width="1200" height="16" fill="#1e293b"/>
+  <circle cx="28" cy="23" r="7" fill="#fb7185"/><circle cx="52" cy="23" r="7" fill="#fbbf24"/><circle cx="76" cy="23" r="7" fill="#34d399"/>
+  <text x="105" y="29" fill="#cbd5e1" font-family="Consolas, monospace" font-size="16">gomoku-benchmark — reproducible round-robin</text>
+  <g font-family="Consolas, monospace" font-size="18">
+    <text x="38" y="88" fill="#86efac">$ gomoku-benchmark --agents random greedy minimax alphabeta mcts --games 8 --size 7</text>
+    <text x="38" y="116" fill="#94a3b8">  --time-limit 0.03 --mcts-iterations 80 --skills off --seed 20260730</text>
+    <text x="38" y="164" fill="#f8fafc">Board 7x7 | 8 games/matchup | seed=20260730</text>
+    <text x="38" y="205" fill="#cbd5e1">Agent       Games  Wins  Loss  Draw  WinRate ±SE    AvgNodes  Cutoffs</text>
+    <text x="38" y="231" fill="#475569">--------------------------------------------------------------------------</text>
+    <text x="38" y="274" fill="#f87171">random          32     0    32     0     0.0% ±0.0%        0.0        0</text>
+    <text x="38" y="316" fill="#34d399">greedy          32    28     4     0    87.5% ±5.8%        0.0        0</text>
+    <text x="38" y="358" fill="#a5b4fc">minimax         32    16    16     0    50.0% ±8.8%       78.1        0</text>
+    <text x="38" y="400" fill="#c4b5fd">alphabeta       32    28     4     0    87.5% ±5.8%       55.9     2891</text>
+    <text x="38" y="442" fill="#fb923c">mcts            32     8    24     0    25.0% ±7.7%        0.0        0</text>
+    <text x="38" y="510" fill="#64748b">✓ skills=off   ✓ alternating colors   ✓ fixed seed   ✓ JSON + CSV saved</text>
+    <text x="38" y="568" fill="#94a3b8">The result is a teaching signal, not a universal strength ranking.</text>
+  </g>
+</svg>
