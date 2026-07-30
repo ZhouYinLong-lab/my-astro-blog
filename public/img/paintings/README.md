@@ -23,3 +23,12 @@
 - 年代：1880–1881
 - 来源：[Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Pierre-Auguste-Renoir-The-Boating-Party-Lunch.jpg)
 - 许可：CC0 1.0（以来源页面当前标注为准）
+
+## Thomas Eakins — The Chess Players
+
+- 文件：`eakins-the-chess-players.jpg`
+- 作者：Thomas Eakins（托马斯·埃金斯）
+- 年代：1876
+- 收藏：纽约大都会艺术博物馆（The Metropolitan Museum of Art）
+- 来源：[Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Thomas_Eakins_-_The_Chess_Players.jpg)；[The Met](https://www.metmuseum.org/art/collection/search/10813)
+- 许可：Public Domain（以来源页面当前标注为准）
