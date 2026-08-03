@@ -39,6 +39,11 @@ site:
           href: /chores/making
           svg: "material-symbols:code-blocks-outline-rounded"
           target: _self
+        - id: garden
+          text: 语义花园
+          href: /chores/garden
+          svg: "material-symbols:account-tree-outline-rounded"
+          target: _self
         - id: about
           text: 居士自序
           href: /about
@@ -53,11 +58,6 @@ site:
           text: 更新日志
           href: /chores/changelog
           svg: "material-symbols:update-rounded"
-          target: _self
-        - id: garden
-          text: 语义花园
-          href: /chores/garden
-          svg: "material-symbols:account-tree-outline-rounded"
           target: _self
     - id: friend
       text: 友链 # 汉化
