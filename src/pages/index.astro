@@ -1,10 +1,10 @@
 ---
-import { getCollection } from "astro:content";
 import { Icon } from "astro-icon/components";
 import MainCard from "@/components/MainCard.astro";
 import BaseLayout from "@/layouts/BaseLayout.astro";
+import { getAllPosts } from "@/utils/blogUtils";
 
-const recentPosts = (await getCollection("blog"))
+const recentPosts = (await getAllPosts())
   .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
   .slice(0, 3);
 ---
@@ -86,7 +86,7 @@ const recentPosts = (await getCollection("blog"))
               description: "项目、工具与工程决策。",
             },
             {
-              href: "/garden/",
+              href: "/chores/garden/",
               icon: "lucide:network",
               label: "语义花园",
               description: "从内容之间的距离重新阅读。",
