@@ -70,6 +70,39 @@ const contributions = [
     infoIcon="lucide:flask-conical"
   >
     <div class="space-y-14">
+      <section aria-labelledby="latent-garden-title">
+        <article class="grid gap-6 rounded-2xl border border-primary/25 bg-primary/5 p-6 md:grid-cols-[1fr_auto] md:items-end md:p-8">
+          <div>
+            <p class="font-mono text-xs font-bold uppercase tracking-[0.22em] text-primary">Featured system</p>
+            <h2 id="latent-garden-title" class="mt-2 text-2xl font-black">Latent Garden</h2>
+            <p class="mt-3 max-w-3xl text-sm leading-7 text-base-content/65">
+              一个面向博客、文档和知识集合的通用语义地图生成器。寒柳别苑作为首个真实案例，提供完整花园与技术向视图；博客只读取静态 JSON，不参与 embedding 计算。
+            </p>
+            <div class="mt-4 flex flex-wrap gap-2">
+              <span class="badge badge-outline">Python</span>
+              <span class="badge badge-outline">Embedding</span>
+              <span class="badge badge-outline">UMAP</span>
+              <span class="badge badge-outline">Static Frontend</span>
+            </div>
+          </div>
+          <div class="flex flex-wrap gap-2 md:justify-end">
+            <a href="/garden/" class="btn btn-sm min-h-11 gap-2">
+              打开语义花园
+              <Icon name="lucide:arrow-right" class="h-4 w-4" />
+            </a>
+            <a
+              href="https://github.com/ZhouYinLong-lab/Latent-Garden"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="btn btn-sm btn-ghost min-h-11 gap-2"
+            >
+              源码
+              <Icon name="lucide:external-link" class="h-4 w-4" />
+            </a>
+          </div>
+        </article>
+      </section>
+
       <section aria-labelledby="featured-projects-title">
         <div class="mb-7">
           <p class="font-mono text-xs uppercase tracking-[0.2em] text-primary">Case studies</p>

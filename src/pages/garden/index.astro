@@ -1,0 +1,131 @@
+---
+import { Icon } from "astro-icon/components";
+import MainCard from "@/components/MainCard.astro";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+
+const gardenBase = "https://latent-garden.zylatent.com/";
+---
+
+<BaseLayout
+  title="语义花园"
+  description="把寒柳别苑的公开文字投影到一张可探索的语义地图。"
+  seoDescription="寒柳别苑语义花园：浏览文章之间的语义距离，并切换完整内容与 Engineering Garden。"
+>
+  <MainCard
+    title="语义花园"
+    description="沿着内容之间的距离，找到另一条阅读路径。"
+    textOverlay="LATENT"
+    headerImageDark="/portfolio/bg-dark.webp"
+    headerImageLight="/portfolio/bg-light.webp"
+    infoIcon="lucide:network"
+  >
+    <div class="space-y-6">
+      <section class="rounded-2xl border border-base-300 bg-base-200 p-5 sm:p-7" aria-labelledby="garden-intro">
+        <div class="grid gap-5 lg:grid-cols-[1fr_auto] lg:items-end">
+          <div>
+            <p class="font-mono text-xs font-bold uppercase tracking-[0.22em] text-primary">Latent Garden</p>
+            <h2 id="garden-intro" class="mt-2 text-2xl font-black">从相近的念头开始阅读</h2>
+            <p class="mt-3 max-w-3xl text-sm leading-7 text-base-content/65">
+              每个点对应一篇公开文章。坐标由文本向量和 UMAP 生成，主题名称经过编辑规则整理；它是一张阅读地图，不是文章质量排名。
+            </p>
+          </div>
+          <a
+            href="https://github.com/ZhouYinLong-lab/Latent-Garden"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="btn btn-sm btn-ghost min-h-11 gap-2"
+          >
+            查看开源仓库
+            <Icon name="lucide:github" class="h-4 w-4" />
+          </a>
+        </div>
+      </section>
+
+      <section aria-labelledby="garden-view-title">
+        <div class="mb-4 flex flex-wrap items-end justify-between gap-4">
+          <div>
+            <p class="font-mono text-xs uppercase tracking-[0.2em] text-base-content/40">Choose a view</p>
+            <h2 id="garden-view-title" class="mt-1 text-xl font-bold">选择地图范围</h2>
+          </div>
+          <div class="join" role="group" aria-label="语义花园视图">
+            <button
+              type="button"
+              class="btn join-item btn-sm min-h-11 garden-view is-active"
+              data-garden-src={`${gardenBase}?embed=1`}
+              aria-pressed="true"
+            >
+              完整花园
+            </button>
+            <button
+              type="button"
+              class="btn join-item btn-sm min-h-11 garden-view"
+              data-garden-src={`${gardenBase}?embed=1&view=engineering`}
+              aria-pressed="false"
+            >
+              Engineering Garden
+            </button>
+          </div>
+        </div>
+
+        <div class="overflow-hidden rounded-2xl border border-base-300 bg-base-200 shadow-sm">
+          <iframe
+            id="semantic-garden-frame"
+            src={`${gardenBase}?embed=1`}
+            title="寒柳别苑交互式语义地图"
+            class="block h-[68svh] min-h-[560px] w-full bg-base-100"
+            loading="lazy"
+          ></iframe>
+        </div>
+        <div class="mt-4 flex flex-wrap items-center justify-between gap-3 text-xs leading-5 text-base-content/50">
+          <p>地图读取预生成的静态 JSON；访问本页不会实时调用 embedding 或博客 API。</p>
+          <a href={gardenBase} target="_blank" rel="noopener noreferrer" class="link-hover inline-flex min-h-11 items-center gap-1 font-semibold text-primary">
+            在独立页面打开
+            <Icon name="lucide:external-link" class="h-3.5 w-3.5" />
+          </a>
+        </div>
+      </section>
+    </div>
+  </MainCard>
+</BaseLayout>
+
+<script>
+  function setupGardenSwitch() {
+    const frame = document.querySelector<HTMLIFrameElement>("#semantic-garden-frame");
+    const buttons = document.querySelectorAll<HTMLButtonElement>(".garden-view");
+    if (!frame || !buttons.length) return;
+    buttons.forEach((button) => {
+      button.addEventListener("click", () => {
+        const source = button.dataset.gardenSrc;
+        if (!source || frame.src === source) return;
+        frame.src = source;
+        buttons.forEach((item) => {
+          const active = item === button;
+          item.classList.toggle("is-active", active);
+          item.setAttribute("aria-pressed", String(active));
+        });
+      });
+    });
+  }
+
+  document.addEventListener("astro:page-load", setupGardenSwitch);
+</script>
+
+<style>
+  :global(html),
+  :global(body) {
+    overflow-x: clip;
+  }
+
+  .garden-view.is-active {
+    border-color: color-mix(in oklab, oklch(var(--p)) 55%, transparent);
+    background: color-mix(in oklab, oklch(var(--p)) 18%, oklch(var(--b2)));
+    color: oklch(var(--p));
+  }
+
+  @media (max-width: 640px) {
+    #semantic-garden-frame {
+      min-height: 520px;
+      height: 66svh;
+    }
+  }
+</style>

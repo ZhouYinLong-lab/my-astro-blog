@@ -65,7 +65,7 @@ const recentPosts = (await getCollection("blog"))
           <h2 id="courtyard-links" class="mt-1 text-2xl font-bold">从这里开始</h2>
         </div>
 
-        <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
           {[
             {
               href: "/blog/",
@@ -84,6 +84,12 @@ const recentPosts = (await getCollection("blog"))
               icon: "lucide:hammer",
               label: "造物录",
               description: "项目、工具与工程决策。",
+            },
+            {
+              href: "/garden/",
+              icon: "lucide:network",
+              label: "语义花园",
+              description: "从内容之间的距离重新阅读。",
             },
             {
               href: "/about/",
