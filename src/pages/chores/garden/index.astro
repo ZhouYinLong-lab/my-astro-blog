@@ -1,0 +1,106 @@
+---
+import { Icon } from "astro-icon/components";
+import MainCard from "@/components/MainCard.astro";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+---
+
+<BaseLayout
+  title="语义花园"
+  description="把寒柳别苑留下的文章、项目和学习记录投影到一张可探索的语义地图。"
+>
+  <MainCard
+    title="语义花园"
+    description="这是一个独立的内容语义地图工具，也是寒柳别苑的第一块真实花圃。"
+    textOverlay="GARDEN"
+    headerImageDark="/portfolio/semantic-garden-dark.png"
+    headerImageLight="/portfolio/semantic-garden-light.png"
+    infoIcon="lucide:map"
+  >
+    <div class="space-y-12">
+      <section class="py-5 text-center" aria-labelledby="garden-intro">
+        <p class="mb-3 font-mono text-xs font-bold uppercase tracking-[0.28em] text-primary">
+          A map of what I leave behind
+        </p>
+        <h2 id="garden-intro" class="mx-auto max-w-3xl break-words text-2xl font-black leading-tight sm:text-4xl">
+          文章不只是列表，也可以长成一座花园
+        </h2>
+        <p class="mx-auto mt-5 max-w-2xl break-words text-base leading-7 text-base-content/65 sm:text-lg">
+          语义花园把文章、项目和学习记录放在同一张地图里。相近的内容会彼此靠近，主题相似的内容会形成一片小小的区域；点击节点，就能回到它原来的页面。
+        </p>
+        <div class="mx-auto mt-7 flex max-w-xs flex-col items-stretch justify-center gap-3 sm:max-w-none sm:flex-row sm:flex-wrap sm:items-center">
+          <a href="https://latent-garden.zylatent.com/" target="_blank" rel="noopener noreferrer" class="btn btn-primary gap-2">
+            打开完整花园
+            <Icon name="lucide:external-link" class="h-4 w-4" />
+          </a>
+          <a href="/blog/latent-garden个人语义花园/" class="btn btn-outline gap-2">
+            先读项目记录
+            <Icon name="lucide:book-open" class="h-4 w-4" />
+          </a>
+        </div>
+      </section>
+
+      <section aria-labelledby="garden-map-title">
+        <div class="mb-5 flex flex-wrap items-end justify-between gap-3">
+          <div>
+            <p class="font-mono text-xs uppercase tracking-[0.2em] text-base-content/40">Live map</p>
+            <h2 id="garden-map-title" class="mt-1 text-2xl font-bold">在这里走走</h2>
+          </div>
+          <a href="https://latent-garden.zylatent.com/" target="_blank" rel="noopener noreferrer" class="link link-primary text-sm">
+            在新窗口打开
+          </a>
+        </div>
+        <div class="overflow-hidden rounded-2xl border border-base-300 bg-base-200 shadow-sm">
+          <iframe
+            src="https://latent-garden.zylatent.com/?embed=1"
+            title="Latent Garden 语义地图"
+            loading="lazy"
+            class="h-[620px] w-full border-0 sm:h-[720px]"
+          ></iframe>
+        </div>
+        <p class="mt-3 text-center text-xs leading-5 text-base-content/45">
+          地图来自独立项目 Latent Garden；如果浏览器阻止嵌入，请使用上方的新窗口链接打开。
+        </p>
+      </section>
+
+      <section class="grid gap-4 md:grid-cols-3" aria-label="如何阅读语义花园">
+        <article class="rounded-2xl border border-base-300 bg-base-200 p-6">
+          <Icon name="lucide:compass" class="h-6 w-6 text-primary" />
+          <h2 class="mt-5 text-lg font-bold">位置不是坐标</h2>
+          <p class="mt-2 text-sm leading-6 text-base-content/60">
+            平面上的距离来自内容向量和降维结果。它适合帮助我们发现邻近关系，不代表地图有一条唯一、固定的“横轴”和“纵轴”。
+          </p>
+        </article>
+        <article class="rounded-2xl border border-base-300 bg-base-200 p-6">
+          <Icon name="lucide:sprout" class="h-6 w-6 text-primary" />
+          <h2 class="mt-5 text-lg font-bold">颜色是编辑判断</h2>
+          <p class="mt-2 text-sm leading-6 text-base-content/60">
+            节点的主题分组结合了内容相似度和人工整理。花园不是让模型替我定义自己，而是把机器的提示交回到人的阅读与取舍里。
+          </p>
+        </article>
+        <article class="rounded-2xl border border-base-300 bg-base-200 p-6">
+          <Icon name="lucide:route" class="h-6 w-6 text-primary" />
+          <h2 class="mt-5 text-lg font-bold">两种走法</h2>
+          <p class="mt-2 text-sm leading-6 text-base-content/60">
+            完整花园保留博客的个人纹理；工程视图则把智能系统、开发者工具和交互实验收拢到一条更清晰的技术主线上。
+          </p>
+        </article>
+      </section>
+
+      <section class="rounded-2xl border border-primary/25 bg-primary/5 px-6 py-8" aria-labelledby="garden-note">
+        <div class="flex flex-col gap-5 sm:flex-row sm:items-start sm:justify-between">
+          <div>
+            <p class="font-mono text-xs uppercase tracking-[0.2em] text-primary">Open project</p>
+            <h2 id="garden-note" class="mt-2 text-2xl font-bold">它不只服务于这一个博客</h2>
+            <p class="mt-3 max-w-2xl text-sm leading-6 text-base-content/65">
+              Latent Garden 与 Astro 博客保持松耦合：内容可以来自 Markdown、MDX、JSON、RSS 或公开网站，最后生成一份可部署的静态地图。寒柳别苑只是它目前最完整的一块试验田。
+            </p>
+          </div>
+          <a href="https://github.com/ZhouYinLong-lab/Latent-Garden" target="_blank" rel="noopener noreferrer" class="btn btn-outline shrink-0 gap-2">
+            <Icon name="lucide:github" class="h-4 w-4" />
+            查看源码
+          </a>
+        </div>
+      </section>
+    </div>
+  </MainCard>
+</BaseLayout>
