@@ -26,7 +26,7 @@
 - 🏠 博客：[zylatent.com](https://zylatent.com)
 - 🔧 GitHub：[ZhouYinLong-lab](https://github.com/ZhouYinLong-lab)
 - 📺 B站：[柳含知](https://space.bilibili.com/511060666)
-- ✉️ Email：Liuhanzhi23@outlook.com
+- ✉️ Email：Liuhanzhi23@outlook.com / Liuhanzhi514@gmail.com
 
 ## 特性
 
