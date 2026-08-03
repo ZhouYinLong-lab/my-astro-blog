@@ -1,11 +1,11 @@
 ---
-import { getCollection } from "astro:content";
 import { Icon } from "astro-icon/components";
 import MainCard from "@/components/MainCard.astro";
 import ProjectCaseCard from "@/components/ProjectCaseCard.astro";
 import BaseLayout from "@/layouts/BaseLayout.astro";
+import { getAllPosts } from "@/utils/blogUtils";
 
-const allPosts = await getCollection("blog");
+const allPosts = await getAllPosts();
 
 const featuredProjects = allPosts
   .filter((post) => post.data.featured && post.data.project)

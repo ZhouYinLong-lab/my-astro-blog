@@ -3,6 +3,9 @@ import { Icon } from "astro-icon/components";
 import MainCard from "@/components/MainCard.astro";
 import GitHubStats from "@/components/mdx/GitHubStats.astro";
 import BaseLayout from "@/layouts/BaseLayout.astro";
+import { USER_AVATAR } from "@/config";
+
+const avatarSrc = USER_AVATAR.startsWith("/") ? USER_AVATAR : `/${USER_AVATAR}`;
 ---
 
 <BaseLayout title="ABOUT">
@@ -18,7 +21,7 @@ import BaseLayout from "@/layouts/BaseLayout.astro";
       <section class="flex flex-col md:flex-row gap-8 items-center md:items-start">
         <div class="avatar">
           <div class="w-32 h-32 md:w-40 md:h-40 rounded-xl ring ring-primary ring-offset-base-100 ring-offset-2 overflow-hidden">
-            <img src="avatar.webp" alt="柳含知" width="160" height="160" loading="eager" />
+            <img class="core-avatar" src={avatarSrc} alt="柳含知" width="160" height="160" loading="eager" />
           </div>
         </div>
 
@@ -70,6 +73,14 @@ import BaseLayout from "@/layouts/BaseLayout.astro";
             养浩然之气,成不朽之真。<br />
             以此自期,无负此身！
           </p>
+
+          <div class="mt-8 flex justify-end">
+            <div class="text-right font-serif text-sm leading-8 tracking-[0.16em] text-base-content/60 sm:text-base">
+              <p>书于</p>
+              <p>丙午天河水</p>
+              <p>惊蛰</p>
+            </div>
+          </div>
         </div>
       </section>
 
