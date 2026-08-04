@@ -41,6 +41,7 @@ const blog = defineCollection({
           demo: z.string().url().optional(),
           metric: z.string(),
           metricLabel: z.string(),
+          metricImage: z.string().optional(),
         })
         .optional(),
     })
