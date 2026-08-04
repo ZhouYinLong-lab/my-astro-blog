@@ -5,9 +5,15 @@ import ProjectCaseCard from "@/components/ProjectCaseCard.astro";
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import { getAllPosts } from "@/utils/blogUtils";
 
-const featuredProjects = (await getAllPosts())
-  .filter((post) => post.data.featured && post.data.project)
+const allPosts = await getAllPosts();
+
+const featuredProjects = allPosts
+  .filter((post) => post.data.workSection === "case-study" && post.data.project)
   .sort((a, b) => a.data.project!.order - b.data.project!.order);
+
+const experimentPosts = allPosts
+  .filter((post) => post.data.workSection === "experiment")
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 
 const outcomes = featuredProjects.map((post) => ({
   value: post.data.project!.metric,
@@ -42,6 +48,10 @@ const outcomes = featuredProjects.map((post) => ({
         <div class="mx-auto mt-7 flex max-w-xs flex-col items-stretch justify-center gap-3 sm:max-w-none sm:flex-row sm:flex-wrap sm:items-center">
           <a href="#case-studies" class="btn btn-primary gap-2">
             查看代表项目
+            <Icon name="lucide:arrow-down" class="h-4 w-4" />
+          </a>
+          <a href="#experiments" class="btn btn-ghost gap-2">
+            查看实验档案
             <Icon name="lucide:arrow-down" class="h-4 w-4" />
           </a>
           <a href="https://github.com/ZhouYinLong-lab" target="_blank" rel="noopener noreferrer" class="btn btn-outline gap-2">
@@ -124,6 +134,50 @@ const outcomes = featuredProjects.map((post) => ({
                 tags={post.data.tags}
                 cover={post.data.image}
               />
+            );
+          })}
+        </div>
+      </section>
+
+      <section id="experiments" class="scroll-mt-24" aria-labelledby="experiments-title">
+        <div class="mb-6">
+          <p class="font-mono text-xs uppercase tracking-[0.2em] text-base-content/40">Experiments</p>
+          <h2 id="experiments-title" class="mt-1 text-2xl font-bold">实验档案</h2>
+          <p class="mt-2 max-w-2xl text-sm leading-6 text-base-content/55">
+            这里留下还在探索中的游戏、算法和交互作品：它们不一定成为产品，但都记录了一次具体的尝试。
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 gap-5 md:grid-cols-2">
+          {experimentPosts.map((post) => {
+            const targetUrl = `/blog/${post.slug}/`;
+            const coverImage = post.data.image;
+            return (
+              <article class="card overflow-hidden border border-base-300 bg-base-200 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
+                {coverImage && (
+                  <figure class="relative h-44 overflow-hidden">
+                    <img
+                      src={coverImage}
+                      alt=""
+                      class="h-full w-full object-cover transition-transform duration-500 hover:scale-105"
+                      loading="lazy"
+                    />
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/45 to-transparent"></div>
+                  </figure>
+                )}
+                <div class="card-body p-5">
+                  <h3 class="card-title text-lg">{post.data.title}</h3>
+                  <p class="line-clamp-2 text-sm leading-6 text-base-content/65">
+                    {post.data.description}
+                  </p>
+                  <div class="card-actions mt-2">
+                    <a href={targetUrl} class="btn btn-sm btn-ghost gap-2">
+                      查看实验记录
+                      <Icon name="lucide:arrow-right" class="h-4 w-4" />
+                    </a>
+                  </div>
+                </div>
+              </article>
             );
           })}
         </div>

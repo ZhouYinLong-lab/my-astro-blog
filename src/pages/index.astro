@@ -65,19 +65,13 @@ const recentPosts = (await getAllPosts())
           <h2 id="courtyard-links" class="mt-1 text-2xl font-bold">从这里开始</h2>
         </div>
 
-        <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
+        <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {[
             {
               href: "/blog/",
               icon: "lucide:book-open",
               label: "博客",
               description: "技术实践、项目复盘与随笔。",
-            },
-            {
-              href: "/project/",
-              icon: "lucide:flask-conical",
-              label: "实验室",
-              description: "游戏、算法和交互实验。",
             },
             {
               href: "/chores/making/",
