@@ -24,6 +24,7 @@ const blog = defineCollection({
         })
         .optional(),
       featured: z.boolean().optional(),
+      workSection: z.enum(["case-study", "experiment"]).optional(),
       bgImage: z.string().optional(),
       lang: z.string().optional(),
       author: z.string().optional(),
