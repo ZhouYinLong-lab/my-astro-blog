@@ -87,7 +87,7 @@ hanliu-biyuan/
 │   │   ├── friend/                  # → /friend
 │   │   ├── humanities-archive/      # → /humanities-archive
 │   │   ├── og/                      # OG 图片生成
-│   │   └── project/                 # → /project (实验室/Labs)
+│   │   └── project/                 # → /project (兼容跳转到造物录实验档案)
 │   ├── plugins/                     # Remark 插件
 │   ├── styles/                      # 全局 SCSS
 │   └── utils/                       # 工具函数
@@ -115,7 +115,7 @@ hanliu-biyuan/
 |--------|------|-----|
 | `blog/` | 博客列表、详情、归档、分类、标签、搜索 | `/blog/*` |
 | `chores/` | 更新日志、热力图 | `/chores/*` |
-| `project/` | 🧪 实验室 (赛博工坊/Labs) — 筛选分类"实验室"的博客 | `/project` |
+| `project/` | 旧项目入口兼容跳转，实验档案现位于造物录 | `/project` |
 | `about/` | 居士自序 (个人介绍) | `/about` |
 | `backyard/` | 后院 (涂鸦墙) | `/backyard` |
 | `friend/` | 友链 | `/friend` |
