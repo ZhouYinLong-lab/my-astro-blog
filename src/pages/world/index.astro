@@ -2,71 +2,25 @@
 import BaseLayout from "@/layouts/BaseLayout.astro";
 
 const rooms = [
-  {
-    id: "garden",
-    label: "语义花园",
-    description: "后园 · 内容之间的隐秘小径",
-    href: "/chores/garden/",
-  },
-  {
-    id: "about",
-    label: "居士自序",
-    description: "正厅 · 一封写给来访者的信",
-    href: "/about/",
-  },
-  {
-    id: "making",
-    label: "造物录",
-    description: "西厢 · 项目、工具与试作",
-    href: "/chores/making/",
-  },
-  {
-    id: "blog",
-    label: "博客",
-    description: "东厢 · 课程、代码与实践",
-    href: "/blog/",
-  },
-  {
-    id: "backyard",
-    label: "别苑杂务",
-    description: "南侧房 · 尚未归类的记录",
-    href: "/backyard/",
-  },
+  { id: "garden", label: "语义花园", href: "/chores/garden/" },
+  { id: "about", label: "居士自序", href: "/about/" },
+  { id: "making", label: "造物录", href: "/chores/making/" },
+  { id: "blog", label: "博客", href: "/blog/" },
+  { id: "backyard", label: "别苑杂务", href: "/backyard/" },
 ];
 ---
 
 <BaseLayout
   title="别苑世界"
   description="一座可以走进去的寒柳别苑。"
-  seoDescription="寒柳别苑的 2.5D 像素院落：正厅、东西厢房、前院与后园。"
+  seoDescription="寒柳别苑的 2.5D 像素院落。"
   isIndexed={false}
   immersive={true}
   animateType="fade-up"
 >
   <div slot="fullscreen" class="world-page">
-    <header class="world-header">
-      <a class="world-brand" href="/" aria-label="返回寒柳别苑">
-        <span class="world-brand__seal">寒</span>
-        <span><strong>寒柳别苑</strong><small>HANLIU BIYUAN / A SMALL HOUSE</small></span>
-      </a>
-      <div class="world-header__right">
-        <span class="world-coordinates">丙午 · 夏日 · 午后</span>
-        <a class="world-exit" href="/">返回庭院 <span aria-hidden="true">↗</span></a>
-      </div>
-    </header>
-
     <main class="world-main">
-      <div class="world-intro">
-        <div>
-          <p class="eyebrow">A SMALL PLACE FOR MANY THINGS</p>
-          <h1>寒柳别苑</h1>
-          <p class="world-intro__copy">从南门进来。先经过一方空院，再决定今天要去哪一间房。</p>
-        </div>
-        <div class="world-note"><span class="world-note__pin"></span><p><b>这里是空间关系，不是分类图。</b><br />书房、工坊和后园都从前院相望。</p></div>
-      </div>
-
       <section class="estate-frame" aria-label="寒柳别苑物理院落地图">
-        <div class="estate-frame__topline"><span>HANLIU BIYUAN · FLOOR PLAN / 01</span><span>CLICK A DOOR TO ENTER</span></div>
         <div class="estate-scene">
           <div class="estate-map-picture" aria-hidden="true">
             <img class="estate-map estate-map--dark" src="/world/estate-dark.png" alt="" />
@@ -75,32 +29,36 @@ const rooms = [
 
           {rooms.map((room) => (
             <a class={`room-hit room-hit--${room.id}`} href={room.href} aria-label={`进入${room.label}`}>
-              <span class="room-hit__label"><b>{room.label}</b><small>{room.description}</small></span>
+              <span class="room-hit__label"><b>{room.label}</b></span>
             </a>
           ))}
-
-          <div class="scene-sign scene-sign--garden">后园<br /><small>语义花园</small></div>
-          <div class="scene-sign scene-sign--hall">居士自序<br /><small>正厅</small></div>
-          <div class="scene-sign scene-sign--west">造物录<br /><small>西厢</small></div>
-          <div class="scene-sign scene-sign--east">博客<br /><small>东厢</small></div>
-          <div class="scene-sign scene-sign--south">别苑杂务<br /><small>南侧房</small></div>
-          <div class="scene-help"><span>↖</span> 点击屋门进入 · 地图保持在原地</div>
         </div>
-        <div class="estate-frame__bottomline"><span>一座房子，几间房，许多还在生长的东西。</span><span>LIGHT / DARK 随网站主题切换</span></div>
       </section>
     </main>
   </div>
 </BaseLayout>
 
 <style is:global>
-  :root { --world-ink:#273329; --world-paper:#edf0df; --world-ground:#b5c497; --world-border:#4c5940; --world-muted:#6b735e; --world-gold:#c2914f; }
-  html[data-theme-type="dark"] { --world-ink:#e8e4d1; --world-paper:#111615; --world-ground:#2a3c32; --world-border:#a39a76; --world-muted:#a4a58b; --world-gold:#b38a4c; }
-  .world-page { min-height:100vh; overflow:hidden; color:var(--world-ink); background:var(--world-paper); }
-  .world-header { position:fixed; z-index:20; inset:0 0 auto; display:flex; align-items:center; justify-content:space-between; padding:1.15rem clamp(1rem,4vw,4.5rem); pointer-events:none; }
-  .world-header>* { pointer-events:auto; }.world-brand { display:inline-flex; align-items:center; gap:.75rem; color:inherit; text-decoration:none; }.world-brand__seal { display:grid; width:2.5rem; height:2.5rem; place-items:center; border:2px solid currentColor; background:var(--world-paper); box-shadow:4px 4px 0 color-mix(in srgb,var(--world-ink) 20%,transparent); font:1.2rem serif; }.world-brand strong,.world-brand small { display:block; }.world-brand strong { font-size:.96rem; letter-spacing:.09em; }.world-brand small { margin-top:.18rem; color:var(--world-muted); font:.56rem ui-monospace,SFMono-Regular,Consolas,monospace; letter-spacing:.13em; }.world-header__right { display:flex; align-items:center; gap:1.4rem; }.world-coordinates { color:var(--world-muted); font:.6rem ui-monospace,SFMono-Regular,Consolas,monospace; letter-spacing:.13em; }.world-exit { color:inherit; font-size:.78rem; font-weight:800; text-decoration:none; }
-  .world-main { width:min(1500px,100%); margin:0 auto; padding:6.5rem 1.2rem 1.5rem; }.world-intro { display:flex; align-items:end; justify-content:space-between; gap:2rem; max-width:1380px; margin:0 auto 1.25rem; }.eyebrow { margin:0 0 .4rem; color:var(--world-muted); font:.62rem ui-monospace,SFMono-Regular,Consolas,monospace; letter-spacing:.17em; }.world-intro h1 { margin:0; font-size:clamp(2.1rem,5vw,4.3rem); line-height:.94; letter-spacing:-.09em; }.world-intro__copy { max-width:30rem; margin:.75rem 0 0; color:var(--world-muted); font-size:.88rem; line-height:1.8; }.world-note { display:flex; align-items:start; gap:.65rem; max-width:18rem; padding:.65rem .8rem; border-left:2px solid var(--world-gold); color:var(--world-muted); font-size:.68rem; line-height:1.6; }.world-note p { margin:0; }.world-note b { color:var(--world-ink); }.world-note__pin { display:block; width:8px; height:8px; margin-top:.28rem; background:var(--world-gold); box-shadow:4px 4px 0 color-mix(in srgb,var(--world-gold) 35%,transparent); }
-  .estate-frame { max-width:1380px; margin:auto; border:2px solid var(--world-border); background:var(--world-ground); box-shadow:10px 10px 0 color-mix(in srgb,var(--world-ink) 15%,transparent); }.estate-frame__topline,.estate-frame__bottomline { display:flex; justify-content:space-between; gap:1rem; padding:.55rem .8rem; color:var(--world-muted); font:.57rem ui-monospace,SFMono-Regular,Consolas,monospace; letter-spacing:.1em; }.estate-frame__topline { border-bottom:1px solid color-mix(in srgb,var(--world-border) 55%,transparent); }.estate-frame__bottomline { border-top:1px solid color-mix(in srgb,var(--world-border) 55%,transparent); }.estate-scene { position:relative; overflow:hidden; aspect-ratio:16/9; background:var(--world-ground); }.estate-map-picture,.estate-map { position:absolute; inset:0; display:block; width:100%; height:100%; }.estate-map { object-fit:cover; image-rendering:auto; }.estate-map--dark { display:block; }.estate-map--light { display:none; } html[data-theme-type="light"] .estate-map--dark { display:none; } html[data-theme-type="light"] .estate-map--light { display:block; }
-  .room-hit { position:absolute; display:block; z-index:5; color:var(--world-ink); text-decoration:none; cursor:pointer; }.room-hit--garden { top:2%; right:5%; width:31%; height:25%; }.room-hit--about { top:14%; left:36%; width:28%; height:28%; }.room-hit--making { top:35%; left:14%; width:23%; height:29%; }.room-hit--blog { top:35%; right:14%; width:23%; height:29%; }.room-hit--backyard { bottom:3%; left:39%; width:22%; height:20%; }.room-hit::after { position:absolute; inset:0; content:""; }.room-hit:hover .room-hit__label,.room-hit:focus-visible .room-hit__label { transform:translate(-50%,-3px); background:var(--world-paper); }.room-hit__label { position:absolute; top:.2rem; left:50%; display:grid; gap:.1rem; width:max-content; max-width:12rem; padding:.32rem .48rem; border-left:2px solid var(--world-gold); background:color-mix(in srgb,var(--world-paper) 76%,transparent); box-shadow:3px 3px 0 rgba(0,0,0,.12); transform:translateX(-50%); transition:transform 160ms ease,background 160ms ease; }.room-hit__label b { font:900 .83rem serif; }.room-hit__label small { color:var(--world-muted); font-size:.56rem; line-height:1.35; }
-  .scene-sign { position:absolute; z-index:4; padding:.2rem .35rem; color:var(--world-ink); background:color-mix(in srgb,var(--world-paper) 62%,transparent); font:900 .78rem serif; line-height:1.15; pointer-events:none; }.scene-sign small { color:var(--world-muted); font: .52rem ui-monospace,SFMono-Regular,Consolas,monospace; letter-spacing:.08em; }.scene-sign--garden { top:20%; right:19%; }.scene-sign--hall { top:17%; left:47%; }.scene-sign--west { top:39%; left:18%; }.scene-sign--east { top:39%; right:18%; }.scene-sign--south { bottom:14%; left:46%; }.scene-help { position:absolute; right:.8rem; bottom:.7rem; z-index:8; padding:.35rem .5rem; color:var(--world-ink); background:color-mix(in srgb,var(--world-paper) 78%,transparent); font:.56rem ui-monospace,SFMono-Regular,Consolas,monospace; }.scene-help span { color:var(--world-gold); font-size:.9rem; }
-  @media (max-width:760px) { .world-page { overflow:auto; }.world-header { position:absolute; padding-top:1rem; }.world-header__right { gap:.5rem; }.world-coordinates { display:none; }.world-main { padding-top:5.4rem; }.world-intro { align-items:start; flex-direction:column; gap:.75rem; }.world-note { max-width:none; }.estate-frame__topline span:last-child,.estate-frame__bottomline span:last-child { display:none; }.estate-scene { min-width:760px; }.estate-frame { overflow-x:auto; }.room-hit__label { transform:translateX(-50%) scale(.9); transform-origin:top center; }.scene-help { right:.4rem; bottom:.4rem; } }
+  :root { --world-paper:#edf0df; --world-ground:#b5c497; --world-ink:#fff4d6; --world-gold:#d7a65b; }
+  html[data-theme-type="dark"] { --world-paper:#111615; --world-ground:#16241f; --world-ink:#f4e8c8; --world-gold:#d3a45a; }
+  .world-page { width:100vw; height:100svh; overflow:hidden; color:var(--world-ink); background:var(--world-paper); }
+  .world-main,.estate-frame,.estate-scene { width:100%; height:100%; }
+  .world-main { margin:0; padding:0; }
+  .estate-frame { position:relative; overflow:hidden; background:var(--world-ground); }
+  .estate-scene { position:relative; overflow:hidden; }
+  .estate-map-picture,.estate-map { position:absolute; inset:0; display:block; width:100%; height:100%; }
+  .estate-map { object-fit:cover; image-rendering:auto; }
+  .estate-map--dark { display:block; }.estate-map--light { display:none; }
+  html[data-theme-type="light"] .estate-map--dark { display:none; } html[data-theme-type="light"] .estate-map--light { display:block; }
+  .room-hit { position:absolute; z-index:5; display:block; color:var(--world-ink); text-decoration:none; cursor:pointer; }
+  .room-hit--garden { top:0; left:20%; width:62%; height:24%; }
+  .room-hit--about { top:17%; left:34%; width:32%; height:34%; }
+  .room-hit--making { top:34%; left:10%; width:29%; height:35%; }
+  .room-hit--blog { top:34%; right:10%; width:29%; height:35%; }
+  .room-hit--backyard { right:2%; bottom:0; width:26%; height:31%; }
+  .room-hit__label { position:absolute; display:block; width:max-content; padding:.18rem .35rem; border-bottom:2px solid var(--world-gold); color:var(--world-ink); background:rgba(23,31,25,.28); font:900 clamp(.8rem,1.25vw,1.1rem) serif; letter-spacing:.08em; text-shadow:2px 2px 0 rgba(0,0,0,.8); transition:transform 160ms ease,background 160ms ease; }
+  .room-hit:hover .room-hit__label,.room-hit:focus-visible .room-hit__label { background:rgba(23,31,25,.72); transform:translateY(-3px); }
+  .room-hit--garden .room-hit__label { top:8%; left:50%; transform:translateX(-50%); }.room-hit--about .room-hit__label { bottom:13%; left:50%; transform:translateX(-50%); }.room-hit--making .room-hit__label { bottom:13%; left:42%; }.room-hit--blog .room-hit__label { bottom:13%; left:42%; }.room-hit--backyard .room-hit__label { top:31%; left:35%; }
+  .room-hit--garden:hover .room-hit__label,.room-hit--garden:focus-visible .room-hit__label,.room-hit--about:hover .room-hit__label,.room-hit--about:focus-visible .room-hit__label { transform:translate(-50%,-3px); }
+  @media (max-aspect-ratio: 4/3) { .estate-map { object-fit:cover; } }
 </style>
