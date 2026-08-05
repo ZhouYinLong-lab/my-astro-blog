@@ -7,40 +7,30 @@ const rooms = [
     label: "语义花园",
     description: "后园 · 内容之间的隐秘小径",
     href: "/chores/garden/",
-    light: "/portfolio/semantic-garden-light.png",
-    dark: "/portfolio/semantic-garden-dark.png",
   },
   {
     id: "about",
     label: "居士自序",
     description: "正厅 · 一封写给来访者的信",
     href: "/about/",
-    light: "/portfolio/hero-about-light.webp",
-    dark: "/portfolio/hero-about-dark.webp",
   },
   {
     id: "making",
     label: "造物录",
     description: "西厢 · 项目、工具与试作",
     href: "/chores/making/",
-    light: "/portfolio/hero-build-light.webp",
-    dark: "/portfolio/hero-build-dark.webp",
   },
   {
     id: "blog",
     label: "博客",
     description: "东厢 · 课程、代码与实践",
     href: "/blog/",
-    light: "/portfolio/hero-blog-light.webp",
-    dark: "/portfolio/hero-blog-dark.webp",
   },
   {
     id: "backyard",
     label: "别苑杂务",
     description: "南侧房 · 尚未归类的记录",
     href: "/backyard/",
-    light: "/portfolio/hero-work-light.webp",
-    dark: "/portfolio/hero-work-dark.webp",
   },
 ];
 ---
@@ -78,13 +68,14 @@ const rooms = [
       <section class="estate-frame" aria-label="寒柳别苑物理院落地图">
         <div class="estate-frame__topline"><span>HANLIU BIYUAN · FLOOR PLAN / 01</span><span>CLICK A DOOR TO ENTER</span></div>
         <div class="estate-scene">
-          <picture class="estate-map-picture" aria-hidden="true"><img src="/world/estate-map.svg" alt="" /></picture>
+          <div class="estate-map-picture" aria-hidden="true">
+            <img class="estate-map estate-map--dark" src="/world/estate-dark.png" alt="" />
+            <img class="estate-map estate-map--light" src="/world/estate-light.png" alt="" />
+          </div>
 
           {rooms.map((room) => (
             <a class={`room-hit room-hit--${room.id}`} href={room.href} aria-label={`进入${room.label}`}>
-              <span class="room-window"><img class="room-window__dark" src={room.dark} alt="" /><img class="room-window__light" src={room.light} alt="" /></span>
               <span class="room-hit__label"><b>{room.label}</b><small>{room.description}</small></span>
-              <span class="room-hit__door">进入</span>
             </a>
           ))}
 
@@ -108,8 +99,8 @@ const rooms = [
   .world-header { position:fixed; z-index:20; inset:0 0 auto; display:flex; align-items:center; justify-content:space-between; padding:1.15rem clamp(1rem,4vw,4.5rem); pointer-events:none; }
   .world-header>* { pointer-events:auto; }.world-brand { display:inline-flex; align-items:center; gap:.75rem; color:inherit; text-decoration:none; }.world-brand__seal { display:grid; width:2.5rem; height:2.5rem; place-items:center; border:2px solid currentColor; background:var(--world-paper); box-shadow:4px 4px 0 color-mix(in srgb,var(--world-ink) 20%,transparent); font:1.2rem serif; }.world-brand strong,.world-brand small { display:block; }.world-brand strong { font-size:.96rem; letter-spacing:.09em; }.world-brand small { margin-top:.18rem; color:var(--world-muted); font:.56rem ui-monospace,SFMono-Regular,Consolas,monospace; letter-spacing:.13em; }.world-header__right { display:flex; align-items:center; gap:1.4rem; }.world-coordinates { color:var(--world-muted); font:.6rem ui-monospace,SFMono-Regular,Consolas,monospace; letter-spacing:.13em; }.world-exit { color:inherit; font-size:.78rem; font-weight:800; text-decoration:none; }
   .world-main { width:min(1500px,100%); margin:0 auto; padding:6.5rem 1.2rem 1.5rem; }.world-intro { display:flex; align-items:end; justify-content:space-between; gap:2rem; max-width:1380px; margin:0 auto 1.25rem; }.eyebrow { margin:0 0 .4rem; color:var(--world-muted); font:.62rem ui-monospace,SFMono-Regular,Consolas,monospace; letter-spacing:.17em; }.world-intro h1 { margin:0; font-size:clamp(2.1rem,5vw,4.3rem); line-height:.94; letter-spacing:-.09em; }.world-intro__copy { max-width:30rem; margin:.75rem 0 0; color:var(--world-muted); font-size:.88rem; line-height:1.8; }.world-note { display:flex; align-items:start; gap:.65rem; max-width:18rem; padding:.65rem .8rem; border-left:2px solid var(--world-gold); color:var(--world-muted); font-size:.68rem; line-height:1.6; }.world-note p { margin:0; }.world-note b { color:var(--world-ink); }.world-note__pin { display:block; width:8px; height:8px; margin-top:.28rem; background:var(--world-gold); box-shadow:4px 4px 0 color-mix(in srgb,var(--world-gold) 35%,transparent); }
-  .estate-frame { max-width:1380px; margin:auto; border:2px solid var(--world-border); background:var(--world-ground); box-shadow:10px 10px 0 color-mix(in srgb,var(--world-ink) 15%,transparent); }.estate-frame__topline,.estate-frame__bottomline { display:flex; justify-content:space-between; gap:1rem; padding:.55rem .8rem; color:var(--world-muted); font:.57rem ui-monospace,SFMono-Regular,Consolas,monospace; letter-spacing:.1em; }.estate-frame__topline { border-bottom:1px solid color-mix(in srgb,var(--world-border) 55%,transparent); }.estate-frame__bottomline { border-top:1px solid color-mix(in srgb,var(--world-border) 55%,transparent); }.estate-scene { position:relative; overflow:hidden; aspect-ratio:16/9; background:var(--world-ground); }.estate-map-picture,.estate-map-picture img { position:absolute; inset:0; display:block; width:100%; height:100%; }.estate-map-picture img { image-rendering:pixelated; } html[data-theme-type="dark"] .estate-map-picture img { filter:brightness(.55) saturate(.75) hue-rotate(165deg); }
-  .room-hit { position:absolute; display:block; z-index:5; color:var(--world-ink); text-decoration:none; }.room-hit--garden { top:2%; right:5%; width:31%; height:25%; }.room-hit--about { top:14%; left:36%; width:28%; height:28%; }.room-hit--making { top:35%; left:14%; width:23%; height:29%; }.room-hit--blog { top:35%; right:14%; width:23%; height:29%; }.room-hit--backyard { bottom:3%; left:39%; width:22%; height:20%; }.room-hit::after { position:absolute; inset:0; content:""; }.room-hit:hover .room-hit__label,.room-hit:focus-visible .room-hit__label { transform:translate(-50%,-3px); background:var(--world-paper); }.room-window { position:absolute; left:50%; top:34%; width:65%; height:30%; overflow:hidden; border:3px solid var(--world-border); background:#26332f; box-shadow:4px 4px 0 rgba(0,0,0,.18); transform:translateX(-50%); pointer-events:none; }.room-window img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:.76; }.room-window__light { display:none; } html[data-theme-type="light"] .room-window__dark { display:none; } html[data-theme-type="light"] .room-window__light { display:block; }.room-hit__label { position:absolute; top:.2rem; left:50%; display:grid; gap:.1rem; width:max-content; max-width:12rem; padding:.32rem .48rem; border-left:2px solid var(--world-gold); background:color-mix(in srgb,var(--world-paper) 76%,transparent); box-shadow:3px 3px 0 rgba(0,0,0,.12); transform:translateX(-50%); transition:transform 160ms ease,background 160ms ease; }.room-hit__label b { font:900 .83rem serif; }.room-hit__label small { color:var(--world-muted); font-size:.56rem; line-height:1.35; }.room-hit__door { position:absolute; bottom:9%; left:50%; padding:.2rem .38rem; border:1px solid var(--world-border); color:var(--world-ink); background:color-mix(in srgb,var(--world-paper) 82%,transparent); font:.54rem ui-monospace,SFMono-Regular,Consolas,monospace; transform:translateX(-50%); opacity:.85; }
+  .estate-frame { max-width:1380px; margin:auto; border:2px solid var(--world-border); background:var(--world-ground); box-shadow:10px 10px 0 color-mix(in srgb,var(--world-ink) 15%,transparent); }.estate-frame__topline,.estate-frame__bottomline { display:flex; justify-content:space-between; gap:1rem; padding:.55rem .8rem; color:var(--world-muted); font:.57rem ui-monospace,SFMono-Regular,Consolas,monospace; letter-spacing:.1em; }.estate-frame__topline { border-bottom:1px solid color-mix(in srgb,var(--world-border) 55%,transparent); }.estate-frame__bottomline { border-top:1px solid color-mix(in srgb,var(--world-border) 55%,transparent); }.estate-scene { position:relative; overflow:hidden; aspect-ratio:16/9; background:var(--world-ground); }.estate-map-picture,.estate-map { position:absolute; inset:0; display:block; width:100%; height:100%; }.estate-map { object-fit:cover; image-rendering:auto; }.estate-map--dark { display:block; }.estate-map--light { display:none; } html[data-theme-type="light"] .estate-map--dark { display:none; } html[data-theme-type="light"] .estate-map--light { display:block; }
+  .room-hit { position:absolute; display:block; z-index:5; color:var(--world-ink); text-decoration:none; cursor:pointer; }.room-hit--garden { top:2%; right:5%; width:31%; height:25%; }.room-hit--about { top:14%; left:36%; width:28%; height:28%; }.room-hit--making { top:35%; left:14%; width:23%; height:29%; }.room-hit--blog { top:35%; right:14%; width:23%; height:29%; }.room-hit--backyard { bottom:3%; left:39%; width:22%; height:20%; }.room-hit::after { position:absolute; inset:0; content:""; }.room-hit:hover .room-hit__label,.room-hit:focus-visible .room-hit__label { transform:translate(-50%,-3px); background:var(--world-paper); }.room-hit__label { position:absolute; top:.2rem; left:50%; display:grid; gap:.1rem; width:max-content; max-width:12rem; padding:.32rem .48rem; border-left:2px solid var(--world-gold); background:color-mix(in srgb,var(--world-paper) 76%,transparent); box-shadow:3px 3px 0 rgba(0,0,0,.12); transform:translateX(-50%); transition:transform 160ms ease,background 160ms ease; }.room-hit__label b { font:900 .83rem serif; }.room-hit__label small { color:var(--world-muted); font-size:.56rem; line-height:1.35; }
   .scene-sign { position:absolute; z-index:4; padding:.2rem .35rem; color:var(--world-ink); background:color-mix(in srgb,var(--world-paper) 62%,transparent); font:900 .78rem serif; line-height:1.15; pointer-events:none; }.scene-sign small { color:var(--world-muted); font: .52rem ui-monospace,SFMono-Regular,Consolas,monospace; letter-spacing:.08em; }.scene-sign--garden { top:20%; right:19%; }.scene-sign--hall { top:17%; left:47%; }.scene-sign--west { top:39%; left:18%; }.scene-sign--east { top:39%; right:18%; }.scene-sign--south { bottom:14%; left:46%; }.scene-help { position:absolute; right:.8rem; bottom:.7rem; z-index:8; padding:.35rem .5rem; color:var(--world-ink); background:color-mix(in srgb,var(--world-paper) 78%,transparent); font:.56rem ui-monospace,SFMono-Regular,Consolas,monospace; }.scene-help span { color:var(--world-gold); font-size:.9rem; }
   @media (max-width:760px) { .world-page { overflow:auto; }.world-header { position:absolute; padding-top:1rem; }.world-header__right { gap:.5rem; }.world-coordinates { display:none; }.world-main { padding-top:5.4rem; }.world-intro { align-items:start; flex-direction:column; gap:.75rem; }.world-note { max-width:none; }.estate-frame__topline span:last-child,.estate-frame__bottomline span:last-child { display:none; }.estate-scene { min-width:760px; }.estate-frame { overflow-x:auto; }.room-hit__label { transform:translateX(-50%) scale(.9); transform-origin:top center; }.scene-help { right:.4rem; bottom:.4rem; } }
 </style>
