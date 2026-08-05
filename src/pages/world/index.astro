@@ -1,441 +1,115 @@
 ---
-import { Icon } from "astro-icon/components";
 import BaseLayout from "@/layouts/BaseLayout.astro";
 
-const places = [
+const rooms = [
   {
-    id: "courtyard",
-    group: "house",
-    number: "01",
-    label: "庭院",
-    english: "COURTYARD",
-    description: "入口、书桌与正在发生的事情",
-    light: "/portfolio/bg-light.webp",
-    dark: "/portfolio/bg-dark.webp",
-    href: "/",
-    accent: "#7e9c58",
-    x: 350,
-    y: 410,
+    id: "garden",
+    label: "语义花园",
+    description: "后园 · 内容之间的隐秘小径",
+    href: "/chores/garden/",
+    light: "/portfolio/semantic-garden-light.png",
+    dark: "/portfolio/semantic-garden-dark.png",
   },
   {
     id: "about",
-    group: "house",
-    number: "02",
     label: "居士自序",
-    english: "ABOUT",
-    description: "一封写给来访者的信",
+    description: "正厅 · 一封写给来访者的信",
+    href: "/about/",
     light: "/portfolio/hero-about-light.webp",
     dark: "/portfolio/hero-about-dark.webp",
-    href: "/about/",
-    accent: "#bd7e58",
-    x: 730,
-    y: 250,
-  },
-  {
-    id: "blog",
-    group: "writing",
-    number: "03",
-    label: "博客",
-    english: "BLOG",
-    description: "从课程、代码到实践记录",
-    light: "/portfolio/hero-blog-light.webp",
-    dark: "/portfolio/hero-blog-dark.webp",
-    href: "/blog/",
-    accent: "#7186a3",
-    x: 1090,
-    y: 370,
   },
   {
     id: "making",
-    group: "making",
-    number: "04",
     label: "造物录",
-    english: "WORKBENCH",
-    description: "项目、工具和工程决策",
+    description: "西厢 · 项目、工具与试作",
+    href: "/chores/making/",
     light: "/portfolio/hero-build-light.webp",
     dark: "/portfolio/hero-build-dark.webp",
-    href: "/chores/making/",
-    accent: "#a3914f",
-    x: 1430,
-    y: 235,
+  },
+  {
+    id: "blog",
+    label: "博客",
+    description: "东厢 · 课程、代码与实践",
+    href: "/blog/",
+    light: "/portfolio/hero-blog-light.webp",
+    dark: "/portfolio/hero-blog-dark.webp",
   },
   {
     id: "backyard",
-    group: "making",
-    number: "05",
     label: "别苑杂务",
-    english: "BACKYARD",
-    description: "不急着分类的零碎记录",
+    description: "南侧房 · 尚未归类的记录",
+    href: "/backyard/",
     light: "/portfolio/hero-work-light.webp",
     dark: "/portfolio/hero-work-dark.webp",
-    href: "/backyard/",
-    accent: "#668c61",
-    x: 1250,
-    y: 720,
   },
-  {
-    id: "garden",
-    group: "garden",
-    number: "06",
-    label: "语义花园",
-    english: "SEMANTIC GARDEN",
-    description: "内容、项目与想法之间的距离",
-    light: "/portfolio/semantic-garden-light.png",
-    dark: "/portfolio/semantic-garden-dark.png",
-    href: "/chores/garden/",
-    accent: "#6c9d59",
-    x: 880,
-    y: 780,
-  },
-];
-
-const links = [
-  ["M 390 465 C 520 380 610 350 730 305", "house"],
-  ["M 760 305 C 880 315 980 340 1090 425", "writing"],
-  ["M 1135 385 C 1230 320 1320 285 1430 290", "making"],
-  ["M 1430 340 C 1400 490 1340 590 1280 735", "making"],
-  ["M 1240 770 C 1120 800 1010 820 905 820", "garden"],
 ];
 ---
 
 <BaseLayout
   title="别苑世界"
-  description="一张可探索的寒柳别苑 2.5D 像素地图。"
-  seoDescription="寒柳别苑的 2.5D 微缩地图，连接博客、造物录、语义花园与居士自序。"
+  description="一座可以走进去的寒柳别苑。"
+  seoDescription="寒柳别苑的 2.5D 像素院落：正厅、东西厢房、前院与后园。"
   isIndexed={false}
   immersive={true}
   animateType="fade-up"
 >
-  <div slot="fullscreen" class="world-page" data-world-root>
+  <div slot="fullscreen" class="world-page">
     <header class="world-header">
       <a class="world-brand" href="/" aria-label="返回寒柳别苑">
         <span class="world-brand__seal">寒</span>
-        <span>
-          <strong>寒柳别苑</strong>
-          <small>HANLIU BIYUAN / WORLD MAP</small>
-        </span>
+        <span><strong>寒柳别苑</strong><small>HANLIU BIYUAN / A SMALL HOUSE</small></span>
       </a>
-      <a class="world-exit" href="/">返回庭院 <Icon name="lucide:arrow-up-right" /></a>
+      <div class="world-header__right">
+        <span class="world-coordinates">丙午 · 夏日 · 午后</span>
+        <a class="world-exit" href="/">返回庭院 <span aria-hidden="true">↗</span></a>
+      </div>
     </header>
 
     <main class="world-main">
-      <div class="world-toolbar">
-        <div class="world-heading">
-          <p>一张给自己用的地图</p>
-          <h1>别苑地图</h1>
+      <div class="world-intro">
+        <div>
+          <p class="eyebrow">A SMALL PLACE FOR MANY THINGS</p>
+          <h1>寒柳别苑</h1>
+          <p class="world-intro__copy">从南门进来。先经过一方空院，再决定今天要去哪一间房。</p>
         </div>
-        <div class="world-filters" role="tablist" aria-label="地图筛选">
-          <button type="button" class="is-active" data-filter="all">总览 <b>06</b></button>
-          <button type="button" data-filter="house">庭院 <b>02</b></button>
-          <button type="button" data-filter="writing">文字 <b>01</b></button>
-          <button type="button" data-filter="making">造物 <b>02</b></button>
-          <button type="button" data-filter="garden">花园 <b>01</b></button>
-        </div>
+        <div class="world-note"><span class="world-note__pin"></span><p><b>这里是空间关系，不是分类图。</b><br />书房、工坊和后园都从前院相望。</p></div>
       </div>
 
-      <section class="world-stage" data-world-stage aria-label="寒柳别苑 2.5D 地图">
-        <div class="world-viewport" data-world-viewport>
-          <div class="world-canvas" data-world-canvas>
-            <svg class="world-terrain" viewBox="0 0 1800 1060" aria-hidden="true">
-              <defs>
-                <pattern id="pixel-grid" width="32" height="32" patternUnits="userSpaceOnUse">
-                  <path d="M32 0H0V32" fill="none" stroke="currentColor" stroke-opacity=".12" stroke-width="1" />
-                </pattern>
-                <pattern id="pixel-speck" width="11" height="11" patternUnits="userSpaceOnUse">
-                  <rect width="2" height="2" x="2" y="2" fill="currentColor" opacity=".12" />
-                  <rect width="1" height="1" x="8" y="7" fill="currentColor" opacity=".1" />
-                </pattern>
-              </defs>
-              <polygon class="terrain-shadow" points="180,320 905,70 1630,320 905,1000" />
-              <polygon class="terrain-base" points="150,285 900,45 1660,300 900,970" />
-              <polygon class="terrain-grid" points="150,285 900,45 1660,300 900,970" fill="url(#pixel-grid)" />
-              <polygon class="terrain-speck" points="150,285 900,45 1660,300 900,970" fill="url(#pixel-speck)" />
-              <path class="terrain-river" d="M70 620 C230 570 300 700 440 640 S680 570 790 650 S1060 760 1180 665 S1450 555 1740 630" />
-              <path class="terrain-river-highlight" d="M70 608 C230 558 300 688 440 628 S680 558 790 638 S1060 748 1180 653 S1450 543 1740 618" />
-              {links.map(([d, group]) => <path class={`route route--${group}`} d={d} data-route-group={group} />)}
-              <path class="main-route" d="M365 470 C520 405 650 350 760 300 C900 300 1025 350 1120 425 C1250 335 1335 290 1455 295 C1430 465 1345 635 1265 755 C1120 805 1015 820 875 820" />
-            </svg>
+      <section class="estate-frame" aria-label="寒柳别苑物理院落地图">
+        <div class="estate-frame__topline"><span>HANLIU BIYUAN · FLOOR PLAN / 01</span><span>CLICK A DOOR TO ENTER</span></div>
+        <div class="estate-scene">
+          <picture class="estate-map-picture" aria-hidden="true"><img src="/world/estate-map.svg" alt="" /></picture>
 
-            <div class="world-map-title">
-              <span>STATIC EXPLORATION MAP</span>
-              <strong>在这里，内容不是列表<br />而是一片彼此相望的地方。</strong>
-            </div>
+          {rooms.map((room) => (
+            <a class={`room-hit room-hit--${room.id}`} href={room.href} aria-label={`进入${room.label}`}>
+              <span class="room-window"><img class="room-window__dark" src={room.dark} alt="" /><img class="room-window__light" src={room.light} alt="" /></span>
+              <span class="room-hit__label"><b>{room.label}</b><small>{room.description}</small></span>
+              <span class="room-hit__door">进入</span>
+            </a>
+          ))}
 
-            <div class="map-tree map-tree--a"></div>
-            <div class="map-tree map-tree--b"></div>
-            <div class="map-tree map-tree--c"></div>
-            <div class="map-bamboo"></div>
-            <div class="map-water-lantern"></div>
-            <div class="map-stone map-stone--a"></div>
-            <div class="map-stone map-stone--b"></div>
-
-            {places.map((place) => (
-              <article
-                class="map-place"
-                data-world-place={place.id}
-                data-group={place.group}
-                style={`--place-x:${place.x}px;--place-y:${place.y}px;--place-accent:${place.accent};`}
-              >
-                <div class="map-place__shadow"></div>
-                <div class="map-place__sprite">
-                  <div class="map-place__top"></div>
-                  <div class="map-place__front">
-                    <div class="map-place__image-frame">
-                      <img class="map-place__image map-place__image--dark" src={place.dark} alt="" decoding="async" />
-                      <img class="map-place__image map-place__image--light" src={place.light} alt="" decoding="async" />
-                    </div>
-                  </div>
-                  <div class="map-place__side"></div>
-                  <span class="map-place__door"></span>
-                </div>
-                <a class="map-place__label" href={place.href}>
-                  <span class="map-place__tag">{place.number} · {place.english}</span>
-                  <strong>{place.label}</strong>
-                  <small>{place.description}</small>
-                  <Icon name="lucide:arrow-up-right" />
-                </a>
-              </article>
-            ))}
-
-            <div class="map-compass" aria-hidden="true">
-              <span>N</span><i></i><b></b><em>E</em><strong>S</strong><small>W</small>
-            </div>
-          </div>
+          <div class="scene-sign scene-sign--garden">后园<br /><small>语义花园</small></div>
+          <div class="scene-sign scene-sign--hall">居士自序<br /><small>正厅</small></div>
+          <div class="scene-sign scene-sign--west">造物录<br /><small>西厢</small></div>
+          <div class="scene-sign scene-sign--east">博客<br /><small>东厢</small></div>
+          <div class="scene-sign scene-sign--south">别苑杂务<br /><small>南侧房</small></div>
+          <div class="scene-help"><span>↖</span> 点击屋门进入 · 地图保持在原地</div>
         </div>
-        <div class="world-stage__hint">拖动地图 · 滚轮缩放 · 点击地标</div>
-        <button class="world-reset" type="button" data-world-reset>重置视野</button>
+        <div class="estate-frame__bottomline"><span>一座房子，几间房，许多还在生长的东西。</span><span>LIGHT / DARK 随网站主题切换</span></div>
       </section>
-
-      <div class="world-legend">
-        <div><span class="legend-symbol legend-symbol--house"></span>内容地点</div>
-        <div><span class="legend-symbol legend-symbol--path"></span>常走的路</div>
-        <div><span class="legend-symbol legend-symbol--garden"></span>正在生长</div>
-        <span class="world-legend__note">一张非导航地图 · 只是为了记住它们彼此相邻</span>
-      </div>
     </main>
   </div>
 </BaseLayout>
 
-<script>
-  const mountWorldMap = () => {
-    const root = document.querySelector("[data-world-root]");
-    const stage = root?.querySelector<HTMLElement>("[data-world-stage]");
-    const viewport = root?.querySelector<HTMLElement>("[data-world-viewport]");
-    const canvas = root?.querySelector<HTMLElement>("[data-world-canvas]");
-    const reset = root?.querySelector<HTMLButtonElement>("[data-world-reset]");
-    const filterButtons = root ? [...root.querySelectorAll<HTMLButtonElement>("[data-filter]")] : [];
-    const places = root ? [...root.querySelectorAll<HTMLElement>("[data-world-place]")] : [];
-    const routes = root ? [...root.querySelectorAll<SVGPathElement>("[data-route-group]")] : [];
-
-    if (!root || !stage || !viewport || !canvas) return;
-
-    const mapWidth = 1800;
-    const mapHeight = 1060;
-    let scale = 1;
-    let x = 0;
-    let y = 0;
-    let dragging = false;
-    let startX = 0;
-    let startY = 0;
-    let originX = 0;
-    let originY = 0;
-
-    const applyTransform = () => {
-      canvas.style.transform = `translate3d(${x}px, ${y}px, 0) scale(${scale})`;
-    };
-
-    const fitMap = () => {
-      const rect = viewport.getBoundingClientRect();
-      const padding = window.innerWidth < 700 ? 24 : 56;
-      scale = Math.min((rect.width - padding) / mapWidth, (rect.height - padding) / mapHeight);
-      scale = Math.min(Math.max(scale, 0.42), 1);
-      x = (rect.width - mapWidth * scale) / 2;
-      y = (rect.height - mapHeight * scale) / 2;
-      applyTransform();
-    };
-
-    const clampZoom = (nextScale: number) => Math.min(Math.max(nextScale, 0.42), 1.7);
-
-    const zoomAt = (nextScale: number, pointerX: number, pointerY: number) => {
-      const previousScale = scale;
-      scale = clampZoom(nextScale);
-      const ratio = scale / previousScale;
-      x = pointerX - (pointerX - x) * ratio;
-      y = pointerY - (pointerY - y) * ratio;
-      applyTransform();
-    };
-
-    const pointerDown = (event: PointerEvent) => {
-      if ((event.target as HTMLElement).closest("a,button")) return;
-      dragging = true;
-      startX = event.clientX;
-      startY = event.clientY;
-      originX = x;
-      originY = y;
-      stage.setPointerCapture(event.pointerId);
-      stage.classList.add("is-dragging");
-    };
-
-    const pointerMove = (event: PointerEvent) => {
-      if (!dragging) return;
-      x = originX + event.clientX - startX;
-      y = originY + event.clientY - startY;
-      applyTransform();
-    };
-
-    const pointerUp = (event: PointerEvent) => {
-      dragging = false;
-      if (stage.hasPointerCapture(event.pointerId)) stage.releasePointerCapture(event.pointerId);
-      stage.classList.remove("is-dragging");
-    };
-
-    stage.addEventListener("pointerdown", pointerDown);
-    stage.addEventListener("pointermove", pointerMove);
-    stage.addEventListener("pointerup", pointerUp);
-    stage.addEventListener("pointercancel", pointerUp);
-    stage.addEventListener("wheel", (event) => {
-      event.preventDefault();
-      const rect = viewport.getBoundingClientRect();
-      zoomAt(scale * (event.deltaY > 0 ? 0.92 : 1.08), event.clientX - rect.left, event.clientY - rect.top);
-    }, { passive: false });
-
-    reset?.addEventListener("click", fitMap);
-    filterButtons.forEach((button) => {
-      button.addEventListener("click", () => {
-        const filter = button.dataset.filter || "all";
-        filterButtons.forEach((item) => item.classList.toggle("is-active", item === button));
-        places.forEach((place) => place.toggleAttribute("data-dimmed", filter !== "all" && place.dataset.group !== filter));
-        routes.forEach((route) => route.toggleAttribute("data-dimmed", filter !== "all" && route.dataset.routeGroup !== filter));
-      });
-    });
-
-    window.addEventListener("resize", fitMap, { passive: true });
-    fitMap();
-  };
-
-  document.addEventListener("astro:page-load", mountWorldMap);
-  mountWorldMap();
-</script>
-
 <style is:global>
-  :root {
-    --world-ink: #263025;
-    --world-paper: #f1f3e8;
-    --world-map: #b7c99d;
-    --world-map-dark: #27382c;
-    --world-map-line: rgba(38, 48, 37, 0.42);
-    --world-label: #f5f1d8;
-  }
-
-  html[data-theme-type="dark"] {
-    --world-ink: #e6ebdf;
-    --world-paper: #111713;
-    --world-map: #304a35;
-    --world-map-dark: #111a14;
-    --world-map-line: rgba(230, 235, 223, 0.36);
-    --world-label: #e6e8d1;
-  }
-
-  .world-page { min-height: 100vh; overflow: hidden; color: var(--world-ink); background: var(--world-paper); }
-  .world-header { position: fixed; z-index: 30; inset: 0 0 auto; display: flex; align-items: center; justify-content: space-between; padding: 1rem clamp(1rem, 4vw, 4rem); pointer-events: none; }
-  .world-header > * { pointer-events: auto; }
-  .world-brand, .world-exit { color: inherit; text-decoration: none; }
-  .world-brand { display: inline-flex; align-items: center; gap: 0.7rem; }
-  .world-brand__seal { display: grid; width: 2.5rem; height: 2.5rem; place-items: center; border: 2px solid currentColor; background: var(--world-paper); font-family: serif; font-size: 1.3rem; box-shadow: 4px 4px 0 color-mix(in srgb, var(--world-ink) 22%, transparent); }
-  .world-brand strong, .world-brand small { display: block; }
-  .world-brand strong { font-size: 0.95rem; letter-spacing: 0.08em; }
-  .world-brand small { margin-top: 0.18rem; color: color-mix(in srgb, var(--world-ink) 56%, transparent); font: 0.55rem ui-monospace, SFMono-Regular, Consolas, monospace; letter-spacing: 0.13em; }
-  .world-exit { display: inline-flex; align-items: center; gap: 0.35rem; font-size: 0.8rem; font-weight: 800; }
-  .world-exit svg { width: 1rem; height: 1rem; }
-  .world-main { width: min(1500px, 100%); margin: 0 auto; padding: 5.5rem 1rem 1rem; }
-  .world-toolbar { display: flex; align-items: flex-end; justify-content: space-between; gap: 2rem; padding: 0.5rem 0 1rem; }
-  .world-heading p { margin: 0 0 0.3rem; color: color-mix(in srgb, var(--world-ink) 54%, transparent); font: 0.65rem ui-monospace, SFMono-Regular, Consolas, monospace; letter-spacing: 0.15em; }
-  .world-heading h1 { margin: 0; font-size: clamp(2rem, 4vw, 3.8rem); font-weight: 900; letter-spacing: -0.08em; }
-  .world-filters { display: flex; flex-wrap: wrap; gap: 0.35rem; padding: 0.35rem; border: 1px solid color-mix(in srgb, var(--world-ink) 25%, transparent); background: color-mix(in srgb, var(--world-paper) 72%, transparent); }
-  .world-filters button { min-width: 6.4rem; padding: 0.7rem 0.8rem; border: 0; color: color-mix(in srgb, var(--world-ink) 62%, transparent); background: transparent; font: 700 0.68rem ui-monospace, SFMono-Regular, Consolas, monospace; text-align: left; cursor: pointer; }
-  .world-filters button b { float: right; display: grid; width: 1.4rem; height: 1.4rem; place-items: center; border-radius: 50%; background: color-mix(in srgb, var(--world-ink) 13%, transparent); font-size: 0.58rem; }
-  .world-filters button.is-active { color: var(--world-label); background: var(--world-map-dark); }
-  .world-filters button.is-active b { background: rgba(255,255,255,0.16); }
-  .world-stage { position: relative; height: min(72vh, 800px); min-height: 520px; overflow: hidden; border: 6px solid var(--world-map-dark); background: var(--world-map-dark); cursor: grab; touch-action: none; user-select: none; }
-  .world-stage.is-dragging { cursor: grabbing; }
-  .world-viewport { position: absolute; inset: 0; overflow: hidden; }
-  .world-canvas { position: absolute; top: 0; left: 0; width: 1800px; height: 1060px; transform-origin: 0 0; will-change: transform; }
-  .world-terrain { position: absolute; inset: 0; width: 100%; height: 100%; color: var(--world-ink); }
-  .terrain-shadow { fill: rgba(0, 0, 0, 0.28); transform: translate(0 20px); }
-  .terrain-base { fill: var(--world-map); stroke: color-mix(in srgb, var(--world-ink) 43%, transparent); stroke-width: 7; }
-  .terrain-grid { fill: url(#pixel-grid); color: var(--world-ink); }
-  .terrain-speck { fill: url(#pixel-speck); color: var(--world-ink); }
-  .terrain-river { fill: none; stroke: #4b837b; stroke-width: 55; stroke-linecap: square; }
-  .terrain-river-highlight { fill: none; stroke: #7db1a1; stroke-width: 17; stroke-dasharray: 3 17; }
-  html[data-theme-type="dark"] .terrain-river { stroke: #2b5b55; }
-  html[data-theme-type="dark"] .terrain-river-highlight { stroke: #4f8c78; }
-  .route { fill: none; stroke: #d1a96c; stroke-width: 19; stroke-linecap: square; stroke-dasharray: 3 14; opacity: 0.72; }
-  .main-route { fill: none; stroke: #f0d89a; stroke-width: 10; stroke-linecap: square; stroke-dasharray: 2 12; opacity: 0.85; }
-  html[data-theme-type="dark"] .route { stroke: #9b8050; }
-  html[data-theme-type="dark"] .main-route { stroke: #d1b873; }
-  .route[data-dimmed], .map-place[data-dimmed] { opacity: 0.2; }
-  .world-map-title { position: absolute; z-index: 4; top: 100px; left: 700px; width: 370px; padding: 1rem 1.25rem; border: 2px solid var(--world-ink); background: var(--world-label); color: #302e25; box-shadow: 8px 8px 0 rgba(0,0,0,0.18); transform: rotate(-1deg); }
-  .world-map-title span { display: block; margin-bottom: 0.6rem; font: 0.58rem ui-monospace, SFMono-Regular, Consolas, monospace; letter-spacing: 0.15em; opacity: 0.62; }
-  .world-map-title strong { font-size: 1.25rem; line-height: 1.35; }
-  .map-place { position: absolute; z-index: 8; top: var(--place-y); left: var(--place-x); width: 275px; transition: opacity 180ms ease, filter 180ms ease; }
-  .map-place__shadow { position: absolute; right: 15px; bottom: 42px; left: 20px; height: 48px; background: rgba(0,0,0,0.28); transform: skewX(-28deg); }
-  .map-place__sprite { position: relative; height: 170px; }
-  .map-place__top { position: absolute; top: 0; left: 28px; width: 210px; height: 82px; border: 4px solid var(--world-ink); background: var(--place-accent); clip-path: polygon(50% 0, 100% 48%, 50% 100%, 0 48%); box-shadow: inset 0 -11px 0 rgba(0,0,0,0.16); }
-  .map-place__front { position: absolute; top: 42px; left: 28px; width: 210px; height: 118px; padding: 7px; border: 4px solid var(--world-ink); background: var(--world-label); }
-  .map-place__side { position: absolute; top: 42px; left: 238px; width: 28px; height: 118px; border: 4px solid var(--world-ink); background: color-mix(in srgb, var(--place-accent) 58%, #27382c); clip-path: polygon(0 0, 100% 10%, 100% 100%, 0 90%); }
-  .map-place__image-frame { position: relative; width: 100%; height: 100%; overflow: hidden; border: 3px solid color-mix(in srgb, var(--world-ink) 75%, transparent); background: #172019; }
-  .map-place__image { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; image-rendering: auto; }
-  .map-place__image--dark { display: block; }
-  .map-place__image--light { display: none; }
-  html[data-theme-type="light"] .map-place__image--dark { display: none; }
-  html[data-theme-type="light"] .map-place__image--light { display: block; }
-  .map-place__door { position: absolute; bottom: 0; left: 112px; z-index: 2; width: 30px; height: 42px; border: 4px solid var(--world-ink); background: var(--place-accent); }
-  .map-place__label { position: absolute; top: -46px; left: 12px; display: grid; grid-template-columns: 1fr auto; gap: 0.18rem 0.7rem; width: 245px; padding: 0.5rem 0.7rem; border: 2px solid #6d6146; background: var(--world-label); color: #302e25; box-shadow: 5px 5px 0 rgba(0,0,0,0.18); text-decoration: none; }
-  .map-place__label::after { position: absolute; bottom: -10px; left: 18px; width: 16px; height: 16px; border-right: 2px solid #6d6146; border-bottom: 2px solid #6d6146; background: var(--world-label); content: ""; transform: rotate(45deg); }
-  .map-place__tag { grid-column: 1 / -1; color: var(--place-accent); font: 0.54rem ui-monospace, SFMono-Regular, Consolas, monospace; letter-spacing: 0.12em; }
-  .map-place__label strong { font-size: 1rem; font-weight: 900; }
-  .map-place__label small { grid-column: 1 / -1; color: #716b59; font-size: 0.62rem; }
-  .map-place__label svg { grid-column: 2; grid-row: 2; width: 1rem; height: 1rem; align-self: center; }
-  .map-tree, .map-bamboo, .map-water-lantern, .map-stone { position: absolute; z-index: 5; pointer-events: none; }
-  .map-tree { width: 96px; height: 128px; }
-  .map-tree::before { position: absolute; right: 30px; bottom: 0; width: 18px; height: 70px; border: 3px solid #334a32; background: #7f6246; content: ""; }
-  .map-tree::after { position: absolute; top: 0; left: 0; width: 96px; height: 80px; border: 3px solid #334a32; background: #759358; clip-path: polygon(49% 0, 76% 20%, 100% 26%, 83% 52%, 96% 78%, 64% 71%, 50% 100%, 32% 74%, 0 80%, 17% 51%, 1% 24%, 29% 18%); }
-  .map-tree--a { top: 215px; left: 190px; }
-  .map-tree--b { top: 685px; left: 540px; transform: scale(0.72); }
-  .map-tree--c { top: 665px; right: 105px; transform: scale(0.86); }
-  .map-bamboo { top: 600px; left: 185px; width: 135px; height: 150px; border-left: 12px solid #466342; border-right: 12px solid #6a884d; transform: skewX(-7deg); box-shadow: 42px 0 0 #789259, 82px 12px 0 #4a6b43; }
-  .map-bamboo::after { position: absolute; top: -8px; left: -22px; width: 170px; height: 110px; background: radial-gradient(ellipse at 30% 35%, #7c9958 0 10%, transparent 11%), radial-gradient(ellipse at 73% 54%, #5c7c4e 0 12%, transparent 13%), radial-gradient(ellipse at 38% 80%, #587449 0 12%, transparent 13%); content: ""; }
-  .map-water-lantern { right: 220px; bottom: 215px; width: 20px; height: 46px; border: 3px solid #404436; background: #d0ac62; box-shadow: 11px 12px 0 -4px #4b5541; }
-  .map-stone { width: 58px; height: 34px; border: 3px solid #485444; background: #89947b; clip-path: polygon(8% 100%, 0 45%, 25% 12%, 72% 0, 100% 44%, 86% 100%); }
-  .map-stone--a { top: 525px; right: 245px; }
-  .map-stone--b { top: 735px; left: 380px; transform: scale(0.72); }
-  .map-compass { position: absolute; z-index: 5; right: 80px; bottom: 64px; width: 90px; height: 90px; border: 3px solid var(--world-ink); background: color-mix(in srgb, var(--world-label) 82%, transparent); transform: rotate(45deg); }
-  .map-compass i, .map-compass b { position: absolute; top: 17px; left: 41px; width: 4px; height: 56px; background: var(--world-ink); }
-  .map-compass b { background: #b04338; transform: rotate(90deg); }
-  .map-compass span, .map-compass em, .map-compass strong, .map-compass small { position: absolute; color: var(--world-ink); font: 700 0.58rem ui-monospace, SFMono-Regular, Consolas, monospace; font-style: normal; transform: rotate(-45deg); }
-  .map-compass span { top: -22px; left: 38px; }.map-compass em { top: 36px; right: -23px; }.map-compass strong { bottom: -22px; left: 38px; }.map-compass small { top: 36px; left: -23px; }
-  .world-stage__hint { position: absolute; z-index: 15; right: 50%; bottom: 0.8rem; padding: 0.45rem 0.8rem; color: var(--world-label); background: rgba(25,35,27,0.82); font: 0.62rem ui-monospace, SFMono-Regular, Consolas, monospace; transform: translateX(50%); }
-  .world-reset { position: absolute; z-index: 15; right: 1rem; bottom: 0.75rem; padding: 0.45rem 0.65rem; border: 1px solid rgba(255,255,255,0.35); color: var(--world-label); background: rgba(25,35,27,0.82); font: 0.62rem ui-monospace, SFMono-Regular, Consolas, monospace; cursor: pointer; }
-  .world-legend { display: flex; flex-wrap: wrap; align-items: center; gap: 1rem 1.5rem; padding: 0.8rem 0; color: color-mix(in srgb, var(--world-ink) 64%, transparent); font: 0.64rem ui-monospace, SFMono-Regular, Consolas, monospace; }
-  .world-legend > div { display: inline-flex; align-items: center; gap: 0.4rem; }
-  .legend-symbol { display: inline-block; width: 18px; height: 12px; border: 2px solid var(--world-ink); }
-  .legend-symbol--house { background: #7e9c58; }.legend-symbol--path { border-color: #b68e57; background: #e2c987; }.legend-symbol--garden { background: #70a06a; }
-  .world-legend__note { margin-left: auto; opacity: 0.56; }
-
-  @media (max-width: 900px) {
-    .world-toolbar { align-items: flex-start; flex-direction: column; gap: 0.8rem; }
-    .world-filters { width: 100%; overflow-x: auto; flex-wrap: nowrap; }
-    .world-filters button { min-width: 5.5rem; }
-  }
-
-  @media (max-width: 700px) {
-    .world-header { padding-top: 4.4rem; }
-    .world-main { padding-top: 7.2rem; }
-    .world-brand small { max-width: 8rem; line-height: 1.4; }
-    .world-stage { height: 70vh; min-height: 450px; }
-    .world-map-title { top: 110px; left: 650px; transform: scale(0.92) rotate(-1deg); transform-origin: left top; }
-    .world-stage__hint { right: auto; bottom: 0.8rem; left: 1rem; transform: none; }
-    .world-reset { bottom: 0.75rem; }
-    .world-legend__note { width: 100%; margin-left: 0; }
-  }
+  :root { --world-ink:#273329; --world-paper:#edf0df; --world-ground:#b5c497; --world-border:#4c5940; --world-muted:#6b735e; --world-gold:#c2914f; }
+  html[data-theme-type="dark"] { --world-ink:#e8e4d1; --world-paper:#111615; --world-ground:#2a3c32; --world-border:#a39a76; --world-muted:#a4a58b; --world-gold:#b38a4c; }
+  .world-page { min-height:100vh; overflow:hidden; color:var(--world-ink); background:var(--world-paper); }
+  .world-header { position:fixed; z-index:20; inset:0 0 auto; display:flex; align-items:center; justify-content:space-between; padding:1.15rem clamp(1rem,4vw,4.5rem); pointer-events:none; }
+  .world-header>* { pointer-events:auto; }.world-brand { display:inline-flex; align-items:center; gap:.75rem; color:inherit; text-decoration:none; }.world-brand__seal { display:grid; width:2.5rem; height:2.5rem; place-items:center; border:2px solid currentColor; background:var(--world-paper); box-shadow:4px 4px 0 color-mix(in srgb,var(--world-ink) 20%,transparent); font:1.2rem serif; }.world-brand strong,.world-brand small { display:block; }.world-brand strong { font-size:.96rem; letter-spacing:.09em; }.world-brand small { margin-top:.18rem; color:var(--world-muted); font:.56rem ui-monospace,SFMono-Regular,Consolas,monospace; letter-spacing:.13em; }.world-header__right { display:flex; align-items:center; gap:1.4rem; }.world-coordinates { color:var(--world-muted); font:.6rem ui-monospace,SFMono-Regular,Consolas,monospace; letter-spacing:.13em; }.world-exit { color:inherit; font-size:.78rem; font-weight:800; text-decoration:none; }
+  .world-main { width:min(1500px,100%); margin:0 auto; padding:6.5rem 1.2rem 1.5rem; }.world-intro { display:flex; align-items:end; justify-content:space-between; gap:2rem; max-width:1380px; margin:0 auto 1.25rem; }.eyebrow { margin:0 0 .4rem; color:var(--world-muted); font:.62rem ui-monospace,SFMono-Regular,Consolas,monospace; letter-spacing:.17em; }.world-intro h1 { margin:0; font-size:clamp(2.1rem,5vw,4.3rem); line-height:.94; letter-spacing:-.09em; }.world-intro__copy { max-width:30rem; margin:.75rem 0 0; color:var(--world-muted); font-size:.88rem; line-height:1.8; }.world-note { display:flex; align-items:start; gap:.65rem; max-width:18rem; padding:.65rem .8rem; border-left:2px solid var(--world-gold); color:var(--world-muted); font-size:.68rem; line-height:1.6; }.world-note p { margin:0; }.world-note b { color:var(--world-ink); }.world-note__pin { display:block; width:8px; height:8px; margin-top:.28rem; background:var(--world-gold); box-shadow:4px 4px 0 color-mix(in srgb,var(--world-gold) 35%,transparent); }
+  .estate-frame { max-width:1380px; margin:auto; border:2px solid var(--world-border); background:var(--world-ground); box-shadow:10px 10px 0 color-mix(in srgb,var(--world-ink) 15%,transparent); }.estate-frame__topline,.estate-frame__bottomline { display:flex; justify-content:space-between; gap:1rem; padding:.55rem .8rem; color:var(--world-muted); font:.57rem ui-monospace,SFMono-Regular,Consolas,monospace; letter-spacing:.1em; }.estate-frame__topline { border-bottom:1px solid color-mix(in srgb,var(--world-border) 55%,transparent); }.estate-frame__bottomline { border-top:1px solid color-mix(in srgb,var(--world-border) 55%,transparent); }.estate-scene { position:relative; overflow:hidden; aspect-ratio:16/9; background:var(--world-ground); }.estate-map-picture,.estate-map-picture img { position:absolute; inset:0; display:block; width:100%; height:100%; }.estate-map-picture img { image-rendering:pixelated; } html[data-theme-type="dark"] .estate-map-picture img { filter:brightness(.55) saturate(.75) hue-rotate(165deg); }
+  .room-hit { position:absolute; display:block; z-index:5; color:var(--world-ink); text-decoration:none; }.room-hit--garden { top:2%; right:5%; width:31%; height:25%; }.room-hit--about { top:14%; left:36%; width:28%; height:28%; }.room-hit--making { top:35%; left:14%; width:23%; height:29%; }.room-hit--blog { top:35%; right:14%; width:23%; height:29%; }.room-hit--backyard { bottom:3%; left:39%; width:22%; height:20%; }.room-hit::after { position:absolute; inset:0; content:""; }.room-hit:hover .room-hit__label,.room-hit:focus-visible .room-hit__label { transform:translate(-50%,-3px); background:var(--world-paper); }.room-window { position:absolute; left:50%; top:34%; width:65%; height:30%; overflow:hidden; border:3px solid var(--world-border); background:#26332f; box-shadow:4px 4px 0 rgba(0,0,0,.18); transform:translateX(-50%); pointer-events:none; }.room-window img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:.76; }.room-window__light { display:none; } html[data-theme-type="light"] .room-window__dark { display:none; } html[data-theme-type="light"] .room-window__light { display:block; }.room-hit__label { position:absolute; top:.2rem; left:50%; display:grid; gap:.1rem; width:max-content; max-width:12rem; padding:.32rem .48rem; border-left:2px solid var(--world-gold); background:color-mix(in srgb,var(--world-paper) 76%,transparent); box-shadow:3px 3px 0 rgba(0,0,0,.12); transform:translateX(-50%); transition:transform 160ms ease,background 160ms ease; }.room-hit__label b { font:900 .83rem serif; }.room-hit__label small { color:var(--world-muted); font-size:.56rem; line-height:1.35; }.room-hit__door { position:absolute; bottom:9%; left:50%; padding:.2rem .38rem; border:1px solid var(--world-border); color:var(--world-ink); background:color-mix(in srgb,var(--world-paper) 82%,transparent); font:.54rem ui-monospace,SFMono-Regular,Consolas,monospace; transform:translateX(-50%); opacity:.85; }
+  .scene-sign { position:absolute; z-index:4; padding:.2rem .35rem; color:var(--world-ink); background:color-mix(in srgb,var(--world-paper) 62%,transparent); font:900 .78rem serif; line-height:1.15; pointer-events:none; }.scene-sign small { color:var(--world-muted); font: .52rem ui-monospace,SFMono-Regular,Consolas,monospace; letter-spacing:.08em; }.scene-sign--garden { top:20%; right:19%; }.scene-sign--hall { top:17%; left:47%; }.scene-sign--west { top:39%; left:18%; }.scene-sign--east { top:39%; right:18%; }.scene-sign--south { bottom:14%; left:46%; }.scene-help { position:absolute; right:.8rem; bottom:.7rem; z-index:8; padding:.35rem .5rem; color:var(--world-ink); background:color-mix(in srgb,var(--world-paper) 78%,transparent); font:.56rem ui-monospace,SFMono-Regular,Consolas,monospace; }.scene-help span { color:var(--world-gold); font-size:.9rem; }
+  @media (max-width:760px) { .world-page { overflow:auto; }.world-header { position:absolute; padding-top:1rem; }.world-header__right { gap:.5rem; }.world-coordinates { display:none; }.world-main { padding-top:5.4rem; }.world-intro { align-items:start; flex-direction:column; gap:.75rem; }.world-note { max-width:none; }.estate-frame__topline span:last-child,.estate-frame__bottomline span:last-child { display:none; }.estate-scene { min-width:760px; }.estate-frame { overflow-x:auto; }.room-hit__label { transform:translateX(-50%) scale(.9); transform-origin:top center; }.scene-help { right:.4rem; bottom:.4rem; } }
 </style>
