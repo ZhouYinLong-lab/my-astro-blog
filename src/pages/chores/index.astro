@@ -1,0 +1,135 @@
+---
+import { Icon } from "astro-icon/components";
+import MainCard from "@/components/MainCard.astro";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+
+const entries = [
+  {
+    icon: "lucide:network",
+    eyebrow: "Garden",
+    title: "语义花园",
+    description: "把文章、项目和学习记录放到一张可以走进去的地图里。",
+    href: "/chores/garden/",
+    action: "进入花园",
+  },
+  {
+    icon: "lucide:scroll-text",
+    eyebrow: "A note from the house",
+    title: "居士自序",
+    description: "一些关于这座别苑、写作者和长期兴趣的说明。",
+    href: "/about/",
+    action: "阅读自序",
+  },
+  {
+    icon: "lucide:flame",
+    eyebrow: "Archive heat",
+    title: "博客热力图",
+    description: "看看文章如何随着时间留下密度、方向和温度。",
+    href: "/chores/heatmap/",
+    action: "查看热力图",
+  },
+  {
+    icon: "lucide:history",
+    eyebrow: "House log",
+    title: "更新日志",
+    description: "记录寒柳别苑的页面、功能和内容如何一点点变化。",
+    href: "/chores/changelog/",
+    action: "翻阅日志",
+  },
+];
+---
+
+<BaseLayout
+  title="别苑杂务 - 寒柳别苑"
+  description="寒柳别苑的附属入口、内容地图与站点记录。"
+>
+  <MainCard
+    title="别苑杂务"
+    description="主屋之外，还有一些需要单独收纳的东西。"
+    textOverlay="CHORES"
+    headerImageDark="/world/estate-dark.png"
+    headerImageLight="/world/estate-light.png"
+    headerClass="chores-header"
+    infoIcon="lucide:layout-grid"
+  >
+    <div class="space-y-14">
+      <section class="py-5" aria-labelledby="chores-intro">
+        <div class="grid gap-8 lg:grid-cols-[minmax(0,1.15fr)_minmax(16rem,.85fr)] lg:items-end">
+          <div>
+            <p class="mb-3 font-mono text-xs font-bold uppercase tracking-[0.28em] text-primary">
+              The side table of the house
+            </p>
+            <h2 id="chores-intro" class="max-w-3xl text-2xl font-black leading-tight sm:text-4xl">
+              这里放一些不必挤进首页的东西
+            </h2>
+            <p class="mt-5 max-w-2xl text-base leading-7 text-base-content/65 sm:text-lg">
+              首页负责让人认识寒柳别苑，博客负责留下文章，造物录负责展示正在制作的东西。别苑杂务则收纳那些支撑整座别苑、但不适合成为主角的入口与记录。
+            </p>
+          </div>
+
+          <aside class="rounded-2xl border border-primary/25 bg-primary/5 p-5" aria-label="页面定位">
+            <p class="font-mono text-xs uppercase tracking-[0.22em] text-primary">A small reminder</p>
+            <p class="mt-3 text-sm leading-6 text-base-content/65">
+              这是一个索引，不是另一张首页。需要找什么，沿着桌面上的入口走进去即可。
+            </p>
+          </aside>
+        </div>
+      </section>
+
+      <section aria-labelledby="chores-entries">
+        <div class="mb-6 flex flex-wrap items-end justify-between gap-4">
+          <div>
+            <p class="font-mono text-xs uppercase tracking-[0.2em] text-base-content/40">House utilities</p>
+            <h2 id="chores-entries" class="mt-1 text-2xl font-bold">从这里继续走</h2>
+          </div>
+          <p class="max-w-sm text-right text-sm leading-6 text-base-content/50">
+            四个入口，分别通向一块花圃、一封自序、一张图和一册日志。
+          </p>
+        </div>
+
+        <div class="grid gap-4 md:grid-cols-2">
+          {entries.map((entry, index) => (
+            <a
+              href={entry.href}
+              class="group rounded-2xl border border-base-300 bg-base-200 p-6 transition-all duration-300 hover:-translate-y-1 hover:border-primary/50 hover:shadow-xl"
+            >
+              <div class="flex items-start justify-between gap-4">
+                <div class="flex h-11 w-11 items-center justify-center rounded-xl bg-base-100 text-primary shadow-sm transition-colors group-hover:bg-primary group-hover:text-primary-content">
+                  <Icon name={entry.icon} class="h-5 w-5" />
+                </div>
+                <span class="font-mono text-xs text-base-content/35">0{index + 1}</span>
+              </div>
+              <p class="mt-7 font-mono text-[0.68rem] uppercase tracking-[0.2em] text-base-content/40">{entry.eyebrow}</p>
+              <h3 class="mt-2 text-xl font-bold">{entry.title}</h3>
+              <p class="mt-2 min-h-12 text-sm leading-6 text-base-content/60">{entry.description}</p>
+              <span class="mt-5 inline-flex items-center gap-2 text-sm font-bold text-primary">
+                {entry.action}
+                <Icon name="lucide:arrow-up-right" class="h-4 w-4 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
+              </span>
+            </a>
+          ))}
+        </div>
+      </section>
+
+      <section class="flex flex-col gap-5 rounded-2xl border border-base-300 bg-base-200/60 px-6 py-7 sm:flex-row sm:items-center sm:justify-between" aria-labelledby="chores-contact">
+        <div>
+          <p class="font-mono text-xs uppercase tracking-[0.2em] text-base-content/40">Another room</p>
+          <h2 id="chores-contact" class="mt-2 text-xl font-bold">需要联系我？去通讯室</h2>
+          <p class="mt-2 text-sm leading-6 text-base-content/60">留言、邮箱、社交账号和评论入口都在那里。</p>
+        </div>
+        <a href="/backyard/" class="btn btn-outline shrink-0 gap-2">
+          打开通讯室
+          <Icon name="lucide:mail" class="h-4 w-4" />
+        </a>
+      </section>
+    </div>
+  </MainCard>
+</BaseLayout>
+
+<style is:global>
+  .chores-header .theme-image-dark,
+  .chores-header .theme-image-light {
+    background-size: 180% auto !important;
+    background-position: 55% 61% !important;
+  }
+</style>

@@ -30,7 +30,8 @@ site:
       target: _self
     - id: chores
       text: 别苑杂务 # 🌟 升级为大分支
-      href: "#" # 父级菜单通常不需要直接跳转
+      href: /chores
+      # 这里是杂务引页；下方入口继续进入具体功能
       svg: "material-symbols:dashboard-customize-outline-rounded"
       target: _self
       subItems: # 🌟 下设三个小分支
