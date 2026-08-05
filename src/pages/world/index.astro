@@ -72,7 +72,7 @@ const rooms = [
   .room-hit--blog { top:32%; left:42%; width:6%; height:8%; }
   .room-hit--chores { top:55.2%; left:52%; width:5%; height:8%; }
   .room-hit--friends { top:89%; left:37%; width:4%; height:7%; }
-  .room-hit--backyard { top:81%; left:76%; width:6%; height:8%; }
+  .room-hit--backyard { top:82%; left:78.5%; width:5.5%; height:7%; }
   .room-hit__label { position:absolute; display:block; width:max-content; padding:.05rem .2rem; color:var(--world-ink); font:900 clamp(.8rem,1.25vw,1.1rem) serif; letter-spacing:.08em; text-shadow:2px 2px 0 rgba(0,0,0,.9),0 0 8px rgba(0,0,0,.85); transition:transform 160ms ease,color 160ms ease; }
   .room-hit__marker-anchor { position:absolute; left:var(--object-x); top:var(--object-y); width:0; height:0; pointer-events:none; }
   .room-hit__marker { --marker-size:clamp(.32rem,.45vw,.5rem); position:absolute; left:calc(var(--marker-size) / -2); top:calc(var(--marker-size) / -2); display:block; width:var(--marker-size); height:var(--marker-size); border-radius:50%; background:var(--world-gold); opacity:.92; box-shadow:0 0 4px 1px color-mix(in srgb, var(--world-gold) 62%, transparent); transition:opacity 180ms ease,transform 180ms ease,box-shadow 180ms ease; }
@@ -87,7 +87,7 @@ const rooms = [
   .room-hit--blog .room-hit__label { top:42%; left:50%; transform:translateX(-50%); }
   .room-hit--chores .room-hit__label { top:8%; left:50%; transform:translateX(-50%); }
   .room-hit--friends .room-hit__label { top:5%; left:34%; }
-  .room-hit--backyard .room-hit__label { top:31%; left:38%; }
+  .room-hit--backyard .room-hit__label { top:5%; left:56%; }
   .room-hit--home { --object-x:50%; --object-y:50%; }
   .room-hit--garden { --object-x:50%; --object-y:50%; }
   .room-hit--about { --object-x:50%; --object-y:60%; }
@@ -95,7 +95,7 @@ const rooms = [
   .room-hit--blog { --object-x:50%; --object-y:50%; }
   .room-hit--chores { --object-x:50%; --object-y:50%; }
   .room-hit--friends { --object-x:50%; --object-y:50%; }
-  .room-hit--backyard { --object-x:50%; --object-y:50%; }
+  .room-hit--backyard { --object-x:56%; --object-y:47%; }
   .room-hit--garden:hover .room-hit__label,.room-hit--garden:focus-visible .room-hit__label,.room-hit--about:hover .room-hit__label,.room-hit--about:focus-visible .room-hit__label,.room-hit--home:hover .room-hit__label,.room-hit--home:focus-visible .room-hit__label,.room-hit--blog:hover .room-hit__label,.room-hit--blog:focus-visible .room-hit__label,.room-hit--chores:hover .room-hit__label,.room-hit--chores:focus-visible .room-hit__label { transform:translate(-50%,-3px); }
   @media (max-aspect-ratio: 4/3) { .estate-map { object-fit:cover; } }
 </style>
