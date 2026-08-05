@@ -65,13 +65,13 @@ const rooms = [
   .room-hit { position:absolute; z-index:5; display:block; color:var(--world-ink); text-decoration:none; cursor:pointer; }
   /* Each link is intentionally close to its physical object, not the whole room. */
   .room-hit--home { left:44%; top:80%; width:12%; height:16%; }
-  .room-hit--garden { top:0; left:9%; width:20%; height:22%; }
+  .room-hit--garden { top:6%; left:14%; width:6%; height:10%; }
   .room-hit--about { top:45%; left:74%; width:12%; height:16%; }
-  .room-hit--making { top:43%; left:13%; width:14%; height:18%; }
-  .room-hit--blog { top:32%; left:43%; width:13%; height:14%; }
-  .room-hit--chores { top:57%; left:52%; width:10%; height:12%; }
-  .room-hit--friends { top:82%; left:37%; width:6%; height:11%; }
-  .room-hit--backyard { top:78%; left:72%; width:18%; height:19%; }
+  .room-hit--making { top:46.5%; left:14%; width:6%; height:9%; }
+  .room-hit--blog { top:32%; left:42%; width:6%; height:8%; }
+  .room-hit--chores { top:55.2%; left:52%; width:5%; height:8%; }
+  .room-hit--friends { top:83.2%; left:36.4%; width:4%; height:7%; }
+  .room-hit--backyard { top:82.7%; left:74.1%; width:6%; height:8%; }
   .room-hit__label { position:absolute; display:block; width:max-content; padding:.05rem .2rem; color:var(--world-ink); font:900 clamp(.8rem,1.25vw,1.1rem) serif; letter-spacing:.08em; text-shadow:2px 2px 0 rgba(0,0,0,.9),0 0 8px rgba(0,0,0,.85); transition:transform 160ms ease,color 160ms ease; }
   .room-hit::after { content:""; position:absolute; left:var(--object-x); top:var(--object-y); width:clamp(.32rem,.45vw,.5rem); aspect-ratio:1; border-radius:50%; background:var(--world-gold); opacity:.92; transform:translate(-50%,-50%) scale(1); box-shadow:0 0 4px 1px color-mix(in srgb, var(--world-gold) 62%, transparent); transition:opacity 180ms ease,transform 180ms ease,box-shadow 180ms ease; pointer-events:none; }
   .room-hit:hover .room-hit__label,.room-hit:focus-visible .room-hit__label { color:#fff4c8; transform:translateY(-3px); }
@@ -87,10 +87,10 @@ const rooms = [
   .room-hit--friends .room-hit__label { top:5%; left:34%; }
   .room-hit--backyard .room-hit__label { top:31%; left:38%; }
   .room-hit--home { --object-x:50%; --object-y:50%; }
-  .room-hit--garden { --object-x:48%; --object-y:35%; }
+  .room-hit--garden { --object-x:50%; --object-y:50%; }
   .room-hit--about { --object-x:50%; --object-y:60%; }
-  .room-hit--making { --object-x:55%; --object-y:60%; }
-  .room-hit--blog { --object-x:50%; --object-y:60%; }
+  .room-hit--making { --object-x:50%; --object-y:50%; }
+  .room-hit--blog { --object-x:50%; --object-y:50%; }
   .room-hit--chores { --object-x:50%; --object-y:50%; }
   .room-hit--friends { --object-x:50%; --object-y:50%; }
   .room-hit--backyard { --object-x:50%; --object-y:50%; }
