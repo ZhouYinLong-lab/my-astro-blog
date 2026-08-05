@@ -37,6 +37,7 @@ const rooms = [
 
           {rooms.map((room) => (
             <a class={`room-hit room-hit--${room.id}`} href={room.href} aria-label={`进入${room.label}`}>
+              <span class="room-hit__marker-anchor" aria-hidden="true"><span class="room-hit__marker"></span></span>
               <span class="room-hit__label"><b>{room.label}</b></span>
             </a>
           ))}
@@ -65,19 +66,20 @@ const rooms = [
   .room-hit { position:absolute; z-index:5; display:block; color:var(--world-ink); text-decoration:none; cursor:pointer; }
   /* Each link is intentionally close to its physical object, not the whole room. */
   .room-hit--home { left:44%; top:80%; width:12%; height:16%; }
-  .room-hit--garden { top:6%; left:14%; width:6%; height:10%; }
+  .room-hit--garden { top:7%; left:13%; width:6%; height:10%; }
   .room-hit--about { top:45%; left:74%; width:12%; height:16%; }
-  .room-hit--making { top:46.5%; left:14%; width:6%; height:9%; }
+  .room-hit--making { top:47%; left:15.5%; width:6%; height:9%; }
   .room-hit--blog { top:32%; left:42%; width:6%; height:8%; }
   .room-hit--chores { top:55.2%; left:52%; width:5%; height:8%; }
-  .room-hit--friends { top:83.2%; left:36.4%; width:4%; height:7%; }
-  .room-hit--backyard { top:82.7%; left:74.1%; width:6%; height:8%; }
+  .room-hit--friends { top:83%; left:37%; width:4%; height:7%; }
+  .room-hit--backyard { top:81%; left:76%; width:6%; height:8%; }
   .room-hit__label { position:absolute; display:block; width:max-content; padding:.05rem .2rem; color:var(--world-ink); font:900 clamp(.8rem,1.25vw,1.1rem) serif; letter-spacing:.08em; text-shadow:2px 2px 0 rgba(0,0,0,.9),0 0 8px rgba(0,0,0,.85); transition:transform 160ms ease,color 160ms ease; }
-  .room-hit::after { content:""; position:absolute; left:var(--object-x); top:var(--object-y); width:clamp(.32rem,.45vw,.5rem); aspect-ratio:1; border-radius:50%; background:var(--world-gold); opacity:.92; transform:translate(-50%,-50%) scale(1); box-shadow:0 0 4px 1px color-mix(in srgb, var(--world-gold) 62%, transparent); transition:opacity 180ms ease,transform 180ms ease,box-shadow 180ms ease; pointer-events:none; }
+  .room-hit__marker-anchor { position:absolute; left:var(--object-x); top:var(--object-y); width:0; height:0; pointer-events:none; }
+  .room-hit__marker { --marker-size:clamp(.32rem,.45vw,.5rem); position:absolute; left:calc(var(--marker-size) / -2); top:calc(var(--marker-size) / -2); display:block; width:var(--marker-size); height:var(--marker-size); border-radius:50%; background:var(--world-gold); opacity:.92; box-shadow:0 0 4px 1px color-mix(in srgb, var(--world-gold) 62%, transparent); transition:opacity 180ms ease,transform 180ms ease,box-shadow 180ms ease; }
   .room-hit:hover .room-hit__label,.room-hit:focus-visible .room-hit__label { color:#fff4c8; transform:translateY(-3px); }
-  .room-hit:hover::after,.room-hit:focus-visible::after { opacity:1; transform:translate(-50%,-50%) scale(1.35); box-shadow:0 0 11px 3px color-mix(in srgb, var(--world-gold) 52%, transparent); }
-  .room-hit.is-clicking::after { animation:object-pulse 420ms cubic-bezier(.2,.9,.3,1); }
-  @keyframes object-pulse { 0% { opacity:.92; transform:translate(-50%,-50%) scale(1); } 52% { opacity:1; transform:translate(-50%,-50%) scale(1.7); box-shadow:0 0 14px 4px color-mix(in srgb, var(--world-gold) 58%, transparent); } 100% { opacity:.92; transform:translate(-50%,-50%) scale(1); } }
+  .room-hit:hover .room-hit__marker,.room-hit:focus-visible .room-hit__marker { transform:scale(1.35); box-shadow:0 0 11px 3px color-mix(in srgb, var(--world-gold) 52%, transparent); }
+  .room-hit.is-clicking .room-hit__marker { animation:object-pulse 420ms cubic-bezier(.2,.9,.3,1); }
+  @keyframes object-pulse { 0% { opacity:.92; transform:scale(1); } 52% { opacity:1; transform:scale(1.7); box-shadow:0 0 14px 4px color-mix(in srgb, var(--world-gold) 58%, transparent); } 100% { opacity:.92; transform:scale(1); } }
   .room-hit--home .room-hit__label { bottom:8%; left:50%; transform:translateX(-50%); }
   .room-hit--garden .room-hit__label { top:18%; left:36%; }
   .room-hit--about .room-hit__label { top:33%; left:55%; }
