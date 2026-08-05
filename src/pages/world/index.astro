@@ -1,0 +1,373 @@
+---
+import { Icon } from "astro-icon/components";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+
+const scenes = [
+  {
+    id: "courtyard",
+    label: "01 / 入苑",
+    eyebrow: "THE COURTYARD",
+    title: "从一张书桌开始",
+    body: "先不急着走远。这里有打开的书、写到一半的纸和一盏还亮着的灯。",
+    light: "/portfolio/bg-light.webp",
+    dark: "/portfolio/bg-dark.webp",
+    href: "/",
+    cta: "回到庭院",
+    accent: "#7c9a54",
+  },
+  {
+    id: "about",
+    label: "02 / 自序",
+    eyebrow: "A NOTE FROM THE HOUSE",
+    title: "把人和来信留在这里",
+    body: "一间公开的小屋，收下自我介绍、信件、旧照片和那些还没有被归档的念头。",
+    light: "/portfolio/hero-about-light.webp",
+    dark: "/portfolio/hero-about-dark.webp",
+    href: "/about/",
+    cta: "读居士自序",
+    accent: "#b07a58",
+  },
+  {
+    id: "blog",
+    label: "03 / 博客",
+    eyebrow: "THE READING ROOM",
+    title: "在书架之间整理问题",
+    body: "文章不是展品，更像一叠被反复打开的纸：代码、课程、实践和一些还在长出形状的想法。",
+    light: "/portfolio/hero-blog-light.webp",
+    dark: "/portfolio/hero-blog-dark.webp",
+    href: "/blog/",
+    cta: "翻开博客",
+    accent: "#7187a5",
+  },
+  {
+    id: "making",
+    label: "04 / 造物录",
+    eyebrow: "THE WORKBENCH",
+    title: "把想法放到桌上",
+    body: "项目、工具和失败的原型都从这里经过。先做出来，再决定它值得被怎样命名。",
+    light: "/portfolio/hero-build-light.webp",
+    dark: "/portfolio/hero-build-dark.webp",
+    href: "/chores/making/",
+    cta: "看造物录",
+    accent: "#9c8b4b",
+  },
+  {
+    id: "work",
+    label: "05 / 杂务",
+    eyebrow: "THE BACK GARDEN",
+    title: "让零碎的东西继续生长",
+    body: "有些记录不属于文章，也暂时不需要结论。它们先放在后院，等下一次路过。",
+    light: "/portfolio/hero-work-light.webp",
+    dark: "/portfolio/hero-work-dark.webp",
+    href: "/backyard/",
+    cta: "进入别苑杂务",
+    accent: "#668b61",
+  },
+  {
+    id: "garden",
+    label: "06 / 语义花园",
+    eyebrow: "THE SEMANTIC GARDEN",
+    title: "看见内容之间的路",
+    body: "文章、项目和学习记录不再只是列表。它们按照相近与相远，慢慢显出一张地图。",
+    light: "/portfolio/semantic-garden-light.png",
+    dark: "/portfolio/semantic-garden-dark.png",
+    href: "/chores/garden/",
+    cta: "打开语义花园",
+    accent: "#6d9f5d",
+  },
+];
+---
+
+<BaseLayout
+  title="别苑世界"
+  description="一座由寒柳别苑现有图像资源组成的固定等距滚动原型。"
+  seoDescription="寒柳别苑的无视频滚动世界原型。"
+  isIndexed={false}
+  immersive={true}
+  animateType="fade-up"
+>
+  <div slot="fullscreen" class="world-page" data-world-root data-scene-count={scenes.length}>
+    <header class="world-topbar">
+      <a class="world-mark" href="/" aria-label="返回寒柳别苑庭院">
+        <span class="world-mark__seal">寒</span>
+        <span>
+          <strong>寒柳别苑</strong>
+          <small>SCROLL WORLD / STATIC PROTOTYPE</small>
+        </span>
+      </a>
+      <div class="world-topbar__right">
+        <span class="world-status"><i></i> 无视频原型</span>
+        <a href="/" class="world-back">返回庭院 <Icon name="lucide:arrow-up-right" /></a>
+      </div>
+    </header>
+
+    <section class="world-scroll" data-world-scroll style={`height: ${scenes.length * 100}vh;`}>
+      <div class="world-stage">
+        <div class="world-track" data-world-track>
+          {scenes.map((scene, index) => (
+            <article
+              class="world-scene"
+              data-world-scene={index}
+              style={`--scene-accent: ${scene.accent};`}
+              aria-label={scene.title}
+            >
+              <div class="world-scene__image-wrap">
+                <img class="world-scene__image world-scene__image--dark" src={scene.dark} alt="" decoding="async" {...(index === 0 ? { fetchpriority: "high" } : {})} />
+                <img class="world-scene__image world-scene__image--light" src={scene.light} alt="" decoding="async" {...(index === 0 ? { fetchpriority: "high" } : {})} />
+              </div>
+              <div class="world-scene__veil"></div>
+              <div class="world-scene__grain"></div>
+              <div class="world-scene__copy">
+                <p class="world-scene__eyebrow"><span>{scene.label}</span> {scene.eyebrow}</p>
+                <h1>{scene.title}</h1>
+                <p class="world-scene__body">{scene.body}</p>
+                <a class="world-scene__cta" href={scene.href}>
+                  {scene.cta}
+                  <Icon name="lucide:arrow-right" />
+                </a>
+              </div>
+              <span class="world-scene__index">{String(index + 1).padStart(2, "0")}</span>
+            </article>
+          ))}
+        </div>
+
+        <div class="world-chrome" aria-hidden="true">
+          <div class="world-progress"><span data-world-progress></span></div>
+          <div class="world-progress-label"><span data-world-current>01</span> / {String(scenes.length).padStart(2, "0")}</div>
+        </div>
+
+        <div class="world-dots" aria-label="场景导航">
+          {scenes.map((scene, index) => (
+            <button type="button" data-world-dot={index} aria-label={`前往${scene.title}`}>
+              <span>{scene.label}</span>
+            </button>
+          ))}
+        </div>
+
+        <div class="world-scroll-hint" data-world-hint>
+          <span>向下滚动，沿着别苑前行</span>
+          <Icon name="lucide:arrow-down" />
+        </div>
+      </div>
+    </section>
+
+    <footer class="world-footer">
+      <span>STATIC STUDY · 保留原有图片资源与空间关系</span>
+      <a href="/">离开世界 <Icon name="lucide:arrow-up-right" /></a>
+    </footer>
+  </div>
+</BaseLayout>
+
+<script>
+  const mountWorld = () => {
+    const root = document.querySelector<HTMLElement>("[data-world-root]");
+    const scrollSpace = root?.querySelector<HTMLElement>("[data-world-scroll]");
+    const track = root?.querySelector<HTMLElement>("[data-world-track]");
+    const current = root?.querySelector<HTMLElement>("[data-world-current]");
+    const progress = root?.querySelector<HTMLElement>("[data-world-progress]");
+    const hint = root?.querySelector<HTMLElement>("[data-world-hint]");
+    const dots = root ? [...root.querySelectorAll<HTMLButtonElement>("[data-world-dot]")] : [];
+    const scenes = root ? [...root.querySelectorAll<HTMLElement>("[data-world-scene]")] : [];
+
+    if (!root || !scrollSpace || !track || !current || !progress || scenes.length === 0) return;
+
+    let ticking = false;
+
+    const update = () => {
+      const bounds = scrollSpace.getBoundingClientRect();
+      const travel = Math.max(scrollSpace.offsetHeight - window.innerHeight, 1);
+      const rawProgress = Math.min(Math.max(-bounds.top / travel, 0), 1);
+      const scenePosition = rawProgress * (scenes.length - 1);
+      const activeScene = Math.min(Math.round(scenePosition), scenes.length - 1);
+
+      track.style.transform = `translate3d(${-scenePosition * 100}vw, 0, 0)`;
+      progress.style.transform = `scaleX(${rawProgress})`;
+      current.textContent = String(activeScene + 1).padStart(2, "0");
+      root.dataset.activeScene = String(activeScene);
+
+      dots.forEach((dot, index) => dot.toggleAttribute("data-active", index === activeScene));
+      scenes.forEach((scene, index) => scene.toggleAttribute("data-active", index === activeScene));
+      if (hint) hint.toggleAttribute("data-hidden", rawProgress > 0.04);
+      ticking = false;
+    };
+
+    const requestUpdate = () => {
+      if (ticking) return;
+      ticking = true;
+      window.requestAnimationFrame(update);
+    };
+
+    dots.forEach((dot, index) => {
+      dot.addEventListener("click", () => {
+        const target = scrollSpace.offsetTop + (scrollSpace.offsetHeight - window.innerHeight) * (index / (scenes.length - 1));
+        window.scrollTo({ top: target, behavior: "smooth" });
+      });
+    });
+
+    window.addEventListener("scroll", requestUpdate, { passive: true });
+    window.addEventListener("resize", requestUpdate, { passive: true });
+    update();
+  };
+
+  document.addEventListener("astro:page-load", mountWorld);
+  mountWorld();
+</script>
+
+<style is:global>
+  :root {
+    --world-ink: #182019;
+    --world-paper: #eff4e8;
+    --world-paper-deep: #dce5d5;
+    --world-shadow: rgba(15, 23, 17, 0.25);
+  }
+
+  html[data-theme-type="dark"] {
+    --world-ink: #eef1e8;
+    --world-paper: #171b1a;
+    --world-paper-deep: #222a25;
+    --world-shadow: rgba(0, 0, 0, 0.42);
+  }
+
+  .world-page {
+    min-height: 100vh;
+    overflow: hidden;
+    color: var(--world-ink);
+    background: var(--world-paper);
+    font-family: inherit;
+  }
+
+  .world-topbar {
+    position: fixed;
+    z-index: 20;
+    inset: 0 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1.1rem clamp(1.25rem, 4vw, 4rem);
+    pointer-events: none;
+  }
+
+  .world-topbar > *, .world-topbar a { pointer-events: auto; }
+
+  .world-mark, .world-back, .world-footer a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .world-mark {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .world-mark__seal {
+    display: grid;
+    width: 2.6rem;
+    height: 2.6rem;
+    place-items: center;
+    border: 1px solid currentColor;
+    border-radius: 0.45rem;
+    background: color-mix(in srgb, var(--world-paper) 82%, transparent);
+    font-family: serif;
+    font-size: 1.35rem;
+    box-shadow: 0 0.3rem 1rem var(--world-shadow);
+  }
+
+  .world-mark strong, .world-mark small { display: block; }
+  .world-mark strong { font-size: 0.95rem; letter-spacing: 0.08em; }
+  .world-mark small { margin-top: 0.15rem; color: color-mix(in srgb, var(--world-ink) 55%, transparent); font: 0.55rem/1.2 ui-monospace, SFMono-Regular, Consolas, monospace; letter-spacing: 0.14em; }
+
+  .world-topbar__right { display: flex; align-items: center; gap: 1.2rem; font-size: 0.75rem; }
+  .world-status { display: inline-flex; align-items: center; gap: 0.45rem; color: color-mix(in srgb, var(--world-ink) 60%, transparent); }
+  .world-status i { display: block; width: 0.45rem; height: 0.45rem; border-radius: 50%; background: #71985b; box-shadow: 0 0 0 0.25rem color-mix(in srgb, #71985b 18%, transparent); }
+  .world-back, .world-footer a { display: inline-flex; align-items: center; gap: 0.35rem; font-weight: 700; }
+  .world-back svg, .world-footer svg { width: 0.95rem; height: 0.95rem; transition: transform 180ms ease; }
+  .world-back:hover svg, .world-footer a:hover svg { transform: translate(0.15rem, -0.15rem); }
+
+  .world-stage {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow: hidden;
+    isolation: isolate;
+    background: var(--world-paper);
+  }
+
+  .world-track {
+    display: flex;
+    height: 100%;
+    width: max-content;
+    will-change: transform;
+  }
+
+  .world-scene {
+    position: relative;
+    width: 100vw;
+    height: 100%;
+    overflow: hidden;
+    isolation: isolate;
+    background: var(--world-paper-deep);
+  }
+
+  .world-scene__image-wrap, .world-scene__image, .world-scene__veil, .world-scene__grain { position: absolute; inset: 0; width: 100%; height: 100%; }
+  .world-scene__image { object-fit: cover; object-position: center; image-rendering: auto; transition: opacity 700ms ease; }
+  .world-scene__image--dark { display: block; }
+  .world-scene__image--light { display: none; }
+  html[data-theme-type="light"] .world-scene__image--dark { display: none; }
+  html[data-theme-type="light"] .world-scene__image--light { display: block; }
+  .world-scene__veil { z-index: 1; background: linear-gradient(90deg, color-mix(in srgb, var(--world-paper) 88%, transparent) 0%, color-mix(in srgb, var(--world-paper) 45%, transparent) 38%, transparent 78%), linear-gradient(0deg, color-mix(in srgb, var(--world-paper) 45%, transparent), transparent 38%); mix-blend-mode: normal; }
+  html[data-theme-type="dark"] .world-scene__veil { background: linear-gradient(90deg, rgba(8, 11, 10, 0.78), rgba(8, 11, 10, 0.27) 42%, transparent 82%), linear-gradient(0deg, rgba(8, 11, 10, 0.35), transparent 42%); }
+  .world-scene__grain { z-index: 2; opacity: 0.13; pointer-events: none; background-image: radial-gradient(color-mix(in srgb, var(--world-ink) 26%, transparent) 0.65px, transparent 0.65px); background-size: 4px 4px; mix-blend-mode: multiply; }
+  html[data-theme-type="dark"] .world-scene__grain { opacity: 0.15; mix-blend-mode: screen; }
+
+  .world-scene__copy { position: absolute; z-index: 3; top: 50%; left: clamp(1.5rem, 9vw, 10rem); width: min(34rem, 44vw); transform: translateY(-42%); }
+  .world-scene__eyebrow { display: flex; flex-wrap: wrap; gap: 0.7rem; align-items: center; margin: 0 0 1rem; color: color-mix(in srgb, var(--world-ink) 64%, transparent); font: 0.68rem/1.3 ui-monospace, SFMono-Regular, Consolas, monospace; letter-spacing: 0.18em; }
+  .world-scene__eyebrow span { color: var(--scene-accent); font-weight: 700; }
+  .world-scene h1 { max-width: 13ch; margin: 0; font-size: clamp(2.4rem, 5vw, 5.8rem); font-weight: 900; line-height: 1.05; letter-spacing: -0.07em; text-wrap: balance; }
+  .world-scene__body { max-width: 27rem; margin: 1.4rem 0 0; color: color-mix(in srgb, var(--world-ink) 70%, transparent); font-size: clamp(0.95rem, 1.4vw, 1.15rem); line-height: 1.9; }
+  .world-scene__cta { display: inline-flex; align-items: center; gap: 0.6rem; margin-top: 1.8rem; padding: 0.75rem 1rem; border: 1px solid color-mix(in srgb, var(--world-ink) 24%, transparent); border-radius: 0.25rem; color: inherit; background: color-mix(in srgb, var(--world-paper) 65%, transparent); font-size: 0.85rem; font-weight: 800; text-decoration: none; box-shadow: 0 0.4rem 1.5rem var(--world-shadow); backdrop-filter: blur(8px); transition: transform 180ms ease, border-color 180ms ease, background 180ms ease; }
+  .world-scene__cta:hover { transform: translateX(0.25rem); border-color: var(--scene-accent); background: color-mix(in srgb, var(--world-paper) 86%, transparent); }
+  .world-scene__cta svg { width: 1rem; height: 1rem; }
+  .world-scene__index { position: absolute; z-index: 3; right: clamp(1.5rem, 5vw, 5rem); bottom: clamp(5rem, 10vh, 8rem); color: color-mix(in srgb, var(--world-ink) 50%, transparent); font: 700 clamp(3rem, 8vw, 7rem)/1 ui-monospace, SFMono-Regular, Consolas, monospace; letter-spacing: -0.14em; }
+
+  .world-chrome { position: absolute; z-index: 5; right: clamp(1.25rem, 4vw, 4rem); bottom: 2rem; left: clamp(1.25rem, 4vw, 4rem); display: flex; align-items: center; gap: 1rem; pointer-events: none; }
+  .world-progress { height: 1px; flex: 1; overflow: hidden; background: color-mix(in srgb, var(--world-ink) 20%, transparent); }
+  .world-progress span { display: block; width: 100%; height: 100%; transform-origin: left center; background: var(--world-ink); }
+  .world-progress-label { min-width: 4rem; color: color-mix(in srgb, var(--world-ink) 62%, transparent); font: 0.7rem ui-monospace, SFMono-Regular, Consolas, monospace; text-align: right; }
+  .world-dots { position: absolute; z-index: 5; top: 50%; right: 1.5rem; display: grid; gap: 0.6rem; transform: translateY(-50%); }
+  .world-dots button { position: relative; width: 0.65rem; height: 0.65rem; padding: 0; border: 1px solid color-mix(in srgb, var(--world-ink) 65%, transparent); border-radius: 50%; background: transparent; cursor: pointer; }
+  .world-dots button span { position: absolute; right: 1.2rem; top: 50%; width: max-content; transform: translateY(-50%) translateX(0.4rem); opacity: 0; color: color-mix(in srgb, var(--world-ink) 70%, transparent); font: 0.65rem ui-monospace, SFMono-Regular, Consolas, monospace; pointer-events: none; transition: opacity 180ms ease, transform 180ms ease; }
+  .world-dots button:hover span, .world-dots button[data-active] span { opacity: 1; transform: translateY(-50%) translateX(0); }
+  .world-dots button[data-active] { border-color: var(--world-ink); background: var(--world-ink); box-shadow: 0 0 0 0.25rem color-mix(in srgb, var(--world-ink) 14%, transparent); }
+  .world-scroll-hint { position: absolute; z-index: 5; right: 50%; bottom: 3.5rem; display: inline-flex; align-items: center; gap: 0.55rem; color: color-mix(in srgb, var(--world-ink) 62%, transparent); font-size: 0.7rem; letter-spacing: 0.1em; transform: translateX(50%); transition: opacity 400ms ease, transform 400ms ease; }
+  .world-scroll-hint svg { width: 1rem; height: 1rem; animation: world-bob 1.8s ease-in-out infinite; }
+  .world-scroll-hint[data-hidden] { opacity: 0; transform: translate(50%, 0.5rem); }
+  @keyframes world-bob { 0%, 100% { transform: translateY(-0.1rem); } 50% { transform: translateY(0.25rem); } }
+
+  .world-footer { display: flex; justify-content: space-between; gap: 1rem; padding: 1rem clamp(1.25rem, 4vw, 4rem); color: color-mix(in srgb, var(--world-ink) 52%, transparent); background: var(--world-paper); font: 0.65rem ui-monospace, SFMono-Regular, Consolas, monospace; letter-spacing: 0.08em; }
+
+  @media (max-width: 700px) {
+    .world-topbar { align-items: flex-start; padding-top: 4.4rem; }
+    .world-topbar__right { align-items: flex-end; flex-direction: column; gap: 0.45rem; }
+    .world-status { display: none; }
+    .world-mark small { max-width: 8rem; line-height: 1.4; }
+    .world-scene__image { object-fit: contain; background: var(--world-paper-deep); }
+    .world-scene__veil { background: linear-gradient(0deg, color-mix(in srgb, var(--world-paper) 90%, transparent), transparent 64%); }
+    html[data-theme-type="dark"] .world-scene__veil { background: linear-gradient(0deg, rgba(8, 11, 10, 0.9), transparent 64%); }
+    .world-scene__copy { top: auto; right: 1.25rem; bottom: 5.5rem; left: 1.25rem; width: auto; transform: none; }
+    .world-scene h1 { max-width: 10ch; font-size: clamp(2.2rem, 12vw, 4rem); }
+    .world-scene__body { max-width: 26rem; margin-top: 0.8rem; font-size: 0.9rem; line-height: 1.7; }
+    .world-scene__cta { margin-top: 1rem; }
+    .world-scene__index { right: 1.5rem; top: 40%; bottom: auto; font-size: 4rem; }
+    .world-dots { top: auto; right: 1.25rem; bottom: 5.9rem; display: flex; transform: none; }
+    .world-dots button span { display: none; }
+    .world-chrome { bottom: 1.5rem; }
+    .world-scroll-hint { bottom: 3rem; font-size: 0.62rem; }
+    .world-footer { flex-direction: column; font-size: 0.58rem; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .world-scene__cta, .world-back svg, .world-footer svg, .world-scroll-hint, .world-scroll-hint svg { animation: none; transition: none; }
+  }
+</style>

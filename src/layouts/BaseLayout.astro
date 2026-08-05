@@ -30,6 +30,7 @@ const {
   showTOC = false,
   isIndexed = true,
   showProgress = false, // 👈 新增：手动强制开启进度条的 prop
+  immersive = false,
 } = Astro.props;
 
 // 🧠 智能判断：当前是否为具体的“博客文章页”
@@ -119,25 +120,29 @@ const resolvedBgImageDark = bgImageDark ?? bgImage;
 
     <Navbar />
 
-    <slot name="fullscreen" />
-
     {/* 这里动态绑定了动画类型 animate-cinematic 或是 animate-fade-up */}
-    <div class={`max-w-6xl mx-auto w-full flex-grow animate-${animateType}`}>
-      <div class="grid grid-cols-1 md:grid-cols-5 lg:grid-cols-4 gap-4 p-4 h-full">
-        <main
-          class="col-span-1 min-w-0 md:col-span-4 lg:col-span-3 bg-transparent order-1 md:order-2 mt-16 md:mt-0 flex flex-col gap-4"
-        >
-          <div class="flex-grow flex flex-col gap-4">
-            <slot />
-          </div>
-          <Footer />
-        </main>
-        <aside class="col-span-1 bg-transparent order-2 md:order-1 md:top-4">
-          <Sidebar headings={headings} showTOC={showTOC} />
-          <slot name="sidebar" />
-        </aside>
+    {immersive ? (
+      <div class={`w-full flex-grow animate-${animateType}`}>
+        <slot name="fullscreen" />
       </div>
-    </div>
+    ) : (
+      <div class={`max-w-6xl mx-auto w-full flex-grow animate-${animateType}`}>
+        <div class="grid grid-cols-1 md:grid-cols-5 lg:grid-cols-4 gap-4 p-4 h-full">
+          <main
+            class="col-span-1 min-w-0 md:col-span-4 lg:col-span-3 bg-transparent order-1 md:order-2 mt-16 md:mt-0 flex flex-col gap-4"
+          >
+            <div class="flex-grow flex flex-col gap-4">
+              <slot />
+            </div>
+            <Footer />
+          </main>
+          <aside class="col-span-1 bg-transparent order-2 md:order-1 md:top-4">
+            <Sidebar headings={headings} showTOC={showTOC} />
+            <slot name="sidebar" />
+          </aside>
+        </div>
+      </div>
+    )}
 
     <MobileTOC headings={headings} showTOC={showTOC} />
     <ScrollToTop />
