@@ -66,7 +66,7 @@ site:
       svg: "material-symbols:supervisor-account-outline-rounded"
       target: _self
     - id: backyard
-      text: 通讯室 # 页面功能是留言、邮箱与联系
+      text: 会客间 # 页面功能是留言、平台入口与来客交流
       href: "/backyard"
       target: _self # 在新标签页打开
       svg: "material-symbols:attach-email-outline-rounded"
