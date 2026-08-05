@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "@/layouts/BaseLayout.astro";
+import ThemeToggle from "@components/widgets/ThemeToggle.astro";
 
 const rooms = [
   { id: "home", label: "首页", href: "/" },
@@ -22,6 +23,10 @@ const rooms = [
   animateType="fade-up"
 >
   <div slot="fullscreen" class="world-page">
+    <div class="world-controls" aria-label="世界页面控制">
+      <ThemeToggle className="world-theme-toggle" />
+      <a class="world-back" href="/" aria-label="返回首页">返回庭院</a>
+    </div>
     <main class="world-main">
       <section class="estate-frame" aria-label="寒柳别苑物理院落地图">
         <div class="estate-scene">
@@ -45,6 +50,10 @@ const rooms = [
   :root { --world-paper:#edf0df; --world-ground:#b5c497; --world-ink:#fff4d6; --world-gold:#d7a65b; }
   html[data-theme-type="dark"] { --world-paper:#111615; --world-ground:#16241f; --world-ink:#f4e8c8; --world-gold:#d3a45a; }
   .world-page { width:100vw; height:100svh; overflow:hidden; color:var(--world-ink); background:var(--world-paper); }
+  .world-controls { position:fixed; z-index:20; top:1rem; right:1rem; display:flex; align-items:center; gap:.6rem; }
+  .world-theme-toggle { border:1px solid color-mix(in srgb, var(--world-ink) 28%, transparent); color:var(--world-ink); background:color-mix(in srgb, var(--world-ground) 76%, transparent); backdrop-filter:blur(8px); }
+  .world-back { padding:.55rem .8rem; color:var(--world-ink); background:color-mix(in srgb, var(--world-ground) 76%, transparent); border:1px solid color-mix(in srgb, var(--world-ink) 28%, transparent); border-radius:.65rem; font:700 .78rem/1.1 serif; text-decoration:none; text-shadow:1px 1px 0 rgba(0,0,0,.75); backdrop-filter:blur(8px); transition:color 160ms ease, border-color 160ms ease, box-shadow 160ms ease, transform 160ms ease; }
+  .world-back:hover,.world-back:focus-visible { color:#fff4c8; border-color:var(--world-gold); box-shadow:0 0 18px color-mix(in srgb, var(--world-gold) 48%, transparent); transform:translateY(-2px); }
   .world-main,.estate-frame,.estate-scene { width:100%; height:100%; }
   .world-main { margin:0; padding:0; }
   .estate-frame { position:relative; overflow:hidden; background:var(--world-ground); }
@@ -73,6 +82,23 @@ const rooms = [
   .room-hit--chores .room-hit__label { top:41%; left:50%; transform:translateX(-50%); }
   .room-hit--friends .room-hit__label { top:12%; left:50%; transform:translateX(-50%); }
   .room-hit--backyard .room-hit__label { top:31%; left:35%; }
+  .room-hit--friends::after { content:""; position:absolute; left:47%; bottom:25%; width:2.8rem; height:2.8rem; border:1px solid color-mix(in srgb, var(--world-gold) 62%, transparent); border-radius:50%; opacity:0; transform:translate(-50%,50%) scale(.82); box-shadow:0 0 0 0 color-mix(in srgb, var(--world-gold) 44%, transparent); transition:opacity 180ms ease, transform 180ms ease, box-shadow 180ms ease; pointer-events:none; }
+  .room-hit--friends:hover::after,.room-hit--friends:focus-visible::after { opacity:1; transform:translate(-50%,50%) scale(1); box-shadow:0 0 20px 5px color-mix(in srgb, var(--world-gold) 28%, transparent); }
+  .room-hit--friends.is-clicking::after { animation: mailbox-pulse 420ms cubic-bezier(.2,.9,.3,1); }
+  @keyframes mailbox-pulse { 0% { opacity:1; transform:translate(-50%,50%) scale(.86); } 52% { opacity:1; transform:translate(-50%,50%) scale(1.12); box-shadow:0 0 24px 8px color-mix(in srgb, var(--world-gold) 42%, transparent); } 100% { opacity:1; transform:translate(-50%,50%) scale(1); } }
   .room-hit--garden:hover .room-hit__label,.room-hit--garden:focus-visible .room-hit__label,.room-hit--about:hover .room-hit__label,.room-hit--about:focus-visible .room-hit__label,.room-hit--home:hover .room-hit__label,.room-hit--home:focus-visible .room-hit__label,.room-hit--chores:hover .room-hit__label,.room-hit--chores:focus-visible .room-hit__label,.room-hit--friends:hover .room-hit__label,.room-hit--friends:focus-visible .room-hit__label { transform:translate(-50%,-3px); }
   @media (max-aspect-ratio: 4/3) { .estate-map { object-fit:cover; } }
 </style>
+
+<script>
+  document.addEventListener("astro:page-load", () => {
+    document.querySelectorAll<HTMLAnchorElement>(".room-hit--friends").forEach((hit) => {
+      hit.addEventListener("click", () => {
+        hit.classList.remove("is-clicking");
+        void hit.offsetWidth;
+        hit.classList.add("is-clicking");
+        window.setTimeout(() => hit.classList.remove("is-clicking"), 460);
+      });
+    });
+  });
+</script>

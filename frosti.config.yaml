@@ -23,17 +23,17 @@ site:
       href: /blog
       svg: "material-symbols:book-2-outline-rounded"
       target: _self
+    - id: making
+      text: 造物录
+      href: /chores/making
+      svg: "material-symbols:code-blocks-outline-rounded"
+      target: _self
     - id: chores
       text: 别苑杂务 # 🌟 升级为大分支
       href: "#" # 父级菜单通常不需要直接跳转
       svg: "material-symbols:dashboard-customize-outline-rounded"
       target: _self
       subItems: # 🌟 下设三个小分支
-        - id: making
-          text: 造物录
-          href: /chores/making
-          svg: "material-symbols:code-blocks-outline-rounded"
-          target: _self
         - id: garden
           text: 语义花园
           href: /chores/garden
@@ -54,6 +54,11 @@ site:
           href: /chores/changelog
           svg: "material-symbols:update-rounded"
           target: _self
+    - id: world
+      text: 导航
+      href: /world
+      svg: "material-symbols:map-outline-rounded"
+      target: _self
     - id: friend
       text: 友链 # 汉化
       href: /friend
