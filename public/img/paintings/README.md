@@ -32,3 +32,12 @@
 - 收藏：纽约大都会艺术博物馆（The Metropolitan Museum of Art）
 - 来源：[Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Thomas_Eakins_-_The_Chess_Players.jpg)；[The Met](https://www.metmuseum.org/art/collection/search/10813)
 - 许可：Public Domain（以来源页面当前标注为准）
+
+## Caravaggio — The Cardsharps
+
+- 文件：caravaggio-cardsharps.jpg
+- 作者：Michelangelo Merisi da Caravaggio（卡拉瓦乔）
+- 年代：约 1594–1597
+- 作品：*The Cardsharps*（《作弊者》）
+- 来源：[Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Cardsharps-Caravaggio_(c.1597).jpg)
+- 许可：Public Domain（以来源页面当前标注为准）
