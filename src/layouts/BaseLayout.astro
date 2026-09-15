@@ -31,6 +31,7 @@ const {
   isIndexed = true,
   showProgress = false, // 👈 新增：手动强制开启进度条的 prop
   immersive = false,
+  hideNavigation = false,
 } = Astro.props;
 
 // 🧠 智能判断：当前是否为具体的“博客文章页”
@@ -118,7 +119,7 @@ const resolvedBgImageDark = bgImageDark ?? bgImage;
       </div>
     )}
 
-    <Navbar />
+    {!hideNavigation && <Navbar />}
 
     {/* 这里动态绑定了动画类型 animate-cinematic 或是 animate-fade-up */}
     {immersive ? (

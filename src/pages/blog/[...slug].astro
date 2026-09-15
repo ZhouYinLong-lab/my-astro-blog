@@ -7,8 +7,9 @@ import { DATE_FORMAT } from "@config";
 import BaseLayout from "@layouts/BaseLayout.astro";
 import dayjs from "@utils/dayjs";
 import Giscus from "@/components/comments/Giscus.astro";
-import PageViews from "@/components/widgets/PageViews.astro";
 import MainCard from "@/components/MainCard.astro";
+import SemanticNeighbors from "@/components/SemanticNeighbors.astro";
+import PageViews from "@/components/widgets/PageViews.astro";
 
 export async function getStaticPaths() {
   const posts = await getCollection("blog");
@@ -34,6 +35,50 @@ const displayDate = blog.data.pubDate
   : "";
 const image = new URL(`/og/${blog.slug}.png`, Astro.site).toString();
 const url = new URL(`/blog/${blog.slug}`, Astro.url.origin);
+const allPosts = await getCollection("blog");
+const visiblePosts = import.meta.env.PROD
+  ? allPosts.filter((post) => !post.data.draft)
+  : allPosts;
+const currentTags = new Set(
+  (blog.data.tags || []).map((tag) => tag.toLowerCase()),
+);
+const currentCategories = new Set(
+  (blog.data.categories || []).map((category) => category.toLowerCase()),
+);
+const titleTerms = new Set(
+  blog.data.title.toLowerCase().match(/[a-z0-9]+|[\u4e00-\u9fff]{2,}/g) || [],
+);
+const relatedPosts = visiblePosts
+  .filter((post) => post.slug !== blog.slug)
+  .map((post) => {
+    const sharedTags = (post.data.tags || []).filter((tag) =>
+      currentTags.has(tag.toLowerCase()),
+    );
+    const sharedCategories = (post.data.categories || []).filter((category) =>
+      currentCategories.has(category.toLowerCase()),
+    );
+    const postTerms = new Set(
+      post.data.title.toLowerCase().match(/[a-z0-9]+|[\u4e00-\u9fff]{2,}/g) ||
+        [],
+    );
+    const sharedTerms = [...titleTerms].filter((term) => postTerms.has(term));
+    const score =
+      sharedTags.length * 6 + sharedCategories.length * 3 + sharedTerms.length;
+    return {
+      slug: post.slug,
+      title: post.data.title,
+      description: post.data.description,
+      tags: post.data.tags || [],
+      score,
+      reason: sharedTags.length
+        ? `共同标签 · ${sharedTags.slice(0, 2).join("、")}`
+        : sharedCategories.length
+          ? `同一分类 · ${sharedCategories[0]}`
+          : "主题邻近 · 继续探索",
+    };
+  })
+  .sort((left, right) => right.score - left.score)
+  .slice(0, 4);
 ---
 
 <BaseLayout
@@ -71,6 +116,8 @@ const url = new URL(`/blog/${blog.slug}`, Astro.url.origin);
         />
       </div>
     </div>
+
+    <SemanticNeighbors posts={relatedPosts} />
 
     <PageViews />
     <Giscus />

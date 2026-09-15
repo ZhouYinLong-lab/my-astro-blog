@@ -1,82 +1,623 @@
 ---
+import ThemeToggle from "@components/widgets/ThemeToggle.astro";
 import { Icon } from "astro-icon/components";
-import MainCard from "@/components/MainCard.astro";
 import BaseLayout from "@/layouts/BaseLayout.astro";
 ---
 
 <BaseLayout
   title="语义花园"
   description="把寒柳别苑留下的文章、项目和学习记录投影到一张可探索的语义地图。"
+  bgImageDark="/portfolio/semantic-garden-dark.png"
+  bgImageLight="/portfolio/semantic-garden-light.png"
+  immersive={true}
+  hideNavigation={true}
+  animateType="fade-up"
 >
-  <MainCard
-    title="语义花园"
-    description="这是一个独立的内容语义地图工具，也是寒柳别苑的第一块真实花圃。"
-    textOverlay="GARDEN"
-    headerImageDark="/portfolio/semantic-garden-dark.png"
-    headerImageLight="/portfolio/semantic-garden-light.png"
-    infoIcon="lucide:map"
-  >
-    <div class="space-y-12">
-      <section class="py-5 text-center" aria-labelledby="garden-intro">
-        <p class="mb-3 font-mono text-xs font-bold uppercase tracking-[0.28em] text-primary">
-          A map of what I leave behind
-        </p>
-        <h2 id="garden-intro" class="mx-auto max-w-3xl break-words text-2xl font-black leading-tight sm:text-4xl">
-          文章不只是列表，也可以长成一座花园
-        </h2>
-        <p class="mx-auto mt-5 max-w-2xl break-words text-base leading-7 text-base-content/65 sm:text-lg">
-          语义花园把文章、项目和学习记录放在同一张地图里。相近的内容会彼此靠近，主题相似的内容会形成一片小小的区域；点击节点，就能回到它原来的页面。
-        </p>
-        <div class="mx-auto mt-7 flex max-w-xs flex-col items-stretch justify-center gap-3 sm:max-w-none sm:flex-row sm:flex-wrap sm:items-center">
-          <a href="https://latent-garden.zylatent.com/" target="_blank" rel="noopener noreferrer" class="btn btn-primary gap-2">
-            打开完整花园
-            <Icon name="lucide:external-link" class="h-4 w-4" />
-          </a>
-          <a href="/blog/latent-garden个人语义花园/" class="btn btn-outline gap-2">
-            先读项目记录
-            <Icon name="lucide:book-open" class="h-4 w-4" />
-          </a>
-        </div>
-      </section>
+  <div slot="fullscreen" class="semantic-garden-page">
+    <aside class="garden-rail" aria-label="语义花园导航">
+      <a class="rail-button rail-back" href="/world/" aria-label="返回别苑" data-tooltip="返回别苑">
+        <Icon name="lucide:arrow-left" class="h-[18px] w-[18px]" />
+      </a>
 
-      <section aria-labelledby="garden-map-title">
-        <div class="mb-5 flex flex-wrap items-end justify-between gap-3">
-          <div>
-            <p class="font-mono text-xs uppercase tracking-[0.2em] text-base-content/40">Live map</p>
-            <h2 id="garden-map-title" class="mt-1 text-2xl font-bold">在这里走走</h2>
-          </div>
-          <a href="https://latent-garden.zylatent.com/" target="_blank" rel="noopener noreferrer" class="link link-primary text-sm">
-            在新窗口打开
-          </a>
+      <div class="garden-signature">
+        <span class="signature-mark" aria-hidden="true">
+          <Icon name="lucide:sprout" class="h-5 w-5" />
+        </span>
+        <div class="signature-copy">
+          <h1>语义花园</h1>
+          <p>LATENT GARDEN</p>
         </div>
-        <div class="overflow-hidden rounded-2xl border border-base-300 bg-base-200 shadow-sm">
-          <iframe
-            src="https://latent-garden.zylatent.com/?embed=1"
-            title="Latent Garden 语义地图"
-            loading="lazy"
-            class="h-[620px] w-full border-0 sm:h-[720px]"
-          ></iframe>
-        </div>
-        <p class="mt-3 text-center text-xs leading-5 text-base-content/45">
-          地图来自独立项目 Latent Garden；如果浏览器阻止嵌入，请使用上方的新窗口链接打开。
-        </p>
-      </section>
+      </div>
 
-      <section class="rounded-2xl border border-primary/25 bg-primary/5 px-6 py-8" aria-labelledby="garden-note">
-        <div class="flex flex-col gap-5 sm:flex-row sm:items-start sm:justify-between">
-          <div>
-            <p class="font-mono text-xs uppercase tracking-[0.2em] text-primary">Open project</p>
-            <h2 id="garden-note" class="mt-2 text-2xl font-bold">它不只服务于这一个博客</h2>
-            <p class="mt-3 max-w-2xl text-sm leading-6 text-base-content/65">
-              Latent Garden 与 Astro 博客保持松耦合：内容可以来自 Markdown、MDX、JSON、RSS 或公开网站，最后生成一份可部署的静态地图。寒柳别苑只是它目前最完整的一块试验田。
-            </p>
-          </div>
-          <a href="https://github.com/ZhouYinLong-lab/Latent-Garden" target="_blank" rel="noopener noreferrer" class="btn btn-outline shrink-0 gap-2">
-            <Icon name="lucide:github" class="h-4 w-4" />
-            查看源码
-          </a>
+      <nav class="rail-actions" aria-label="花园工具">
+        <a
+          class="rail-button rail-project"
+          href="/blog/latent-garden个人语义花园/"
+          aria-label="阅读项目记录"
+          data-tooltip="项目记录"
+        >
+          <Icon name="lucide:book-open" class="h-[18px] w-[18px]" />
+        </a>
+
+        <details class="garden-about">
+          <summary class="rail-button" aria-label="了解语义花园" data-tooltip="关于花园">
+            <Icon name="lucide:info" class="h-[18px] w-[18px]" />
+          </summary>
+          <section class="garden-about-panel" aria-labelledby="garden-about-title">
+            <p class="about-index">GARDEN NOTE · 01</p>
+            <h2 id="garden-about-title">文章之间，也有距离</h2>
+            <p>地图按照内容语义排列文章与项目。位置越近，主题通常越相似；点击节点即可回到原文。</p>
+            <div class="about-links">
+              <a href="/blog/latent-garden个人语义花园/">阅读项目记录</a>
+              <a href="https://github.com/ZhouYinLong-lab/Latent-Garden" target="_blank" rel="noopener noreferrer">查看源码</a>
+            </div>
+          </section>
+        </details>
+
+        <ThemeToggle className="garden-theme-toggle" />
+
+        <a
+          class="rail-button rail-open"
+          href="https://latent-garden.zylatent.com/"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="独立打开语义花园"
+          data-tooltip="独立打开"
+        >
+          <Icon name="lucide:arrow-up-right" class="h-[18px] w-[18px]" />
+        </a>
+      </nav>
+    </aside>
+
+    <main class="garden-stage">
+      <iframe
+        id="semantic-garden-frame"
+        src="https://latent-garden.zylatent.com/?embed=1&theme=obsidian"
+        title="寒柳别苑语义地图"
+        loading="eager"
+        referrerpolicy="strict-origin-when-cross-origin"
+      ></iframe>
+
+      <div class="garden-loader" id="garden-loader" aria-live="polite">
+        <div class="loader-orbit" aria-hidden="true">
+          <span><Icon name="lucide:sprout" class="h-6 w-6" /></span>
         </div>
-      </section>
-    </div>
-  </MainCard>
+        <div class="loader-copy">
+          <strong>正在展开花园</strong>
+          <span>读取文章坐标与主题关系</span>
+        </div>
+      </div>
+
+      <noscript>
+        <p class="garden-noscript">需要启用 JavaScript 才能浏览语义地图。</p>
+      </noscript>
+    </main>
+  </div>
 </BaseLayout>
+
+<style is:global>
+  .semantic-garden-page {
+    --rail-bg: rgba(244, 241, 227, 0.96);
+    --rail-bg-solid: #f4f1e3;
+    --rail-text: #26372b;
+    --rail-muted: #747b6d;
+    --rail-line: rgba(52, 75, 57, 0.16);
+    --rail-hover: rgba(76, 111, 62, 0.1);
+    --rail-accent: #567643;
+    --rail-accent-strong: #3f6033;
+    --paper: #f2f2df;
+    isolation: isolate;
+    display: grid;
+    grid-template-columns: 5.25rem minmax(0, 1fr);
+    width: 100%;
+    height: 100svh;
+    min-height: 34rem;
+    overflow: hidden;
+    color: var(--rail-text);
+    background: var(--paper);
+  }
+
+  html[data-theme-type="dark"] .semantic-garden-page {
+    --rail-bg: rgba(8, 22, 16, 0.97);
+    --rail-bg-solid: #0b1b14;
+    --rail-text: #eeeedf;
+    --rail-muted: #9ca799;
+    --rail-line: rgba(222, 232, 208, 0.13);
+    --rail-hover: rgba(190, 213, 141, 0.11);
+    --rail-accent: #bdd48d;
+    --rail-accent-strong: #d6e5b3;
+  }
+
+  .garden-rail {
+    position: relative;
+    z-index: 20;
+    display: grid;
+    grid-template-rows: auto minmax(0, 1fr) auto;
+    justify-items: center;
+    gap: 1rem;
+    min-width: 0;
+    padding: max(1rem, env(safe-area-inset-top)) 0.75rem max(1rem, env(safe-area-inset-bottom));
+    border-right: 1px solid var(--rail-line);
+    background:
+      linear-gradient(180deg, color-mix(in srgb, var(--rail-bg) 94%, transparent), var(--rail-bg)),
+      repeating-linear-gradient(0deg, transparent 0 6px, color-mix(in srgb, var(--rail-text) 2%, transparent) 6px 7px);
+    box-shadow: 12px 0 38px rgba(24, 35, 26, 0.08);
+    backdrop-filter: blur(18px) saturate(1.05);
+  }
+
+  .garden-rail::after {
+    content: "";
+    position: absolute;
+    top: 1.1rem;
+    right: -1px;
+    bottom: 1.1rem;
+    width: 1px;
+    pointer-events: none;
+    background: linear-gradient(transparent, var(--rail-accent), transparent);
+    opacity: 0.34;
+  }
+
+  .rail-button,
+  .garden-theme-toggle {
+    position: relative;
+    display: inline-grid !important;
+    width: 2.875rem !important;
+    min-width: 2.875rem !important;
+    height: 2.875rem !important;
+    min-height: 2.875rem !important;
+    flex: 0 0 auto;
+    place-items: center;
+    padding: 0 !important;
+    border: 1px solid transparent !important;
+    border-radius: 50% !important;
+    color: var(--rail-muted) !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    text-decoration: none;
+    cursor: pointer;
+    transition: color 160ms ease, background-color 160ms ease, border-color 160ms ease, transform 160ms ease !important;
+  }
+
+  .rail-button:hover,
+  .rail-button:focus-visible,
+  .garden-theme-toggle:hover,
+  .garden-theme-toggle:focus-visible,
+  .garden-about[open] > summary {
+    border-color: var(--rail-line) !important;
+    color: var(--rail-accent) !important;
+    background: var(--rail-hover) !important;
+  }
+
+  .rail-button:focus-visible,
+  .garden-theme-toggle:focus-visible,
+  .garden-about-panel a:focus-visible {
+    outline: 2px solid var(--rail-accent);
+    outline-offset: 3px;
+  }
+
+  .rail-button:active,
+  .garden-theme-toggle:active {
+    transform: scale(0.94);
+  }
+
+  .rail-button[data-tooltip]::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    left: calc(100% + 0.65rem);
+    top: 50%;
+    z-index: 40;
+    width: max-content;
+    padding: 0.38rem 0.55rem;
+    border: 1px solid var(--rail-line);
+    border-radius: 0.38rem;
+    color: var(--rail-text);
+    background: var(--rail-bg-solid);
+    box-shadow: 0 8px 26px rgba(21, 30, 23, 0.15);
+    font-size: 0.68rem;
+    font-weight: 700;
+    pointer-events: none;
+    opacity: 0;
+    transform: translate(0.3rem, -50%);
+    transition: opacity 140ms ease, transform 140ms ease;
+  }
+
+  .rail-button[data-tooltip]:hover::after,
+  .rail-button[data-tooltip]:focus-visible::after {
+    opacity: 1;
+    transform: translate(0, -50%);
+  }
+
+  .garden-signature {
+    display: flex;
+    min-height: 0;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.9rem;
+    padding: 0.4rem 0;
+  }
+
+  .signature-mark {
+    display: grid;
+    width: 2.45rem;
+    height: 2.45rem;
+    flex: 0 0 auto;
+    place-items: center;
+    border: 1px solid color-mix(in srgb, var(--rail-accent) 27%, transparent);
+    border-radius: 50%;
+    color: var(--rail-accent);
+    background: color-mix(in srgb, var(--rail-accent) 8%, transparent);
+  }
+
+  .signature-copy {
+    display: flex;
+    min-height: 0;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.8rem;
+  }
+
+  .signature-copy h1,
+  .signature-copy p {
+    margin: 0;
+    writing-mode: vertical-rl;
+    text-orientation: upright;
+  }
+
+  .signature-copy h1 {
+    color: var(--rail-text);
+    font: 750 1.04rem/1.1 Georgia, "Songti SC", "Noto Serif SC", serif;
+    letter-spacing: 0.2em;
+  }
+
+  .signature-copy p {
+    overflow: hidden;
+    color: var(--rail-muted);
+    font: 650 0.5rem/1 ui-monospace, SFMono-Regular, Menlo, monospace;
+    letter-spacing: 0.17em;
+    text-orientation: mixed;
+  }
+
+  .rail-actions {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.28rem;
+  }
+
+  .rail-open {
+    margin-top: 0.34rem;
+    border-color: color-mix(in srgb, var(--rail-accent) 42%, transparent) !important;
+    color: var(--rail-bg-solid) !important;
+    background: var(--rail-accent) !important;
+    box-shadow: 0 8px 22px color-mix(in srgb, var(--rail-accent) 24%, transparent) !important;
+  }
+
+  .rail-open:hover,
+  .rail-open:focus-visible {
+    color: var(--rail-bg-solid) !important;
+    background: var(--rail-accent-strong) !important;
+    transform: translateY(-1px);
+  }
+
+  .garden-about {
+    position: relative;
+  }
+
+  .garden-about > summary {
+    list-style: none;
+  }
+
+  .garden-about > summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .garden-about-panel {
+    position: absolute;
+    left: calc(100% + 1.15rem);
+    bottom: 0;
+    z-index: 60;
+    width: min(22rem, calc(100vw - 7rem));
+    padding: 1.35rem;
+    border: 1px solid var(--rail-line);
+    border-radius: 0.2rem 1rem 1rem 1rem;
+    color: var(--rail-text);
+    background:
+      linear-gradient(135deg, color-mix(in srgb, var(--rail-bg-solid) 96%, transparent), var(--rail-bg-solid)),
+      repeating-linear-gradient(0deg, transparent 0 5px, color-mix(in srgb, var(--rail-text) 2%, transparent) 5px 6px);
+    box-shadow: 0 24px 70px rgba(19, 29, 21, 0.28);
+  }
+
+  .about-index {
+    margin: 0;
+    color: var(--rail-accent);
+    font: 700 0.6rem/1 ui-monospace, SFMono-Regular, Menlo, monospace;
+    letter-spacing: 0.16em;
+  }
+
+  .garden-about-panel h2 {
+    margin: 0.65rem 0 0;
+    color: var(--rail-text);
+    font: 750 1.28rem/1.3 Georgia, "Songti SC", serif;
+  }
+
+  .garden-about-panel > p:not(.about-index) {
+    margin: 0.8rem 0 0;
+    color: var(--rail-muted);
+    font-size: 0.8rem;
+    line-height: 1.75;
+  }
+
+  .about-links {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+    padding-top: 0.9rem;
+    border-top: 1px solid var(--rail-line);
+  }
+
+  .about-links a {
+    color: var(--rail-accent);
+    font-size: 0.75rem;
+    font-weight: 750;
+    text-underline-offset: 0.2em;
+  }
+
+  .garden-stage {
+    position: relative;
+    min-width: 0;
+    min-height: 0;
+    overflow: hidden;
+    background: var(--paper);
+  }
+
+  .garden-stage::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    pointer-events: none;
+    box-shadow: inset 10px 0 24px rgba(45, 60, 43, 0.06);
+  }
+
+  #semantic-garden-frame {
+    position: absolute;
+    inset: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    border: 0;
+    background: var(--paper);
+  }
+
+  .garden-loader {
+    position: absolute;
+    inset: 0;
+    z-index: 5;
+    display: grid;
+    place-content: center;
+    justify-items: center;
+    gap: 1.25rem;
+    pointer-events: none;
+    color: #344434;
+    background:
+      radial-gradient(circle at 50% 44%, rgba(255, 255, 246, 0.82), transparent 31rem),
+      linear-gradient(135deg, #f6f4e5, #e9edd7);
+    animation: loader-dismiss 420ms ease 2.2s forwards;
+    transition: visibility 420ms ease, opacity 420ms ease;
+  }
+
+  .garden-stage.is-loaded .garden-loader {
+    visibility: hidden;
+    opacity: 0;
+  }
+
+  .loader-orbit {
+    display: grid;
+    width: clamp(12rem, 28vw, 18rem);
+    aspect-ratio: 1;
+    place-items: center;
+    border: 1px solid rgba(80, 109, 65, 0.18);
+    border-radius: 50%;
+    background:
+      repeating-radial-gradient(circle, transparent 0 2.25rem, rgba(80, 109, 65, 0.13) 2.28rem 2.34rem),
+      repeating-conic-gradient(from 0deg, rgba(80, 109, 65, 0.09) 0 1deg, transparent 1deg 45deg);
+  }
+
+  .loader-orbit span {
+    display: grid;
+    width: 3.35rem;
+    height: 3.35rem;
+    place-items: center;
+    border: 1px solid rgba(80, 109, 65, 0.28);
+    border-radius: 50%;
+    color: #567643;
+    background: rgba(247, 246, 232, 0.9);
+    box-shadow: 0 12px 40px rgba(66, 86, 58, 0.12);
+    animation: loader-breathe 1.8s ease-in-out infinite;
+  }
+
+  .loader-copy {
+    text-align: center;
+  }
+
+  .loader-copy strong,
+  .loader-copy span {
+    display: block;
+  }
+
+  .loader-copy strong {
+    font: 750 1rem/1.3 Georgia, "Songti SC", serif;
+    letter-spacing: 0.08em;
+  }
+
+  .loader-copy span {
+    margin-top: 0.35rem;
+    color: #76806f;
+    font-size: 0.68rem;
+  }
+
+  .garden-noscript {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    z-index: 8;
+    margin: 0;
+    color: #344434;
+    transform: translate(-50%, -50%);
+  }
+
+  @keyframes loader-breathe {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.07); }
+  }
+
+  @keyframes loader-dismiss {
+    to { visibility: hidden; opacity: 0; }
+  }
+
+  @media (max-width: 900px) {
+    .semantic-garden-page {
+      grid-template-columns: minmax(0, 1fr);
+      grid-template-rows: auto minmax(0, 1fr);
+      min-height: 30rem;
+    }
+
+    .garden-rail {
+      grid-template-columns: auto minmax(0, 1fr) auto;
+      grid-template-rows: auto;
+      justify-items: initial;
+      align-items: center;
+      gap: 0.55rem;
+      min-height: 4rem;
+      padding: max(0.5rem, env(safe-area-inset-top)) max(0.6rem, env(safe-area-inset-right)) 0.5rem max(0.6rem, env(safe-area-inset-left));
+      border-right: 0;
+      border-bottom: 1px solid var(--rail-line);
+      box-shadow: 0 8px 26px rgba(24, 35, 26, 0.08);
+    }
+
+    .garden-rail::after,
+    .rail-button[data-tooltip]::after {
+      display: none;
+    }
+
+    .garden-signature {
+      min-width: 0;
+      flex-direction: row;
+      justify-self: start;
+      gap: 0.62rem;
+      padding: 0;
+    }
+
+    .signature-mark {
+      width: 2.35rem;
+      height: 2.35rem;
+    }
+
+    .signature-copy {
+      min-width: 0;
+      align-items: flex-start;
+      gap: 0.18rem;
+    }
+
+    .signature-copy h1,
+    .signature-copy p {
+      writing-mode: horizontal-tb;
+    }
+
+    .signature-copy h1 {
+      overflow: hidden;
+      font-size: 0.98rem;
+      letter-spacing: 0.06em;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .signature-copy p {
+      font-size: 0.46rem;
+      letter-spacing: 0.12em;
+    }
+
+    .rail-actions {
+      flex-direction: row;
+      justify-self: end;
+      gap: 0.18rem;
+    }
+
+    .rail-project,
+    .garden-about {
+      display: none !important;
+    }
+
+    .rail-open {
+      margin: 0 0 0 0.1rem;
+    }
+
+    .garden-theme-toggle,
+    .rail-button {
+      width: 2.75rem !important;
+      min-width: 2.75rem !important;
+      height: 2.75rem !important;
+      min-height: 2.75rem !important;
+    }
+
+    .garden-stage::after {
+      box-shadow: inset 0 8px 20px rgba(45, 60, 43, 0.05);
+    }
+  }
+
+  @media (max-width: 410px) {
+    .signature-copy p {
+      display: none;
+    }
+
+    .garden-rail {
+      gap: 0.4rem;
+    }
+  }
+
+  @media (max-height: 660px) and (min-width: 901px) {
+    .signature-copy p {
+      display: none;
+    }
+
+    .rail-actions {
+      gap: 0.08rem;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .semantic-garden-page *,
+    .semantic-garden-page *::before,
+    .semantic-garden-page *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      scroll-behavior: auto !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+</style>
+
+<script>
+  const setupSemanticGarden = () => {
+    const frame = document.querySelector<HTMLIFrameElement>("#semantic-garden-frame");
+    const stage = document.querySelector<HTMLElement>(".garden-stage");
+    const about = document.querySelector<HTMLDetailsElement>(".garden-about");
+
+    if (frame && stage && !frame.dataset.loadBound) {
+      frame.dataset.loadBound = "true";
+      const revealMap = () => stage.classList.add("is-loaded");
+      frame.addEventListener("load", revealMap, { once: true });
+      window.setTimeout(revealMap, 1800);
+    }
+
+    if (about && !about.dataset.outsideBound) {
+      about.dataset.outsideBound = "true";
+      document.addEventListener("pointerdown", (event) => {
+        if (about.open && !about.contains(event.target as Node)) about.open = false;
+      });
+    }
+  };
+
+  document.addEventListener("astro:page-load", setupSemanticGarden);
+  setupSemanticGarden();
+</script>

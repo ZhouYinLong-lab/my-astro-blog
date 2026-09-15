@@ -1,0 +1,144 @@
+---
+interface RelatedPost {
+  slug: string;
+  title: string;
+  description: string;
+  tags: string[];
+  reason: string;
+}
+
+interface Props {
+  posts: RelatedPost[];
+}
+
+const { posts } = Astro.props;
+---
+
+{posts.length > 0 && (
+  <section class="semantic-neighbors" aria-labelledby="semantic-neighbors-title">
+    <div class="semantic-neighbors-heading">
+      <div>
+        <p class="semantic-neighbors-eyebrow">LOCAL GRAPH · 继续探索</p>
+        <h2 id="semantic-neighbors-title">附近的文章</h2>
+      </div>
+      <a href="/chores/garden/" class="semantic-neighbors-map">打开全局地图 ↗</a>
+    </div>
+    <div class="semantic-neighbors-grid">
+      {posts.map((post) => (
+        <a class="semantic-neighbor" href={`/blog/${post.slug}/`}>
+          <span class="semantic-neighbor-title">{post.title}</span>
+          <span class="semantic-neighbor-description">{post.description}</span>
+          <span class="semantic-neighbor-meta">
+            <span>{post.reason}</span>
+            <span aria-hidden="true">↗</span>
+          </span>
+        </a>
+      ))}
+    </div>
+  </section>
+)}
+
+<style>
+  .semantic-neighbors {
+    --neighbors-ink: hsl(var(--bc) / 0.92);
+    --neighbors-muted: hsl(var(--bc) / 0.58);
+    --neighbors-line: hsl(var(--bc) / 0.14);
+    --neighbors-accent: hsl(var(--p) / 0.86);
+    margin: 2.2rem 0 1.8rem;
+    padding: 1.25rem;
+    border: 1px solid var(--neighbors-line);
+    border-radius: 0.95rem;
+    background: hsl(var(--b2) / 0.42);
+  }
+
+  .semantic-neighbors-heading {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .semantic-neighbors-eyebrow {
+    margin: 0 0 0.38rem;
+    color: var(--neighbors-accent);
+    font: 700 0.58rem/1 ui-monospace, SFMono-Regular, Menlo, monospace;
+    letter-spacing: 0.14em;
+  }
+
+  .semantic-neighbors h2 {
+    margin: 0;
+    color: var(--neighbors-ink);
+    font-size: 1.25rem;
+  }
+
+  .semantic-neighbors-map {
+    color: var(--neighbors-muted);
+    font-size: 0.72rem;
+    text-underline-offset: 0.2em;
+  }
+
+  .semantic-neighbors-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.6rem;
+  }
+
+  .semantic-neighbor {
+    display: grid;
+    min-width: 0;
+    gap: 0.42rem;
+    padding: 0.8rem;
+    border: 1px solid transparent;
+    border-radius: 0.65rem;
+    color: inherit;
+    text-decoration: none;
+    background: hsl(var(--b1) / 0.32);
+    transition: border-color 160ms ease, background-color 160ms ease, transform 160ms ease;
+  }
+
+  .semantic-neighbor:hover,
+  .semantic-neighbor:focus-visible {
+    border-color: var(--neighbors-line);
+    background: hsl(var(--b1) / 0.72);
+    transform: translateY(-2px);
+  }
+
+  .semantic-neighbor-title {
+    color: var(--neighbors-ink);
+    font-weight: 700;
+    line-height: 1.45;
+  }
+
+  .semantic-neighbor-description {
+    display: -webkit-box;
+    overflow: hidden;
+    color: var(--neighbors-muted);
+    font-size: 0.75rem;
+    line-height: 1.6;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+  }
+
+  .semantic-neighbor-meta {
+    display: flex;
+    justify-content: space-between;
+    gap: 0.5rem;
+    color: var(--neighbors-accent);
+    font: 600 0.62rem/1.3 ui-monospace, SFMono-Regular, Menlo, monospace;
+  }
+
+  @media (max-width: 640px) {
+    .semantic-neighbors {
+      padding: 1rem;
+    }
+
+    .semantic-neighbors-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .semantic-neighbor { transition: none; }
+  }
+</style>
