@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="light">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex" />
+    <title>别苑导航场景对比</title>
+    <style>
+      * { box-sizing: border-box; }
+      :root { color-scheme: light dark; font-family: system-ui, sans-serif; }
+      body { margin: 0; background: #e7e3d2; color: #26372f; }
+      html[data-theme="dark"] body { background: #0c151d; color: #e7dec8; }
+      main { width: min(100% - 2rem, 1500px); margin: auto; padding: 1.5rem 0 2rem; }
+      header { display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: 1rem; margin-bottom: 1rem; }
+      h1 { margin: 0.25rem 0; font: 600 clamp(1.5rem, 3vw, 2.5rem)/1.2 Georgia, "Songti SC", serif; }
+      p { margin: 0; color: color-mix(in srgb, currentColor 70%, transparent); line-height: 1.6; }
+      .eyebrow { font-size: 0.7rem; letter-spacing: 0.18em; text-transform: uppercase; }
+      .controls { display: flex; flex-wrap: wrap; align-items: center; gap: 0.6rem; }
+      button { min-height: 2.75rem; padding: 0.6rem 0.9rem; border: 1px solid currentColor; border-radius: 0.35rem; background: transparent; color: inherit; cursor: pointer; }
+      button[aria-pressed="true"] { background: #29483c; color: #fff3d1; }
+      label { display: flex; align-items: center; gap: 0.6rem; min-height: 2.75rem; }
+      input[type="range"] { width: min(32vw, 18rem); }
+      .comparison { position: relative; overflow: hidden; aspect-ratio: 1672 / 941; border: 1px solid color-mix(in srgb, currentColor 25%, transparent); background: #151d17; box-shadow: 0 1rem 3rem #0002; }
+      .comparison img { position: absolute; inset: 0; display: block; width: 100%; height: 100%; object-fit: contain; }
+      .after-wrap { position: absolute; inset: 0; overflow: hidden; width: 50%; border-right: 2px solid #efc66b; }
+      .after-wrap img { width: calc(100vw - 2rem); max-width: 1500px; height: 100%; object-fit: contain; object-position: left center; }
+      .labels { display: flex; justify-content: space-between; padding-top: 0.6rem; font-size: 0.78rem; }
+      .note { margin-top: 1rem; max-width: 65rem; }
+      @media (max-width: 720px) {
+        main { width: min(100% - 1rem, 1500px); padding-top: 1rem; }
+        header { align-items: start; }
+        input[type="range"] { width: 9rem; }
+        .after-wrap img { width: calc(100vw - 1rem); }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <header>
+        <div>
+          <p class="eyebrow">Navigation scene 02</p>
+          <h1>别苑导航场景匹配</h1>
+          <p>拖动分界线，对比原图与墙体完整、内饰匹配的导航地图。</p>
+        </div>
+        <div class="controls">
+          <button type="button" data-theme="light" aria-pressed="true">日间</button>
+          <button type="button" data-theme="dark" aria-pressed="false">夜间</button>
+          <label>修复范围 <input id="reveal" type="range" min="0" max="100" value="50" /></label>
+        </div>
+      </header>
+
+      <section class="comparison" aria-label="地图修复前后对比">
+        <img id="before" src="estate-light.png" alt="原始地图" />
+        <div class="after-wrap" id="after-wrap">
+          <img id="after" src="estate-light-walled-v1-refined-tall.png" alt="从第一版重新修整的地图" />
+        </div>
+      </section>
+      <div class="labels"><span>修复后</span><span>原图</span></div>
+      <p class="note">正式 `/world/` 已使用此版本。主屋对应博客，左厢对应造物录，石桌对应别苑杂务，后园对应语义花园，右厢对应居士自序，信箱对应友链，右下房间对应会客间，正门对应首页。</p>
+    </main>
+    <script>
+      const before = document.querySelector("#before");
+      const after = document.querySelector("#after");
+      const wrap = document.querySelector("#after-wrap");
+      const reveal = document.querySelector("#reveal");
+
+      reveal.addEventListener("input", () => {
+        wrap.style.width = `${reveal.value}%`;
+      });
+
+      document.querySelectorAll("[data-theme]").forEach((button) => {
+        button.addEventListener("click", () => {
+          const theme = button.dataset.theme;
+          document.documentElement.dataset.theme = theme;
+          before.src = `estate-${theme}.png`;
+          after.src = `estate-${theme}-walled-v1-refined-tall.png`;
+          document.querySelectorAll("[data-theme]").forEach((item) => {
+            item.setAttribute("aria-pressed", String(item === button));
+          });
+        });
+      });
+    </script>
+  </body>
+</html>

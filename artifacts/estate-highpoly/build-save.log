@@ -1,0 +1,15 @@
+GARDEN [0.2s] Materials and mesh generators ready
+GARDEN [0.3s] Ground, pond, paving and boundary walls built
+GARDEN [0.6s] Eight destination structures and interiors built
+GARDEN [0.6s] Segmented masonry arch bridge complete
+GARDEN [1.8s] Hero willow: branching trunk, hanging twigs and individual folded leaves
+GARDEN [3.0s] Garden beds, rockery, bamboo and perimeter planting complete
+GARDEN [3.0s] Four waterbirds and lotus geometry complete
+Blender 4.5.3 LTS (hash 67807e1800cc built 2025-09-09 01:33:33)
+Warning: Path 'C:/Windows/Fonts/simkai.ttf' cannot be made relative for Font 'KaiTi Regular'
+Info: Packed 1 file(s)
+Info: Saved as "hanliu-garden-highpoly.blend"
+GARDEN [3.4s] Saved editable model: {"vertices": 1905897, "polygons": 1264225, "triangles": 2545651, "mesh_objects": 185, "materials": 37}
+GARDEN [3.4s] Complete
+
+Blender quit

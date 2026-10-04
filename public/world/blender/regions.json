@@ -1,0 +1,99 @@
+{
+  "regions": [
+    {
+      "id": "home",
+      "label": "主庭院",
+      "subtitle": "寒柳别苑",
+      "href": "/",
+      "anchor": [
+        0,
+        -6.1,
+        2.1
+      ],
+      "poster": {
+        "x": 48.508,
+        "y": 64.374
+      }
+    },
+    {
+      "id": "making",
+      "label": "机杼工坊",
+      "subtitle": "项目与工具",
+      "href": "/chores/making/",
+      "anchor": [
+        -5.8,
+        -0.5,
+        3
+      ],
+      "poster": {
+        "x": 27.177,
+        "y": 40.545
+      }
+    },
+    {
+      "id": "lab",
+      "label": "尺蠖实验室",
+      "subtitle": "算法与智能系统",
+      "href": "/blog/category/尺蠖/",
+      "anchor": [
+        5.7,
+        0.5,
+        3.4
+      ],
+      "poster": {
+        "x": 72.432,
+        "y": 38.002
+      }
+    },
+    {
+      "id": "library",
+      "label": "留丝书斋",
+      "subtitle": "博客与阅读",
+      "href": "/blog/",
+      "anchor": [
+        0,
+        4.6,
+        3.8
+      ],
+      "poster": {
+        "x": 51.125,
+        "y": 21.274
+      }
+    },
+    {
+      "id": "garden",
+      "label": "语义花园",
+      "subtitle": "探索内容联系",
+      "href": "/chores/garden/",
+      "anchor": [
+        -4.4,
+        5.8,
+        1.2
+      ],
+      "poster": {
+        "x": 34.198,
+        "y": 26.582
+      }
+    },
+    {
+      "id": "backyard",
+      "label": "会客间",
+      "subtitle": "留言与交流",
+      "href": "/backyard/",
+      "anchor": [
+        5,
+        -3.4,
+        2.5
+      ],
+      "poster": {
+        "x": 68.738,
+        "y": 54.675
+      }
+    }
+  ],
+  "metrics": {
+    "objects": 46,
+    "triangles": 28572,
+    "glbBytes": 1903912
+  }
+}

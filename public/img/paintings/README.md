@@ -33,6 +33,15 @@
 - 来源：[Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Thomas_Eakins_-_The_Chess_Players.jpg)；[The Met](https://www.metmuseum.org/art/collection/search/10813)
 - 许可：Public Domain（以来源页面当前标注为准）
 
+## Édouard Manet — A Bar at the Folies-Bergère
+
+- 文件：`manet-a-bar-at-the-folies-bergere.jpg`
+- 作者：Édouard Manet（爱德华·马奈）
+- 年代：1881–1882
+- 收藏：考陶尔德艺术学院（The Courtauld Institute of Art）
+- 来源：[Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Edouard_Manet,_A_Bar_at_the_Folies-Berg%C3%A8re.jpg)
+- 许可：Public Domain Mark（以来源页面当前标注为准）
+
 ## Caravaggio — The Cardsharps
 
 - 文件：caravaggio-cardsharps.jpg

@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="zh-CN" data-mode="day">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>寒柳别苑 · 像素庭院</title>
+  <style>
+    *{box-sizing:border-box}body{margin:0;background:#e8e8da;color:#263c34;font-family:system-ui,sans-serif;transition:background .25s,color .25s}
+    html[data-mode=night] body{background:#101f23;color:#d8dfce}
+    header{max-width:1360px;margin:auto;padding:30px 32px 0;display:flex;justify-content:space-between;align-items:center;gap:20px}
+    h1{font:500 clamp(24px,3vw,38px)/1.3 Georgia,'Songti SC',serif;margin:6px 0}p{line-height:1.7}small{font-size:11px;letter-spacing:.22em;opacity:.65}
+    a{color:inherit;text-underline-offset:4px}button{font:inherit;color:inherit;cursor:pointer;border:1px solid #748c7c66;background:transparent;border-radius:30px;padding:10px 18px}
+    button[aria-pressed=true]{background:#294c40;color:#f4ebcf}button:focus-visible,a:focus-visible{outline:3px solid #bf8d38;outline-offset:4px}
+    .controls{display:flex;gap:8px;flex-wrap:wrap}.layout{max-width:1360px;margin:auto;display:grid;grid-template-columns:minmax(0,1fr) 250px;gap:24px;align-items:center;padding:0 32px 30px}
+    .scene{position:relative;aspect-ratio:4/3;min-width:0}.scene img{width:100%;height:100%;display:block;object-fit:contain}
+    .night{display:none!important}html[data-mode=night] .day{display:none}html[data-mode=night] .night{display:block!important}
+    .pin{position:absolute;transform:translate(-50%,-100%);padding:6px 10px;background:#f3efdfed;color:#243e33;border:1px solid #294c4055;border-radius:5px;font-size:12px;white-space:nowrap;text-decoration:none;box-shadow:0 3px 12px #0001}
+    .pin:after{content:'';position:absolute;left:50%;top:100%;height:12px;border-left:1px solid #a78645}.pin:hover{background:#f1cf88}
+    aside{padding:24px 0}aside p{font-size:13px;opacity:.75}nav{display:grid;gap:0;margin:20px 0}nav a{padding:14px 0;border-bottom:1px solid #71877640;text-decoration:none;display:flex;justify-content:space-between;gap:10px;font-size:14px}nav a span{font-size:11px;opacity:.65}nav a:hover{color:#af7621}
+    footer{font-size:12px;line-height:1.8;max-width:1360px;margin:auto;padding:0 32px 30px;opacity:.7}
+    @media(max-width:800px){header{padding:22px 18px 0;align-items:start;flex-direction:column}.layout{display:block;padding:10px 12px}.pin{font-size:10px;padding:4px 5px}aside{padding:10px 12px}nav{grid-template-columns:1fr 1fr;column-gap:24px}footer{padding:0 24px 24px}}
+    body{background:#e4dfcc;color:#344032}
+    html[data-mode=night] body{background:#111d1d;color:#d4d6bc}
+    header{max-width:1440px;padding-top:24px}
+    button{border-radius:4px;min-height:44px;padding:8px 14px;font-size:13px}
+    .layout{display:block;max-width:1440px;padding-top:18px}
+    .viewport{overflow:auto;border:1px solid #8c947d55;background:#d0d0b7;scrollbar-color:#77866a #d0d0b7}
+    html[data-mode=night] .viewport{background:#142625;border-color:#4a605355}
+    .scene{width:min(100%,1280px);margin:auto;isolation:isolate}
+    .scene img{image-rendering:pixelated;background:none}
+    .scene[data-version=previous] img{image-rendering:auto}
+    .scene[data-zoom="1"]{width:640px;max-width:none}
+    .scene[data-zoom="2"]{width:1280px;max-width:none}
+    .pin{border-radius:2px;background:#ede5cbf2;font-family:'Songti SC',serif;padding:8px 10px;min-height:32px}
+    html[data-mode=night] .pin{background:#253b32ef;color:#f0ddb1;border-color:#8d8867}
+    .pin:hover,.pin:focus-visible{background:#dbbc75;color:#23382e}
+    aside{display:grid;grid-template-columns:260px 1fr;gap:32px;padding:24px 0}
+    aside p{margin:8px 0}nav{grid-template-columns:repeat(3,minmax(0,1fr));gap:0 24px;margin:0}
+    nav a{min-height:48px;align-items:center}footer{max-width:1440px}
+    .notes{font-size:12px;margin:10px 0 0;opacity:.75;line-height:1.7}
+    #effects{pointer-events:none;position:absolute;inset:0;overflow:hidden}
+    .effect{position:absolute;transform:translate(-50%,-50%);animation:glimmer 3.7s ease-in-out infinite alternate;animation-delay:var(--delay)}
+    .lantern{width:1.3%;aspect-ratio:1;background:#ffd07a;filter:blur(4px);opacity:0;mix-blend-mode:screen}
+    .ripple{width:1.2%;height:.35%;border-top:1px solid #b7c99b;border-bottom:1px solid #b7c99b;opacity:.22;animation-name:water}
+    html[data-mode=night] .lantern{opacity:.35}
+    .scene[data-version=previous] #effects{display:none}
+    @keyframes glimmer{from{filter:blur(4px);transform:translate(-50%,-50%) scale(.85)}to{filter:blur(6px);transform:translate(-50%,-50%) scale(1.12)}}
+    @keyframes water{from{opacity:.10;transform:translate(-50%,-50%) scaleX(.55)}to{opacity:.30;transform:translate(-50%,-50%) scaleX(1.25)}}
+    #effects[hidden]{display:none}
+    @media(max-width:800px){header{padding:20px 16px 0;gap:14px}.layout{padding:16px 12px}aside{display:block;padding:16px 4px}nav{grid-template-columns:repeat(2,minmax(0,1fr));margin-top:16px}.controls{gap:6px}button{padding:8px 10px}.pin{font-size:10px;padding:5px;min-height:28px}}
+    @media(prefers-reduced-motion:reduce){body{transition:none}.effect{animation:none}}
+  </style>
+</head>
+<body>
+  <header><div><small>HANLIU BIYUAN / PIXEL STUDY 03</small><h1>寒柳别苑 · 像素庭院</h1></div><div class="controls" aria-label="画面控制"><button data-theme="day" aria-pressed="true">日间</button><button data-theme="night" aria-pressed="false">夜间</button><button id="labels" aria-pressed="true">地标</button><button id="motion" aria-pressed="true">动效</button><button id="compare" aria-pressed="false">对照第二版</button><button id="zoom">放大看细节</button></div></header>
+  <main class="layout">
+    <div class="viewport" tabindex="0" aria-label="庭院画面，放大后可以横向滚动">
+    <div class="scene" data-version="pixel" aria-label="固定视角的像素庭院">
+      <img class="day" src="estate-pixel-day.png?v=3" alt="日间像素庭院：深灰叠瓦、错缝石板、垂柳、竹林和完整的院落建筑" width="640" height="480">
+      <img class="night" src="estate-pixel-night.png?v=3" alt="夜间像素庭院，格窗透出暖光，灯笼照亮石板小路" width="640" height="480" loading="lazy">
+      <div id="effects" aria-hidden="true"></div>
+      <div id="pins"></div>
+    </div>
+    </div>
+    <p class="notes" id="view-status" role="status">第三版 · 叠瓦、石板、垂柳与竹林。点击地标进入对应页面。</p>
+    <aside><div><small>庭院导览</small><p>穿过门楼，沿石板路到书斋。工坊与实验室在两侧，后院有池塘与垂柳。</p><p>墙体完整，书斋与工坊的门扇半开。</p></div>
+      <nav aria-label="别苑入口">
+        <a href="/">主庭院 <span>首页 ↗</span></a>
+        <a href="/chores/making/">机杼工坊 <span>项目与工具 ↗</span></a>
+        <a href="/blog/category/尺蠖/">尺蠖实验室 <span>学习记录 ↗</span></a>
+        <a href="/blog/">留丝书斋 <span>博客与阅读 ↗</span></a>
+        <a href="/chores/garden/">语义花园 <span>内容联系 ↗</span></a>
+        <a href="/backyard/">会客间 <span>留言 ↗</span></a>
+      </nav>
+    </aside>
+  </main>
+  <footer><a href="/world/">返回原地图</a> · <a href="estate-pixel.glb" download>下载新版模型</a> · 当前为固定视角渲染，门窗尚未添加开关动画。</footer>
+  <script>
+    document.querySelectorAll('[data-theme]').forEach(button=>button.addEventListener('click',()=>{
+      document.documentElement.dataset.mode=button.dataset.theme;
+      document.querySelectorAll('[data-theme]').forEach(b=>b.setAttribute('aria-pressed',String(b===button)));
+    }));
+    document.querySelector('#labels').addEventListener('click',event=>{
+      const button=event.currentTarget;const show=button.getAttribute('aria-pressed')!=='true';
+      button.setAttribute('aria-pressed',String(show));document.querySelector('#pins').hidden=!show;
+    });
+    const scene=document.querySelector('.scene');
+    const status=document.querySelector('#view-status');
+    const motion=document.querySelector('#motion');
+    const effects=document.querySelector('#effects');
+    const reduced=matchMedia('(prefers-reduced-motion: reduce)');
+    const setMotion=enabled=>{motion.setAttribute('aria-pressed',String(enabled));effects.hidden=!enabled};
+    setMotion(!reduced.matches);
+    reduced.addEventListener('change',event=>setMotion(!event.matches));
+    motion.addEventListener('click',()=>setMotion(motion.getAttribute('aria-pressed')!=='true'));
+    document.querySelector('#compare').addEventListener('click',event=>{
+      const button=event.currentTarget;const previous=button.getAttribute('aria-pressed')!=='true';
+      button.setAttribute('aria-pressed',String(previous));scene.dataset.version=previous?'previous':'pixel';
+      ['day','night'].forEach(theme=>{document.querySelector('.'+theme).src=(previous?'estate-':'estate-pixel-')+theme+'.png?v=3'});
+      status.textContent=previous?'第二版 · 原始低模，对照相同机位。':'第三版 · 叠瓦、石板、垂柳与竹林。点击地标进入对应页面。';
+    });
+    document.querySelector('#zoom').addEventListener('click',event=>{
+      const zoom=scene.dataset.zoom==='2';scene.dataset.zoom=zoom?'fit':'2';
+      event.currentTarget.textContent=zoom?'放大看细节':'适应窗口';
+      if(!zoom)document.querySelector('.viewport').scrollLeft=(1280-document.querySelector('.viewport').clientWidth)/2;
+    });
+    fetch('regions-pixel.json?v=3').then(response=>{if(!response.ok)throw Error('No region data');return response.json()}).then(({regions,effects:ambient=[]})=>{
+      const pins=document.querySelector('#pins');
+      regions.forEach(region=>{const a=document.createElement('a');a.className='pin';a.href=region.href;a.textContent=region.label;
+        a.style.left=region.poster.x+'%';a.style.top=region.poster.y+'%';pins.append(a)});
+      ambient.forEach((point,index)=>{const el=document.createElement('span');el.className='effect '+point.kind;el.style.left=point.x+'%';el.style.top=point.y+'%';el.style.setProperty('--delay',(-index*.41)+'s');effects.append(el)});
+    }).catch(()=>{});
+  </script>
+</body>
+</html>

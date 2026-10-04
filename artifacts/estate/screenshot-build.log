@@ -1,0 +1,746 @@
+
+> hanliu-biyuan@1.0.0 build D:\Projects\博客和机器人\my-astro-blog
+> astro build && pagefind --site dist
+
+15:24:07 [content] Syncing content
+15:24:07 [content] Synced content
+15:24:07 [types] Generated 292ms
+15:24:07 [build] output: "static"
+15:24:07 [build] mode: "static"
+15:24:07 [build] directory: D:\Projects\博客和机器人\my-astro-blog\dist\
+15:24:07 [build] Collecting build info...
+15:24:07 [build] ✓ Completed in 440ms.
+15:24:07 [build] Building static entrypoints...
+Browserslist: browsers data (caniuse-lite) is 9 months old. Please run:
+  npx update-browserslist-db@latest
+  Why you should do it regularly: https://github.com/browserslist/update-db#readme
+15:24:14 [vite] ✓ built in 7.68s
+15:24:14 [build] ✓ Completed in 7.70s.
+
+ building client (vite) 
+15:24:14 [vite] transforming...
+15:24:15 [vite] ✓ 99 modules transformed.
+15:24:15 [vite] rendering chunks...
+15:24:15 [vite] computing gzip size...
+15:24:15 [vite] dist/_astro/ec.p1z7b.js                                                             2.48 kB
+15:24:15 [vite] dist/_astro/ec.oj3b7.css                                                           16.11 kB │ gzip:  3.90 kB
+15:24:15 [vite] dist/_astro/PointerOnNavigation.astro_astro_type_script_index_0_lang.CJhFi-Ce.js    0.29 kB │ gzip:  0.17 kB
+15:24:15 [vite] dist/_astro/jsx-runtime.D_zvdyIk.js                                                 0.73 kB │ gzip:  0.46 kB
+15:24:15 [vite] dist/_astro/SiteInfo.astro_astro_type_script_index_0_lang.BtUupD4E.js               1.20 kB │ gzip:  0.47 kB
+15:24:15 [vite] dist/_astro/search.astro_astro_type_script_index_0_lang.B-QFzr-m.js                 2.23 kB │ gzip:  1.13 kB
+15:24:15 [vite] dist/_astro/FastApiPlayground.DvMuMXRU.js                                           2.84 kB │ gzip:  1.18 kB
+15:24:15 [vite] dist/_astro/ClientRouter.astro_astro_type_script_index_0_lang.BB69ZWHN.js           3.89 kB │ gzip:  1.68 kB
+15:24:15 [vite] dist/_astro/GitHubStats.astro_astro_type_script_index_0_lang.vvWVWtNk.js            5.82 kB │ gzip:  2.00 kB
+15:24:15 [vite] dist/_astro/index.DiEladB3.js                                                       7.85 kB │ gzip:  3.05 kB
+15:24:15 [vite] dist/_astro/router.JMbDdm5f.js                                                     11.50 kB │ gzip:  4.02 kB
+15:24:15 [vite] dist/_astro/DossierArchive.BPub7VfH.js                                             16.21 kB │ gzip:  5.31 kB
+15:24:15 [vite] dist/_astro/ui-core.CRLEpKYS.js                                                    72.93 kB │ gzip: 22.86 kB
+15:24:15 [vite] dist/_astro/client.C5Auakxu.js                                                    186.79 kB │ gzip: 58.63 kB
+15:24:15 [vite] dist/_astro/index.Dsb38-Dp.js                                                     191.33 kB │ gzip: 50.70 kB
+15:24:15 [vite] ✓ built in 897ms
+
+ generating static routes 
+15:24:16 ▶ src/pages/404.astro
+15:24:16   └─ /404.html (+25ms) 
+15:24:16 ▶ src/pages/about/index.astro
+15:24:16   └─ /about/index.html (+8ms) 
+15:24:16 ▶ src/pages/backyard/index.astro
+15:24:16   └─ /backyard/index.html (+6ms) 
+15:24:16 ▶ src/pages/blog/[...page].astro
+15:24:16   ├─ /blog/index.html (+10ms) 
+15:24:16   ├─ /blog/2/index.html (+10ms) 
+15:24:16   ├─ /blog/3/index.html (+7ms) 
+15:24:16   ├─ /blog/4/index.html (+6ms) 
+15:24:16   ├─ /blog/5/index.html (+6ms) 
+15:24:16   └─ /blog/6/index.html (+8ms) 
+15:24:16 ▶ src/pages/blog/[...slug].astro
+15:24:16   ├─ /blog/2026上半年-代码与项目回顾/index.html (+10ms) 
+15:24:16   ├─ /blog/dog-littletools工具集/index.html (+10ms) 
+15:24:16   ├─ /blog/cpp-memory-ownership-raii/index.html (+32ms) 
+15:24:16   ├─ /blog/fastapi-basics/index.html (+40ms) 
+15:24:16   ├─ /blog/2025-大雪/index.html (+9ms) 
+15:24:16   ├─ /blog/ghost-in-shell/index.html (+8ms) 
+15:24:16   ├─ /blog/dog-skills-48-claude-code技能库/index.html (+20ms) 
+15:24:16   ├─ /blog/dog-skills续篇/index.html (+14ms) 
+15:24:16   ├─ /blog/miniarena自走棋/index.html (+11ms) 
+15:24:16   ├─ /blog/nane校园互助/index.html (+13ms) 
+15:24:16   ├─ /blog/nannahelper教程文档/index.html (+7ms) 
+15:24:16   ├─ /blog/smartagent/index.html (+7ms) 
+15:24:16   ├─ /blog/七王国的骑士-第一季/index.html (+9ms) 
+15:24:16   ├─ /blog/we-are-the-world/index.html (+7ms) 
+15:24:16   ├─ /blog/互动网页-夜空为你闪烁/index.html (+6ms) 
+15:24:16   ├─ /blog/五子棋搜索实验/index.html (+12ms) 
+15:24:16   ├─ /blog/兰波-七岁智者/index.html (+6ms) 
+15:24:16   ├─ /blog/兰波-告别/index.html (+7ms) 
+15:24:16   ├─ /blog/兰波-地狱之夜/index.html (+5ms) 
+15:24:16   ├─ /blog/兰波-奥菲利娅/index.html (+4ms) 
+15:24:16   ├─ /blog/兰波-山谷睡者/index.html (+7ms) 
+15:24:16   ├─ /blog/兰波-巴黎狂欢节/index.html (+5ms) 
+15:24:16   ├─ /blog/兰波-我的饥饿/index.html (+5ms) 
+15:24:16   ├─ /blog/兰波-我的流浪/index.html (+7ms) 
+15:24:16   ├─ /blog/兰波-感觉/index.html (+5ms) 
+15:24:16   ├─ /blog/兰波-母狼/index.html (+4ms) 
+15:24:16   ├─ /blog/兰波-永恒/index.html (+7ms) 
+15:24:16   ├─ /blog/兰波-第一次夜晚/index.html (+5ms) 
+15:24:16   ├─ /blog/兰波-被囚禁者/index.html (+4ms) 
+15:24:16   ├─ /blog/兰波-致一位理性的人/index.html (+7ms) 
+15:24:16   ├─ /blog/兰波-邪恶/index.html (+5ms) 
+15:24:16   ├─ /blog/兰波-醉舟/index.html (+5ms) 
+15:24:16   ├─ /blog/兰波-黎明/index.html (+7ms) 
+15:24:16   ├─ /blog/大庚剑阵/index.html (+6ms) 
+15:24:16   ├─ /blog/在概率的雾里行走-贝叶斯与mcmc学习记录/index.html (+34ms) 
+15:24:16   ├─ /blog/如何在数字时代活成一棵树/index.html (+6ms) 
+15:24:16   ├─ /blog/当奇迹遇到奇迹/index.html (+5ms) 
+15:24:16   ├─ /blog/我的2025/index.html (+7ms) 
+15:24:16   ├─ /blog/淮海战役h5互动地图/index.html (+9ms) 
+15:24:16   ├─ /blog/海子-以梦为马/index.html (+5ms) 
+15:24:16   ├─ /blog/游记-济南/index.html (+8ms) 
+15:24:16   ├─ /blog/烟火文沃康城新章/index.html (+5ms) 
+15:24:16   ├─ /blog/绘出七彩的七天/index.html (+5ms) 
+15:24:16   ├─ /blog/鸳鸯/index.html (+7ms) 
+15:24:16   └─ /blog/dog-map个人路线地图/index.html (+7ms) 
+15:24:16 ▶ src/pages/blog/archives.astro
+15:24:16   └─ /blog/archives/index.html (+5ms) 
+15:24:16 ▶ src/pages/blog/categories.astro
+15:24:16   └─ /blog/categories/index.html (+8ms) 
+15:24:16 ▶ src/pages/blog/category/[category]/[...page].astro
+15:24:16   ├─ /blog/category/机杼/index.html (+6ms) 
+15:24:16   ├─ /blog/category/机杼/2/index.html (+4ms) 
+15:24:16   ├─ /blog/category/尺蠖/index.html (+6ms) 
+15:24:16   ├─ /blog/category/似水/index.html (+4ms) 
+15:24:16   ├─ /blog/category/罔两/index.html (+4ms) 
+15:24:16   ├─ /blog/category/留丝/index.html (+5ms) 
+15:24:16   ├─ /blog/category/留丝/2/index.html (+7ms) 
+15:24:16   ├─ /blog/category/留丝/3/index.html (+4ms) 
+15:24:16   ├─ /blog/category/渊映/index.html (+3ms) 
+15:24:16   └─ /blog/category/旅蚁/index.html (+3ms) 
+15:24:16 ▶ src/pages/blog/search.astro
+15:24:16   └─ /blog/search/index.html (+5ms) 
+15:24:16 ▶ src/pages/blog/tag/[tag]/[...page].astro
+15:24:16   ├─ /blog/tag/React/index.html (+5ms) 
+15:24:16   ├─ /blog/tag/TypeScript/index.html (+4ms) 
+15:24:16   ├─ /blog/tag/MapLibre GL/index.html (+5ms) 
+15:24:16   ├─ /blog/tag/地图/index.html (+4ms) 
+15:24:16   ├─ /blog/tag/个人项目/index.html (+3ms) 
+15:24:16   ├─ /blog/tag/3D地图/index.html (+3ms) 
+15:24:16   ├─ /blog/tag/Python/index.html (+5ms) 
+15:24:16   ├─ /blog/tag/人工智能/index.html (+4ms) 
+15:24:16   ├─ /blog/tag/对抗搜索/index.html (+4ms) 
+15:24:16   ├─ /blog/tag/Minimax/index.html (+3ms) 
+15:24:16   ├─ /blog/tag/Alpha-Beta/index.html (+4ms) 
+15:24:16   ├─ /blog/tag/MCTS/index.html (+6ms) 
+15:24:16   ├─ /blog/tag/FastAPI/index.html (+4ms) 
+15:24:16   ├─ /blog/tag/后端/index.html (+4ms) 
+15:24:16   ├─ /blog/tag/API/index.html (+3ms) 
+15:24:16   ├─ /blog/tag/编程学习/index.html (+5ms) 
+15:24:16   ├─ /blog/tag/贝叶斯推断/index.html (+4ms) 
+15:24:16   ├─ /blog/tag/MCMC/index.html (+3ms) 
+15:24:16   ├─ /blog/tag/PyMC/index.html (+3ms) 
+15:24:16   ├─ /blog/tag/数学建模/index.html (+4ms) 
+15:24:16   ├─ /blog/tag/概率编程/index.html (+6ms) 
+15:24:16   ├─ /blog/tag/Bash/index.html (+3ms) 
+15:24:16   ├─ /blog/tag/CLI/index.html (+3ms) 
+15:24:16   ├─ /blog/tag/工具/index.html (+3ms) 
+15:24:16   ├─ /blog/tag/自动化/index.html (+6ms) 
+15:24:16   ├─ /blog/tag/Claude Code/index.html (+4ms) 
+15:24:16   ├─ /blog/tag/AI/index.html (+3ms) 
+15:24:16   ├─ /blog/tag/Skill/index.html (+4ms) 
+15:24:16   ├─ /blog/tag/开源/index.html (+6ms) 
+15:24:16   ├─ /blog/tag/C++/index.html (+3ms) 
+15:24:16   ├─ /blog/tag/Qt6/index.html (+3ms) 
+15:24:16   ├─ /blog/tag/自走棋/index.html (+3ms) 
+15:24:16   ├─ /blog/tag/游戏/index.html (+5ms) 
+15:24:16   ├─ /blog/tag/算法/index.html (+3ms) 
+15:24:16   ├─ /blog/tag/JavaScript/index.html (+3ms) 
+15:24:16   ├─ /blog/tag/Node.js/index.html (+3ms) 
+15:24:16   ├─ /blog/tag/PostgreSQL/index.html (+6ms) 
+15:24:16   ├─ /blog/tag/PWA/index.html (+3ms) 
+15:24:16   ├─ /blog/tag/全栈/index.html (+3ms) 
+15:24:16   ├─ /blog/tag/校园/index.html (+3ms) 
+15:24:16   ├─ /blog/tag/教程/index.html (+3ms) 
+15:24:16   ├─ /blog/tag/MkDocs/index.html (+5ms) 
+15:24:16   ├─ /blog/tag/文档/index.html (+4ms) 
+15:24:16   ├─ /blog/tag/CI/CD/index.html (+3ms) 
+15:24:16   ├─ /blog/tag/H5/index.html (+3ms) 
+15:24:16   ├─ /blog/tag/历史/index.html (+6ms) 
+15:24:16   ├─ /blog/tag/互动网页/index.html (+4ms) 
+15:24:16   ├─ /blog/tag/社会实践/index.html (+3ms) 
+15:24:16   ├─ /blog/tag/志愿服务/index.html (+3ms) 
+15:24:16   ├─ /blog/tag/陪伴/index.html (+5ms) 
+15:24:16   ├─ /blog/tag/ASD/index.html (+3ms) 
+15:24:16   ├─ /blog/tag/南京大学/index.html (+3ms) 
+15:24:16   ├─ /blog/tag/效率工具/index.html (+3ms) 
+15:24:16   ├─ /blog/tag/项目回顾/index.html (+3ms) 
+15:24:16   ├─ /blog/tag/书评/index.html (+5ms) 
+15:24:16   ├─ /blog/tag/科幻/index.html (+4ms) 
+15:24:17   ├─ /blog/tag/《挽救计划》/index.html (+3ms) 
+15:24:17   ├─ /blog/tag/海子/index.html (+3ms) 
+15:24:17   ├─ /blog/tag/诗歌/index.html (+6ms) 
+15:24:17   ├─ /blog/tag/诗歌/2/index.html (+4ms) 
+15:24:17   ├─ /blog/tag/诗歌/3/index.html (+3ms) 
+15:24:17   ├─ /blog/tag/影评/index.html (+4ms) 
+15:24:17   ├─ /blog/tag/小鞋子/index.html (+5ms) 
+15:24:17   ├─ /blog/tag/伊朗/index.html (+3ms) 
+15:24:17   ├─ /blog/tag/战争/index.html (+3ms) 
+15:24:17   ├─ /blog/tag/Godot/index.html (+3ms) 
+15:24:17   ├─ /blog/tag/路径规划/index.html (+3ms) 
+15:24:17   ├─ /blog/tag/回忆/index.html (+6ms) 
+15:24:17   ├─ /blog/tag/徐州一中/index.html (+3ms) 
+15:24:17   ├─ /blog/tag/内存管理/index.html (+3ms) 
+15:24:17   ├─ /blog/tag/社评/index.html (+3ms) 
+15:24:17   ├─ /blog/tag/社交媒体/index.html (+5ms) 
+15:24:17   ├─ /blog/tag/游记/index.html (+3ms) 
+15:24:17   ├─ /blog/tag/济南/index.html (+3ms) 
+15:24:17   ├─ /blog/tag/《冰与火之歌》/index.html (+3ms) 
+15:24:17   ├─ /blog/tag/《七王国的骑士》/index.html (+3ms) 
+15:24:17   ├─ /blog/tag/兰波/index.html (+6ms) 
+15:24:17   ├─ /blog/tag/兰波/2/index.html (+5ms) 
+15:24:17   ├─ /blog/tag/兰波/3/index.html (+3ms) 
+15:24:17   ├─ /blog/tag/凡人修仙传/index.html (+3ms) 
+15:24:17   ├─ /blog/tag/赛博朋克/index.html (+6ms) 
+15:24:17   └─ /blog/tag/年度总结/index.html (+3ms) 
+15:24:17 ▶ src/pages/blog/tags.astro
+15:24:17   └─ /blog/tags/index.html (+6ms) 
+15:24:17 ▶ src/pages/chores/changelog.astro
+15:24:17   └─ /chores/changelog/index.html (+1.36s) 
+15:24:18 ▶ src/pages/chores/garden/index.astro
+15:24:18   └─ /chores/garden/index.html (+2ms) 
+15:24:18 ▶ src/pages/chores/heatmap.astro
+15:24:18   └─ /chores/heatmap/index.html (+5ms) 
+15:24:18 ▶ src/pages/chores/index.astro
+15:24:18   └─ /chores/index.html (+4ms) 
+15:24:18 ▶ src/pages/chores/making/index.astro
+15:24:18   └─ /chores/making/index.html (+8ms) 
+15:24:18 ▶ src/pages/friend/index.astro
+15:24:18   └─ /friend/index.html (+4ms) 
+15:24:18 ▶ src/pages/garden/index.astro
+15:24:18   └─ /garden/index.html (+4ms) 
+15:24:18 ▶ src/pages/humanities-archive/index.astro
+15:24:18   └─ /humanities-archive/index.html (+2ms) 
+15:24:18 ▶ src/pages/index.astro
+15:24:18   └─ /index.html (+5ms) 
+15:24:18 λ src/pages/og/[...slug].png.ts
+15:24:18   ├─ /og/2026上半年-代码与项目回顾.png (+9ms) 
+15:24:18   ├─ /og/dog-littletools工具集.png (+7ms) 
+[og] font fetch failed DOMException [AbortError]: This operation was aborted
+    at node:internal/deps/undici/undici:13510:13
+    at runNextTicks (node:internal/process/task_queues:60:5)
+    at listOnTimeout (node:internal/timers:545:9)
+    at process.processTimers (node:internal/timers:519:7)
+    at async fetchWithTimeout (file:///D:/Projects/%E5%8D%9A%E5%AE%A2%E5%92%8C%E6%9C%BA%E5%99%A8%E4%BA%BA/my-astro-blog/dist/pages/og/_---slug_.png.astro.mjs?time=1789716258523:35:12)
+    at async Promise.all (index 0)
+    at async file:///D:/Projects/%E5%8D%9A%E5%AE%A2%E5%92%8C%E6%9C%BA%E5%99%A8%E4%BA%BA/my-astro-blog/dist/pages/og/_---slug_.png.astro.mjs?time=1789716258523:296:30
+    at async fetchNotoSansSCFonts (file:///D:/Projects/%E5%8D%9A%E5%AE%A2%E5%92%8C%E6%9C%BA%E5%99%A8%E4%BA%BA/my-astro-blog/dist/pages/og/_---slug_.png.astro.mjs?time=1789716258523:319:10)
+    at async Promise.all (index 0)
+    at async Module.GET (file:///D:/Projects/%E5%8D%9A%E5%AE%A2%E5%92%8C%E6%9C%BA%E5%99%A8%E4%BA%BA/my-astro-blog/dist/pages/og/_---slug_.png.astro.mjs?time=1789716258523:337:70)
+[og] image generation failed {
+  slug: 'cpp-memory-ownership-raii',
+  err: Error: No fonts are loaded. At least one font is required to calculate the layout.
+      at jt.getEngine (file:///D:/Projects/%E5%8D%9A%E5%AE%A2%E5%92%8C%E6%9C%BA%E5%99%A8%E4%BA%BA/my-astro-blog/node_modules/.pnpm/satori@0.18.3/node_modules/satori/dist/index.js:7:45203)
+      at Ii (file:///D:/Projects/%E5%8D%9A%E5%AE%A2%E5%92%8C%E6%9C%BA%E5%99%A8%E4%BA%BA/my-astro-blog/node_modules/.pnpm/satori@0.18.3/node_modules/satori/dist/index.js:7:14934)
+      at runNextTicks (node:internal/process/task_queues:60:5)
+      at listOnTimeout (node:internal/timers:545:9)
+      at process.processTimers (node:internal/timers:519:7)
+      at async zt (file:///D:/Projects/%E5%8D%9A%E5%AE%A2%E5%92%8C%E6%9C%BA%E5%99%A8%E4%BA%BA/my-astro-blog/node_modules/.pnpm/satori@0.18.3/node_modules/satori/dist/index.js:7:41269)
+      at async zt (file:///D:/Projects/%E5%8D%9A%E5%AE%A2%E5%92%8C%E6%9C%BA%E5%99%A8%E4%BA%BA/my-astro-blog/node_modules/.pnpm/satori@0.18.3/node_modules/satori/dist/index.js:7:42566)
+      at async zt (file:///D:/Projects/%E5%8D%9A%E5%AE%A2%E5%92%8C%E6%9C%BA%E5%99%A8%E4%BA%BA/my-astro-blog/node_modules/.pnpm/satori@0.18.3/node_modules/satori/dist/index.js:7:42566)
+      at async zt (file:///D:/Projects/%E5%8D%9A%E5%AE%A2%E5%92%8C%E6%9C%BA%E5%99%A8%E4%BA%BA/my-astro-blog/node_modules/.pnpm/satori@0.18.3/node_modules/satori/dist/index.js:7:42566)
+      at async eI (file:///D:/Projects/%E5%8D%9A%E5%AE%A2%E5%92%8C%E6%9C%BA%E5%99%A8%E4%BA%BA/my-astro-blog/node_modules/.pnpm/satori@0.18.3/node_modules/satori/dist/index.js:8:28883)
+}
+15:24:18   ├─ /og/cpp-memory-ownership-raii.png (+5.25s) 
+[og] image generation failed {
+  slug: 'fastapi-basics',
+  err: Error: No fonts are loaded. At least one font is required to calculate the layout.
+      at jt.getEngine (file:///D:/Projects/%E5%8D%9A%E5%AE%A2%E5%92%8C%E6%9C%BA%E5%99%A8%E4%BA%BA/my-astro-blog/node_modules/.pnpm/satori@0.18.3/node_modules/satori/dist/index.js:7:45203)
+      at Ii (file:///D:/Projects/%E5%8D%9A%E5%AE%A2%E5%92%8C%E6%9C%BA%E5%99%A8%E4%BA%BA/my-astro-blog/node_modules/.pnpm/satori@0.18.3/node_modules/satori/dist/index.js:7:14934)
+      at async zt (file:///D:/Projects/%E5%8D%9A%E5%AE%A2%E5%92%8C%E6%9C%BA%E5%99%A8%E4%BA%BA/my-astro-blog/node_modules/.pnpm/satori@0.18.3/node_modules/satori/dist/index.js:7:41269)
+      at async zt (file:///D:/Projects/%E5%8D%9A%E5%AE%A2%E5%92%8C%E6%9C%BA%E5%99%A8%E4%BA%BA/my-astro-blog/node_modules/.pnpm/satori@0.18.3/node_modules/satori/dist/index.js:7:42566)
+      at async zt (file:///D:/Projects/%E5%8D%9A%E5%AE%A2%E5%92%8C%E6%9C%BA%E5%99%A8%E4%BA%BA/my-astro-blog/node_modules/.pnpm/satori@0.18.3/node_modules/satori/dist/index.js:7:42566)
+      at async zt (file:///D:/Projects/%E5%8D%9A%E5%AE%A2%E5%92%8C%E6%9C%BA%E5%99%A8%E4%BA%BA/my-astro-blog/node_modules/.pnpm/satori@0.18.3/node_modules/satori/dist/index.js:7:42566)
+      at async eI (file:///D:/Projects/%E5%8D%9A%E5%AE%A2%E5%92%8C%E6%9C%BA%E5%99%A8%E4%BA%BA/my-astro-blog/node_modules/.pnpm/satori@0.18.3/node_modules/satori/dist/index.js:8:28883)
+      at async generateOgPng (file:///D:/Projects/%E5%8D%9A%E5%AE%A2%E5%92%8C%E6%9C%BA%E5%99%A8%E4%BA%BA/my-astro-blog/dist/pages/og/_---slug_.png.astro.mjs?time=1789716258523:251:15)
+      at async Module.GET (file:///D:/Projects/%E5%8D%9A%E5%AE%A2%E5%92%8C%E6%9C%BA%E5%99%A8%E4%BA%BA/my-astro-blog/dist/pages/og/_---slug_.png.astro.mjs?time=1789716258523:340:17)
+      at async renderEndpoint (file:///D:/Projects/%E5%8D%9A%E5%AE%A2%E5%92%8C%E6%9C%BA%E5%99%A8%E4%BA%BA/my-astro-blog/node_modules/.pnpm/astro@5.16.4_@types+node@24.10.1_jiti@1.21.7_lightningcss@1.29.3_rollup@4.62.2_sass-embedded@_r65thrmtdtbysovjyck5dolagu/node_modules/astro/dist/runtime/server/endpoint.js:37:18)
+}
+15:24:23   ├─ /og/fastapi-basics.png (+9ms) 
+15:24:23   ├─ /og/2025-大雪.png (+7ms) 
+[og] image generation failed {
+  slug: 'ghost-in-shell',
+  err: Error: No fonts are loaded. At least one font is required to calculate the layout.
+      at jt.getEngine (file:///D:/Projects/%E5%8D%9A%E5%AE%A2%E5%92%8C%E6%9C%BA%E5%99%A8%E4%BA%BA/my-astro-blog/node_modules/.pnpm/satori@0.18.3/node_modules/satori/dist/index.js:7:45203)
+      at Ii (file:///D:/Projects/%E5%8D%9A%E5%AE%A2%E5%92%8C%E6%9C%BA%E5%99%A8%E4%BA%BA/my-astro-blog/node_modules/.pnpm/satori@0.18.3/node_modules/satori/dist/index.js:7:14934)
+      at async zt (file:///D:/Projects/%E5%8D%9A%E5%AE%A2%E5%92%8C%E6%9C%BA%E5%99%A8%E4%BA%BA/my-astro-blog/node_modules/.pnpm/satori@0.18.3/node_modules/satori/dist/index.js:7:41269)
+      at async zt (file:///D:/Projects/%E5%8D%9A%E5%AE%A2%E5%92%8C%E6%9C%BA%E5%99%A8%E4%BA%BA/my-astro-blog/node_modules/.pnpm/satori@0.18.3/node_modules/satori/dist/index.js:7:42566)
+      at async zt (file:///D:/Projects/%E5%8D%9A%E5%AE%A2%E5%92%8C%E6%9C%BA%E5%99%A8%E4%BA%BA/my-astro-blog/node_modules/.pnpm/satori@0.18.3/node_modules/satori/dist/index.js:7:42566)
+      at async zt (file:///D:/Projects/%E5%8D%9A%E5%AE%A2%E5%92%8C%E6%9C%BA%E5%99%A8%E4%BA%BA/my-astro-blog/node_modules/.pnpm/satori@0.18.3/node_modules/satori/dist/index.js:7:42566)
+      at async eI (file:///D:/Projects/%E5%8D%9A%E5%AE%A2%E5%92%8C%E6%9C%BA%E5%99%A8%E4%BA%BA/my-astro-blog/node_modules/.pnpm/satori@0.18.3/node_modules/satori/dist/index.js:8:28883)
+      at async generateOgPng (file:///D:/Projects/%E5%8D%9A%E5%AE%A2%E5%92%8C%E6%9C%BA%E5%99%A8%E4%BA%BA/my-astro-blog/dist/pages/og/_---slug_.png.astro.mjs?time=1789716258523:251:15)
+      at async Module.GET (file:///D:/Projects/%E5%8D%9A%E5%AE%A2%E5%92%8C%E6%9C%BA%E5%99%A8%E4%BA%BA/my-astro-blog/dist/pages/og/_---slug_.png.astro.mjs?time=1789716258523:340:17)
+      at async renderEndpoint (file:///D:/Projects/%E5%8D%9A%E5%AE%A2%E5%92%8C%E6%9C%BA%E5%99%A8%E4%BA%BA/my-astro-blog/node_modules/.pnpm/astro@5.16.4_@types+node@24.10.1_jiti@1.21.7_lightningcss@1.29.3_rollup@4.62.2_sass-embedded@_r65thrmtdtbysovjyck5dolagu/node_modules/astro/dist/runtime/server/endpoint.js:37:18)
+}
+15:24:23   ├─ /og/ghost-in-shell.png (+9ms) 
+15:24:23   ├─ /og/dog-skills-48-claude-code技能库.png (+6ms) 
+15:24:23   ├─ /og/dog-skills续篇.png (+5ms) 
+15:24:23   ├─ /og/miniarena自走棋.png (+7ms) 
+15:24:23   ├─ /og/nane校园互助.png (+5ms) 
+15:24:23   ├─ /og/nannahelper教程文档.png (+6ms) 
+[og] image generation failed {
+  slug: 'smartagent',
+  err: Error: No fonts are loaded. At least one font is required to calculate the layout.
+      at jt.getEngine (file:///D:/Projects/%E5%8D%9A%E5%AE%A2%E5%92%8C%E6%9C%BA%E5%99%A8%E4%BA%BA/my-astro-blog/node_modules/.pnpm/satori@0.18.3/node_modules/satori/dist/index.js:7:45203)
+      at Ii (file:///D:/Projects/%E5%8D%9A%E5%AE%A2%E5%92%8C%E6%9C%BA%E5%99%A8%E4%BA%BA/my-astro-blog/node_modules/.pnpm/satori@0.18.3/node_modules/satori/dist/index.js:7:14934)
+      at async zt (file:///D:/Projects/%E5%8D%9A%E5%AE%A2%E5%92%8C%E6%9C%BA%E5%99%A8%E4%BA%BA/my-astro-blog/node_modules/.pnpm/satori@0.18.3/node_modules/satori/dist/index.js:7:41269)
+      at async zt (file:///D:/Projects/%E5%8D%9A%E5%AE%A2%E5%92%8C%E6%9C%BA%E5%99%A8%E4%BA%BA/my-astro-blog/node_modules/.pnpm/satori@0.18.3/node_modules/satori/dist/index.js:7:42566)
+      at async zt (file:///D:/Projects/%E5%8D%9A%E5%AE%A2%E5%92%8C%E6%9C%BA%E5%99%A8%E4%BA%BA/my-astro-blog/node_modules/.pnpm/satori@0.18.3/node_modules/satori/dist/index.js:7:42566)
+      at async zt (file:///D:/Projects/%E5%8D%9A%E5%AE%A2%E5%92%8C%E6%9C%BA%E5%99%A8%E4%BA%BA/my-astro-blog/node_modules/.pnpm/satori@0.18.3/node_modules/satori/dist/index.js:7:42566)
+      at async eI (file:///D:/Projects/%E5%8D%9A%E5%AE%A2%E5%92%8C%E6%9C%BA%E5%99%A8%E4%BA%BA/my-astro-blog/node_modules/.pnpm/satori@0.18.3/node_modules/satori/dist/index.js:8:28883)
+      at async generateOgPng (file:///D:/Projects/%E5%8D%9A%E5%AE%A2%E5%92%8C%E6%9C%BA%E5%99%A8%E4%BA%BA/my-astro-blog/dist/pages/og/_---slug_.png.astro.mjs?time=1789716258523:251:15)
+      at async Module.GET (file:///D:/Projects/%E5%8D%9A%E5%AE%A2%E5%92%8C%E6%9C%BA%E5%99%A8%E4%BA%BA/my-astro-blog/dist/pages/og/_---slug_.png.astro.mjs?time=1789716258523:340:17)
+      at async renderEndpoint (file:///D:/Projects/%E5%8D%9A%E5%AE%A2%E5%92%8C%E6%9C%BA%E5%99%A8%E4%BA%BA/my-astro-blog/node_modules/.pnpm/astro@5.16.4_@types+node@24.10.1_jiti@1.21.7_lightningcss@1.29.3_rollup@4.62.2_sass-embedded@_r65thrmtdtbysovjyck5dolagu/node_modules/astro/dist/runtime/server/endpoint.js:37:18)
+}
+15:24:23   ├─ /og/smartagent.png (+8ms) 
+15:24:23   ├─ /og/七王国的骑士-第一季.png (+6ms) 
+[og] image generation failed {
+  slug: 'we-are-the-world',
+  err: Error: No fonts are loaded. At least one font is required to calculate the layout.
+      at jt.getEngine (file:///D:/Projects/%E5%8D%9A%E5%AE%A2%E5%92%8C%E6%9C%BA%E5%99%A8%E4%BA%BA/my-astro-blog/node_modules/.pnpm/satori@0.18.3/node_modules/satori/dist/index.js:7:45203)
+      at Ii (file:///D:/Projects/%E5%8D%9A%E5%AE%A2%E5%92%8C%E6%9C%BA%E5%99%A8%E4%BA%BA/my-astro-blog/node_modules/.pnpm/satori@0.18.3/node_modules/satori/dist/index.js:7:14934)
+      at async zt (file:///D:/Projects/%E5%8D%9A%E5%AE%A2%E5%92%8C%E6%9C%BA%E5%99%A8%E4%BA%BA/my-astro-blog/node_modules/.pnpm/satori@0.18.3/node_modules/satori/dist/index.js:7:41269)
+      at async zt (file:///D:/Projects/%E5%8D%9A%E5%AE%A2%E5%92%8C%E6%9C%BA%E5%99%A8%E4%BA%BA/my-astro-blog/node_modules/.pnpm/satori@0.18.3/node_modules/satori/dist/index.js:7:42566)
+      at async zt (file:///D:/Projects/%E5%8D%9A%E5%AE%A2%E5%92%8C%E6%9C%BA%E5%99%A8%E4%BA%BA/my-astro-blog/node_modules/.pnpm/satori@0.18.3/node_modules/satori/dist/index.js:7:42566)
+      at async zt (file:///D:/Projects/%E5%8D%9A%E5%AE%A2%E5%92%8C%E6%9C%BA%E5%99%A8%E4%BA%BA/my-astro-blog/node_modules/.pnpm/satori@0.18.3/node_modules/satori/dist/index.js:7:42566)
+      at async eI (file:///D:/Projects/%E5%8D%9A%E5%AE%A2%E5%92%8C%E6%9C%BA%E5%99%A8%E4%BA%BA/my-astro-blog/node_modules/.pnpm/satori@0.18.3/node_modules/satori/dist/index.js:8:28883)
+      at async generateOgPng (file:///D:/Projects/%E5%8D%9A%E5%AE%A2%E5%92%8C%E6%9C%BA%E5%99%A8%E4%BA%BA/my-astro-blog/dist/pages/og/_---slug_.png.astro.mjs?time=1789716258523:251:15)
+      at async Module.GET (file:///D:/Projects/%E5%8D%9A%E5%AE%A2%E5%92%8C%E6%9C%BA%E5%99%A8%E4%BA%BA/my-astro-blog/dist/pages/og/_---slug_.png.astro.mjs?time=1789716258523:340:17)
+      at async renderEndpoint (file:///D:/Projects/%E5%8D%9A%E5%AE%A2%E5%92%8C%E6%9C%BA%E5%99%A8%E4%BA%BA/my-astro-blog/node_modules/.pnpm/astro@5.16.4_@types+node@24.10.1_jiti@1.21.7_lightningcss@1.29.3_rollup@4.62.2_sass-embedded@_r65thrmtdtbysovjyck5dolagu/node_modules/astro/dist/runtime/server/endpoint.js:37:18)
+}
+15:24:23   ├─ /og/we-are-the-world.png (+8ms) 
+15:24:23   ├─ /og/互动网页-夜空为你闪烁.png (+6ms) 
+15:24:23   ├─ /og/五子棋搜索实验.png (+5ms) 
+15:24:23   ├─ /og/兰波-七岁智者.png (+6ms) 
+15:24:23   ├─ /og/兰波-告别.png (+6ms) 
+15:24:24   ├─ /og/兰波-地狱之夜.png (+5ms) 
+15:24:24   ├─ /og/兰波-奥菲利娅.png (+6ms) 
+15:24:24   ├─ /og/兰波-山谷睡者.png (+7ms) 
+15:24:24   ├─ /og/兰波-巴黎狂欢节.png (+6ms) 
+15:24:24   ├─ /og/兰波-我的饥饿.png (+6ms) 
+15:24:24   ├─ /og/兰波-我的流浪.png (+7ms) 
+15:24:24   ├─ /og/兰波-感觉.png (+6ms) 
+15:24:24   ├─ /og/兰波-母狼.png (+5ms) 
+15:24:24   ├─ /og/兰波-永恒.png (+6ms) 
+15:24:24   ├─ /og/兰波-第一次夜晚.png (+6ms) 
+15:24:24   ├─ /og/兰波-被囚禁者.png (+6ms) 
+15:24:24   ├─ /og/兰波-致一位理性的人.png (+6ms) 
+15:24:24   ├─ /og/兰波-邪恶.png (+6ms) 
+15:24:24   ├─ /og/兰波-醉舟.png (+6ms) 
+15:24:24   ├─ /og/兰波-黎明.png (+6ms) 
+15:24:24   ├─ /og/大庚剑阵.png (+6ms) 
+15:24:24   ├─ /og/在概率的雾里行走-贝叶斯与mcmc学习记录.png (+5ms) 
+15:24:24   ├─ /og/如何在数字时代活成一棵树.png (+7ms) 
+15:24:24   ├─ /og/当奇迹遇到奇迹.png (+6ms) 
+15:24:24   ├─ /og/我的2025.png (+6ms) 
+15:24:24   ├─ /og/淮海战役h5互动地图.png (+6ms) 
+15:24:24   ├─ /og/海子-以梦为马.png (+6ms) 
+15:24:24   ├─ /og/游记-济南.png (+6ms) 
+15:24:24   ├─ /og/烟火文沃康城新章.png (+6ms) 
+15:24:24   ├─ /og/绘出七彩的七天.png (+5ms) 
+15:24:24   ├─ /og/鸳鸯.png (+6ms) 
+15:24:24   └─ /og/dog-map个人路线地图.png (+6ms) 
+15:24:24 ▶ src/pages/project/index.astro
+15:24:24   └─ /project/index.html (+1ms) 
+15:24:24 λ src/pages/robots.txt.ts
+15:24:24   └─ /robots.txt (+1ms) 
+15:24:24 λ src/pages/rss.xml.ts
+15:24:24   └─ /rss.xml (+47ms) 
+15:24:24 ▶ src/pages/world/index.astro
+15:24:24   └─ /world/index.html (+2ms) 
+15:24:24 ✓ Completed in 8.37s.
+
+15:24:24 [@astrojs/sitemap] `sitemap-index.xml` created at `dist`
+(-194 Bytes)	19.27% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/labs/onlyto/css/skystar.css
+(-91 Bytes)	0.57% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/_astro/ec.oj3b7.css
+(-61 Bytes)	1.02% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/_astro/CyberButton_astro_astro_type_style_index_0_lang.Bj02BEB5.css
+(-24 Bytes)	0.26% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/_astro/index.BoXiS6gu.css
+(-2.2 KB)	0.83% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/_astro/index.CG6cCCyQ.css
+(-1.96 KB)	1.03% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/_astro/index.CNDxnSko.css
+✓ Successfully compressed a total of 6 CSS files for 4.52 KB.
+15:24:39 [build] Waiting for integration "@playform/compress", hook "astro:build:done"...
+(-22 Bytes)	4.94% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/project/index.html
+(-292 Bytes)	3.54% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/humanities-archive/index.html
+(-699 Bytes)	1.25% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/labs/geng-blade/index.html
+(-1.86 KB)	34.96% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/labs/smart-agent/index.html
+(-1.07 KB)	44.17% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/labs/onlyto/index.html
+(-586 Bytes)	15.48% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/republic/articles/news-03.html
+(-586 Bytes)	15.40% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/republic/articles/news-04.html
+(-1022 Bytes)	21.78% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/world/estate-walled-preview.html
+(-586 Bytes)	14.26% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/republic/articles/poetry-in-wasteland.html
+(-599 Bytes)	14.28% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/republic/articles/inspection.html
+(-586 Bytes)	15.33% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/republic/articles/news-02.html
+(-1020 Bytes)	21.69% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/republic/documents.html
+(-625 Bytes)	14.72% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/republic/articles/news-01.html
+(-612 Bytes)	15.38% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/republic/articles/basic-law.html
+(-1.83 KB)	30.24% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/republic/news.html
+(-783 Bytes)	8.78% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/republic/articles/akira-exhibition.html
+(-734 Bytes)	10.48% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/republic/articles/hail-mary.html
+(-960 Bytes)	6.82% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/republic/articles/002.html
+(-981 Bytes)	9.54% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/world/blender/index.html
+(-7.42 KB)	46.74% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/labs/my-crypto-compiler/index.html
+(-3.7 KB)	30.54% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/republic/index.html
+(-3.56 KB)	19.87% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/chores/garden/index.html
+(-1.5 KB)	12.94% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/republic/articles/001.html
+(-6.1 KB)	11.83% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/blog/search/index.html
+(-9.02 KB)	13.95% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/chores/heatmap/index.html
+(-6.2 KB)	11.37% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/404.html
+(-6.4 KB)	10.52% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/chores/index.html
+(-22.45 KB)	5.59% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/chores/changelog/index.html
+(-8.15 KB)	11.76% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/blog/categories/index.html
+(-6.5 KB)	10.20% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/index.html
+(-7.11 KB)	10.20% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/blog/archives/index.html
+(-7.01 KB)	8.54% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/chores/making/index.html
+(-6.88 KB)	11.41% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/backyard/index.html
+(-8.55 KB)	10.07% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/blog/七王国的骑士-第一季/index.html
+(-6.18 KB)	10.91% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/garden/index.html
+(-6.5 KB)	10.98% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/blog/tag/项目回顾/index.html
+(-6.22 KB)	11.03% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/friend/index.html
+(-6.51 KB)	11.01% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/blog/tag/年度总结/index.html
+(-6.51 KB)	11.01% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/blog/tag/海子/index.html
+(-6.51 KB)	11.01% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/blog/tag/凡人修仙传/index.html
+(-6.51 KB)	11.01% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/blog/tag/济南/index.html
+(-6.51 KB)	10.96% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/blog/category/渊映/index.html
+(-6.51 KB)	10.97% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/blog/tag/社评/index.html
+(-6.51 KB)	11.01% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/blog/tag/游记/index.html
+(-6.51 KB)	11.01% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/blog/category/旅蚁/index.html
+(-6.51 KB)	10.96% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/blog/tag/社交媒体/index.html
+(-6.52 KB)	10.97% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/blog/tag/兰波/3/index.html
+(-6.53 KB)	10.94% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/blog/tag/《七王国的骑士》/index.html
+(-6.53 KB)	10.96% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/blog/tag/《挽救计划》/index.html
+(-6.53 KB)	10.95% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/blog/tag/内存管理/index.html
+(-6.53 KB)	10.97% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/blog/tag/书评/index.html
+(-6.53 KB)	10.95% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/blog/tag/《冰与火之歌》/index.html
+(-6.53 KB)	10.98% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/blog/tag/赛博朋克/index.html
+(-6.54 KB)	10.98% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/blog/tag/Godot/index.html
+(-6.55 KB)	10.98% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/blog/tag/伊朗/index.html
+(-6.54 KB)	10.97% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/blog/tag/路径规划/index.html
+(-6.55 KB)	10.98% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/blog/tag/战争/index.html
+(-6.55 KB)	10.98% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/blog/tag/小鞋子/index.html
+(-6.56 KB)	10.94% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/blog/tag/Bash/index.html
+(-6.56 KB)	10.94% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/blog/tag/API/index.html
+(-6.56 KB)	10.96% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/blog/tag/ASD/index.html
+(-6.56 KB)	10.94% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/blog/tag/CLI/index.html
+(-6.56 KB)	10.94% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/blog/tag/MkDocs/index.html
+(-6.56 KB)	10.94% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/blog/tag/FastAPI/index.html
+(-6.56 KB)	10.92% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/blog/tag/MCMC/index.html
+(-6.56 KB)	10.94% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/blog/tag/南京大学/index.html
+(-6.56 KB)	10.97% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/blog/tag/Qt6/index.html
+(-6.56 KB)	10.94% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/blog/tag/后端/index.html
+(-6.56 KB)	10.92% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/blog/tag/PyMC/index.html
+(-6.56 KB)	10.93% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/blog/tag/工具/index.html
+(-6.56 KB)	10.94% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/blog/tag/教程/index.html
+(-6.56 KB)	10.94% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/blog/tag/志愿服务/index.html
+(-6.56 KB)	10.91% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/blog/tag/数学建模/index.html
+(-6.56 KB)	10.90% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/blog/tag/效率工具/index.html
+(-6.56 KB)	10.94% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/blog/tag/文档/index.html
+(-6.56 KB)	10.96% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/blog/tag/自走棋/index.html
+(-6.56 KB)	10.96% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/blog/tag/游戏/index.html
+(-6.56 KB)	10.91% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/blog/tag/概率编程/index.html
+(-6.56 KB)	10.95% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/blog/tag/陪伴/index.html
+(-6.56 KB)	10.94% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/blog/tag/CI/CD/index.html
+(-6.57 KB)	10.91% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/blog/tag/Alpha-Beta/index.html
+(-6.58 KB)	10.93% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/blog/tag/3D地图/index.html
+(-6.56 KB)	10.90% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/blog/tag/贝叶斯推断/index.html
+(-6.57 KB)	10.92% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/blog/tag/JavaScript/index.html
+(-6.57 KB)	10.93% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/blog/tag/MapLibre GL/index.html
+(-6.57 KB)	10.91% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/blog/tag/MCTS/index.html
+(-6.57 KB)	10.92% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/blog/tag/PostgreSQL/index.html
+(-6.57 KB)	10.91% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/blog/tag/Minimax/index.html
+(-6.57 KB)	10.93% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/blog/tag/Node.js/index.html
+(-6.57 KB)	10.93% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/blog/tag/PWA/index.html
+(-6.57 KB)	10.90% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/blog/tag/人工智能/index.html
+(-6.58 KB)	10.93% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/blog/tag/个人项目/index.html
+(-6.57 KB)	10.92% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/blog/tag/校园/index.html
+(-6.57 KB)	10.92% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/blog/tag/全栈/index.html
+(-6.57 KB)	10.90% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/blog/tag/对抗搜索/index.html
+(-6.59 KB)	10.91% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/blog/tag/H5/index.html
+(-6.59 KB)	10.90% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/blog/tag/历史/index.html
+(-6.65 KB)	10.78% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/blog/category/机杼/2/index.html
+(-6.66 KB)	10.78% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/blog/tag/徐州一中/index.html
+(-6.66 KB)	10.73% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/blog/tag/诗歌/3/index.html
+(-6.66 KB)	10.72% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/blog/category/留丝/3/index.html
+(-6.71 KB)	10.67% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/blog/tag/C++/index.html
+(-6.69 KB)	10.70% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/blog/tag/科幻/index.html
+(-6.71 KB)	10.64% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/blog/tag/编程学习/index.html
+(-6.73 KB)	10.69% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/blog/tag/算法/index.html
+(-6.74 KB)	10.60% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/blog/tag/AI/index.html
+(-6.74 KB)	10.61% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/blog/tag/自动化/index.html
+(-6.76 KB)	10.61% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/blog/tag/Python/index.html
+(-6.74 KB)	10.60% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/blog/tag/Skill/index.html
+(-6.78 KB)	10.60% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/blog/tag/社会实践/index.html
+(-6.79 KB)	10.60% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/blog/tag/TypeScript/index.html
+(-6.79 KB)	10.60% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/blog/tag/地图/index.html
+(-6.79 KB)	10.60% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/blog/tag/React/index.html
+(-6.86 KB)	10.45% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/blog/tag/影评/index.html
+(-6.93 KB)	10.36% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/blog/tag/回忆/index.html
+(-6.93 KB)	10.32% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/blog/tag/开源/index.html
+(-7.02 KB)	10.21% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/blog/category/罔两/index.html
+(-6.92 KB)	10.31% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/blog/tag/Claude Code/index.html
+(-7.25 KB)	9.93% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/blog/category/似水/index.html
+(-7.27 KB)	9.88% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/blog/category/尺蠖/index.html
+(-7.53 KB)	9.58% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/blog/tag/兰波/2/index.html
+(-7.03 KB)	10.24% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/blog/tag/互动网页/index.html
+(-7.53 KB)	9.56% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/blog/tag/诗歌/2/index.html
+(-7.53 KB)	9.53% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/blog/tag/兰波/index.html
+(-7.52 KB)	9.55% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/blog/tag/诗歌/index.html
+(-7.52 KB)	9.54% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/blog/category/留丝/index.html
+(-7.92 KB)	9.28% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/blog/category/机杼/index.html
+(-8.58 KB)	10.74% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/blog/兰波-巴黎狂欢节/index.html
+(-7.53 KB)	9.56% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/blog/category/留丝/2/index.html
+(-8.58 KB)	10.85% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/blog/兰波-感觉/index.html
+(-8.58 KB)	10.73% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/blog/兰波-山谷睡者/index.html
+(-8.58 KB)	10.72% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/blog/兰波-被囚禁者/index.html
+(-8.58 KB)	10.71% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/blog/兰波-七岁智者/index.html
+(-8.58 KB)	10.73% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/blog/兰波-母狼/index.html
+(-8.58 KB)	10.77% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/blog/兰波-告别/index.html
+(-8.58 KB)	10.82% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/blog/兰波-永恒/index.html
+(-8.58 KB)	10.69% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/blog/兰波-我的饥饿/index.html
+(-8.58 KB)	10.73% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/blog/兰波-致一位理性的人/index.html
+(-8.58 KB)	10.77% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/blog/兰波-黎明/index.html
+(-8.58 KB)	10.71% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/blog/兰波-第一次夜晚/index.html
+(-8.58 KB)	10.61% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/blog/兰波-奥菲利娅/index.html
+(-8.58 KB)	10.62% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/blog/兰波-地狱之夜/index.html
+(-8.59 KB)	10.70% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/blog/兰波-我的流浪/index.html
+(-8.59 KB)	10.82% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/blog/兰波-邪恶/index.html
+(-8.68 KB)	10.43% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/blog/兰波-醉舟/index.html
+(-8.53 KB)	10.72% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/blog/海子-以梦为马/index.html
+(-8.58 KB)	10.71% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/blog/互动网页-夜空为你闪烁/index.html
+(-3.41 KB)	18.80% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/world/index.html
+(-8.61 KB)	10.75% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/blog/大庚剑阵/index.html
+(-6.82 KB)	10.45% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/blog/6/index.html
+(-7.66 KB)	9.38% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/blog/4/index.html
+(-7.67 KB)	9.34% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/blog/3/index.html
+(-7.69 KB)	9.38% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/blog/5/index.html
+(-7.79 KB)	9.28% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/blog/2/index.html
+(-8.1 KB)	9.04% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/blog/index.html
+(-8.72 KB)	10.62% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/blog/2025-大雪/index.html
+(-8.64 KB)	9.84% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/blog/如何在数字时代活成一棵树/index.html
+(-8.8 KB)	9.77% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/blog/我的2025/index.html
+(-8.75 KB)	9.66% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/blog/2026上半年-代码与项目回顾/index.html
+(-8.95 KB)	9.44% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/blog/ghost-in-shell/index.html
+(-8.78 KB)	10.29% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/blog/烟火文沃康城新章/index.html
+(-8.89 KB)	9.64% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/blog/绘出七彩的七天/index.html
+(-8.99 KB)	10.17% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/blog/游记-济南/index.html
+(-8.76 KB)	9.58% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/blog/当奇迹遇到奇迹/index.html
+(-8.93 KB)	9.07% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/blog/we-are-the-world/index.html
+(-6.79 KB)	8.31% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/about/index.html
+(-9.01 KB)	9.14% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/blog/nane校园互助/index.html
+(-9 KB)	9.31% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/blog/nannahelper教程文档/index.html
+(-9.13 KB)	8.99% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/blog/dog-littletools工具集/index.html
+(-9.07 KB)	10.04% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/blog/smartagent/index.html
+(-8.82 KB)	9.97% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/blog/鸳鸯/index.html
+(-9.3 KB)	8.91% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/blog/dog-skills续篇/index.html
+(-9.63 KB)	9.53% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/blog/淮海战役h5互动地图/index.html
+(-9.08 KB)	9.60% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/blog/dog-map个人路线地图/index.html
+(-8.6 KB)	11.00% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/blog/tags/index.html
+(-9.71 KB)	8.98% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/blog/五子棋搜索实验/index.html
+(-9.79 KB)	8.61% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/blog/miniarena自走棋/index.html
+(-12.46 KB)	7.04% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/blog/dog-skills-48-claude-code技能库/index.html
+(-14.54 KB)	7.09% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/blog/在概率的雾里行走-贝叶斯与mcmc学习记录/index.html
+(-14.37 KB)	7.15% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/blog/fastapi-basics/index.html
+(-14.19 KB)	7.45% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/blog/cpp-memory-ownership-raii/index.html
+✓ Successfully compressed a total of 181 HTML files for 1.2 MB.
+(-60.01 KB)	47.61% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/left.png
+(-608.65 KB)	76.21% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/qq.jpg
+(-72.64 KB)	52.19% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/right.png
+(-17.86 KB)	46.38% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/wechat.jpg
+(-289.14 KB)	71.04% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/liu.png
+(-934.58 KB)	75.55% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/background/111.png
+(-699.45 KB)	66.36% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/background/222.png
+(-115.69 KB)	49.98% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/img/image2.jpg
+(-289.14 KB)	71.04% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/img/liu.png
+(-400.2 KB)	64.27% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/img/waterlily.png
+(-167.78 KB)	66.66% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/img/xuanyuan.png
+(-45.66 KB)	57.40% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/music/sea&dust cover.png
+(-3.58 KB)	81.20% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/og/2025-大雪.png
+(-3.58 KB)	81.20% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/og/2026上半年-代码与项目回顾.png
+(-61.57 KB)	64.54% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/music/we are the world.png
+(-3.58 KB)	81.20% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/og/dog-littletools工具集.png
+(-3.58 KB)	81.20% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/og/cpp-memory-ownership-raii.png
+(-3.58 KB)	81.20% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/og/dog-skills-48-claude-code技能库.png
+(-3.58 KB)	81.20% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/og/dog-map个人路线地图.png
+(-3.58 KB)	81.20% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/og/dog-skills续篇.png
+(-3.58 KB)	81.20% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/og/fastapi-basics.png
+(-3.58 KB)	81.20% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/og/ghost-in-shell.png
+(-3.58 KB)	81.20% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/og/nane校园互助.png
+(-3.58 KB)	81.20% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/og/miniarena自走棋.png
+(-3.58 KB)	81.20% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/og/nannahelper教程文档.png
+(-3.58 KB)	81.20% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/og/smartagent.png
+(-3.58 KB)	81.20% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/og/we-are-the-world.png
+(-3.58 KB)	81.20% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/og/七王国的骑士-第一季.png
+(-3.58 KB)	81.20% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/og/互动网页-夜空为你闪烁.png
+(-3.58 KB)	81.20% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/og/五子棋搜索实验.png
+(-3.58 KB)	81.20% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/og/兰波-七岁智者.png
+(-3.58 KB)	81.20% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/og/兰波-告别.png
+(-3.58 KB)	81.20% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/og/兰波-奥菲利娅.png
+(-3.58 KB)	81.20% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/og/兰波-地狱之夜.png
+(-3.58 KB)	81.20% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/og/兰波-山谷睡者.png
+(-3.58 KB)	81.20% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/og/兰波-巴黎狂欢节.png
+(-3.58 KB)	81.20% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/og/兰波-我的流浪.png
+(-3.58 KB)	81.20% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/og/兰波-感觉.png
+(-3.58 KB)	81.20% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/og/兰波-母狼.png
+(-3.58 KB)	81.20% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/og/兰波-我的饥饿.png
+(-3.58 KB)	81.20% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/og/兰波-第一次夜晚.png
+(-3.58 KB)	81.20% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/og/兰波-永恒.png
+(-3.58 KB)	81.20% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/og/兰波-致一位理性的人.png
+(-3.58 KB)	81.20% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/og/兰波-邪恶.png
+(-3.58 KB)	81.20% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/og/兰波-被囚禁者.png
+(-3.58 KB)	81.20% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/og/兰波-醉舟.png
+(-3.58 KB)	81.20% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/og/兰波-黎明.png
+(-3.58 KB)	81.20% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/og/在概率的雾里行走-贝叶斯与mcmc学习记录.png
+(-3.58 KB)	81.20% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/og/大庚剑阵.png
+(-3.58 KB)	81.20% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/og/如何在数字时代活成一棵树.png
+(-3.58 KB)	81.20% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/og/当奇迹遇到奇迹.png
+(-3.58 KB)	81.20% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/og/我的2025.png
+(-3.58 KB)	81.20% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/og/游记-济南.png
+(-3.58 KB)	81.20% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/og/海子-以梦为马.png
+(-3.58 KB)	81.20% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/og/淮海战役h5互动地图.png
+(-3.58 KB)	81.20% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/og/绘出七彩的七天.png
+(-3.58 KB)	81.20% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/og/鸳鸯.png
+(-3.58 KB)	81.20% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/og/烟火文沃康城新章.png
+(-399.14 KB)	66.44% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/portfolio/case-nane-poster.png
+(-338.54 KB)	46.38% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/img/2025snow/1.png
+(-536.1 KB)	56.00% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/img/2025snow/2.png
+(-248.04 KB)	46.90% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/img/2025snow/11.png
+(-430.74 KB)	49.56% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/img/2025snow/4.png
+(-82.19 KB)	55.66% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/img/bayes/coin-bayesian-update.png
+(-93.31 KB)	55.71% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/img/bayes/mh-posterior-sampler.png
+(-261.12 KB)	46.23% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/img/2025snow/cover.png
+(-529.54 KB)	68.34% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/img/dog-map/dog-map-campus-detail.png
+(-3.5 MB)	87.89% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/img/dog-map/dog-map-icon-gallery.png
+(-399.13 KB)	62.31% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/img/dog-map/dog-map-overview.png
+(-500.91 KB)	67.19% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/img/dog-map/dog-map-night-market.png
+(-301.9 KB)	66.24% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/img/flowers/summer.png
+(-509.63 KB)	68.74% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/img/dog-map/dog-map-shop-detail.png
+(-596.72 KB)	79.63% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/img/emulation/shadps4-logo.png
+(-355.06 KB)	76.15% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/img/ghost/ghost1.png
+(-400.67 KB)	58.61% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/img/ghost/ghost3.png
+(-507.98 KB)	71.13% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/img/ghost/ghost2.png
+(-211.67 KB)	53.31% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/img/ghost/ghost4.png
+(-284.62 KB)	62.04% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/img/huaihai/qa-desktop-directory.png
+(-105.51 KB)	58.85% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/img/huaihai/qa-mobile-directory.png
+(-841.35 KB)	63.63% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/img/huaihai/qa-desktop-map.png
+(-552.44 KB)	52.23% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/img/my-2025/world.png
+(-54.58 KB)	65.63% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/img/question/40a52944-994e-4017-a50c-25b655f8d852.png
+(-187.07 KB)	70.69% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/img/six-degrees/li-qiang-musk.jpg
+(-406.41 KB)	80.02% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/img/zawu/renzi.png
+(-421.01 KB)	71.66% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/img/six-degrees/nju-huawei-lamda-lab.png
+(-64.31 KB)	64.34% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/img/zawu/wanjiu.png
+(-223.88 KB)	84.95% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/img/yelu/5.jpg
+(-4.99 KB)	55.36% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/labs/smart-agent/index.apple-touch-icon.png
+(-185.16 KB)	53.64% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/img/zawu/tree.jpg
+(-4.99 KB)	55.36% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/labs/smart-agent/index.icon.png
+(-11.68 KB)	55.79% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/labs/smart-agent/index.png
+(-961.47 KB)	80.15% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/world/blender/estate-day.png
+(-190.23 KB)	72.42% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/world/blender/estate-pixel-day.png
+(-909.44 KB)	79.17% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/world/blender/estate-night.png
+(-171.46 KB)	70.44% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/world/blender/estate-pixel-night.png
+(-17.26 KB)	64.34% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/img/random/season1/1.png
+(-32.01 KB)	68.82% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/img/random/season1/3.png
+(-22.26 KB)	58.99% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/img/random/season1/2.png
+(-28.94 KB)	60.35% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/img/random/season1/5.png
+(-27.53 KB)	67.82% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/img/random/season1/4.png
+(-17.05 KB)	65.46% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/img/random/season1/7.png
+(-87.24 KB)	83.28% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/labs/onlyto/img/skystar2.jpg
+(-58.2 KB)	57.52% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/img/random/season1/8.png
+(-20.15 KB)	65.60% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/img/random/season1/6.png
+(-601.58 KB)	49.79% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/moonlight.png
+(-1.29 MB)	69.47% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/img/l.png
+(-993.73 KB)	55.38% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/portfolio/chores-dark.png
+(-1.51 MB)	65.46% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/portfolio/chores-light.png
+(-788.15 KB)	46.95% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/portfolio/parlor-dark.png
+(-1.41 MB)	63.85% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/portfolio/parlor-light.png
+(-1.06 MB)	52.85% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/world/estate-dark-walled-v2.png
+(-1.03 MB)	51.61% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/world/estate-dark-walled-v1-refined-tall.png
+(-1011.36 KB)	52.91% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/world/estate-dark-walled-v5.png
+(-996.36 KB)	49.44% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/world/estate-dark-walled-v1.png
+(-1008.52 KB)	52.57% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/world/estate-dark-walled-v3.png
+(-999.12 KB)	53.16% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/world/estate-dark-walled-v6.png
+(-1.52 MB)	60.81% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/world/estate-light-walled-v4.png
+(-1.52 MB)	61.41% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/world/estate-light-walled-v5.png
+(-1.5 MB)	61.25% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/world/estate-light-walled-v6.png
+(-1.54 MB)	61.09% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/world/estate-light-walled-v3.png
+(-729.24 KB)	53.57% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/img/2025snow/3.png
+(-1.44 MB)	60.44% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/world/estate-light-walled-v7.png
+(-2.1 MB)	75.30% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/img/emulation/emulation-games.png
+(-1.24 MB)	64.60% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/img/ohmystyle/high-chroma-color-pairing-portrait.png
+(-4.81 MB)	82.76% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/home_bg.jpg
+(-2.03 MB)	59.64% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/img/r.png
+(-1.13 MB)	45.58% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/portfolio/semantic-garden-dark.png
+(-1.06 MB)	51.40% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/world/estate-dark-walled-v1-refined.png
+(-1.14 MB)	45.91% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/portfolio/semantic-garden-light.png
+(-1.59 MB)	60.43% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/world/estate-light-walled-v1-refined-tall.png
+(-1.08 MB)	50.23% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/world/estate-dark.png
+(-1.66 MB)	62.12% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/world/estate-light-walled-v2.png
+(-1.67 MB)	61.23% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/world/estate-light-walled-v1-refined.png
+(-1.51 MB)	58.80% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/world/estate-light-walled-v1.png
+(-1.58 MB)	59.10% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/world/estate-light.png
+(-5.84 MB)	63.47% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/img/duncon/poster.png
+(-6.72 MB)	68.85% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/img/image3.png
+(-4.17 MB)	46.76% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/img/remembrance/camille-pissarro-boulevard-montmartre-at-night-1897.jpg
+✓ Successfully compressed a total of 138 Image files for 79.73 MB.
+(-1.06 KB)	31.60% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/republic/data.js
+(-8 Bytes)	0.21% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/_astro/ClientRouter.astro_astro_type_script_index_0_lang.BB69ZWHN.js
+(-2.57 KB)	1.41% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/_astro/client.C5Auakxu.js
+(-1 Bytes)	0.04% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/_astro/FastApiPlayground.DvMuMXRU.js
+(-5 Bytes)	0.09% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/_astro/GitHubStats.astro_astro_type_script_index_0_lang.vvWVWtNk.js
+(-256 Bytes)	35.31% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/_astro/jsx-runtime.D_zvdyIk.js
+(-247 Bytes)	3.15% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/_astro/index.DiEladB3.js
+(-21 Bytes)	1.96% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/_astro/over-the-top.DTnbtWsH.js
+(-1 Bytes)	0.08% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/_astro/SiteInfo.astro_astro_type_script_index_0_lang.BtUupD4E.js
+(-259 Bytes)	0.14% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/_astro/index.Dsb38-Dp.js
+(-576 Bytes)	16.53% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/labs/onlyto/js/skystar.js
+(-2.41 KB)	82.98% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/labs/smart-agent/index.audio.position.worklet.js
+(-102 Bytes)	2.32% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/_astro/vanilla.ChgcMPTJ.js
+(-122 Bytes)	0.17% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/_astro/ui-core.CRLEpKYS.js
+(-77.3 KB)	25.07% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/labs/smart-agent/index.js
+(-4.29 KB)	60.21% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/labs/smart-agent/index.audio.worklet.js
+✓ Successfully compressed a total of 16 JavaScript files for 89.19 KB.
+(-206 Bytes)	9.17% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/img/gomoku/benchmark-terminal.svg
+(-458 Bytes)	7.28% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/img/gomoku/search-architecture.svg
+✓ Successfully compressed a total of 2 SVG files for 664 Bytes.
+(-1.18 KB)	47.65% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/world/blender/regions-pixel.json
+(-845 Bytes)	47.18% reduction in D:/Projects/博客和机器人/my-astro-blog/dist/world/blender/regions.json
+✓ Successfully compressed a total of 2 JSON files for 2 KB.
+15:25:55 [build] 161 page(s) built in 109.17s
+15:25:55 [build] Complete!
+
+Running Pagefind v1.4.0 (Extended)
+Running from: "D:\\Projects\\博客和机器人\\my-astro-blog"
+Source:       "dist"
+Output:       "dist\\pagefind"
+
+[Walking source directory]
+Found 182 files matching **/*.{html}
+
+[Parsing files]
+Found a data-pagefind-body element on the site.
+1 page found without an <html> element. 
+↳ Ignoring pages without this tag.
+Pages without an outer <html> element will not be processed by default. 
+If adding this element is not possible, use the root selector config to target a different root element.
+
+  * "/baidu_verify_codeva-uUUqAxRuNb.html" has no <html> element
+[Reading languages]
+Discovered 1 language: zh
+
+[Building search indexes]
+Total: 
+  Indexed 1 language
+  Indexed 157 pages
+  Indexed 7613 words
+  Indexed 0 filters
+  Indexed 0 sorts
+Note: Pagefind doesn't support stemming for the language zh. 
+Search will still work, but will not match across root words.
+Note: Pagefind doesn't support stemming for the language zh. 
+Search will still work, but will not match across root words.
+
+Finished in 0.822 seconds

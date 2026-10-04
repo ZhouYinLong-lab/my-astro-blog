@@ -1,0 +1,568 @@
+GARDEN [0.2s] Materials and mesh generators ready
+GARDEN [0.3s] Ground, pond, paving and boundary walls built
+GARDEN [0.6s] Eight destination structures and interiors built
+GARDEN [0.7s] Segmented masonry arch bridge complete
+GARDEN [1.8s] Hero willow: branching trunk, hanging twigs and individual folded leaves
+GARDEN [3.1s] Garden beds, rockery, bamboo and perimeter planting complete
+GARDEN [3.1s] Four waterbirds and lotus geometry complete
+Blender 4.5.3 LTS (hash 67807e1800cc built 2025-09-09 01:33:33)
+Warning: Path 'C:/Windows/Fonts/simkai.ttf' cannot be made relative for Font 'KaiTi Regular'
+Info: Saved as "hanliu-garden-highpoly.blend"
+GARDEN [3.5s] Saved editable model: {"vertices": 1926052, "polygons": 1277504, "triangles": 2572754, "mesh_objects": 182, "materials": 37}
+Fra:1 Mem:211.68M (Peak 218.34M) | Time:00:00.58 | Mem:0.00M, Peak:0.00M | Hanliu_Garden_Highpoly, ViewLayer | Synchronizing object | 寒柳别苑
+Fra:1 Mem:219.25M (Peak 220.08M) | Time:00:00.58 | Mem:0.00M, Peak:0.00M | Hanliu_Garden_Highpoly, ViewLayer | Synchronizing object | home · Plaster
+Fra:1 Mem:219.25M (Peak 220.08M) | Time:00:00.58 | Mem:0.00M, Peak:0.00M | Hanliu_Garden_Highpoly, ViewLayer | Synchronizing object | home · Tile0
+Fra:1 Mem:219.27M (Peak 220.08M) | Time:00:00.58 | Mem:0.00M, Peak:0.00M | Hanliu_Garden_Highpoly, ViewLayer | Synchronizing object | home · WoodLight
+Fra:1 Mem:219.29M (Peak 220.08M) | Time:00:00.58 | Mem:0.00M, Peak:0.00M | Hanliu_Garden_Highpoly, ViewLayer | Synchronizing object | home · StoneLight
+Fra:1 Mem:219.47M (Peak 220.08M) | Time:00:00.58 | Mem:0.00M, Peak:0.00M | Hanliu_Garden_Highpoly, ViewLayer | Synchronizing object | 博客
+Fra:1 Mem:224.90M (Peak 225.36M) | Time:00:00.59 | Mem:0.00M, Peak:0.00M | Hanliu_Garden_Highpoly, ViewLayer | Synchronizing object | blog · Stone
+Fra:1 Mem:224.90M (Peak 225.36M) | Time:00:00.59 | Mem:0.00M, Peak:0.00M | Hanliu_Garden_Highpoly, ViewLayer | Synchronizing object | blog · Wood
+Fra:1 Mem:224.91M (Peak 225.36M) | Time:00:00.59 | Mem:0.00M, Peak:0.00M | Hanliu_Garden_Highpoly, ViewLayer | Synchronizing object | blog · Paper
+Fra:1 Mem:224.93M (Peak 225.36M) | Time:00:00.59 | Mem:0.00M, Peak:0.00M | Hanliu_Garden_Highpoly, ViewLayer | Synchronizing object | blog · Tile1
+Fra:1 Mem:224.99M (Peak 225.36M) | Time:00:00.59 | Mem:0.00M, Peak:0.00M | Hanliu_Garden_Highpoly, ViewLayer | Synchronizing object | blog · Tile3
+Fra:1 Mem:225.50M (Peak 225.50M) | Time:00:00.59 | Mem:0.00M, Peak:0.00M | Hanliu_Garden_Highpoly, ViewLayer | Synchronizing object | 别苑杂务
+Fra:1 Mem:229.37M (Peak 229.37M) | Time:00:00.59 | Mem:0.00M, Peak:0.00M | Hanliu_Garden_Highpoly, ViewLayer | Synchronizing object | blog · Ceramic
+Fra:1 Mem:239.65M (Peak 240.39M) | Time:00:00.59 | Mem:0.00M, Peak:0.00M | Hanliu_Garden_Highpoly, ViewLayer | Synchronizing object | chores · StoneLight
+Fra:1 Mem:239.65M (Peak 240.39M) | Time:00:00.59 | Mem:0.00M, Peak:0.00M | Hanliu_Garden_Highpoly, ViewLayer | Synchronizing object | chores · Tile2
+Fra:1 Mem:239.65M (Peak 240.39M) | Time:00:00.59 | Mem:0.00M, Peak:0.00M | Hanliu_Garden_Highpoly, ViewLayer | Synchronizing object | chores · WoodLight
+Fra:1 Mem:239.70M (Peak 240.39M) | Time:00:00.59 | Mem:0.00M, Peak:0.00M | Hanliu_Garden_Highpoly, ViewLayer | Synchronizing object | chores · Paper
+Fra:1 Mem:239.80M (Peak 240.39M) | Time:00:00.59 | Mem:0.00M, Peak:0.00M | Hanliu_Garden_Highpoly, ViewLayer | Synchronizing object | 造物录
+Fra:1 Mem:247.00M (Peak 247.60M) | Time:00:00.59 | Mem:0.00M, Peak:0.00M | Hanliu_Garden_Highpoly, ViewLayer | Synchronizing object | making · Stone
+Fra:1 Mem:247.00M (Peak 247.60M) | Time:00:00.59 | Mem:0.00M, Peak:0.00M | Hanliu_Garden_Highpoly, ViewLayer | Synchronizing object | making · Wood
+Fra:1 Mem:247.01M (Peak 247.60M) | Time:00:00.59 | Mem:0.00M, Peak:0.00M | Hanliu_Garden_Highpoly, ViewLayer | Synchronizing object | making · WoodLight
+Fra:1 Mem:247.01M (Peak 247.60M) | Time:00:00.59 | Mem:0.00M, Peak:0.00M | Hanliu_Garden_Highpoly, ViewLayer | Synchronizing object | making · Wood.001
+Fra:1 Mem:247.08M (Peak 247.60M) | Time:00:00.59 | Mem:0.00M, Peak:0.00M | Hanliu_Garden_Highpoly, ViewLayer | Synchronizing object | making · Tile2
+Fra:1 Mem:247.09M (Peak 247.60M) | Time:00:00.59 | Mem:0.00M, Peak:0.00M | Hanliu_Garden_Highpoly, ViewLayer | Synchronizing object | making · Tile3
+Fra:1 Mem:247.31M (Peak 247.60M) | Time:00:00.59 | Mem:0.00M, Peak:0.00M | Hanliu_Garden_Highpoly, ViewLayer | Synchronizing object | making · WoodLight.001
+Fra:1 Mem:247.56M (Peak 247.60M) | Time:00:00.59 | Mem:0.00M, Peak:0.00M | Hanliu_Garden_Highpoly, ViewLayer | Synchronizing object | 语义花园
+Fra:1 Mem:247.99M (Peak 247.99M) | Time:00:00.59 | Mem:0.00M, Peak:0.00M | Hanliu_Garden_Highpoly, ViewLayer | Synchronizing object | making · Ink
+Fra:1 Mem:248.37M (Peak 248.37M) | Time:00:00.59 | Mem:0.00M, Peak:0.00M | Hanliu_Garden_Highpoly, ViewLayer | Synchronizing object | making · Brass
+Fra:1 Mem:256.64M (Peak 257.25M) | Time:00:00.59 | Mem:0.00M, Peak:0.00M | Hanliu_Garden_Highpoly, ViewLayer | Synchronizing object | garden · Plaster
+Fra:1 Mem:256.64M (Peak 257.25M) | Time:00:00.59 | Mem:0.00M, Peak:0.00M | Hanliu_Garden_Highpoly, ViewLayer | Synchronizing object | garden · Tile3
+Fra:1 Mem:256.68M (Peak 257.25M) | Time:00:00.59 | Mem:0.00M, Peak:0.00M | Hanliu_Garden_Highpoly, ViewLayer | Synchronizing object | garden · Wood.001
+Fra:1 Mem:256.70M (Peak 257.25M) | Time:00:00.59 | Mem:0.00M, Peak:0.00M | Hanliu_Garden_Highpoly, ViewLayer | Synchronizing object | garden · Wood.002
+Fra:1 Mem:257.17M (Peak 257.25M) | Time:00:00.59 | Mem:0.00M, Peak:0.00M | Hanliu_Garden_Highpoly, ViewLayer | Synchronizing object | garden · Leaf4
+Fra:1 Mem:257.46M (Peak 257.46M) | Time:00:00.59 | Mem:0.00M, Peak:0.00M | Hanliu_Garden_Highpoly, ViewLayer | Synchronizing object | garden · Leaf0
+Fra:1 Mem:257.49M (Peak 257.49M) | Time:00:00.59 | Mem:0.00M, Peak:0.00M | Hanliu_Garden_Highpoly, ViewLayer | Synchronizing object | garden · Leaf3
+Fra:1 Mem:258.24M (Peak 258.24M) | Time:00:00.59 | Mem:0.00M, Peak:0.00M | Hanliu_Garden_Highpoly, ViewLayer | Synchronizing object | garden · PalePink
+Fra:1 Mem:258.91M (Peak 258.91M) | Time:00:00.59 | Mem:0.00M, Peak:0.00M | Hanliu_Garden_Highpoly, ViewLayer | Synchronizing object | garden · White
+Fra:1 Mem:261.96M (Peak 261.96M) | Time:00:00.59 | Mem:0.00M, Peak:0.00M | Hanliu_Garden_Highpoly, ViewLayer | Synchronizing object | garden · Purple
+Fra:1 Mem:265.07M (Peak 265.07M) | Time:00:00.59 | Mem:0.00M, Peak:0.00M | Hanliu_Garden_Highpoly, ViewLayer | Synchronizing object | garden · StoneLight.001
+Fra:1 Mem:265.15M (Peak 265.15M) | Time:00:00.59 | Mem:0.00M, Peak:0.00M | Hanliu_Garden_Highpoly, ViewLayer | Synchronizing object | garden · Mortar
+Fra:1 Mem:279.81M (Peak 279.81M) | Time:00:00.60 | Mem:0.00M, Peak:0.00M | Hanliu_Garden_Highpoly, ViewLayer | Synchronizing object | garden · Stone
+Fra:1 Mem:286.36M (Peak 286.96M) | Time:00:00.60 | Mem:0.00M, Peak:0.00M | Hanliu_Garden_Highpoly, ViewLayer | Synchronizing object | about · Stone
+Fra:1 Mem:286.36M (Peak 286.96M) | Time:00:00.60 | Mem:0.00M, Peak:0.00M | Hanliu_Garden_Highpoly, ViewLayer | Synchronizing object | about · Wood
+Fra:1 Mem:286.36M (Peak 286.96M) | Time:00:00.60 | Mem:0.00M, Peak:0.00M | Hanliu_Garden_Highpoly, ViewLayer | Synchronizing object | about · Brass
+Fra:1 Mem:286.43M (Peak 286.96M) | Time:00:00.60 | Mem:0.00M, Peak:0.00M | Hanliu_Garden_Highpoly, ViewLayer | Synchronizing object | about · Tile2
+Fra:1 Mem:286.46M (Peak 286.96M) | Time:00:00.60 | Mem:0.00M, Peak:0.00M | Hanliu_Garden_Highpoly, ViewLayer | Synchronizing object | about · Tile3
+Fra:1 Mem:286.71M (Peak 286.96M) | Time:00:00.60 | Mem:0.00M, Peak:0.00M | Hanliu_Garden_Highpoly, ViewLayer | Synchronizing object | about · StoneLight.001
+Fra:1 Mem:287.32M (Peak 287.32M) | Time:00:00.60 | Mem:0.00M, Peak:0.00M | Hanliu_Garden_Highpoly, ViewLayer | Synchronizing object | 友链
+Fra:1 Mem:287.53M (Peak 287.53M) | Time:00:00.60 | Mem:0.00M, Peak:0.00M | Hanliu_Garden_Highpoly, ViewLayer | Synchronizing object | about · Tile3.001
+Fra:1 Mem:288.60M (Peak 288.60M) | Time:00:00.60 | Mem:0.00M, Peak:0.00M | Hanliu_Garden_Highpoly, ViewLayer | Synchronizing object | about · Tile0.001
+Fra:1 Mem:289.37M (Peak 289.37M) | Time:00:00.60 | Mem:0.00M, Peak:0.00M | Hanliu_Garden_Highpoly, ViewLayer | Synchronizing object | about · Tile1.001
+Fra:1 Mem:289.97M (Peak 289.97M) | Time:00:00.60 | Mem:0.00M, Peak:0.00M | Hanliu_Garden_Highpoly, ViewLayer | Synchronizing object | about · Tile2.001
+Fra:1 Mem:290.15M (Peak 290.15M) | Time:00:00.60 | Mem:0.00M, Peak:0.00M | Hanliu_Garden_Highpoly, ViewLayer | Synchronizing object | about · WoodLight.001
+Fra:1 Mem:296.06M (Peak 296.06M) | Time:00:00.60 | Mem:0.00M, Peak:0.00M | Hanliu_Garden_Highpoly, ViewLayer | Synchronizing object | friends · Wood
+Fra:1 Mem:296.06M (Peak 296.06M) | Time:00:00.60 | Mem:0.00M, Peak:0.00M | Hanliu_Garden_Highpoly, ViewLayer | Synchronizing object | friends · Wood.001
+Fra:1 Mem:296.07M (Peak 296.07M) | Time:00:00.60 | Mem:0.00M, Peak:0.00M | Hanliu_Garden_Highpoly, ViewLayer | Synchronizing object | friends · Tile2
+Fra:1 Mem:296.08M (Peak 296.08M) | Time:00:00.60 | Mem:0.00M, Peak:0.00M | Hanliu_Garden_Highpoly, ViewLayer | Synchronizing object | friends · Tile1
+Fra:1 Mem:296.08M (Peak 296.08M) | Time:00:00.60 | Mem:0.00M, Peak:0.00M | Hanliu_Garden_Highpoly, ViewLayer | Synchronizing object | 会客间
+Fra:1 Mem:301.27M (Peak 301.76M) | Time:00:00.60 | Mem:0.00M, Peak:0.00M | Hanliu_Garden_Highpoly, ViewLayer | Synchronizing object | backyard · Stone
+Fra:1 Mem:301.27M (Peak 301.76M) | Time:00:00.60 | Mem:0.00M, Peak:0.00M | Hanliu_Garden_Highpoly, ViewLayer | Synchronizing object | backyard · Tile1
+Fra:1 Mem:301.27M (Peak 301.76M) | Time:00:00.60 | Mem:0.00M, Peak:0.00M | Hanliu_Garden_Highpoly, ViewLayer | Synchronizing object | backyard · Tile0
+Fra:1 Mem:301.52M (Peak 301.76M) | Time:00:00.60 | Mem:0.00M, Peak:0.00M | Hanliu_Garden_Highpoly, ViewLayer | Synchronizing object | backyard · Tile2
+Fra:1 Mem:301.76M (Peak 301.76M) | Time:00:00.60 | Mem:0.00M, Peak:0.00M | Hanliu_Garden_Highpoly, ViewLayer | Synchronizing object | backyard · Wood.001
+Fra:1 Mem:301.84M (Peak 301.84M) | Time:00:00.60 | Mem:0.00M, Peak:0.00M | Hanliu_Garden_Highpoly, ViewLayer | Synchronizing object | backyard · Ceramic
+Fra:1 Mem:302.16M (Peak 302.16M) | Time:00:00.60 | Mem:0.00M, Peak:0.00M | Hanliu_Garden_Highpoly, ViewLayer | Synchronizing object | backyard · White
+Fra:1 Mem:302.94M (Peak 302.94M) | Time:00:00.60 | Mem:0.00M, Peak:0.00M | Hanliu_Garden_Highpoly, ViewLayer | Synchronizing object | site · Earth
+Fra:1 Mem:303.37M (Peak 303.37M) | Time:00:00.60 | Mem:0.00M, Peak:0.00M | Hanliu_Garden_Highpoly, ViewLayer | Synchronizing object | site · Stone
+Fra:1 Mem:304.21M (Peak 304.21M) | Time:00:00.60 | Mem:0.00M, Peak:0.00M | Hanliu_Garden_Highpoly, ViewLayer | Synchronizing object | site · PondBed
+Fra:1 Mem:304.57M (Peak 304.57M) | Time:00:00.60 | Mem:0.00M, Peak:0.00M | Hanliu_Garden_Highpoly, ViewLayer | Synchronizing object | site · Water
+Fra:1 Mem:305.06M (Peak 305.06M) | Time:00:00.60 | Mem:0.00M, Peak:0.00M | Hanliu_Garden_Highpoly, ViewLayer | Synchronizing object | site · Backdrop
+Fra:1 Mem:305.34M (Peak 305.34M) | Time:00:00.60 | Mem:0.00M, Peak:0.00M | Hanliu_Garden_Highpoly, ViewLayer | Synchronizing object | site · StoneLight
+Fra:1 Mem:305.35M (Peak 305.35M) | Time:00:00.60 | Mem:0.00M, Peak:0.00M | Hanliu_Garden_Highpoly, ViewLayer | Synchronizing object | site · StoneLight.001
+Fra:1 Mem:305.59M (Peak 305.59M) | Time:00:00.60 | Mem:0.00M, Peak:0.00M | Hanliu_Garden_Highpoly, ViewLayer | Synchronizing object | site · Mortar
+Fra:1 Mem:306.11M (Peak 306.11M) | Time:00:00.60 | Mem:0.00M, Peak:0.00M | Hanliu_Garden_Highpoly, ViewLayer | Synchronizing object | site · Stone.001
+Fra:1 Mem:306.79M (Peak 306.79M) | Time:00:00.60 | Mem:0.00M, Peak:0.00M | Hanliu_Garden_Highpoly, ViewLayer | Synchronizing object | site · Plaster
+Fra:1 Mem:307.80M (Peak 307.80M) | Time:00:00.60 | Mem:0.00M, Peak:0.00M | Hanliu_Garden_Highpoly, ViewLayer | Synchronizing object | site · Tile1
+Fra:1 Mem:309.67M (Peak 309.67M) | Time:00:00.60 | Mem:0.00M, Peak:0.00M | Hanliu_Garden_Highpoly, ViewLayer | Synchronizing object | site · Leaf0
+Fra:1 Mem:311.37M (Peak 311.37M) | Time:00:00.60 | Mem:0.00M, Peak:0.00M | Hanliu_Garden_Highpoly, ViewLayer | Synchronizing object | site · Leaf3
+Fra:1 Mem:313.10M (Peak 313.10M) | Time:00:00.60 | Mem:0.00M, Peak:0.00M | Hanliu_Garden_Highpoly, ViewLayer | Synchronizing object | Large sky fill
+Fra:1 Mem:313.08M (Peak 313.10M) | Time:00:00.60 | Mem:0.00M, Peak:0.00M | Hanliu_Garden_Highpoly, ViewLayer | Synchronizing object | Soft afternoon sun
+Fra:1 Mem:313.08M (Peak 313.10M) | Time:00:00.60 | Mem:0.00M, Peak:0.00M | Hanliu_Garden_Highpoly, ViewLayer | Synchronizing object | birds · Ink.003
+Fra:1 Mem:313.30M (Peak 313.30M) | Time:00:00.60 | Mem:0.00M, Peak:0.00M | Hanliu_Garden_Highpoly, ViewLayer | Synchronizing object | birds · DuckBrown.001
+Fra:1 Mem:315.33M (Peak 315.33M) | Time:00:00.60 | Mem:0.00M, Peak:0.00M | Hanliu_Garden_Highpoly, ViewLayer | Synchronizing object | birds · Ink.002
+Fra:1 Mem:315.47M (Peak 315.47M) | Time:00:00.60 | Mem:0.00M, Peak:0.00M | Hanliu_Garden_Highpoly, ViewLayer | Synchronizing object | birds · DuckBrown
+Fra:1 Mem:315.69M (Peak 315.69M) | Time:00:00.60 | Mem:0.00M, Peak:0.00M | Hanliu_Garden_Highpoly, ViewLayer | Synchronizing object | birds · Yellow
+Fra:1 Mem:315.70M (Peak 315.70M) | Time:00:00.60 | Mem:0.00M, Peak:0.00M | Hanliu_Garden_Highpoly, ViewLayer | Synchronizing object | birds · DuckGreen
+Fra:1 Mem:315.59M (Peak 315.70M) | Time:00:00.60 | Mem:0.00M, Peak:0.00M | Hanliu_Garden_Highpoly, ViewLayer | Synchronizing object | site · Pink
+Fra:1 Mem:316.06M (Peak 316.06M) | Time:00:00.60 | Mem:0.00M, Peak:0.00M | Hanliu_Garden_Highpoly, ViewLayer | Synchronizing object | bridge · StoneLight.001
+Fra:1 Mem:316.50M (Peak 316.50M) | Time:00:00.60 | Mem:0.00M, Peak:0.00M | Hanliu_Garden_Highpoly, ViewLayer | Synchronizing object | birds · BirdGrey.001
+Fra:1 Mem:317.24M (Peak 317.35M) | Time:00:00.60 | Mem:0.00M, Peak:0.00M | Hanliu_Garden_Highpoly, ViewLayer | Synchronizing object | planting · Wood
+Fra:1 Mem:318.83M (Peak 318.83M) | Time:00:00.60 | Mem:0.00M, Peak:0.00M | Hanliu_Garden_Highpoly, ViewLayer | Synchronizing object | birds · Orange
+Fra:1 Mem:319.85M (Peak 319.85M) | Time:00:00.60 | Mem:0.00M, Peak:0.00M | Hanliu_Garden_Highpoly, ViewLayer | Synchronizing object | planting · WoodLight
+Fra:1 Mem:319.95M (Peak 319.95M) | Time:00:00.60 | Mem:0.00M, Peak:0.00M | Hanliu_Garden_Highpoly, ViewLayer | Synchronizing object | birds · Ink.001
+Fra:1 Mem:321.62M (Peak 321.62M) | Time:00:00.60 | Mem:0.00M, Peak:0.00M | Hanliu_Garden_Highpoly, ViewLayer | Synchronizing object | birds · BirdWhite.001
+Fra:1 Mem:321.42M (Peak 321.62M) | Time:00:00.60 | Mem:0.00M, Peak:0.00M | Hanliu_Garden_Highpoly, ViewLayer | Synchronizing object | birds · BirdGrey
+Fra:1 Mem:324.26M (Peak 324.26M) | Time:00:00.60 | Mem:0.00M, Peak:0.00M | Hanliu_Garden_Highpoly, ViewLayer | Synchronizing object | planting · Leaf0
+Fra:1 Mem:324.26M (Peak 324.26M) | Time:00:00.60 | Mem:0.00M, Peak:0.00M | Hanliu_Garden_Highpoly, ViewLayer | Synchronizing object | planting · Leaf2
+Fra:1 Mem:324.24M (Peak 324.26M) | Time:00:00.60 | Mem:0.00M, Peak:0.00M | Hanliu_Garden_Highpoly, ViewLayer | Synchronizing object | planting · Leaf1
+Fra:1 Mem:335.30M (Peak 335.30M) | Time:00:00.60 | Mem:0.00M, Peak:0.00M | Hanliu_Garden_Highpoly, ViewLayer | Synchronizing object | birds · Ink
+Fra:1 Mem:335.27M (Peak 335.30M) | Time:00:00.60 | Mem:0.00M, Peak:0.00M | Hanliu_Garden_Highpoly, ViewLayer | Synchronizing object | birds · BirdWhite
+Fra:1 Mem:350.94M (Peak 350.94M) | Time:00:00.61 | Mem:0.00M, Peak:0.00M | Hanliu_Garden_Highpoly, ViewLayer | Synchronizing object | planting · Wood.001
+Fra:1 Mem:351.18M (Peak 351.18M) | Time:00:00.61 | Mem:0.00M, Peak:0.00M | Hanliu_Garden_Highpoly, ViewLayer | Synchronizing object | planting · PalePink
+Fra:1 Mem:351.39M (Peak 351.39M) | Time:00:00.61 | Mem:0.00M, Peak:0.00M | Hanliu_Garden_Highpoly, ViewLayer | Synchronizing object | planting · Leaf4
+Fra:1 Mem:351.43M (Peak 351.43M) | Time:00:00.61 | Mem:0.00M, Peak:0.00M | Hanliu_Garden_Highpoly, ViewLayer | Synchronizing object | planting · Leaf3
+Fra:1 Mem:362.88M (Peak 362.88M) | Time:00:00.61 | Mem:0.00M, Peak:0.00M | Hanliu_Garden_Highpoly, ViewLayer | Synchronizing object | planting · Wood.002
+Fra:1 Mem:364.68M (Peak 364.68M) | Time:00:00.61 | Mem:0.00M, Peak:0.00M | Hanliu_Garden_Highpoly, ViewLayer | Synchronizing object | planting · Leaf3.001
+Fra:1 Mem:365.56M (Peak 365.56M) | Time:00:00.61 | Mem:0.00M, Peak:0.00M | Hanliu_Garden_Highpoly, ViewLayer | Synchronizing object | planting · Leaf1.001
+Fra:1 Mem:366.01M (Peak 366.01M) | Time:00:00.61 | Mem:0.00M, Peak:0.00M | Hanliu_Garden_Highpoly, ViewLayer | Synchronizing object | planting · Leaf4.001
+Fra:1 Mem:385.91M (Peak 385.94M) | Time:00:00.61 | Mem:0.00M, Peak:0.00M | Hanliu_Garden_Highpoly, ViewLayer | Synchronizing object | planting · Leaf2.001
+Fra:1 Mem:386.59M (Peak 386.59M) | Time:00:00.61 | Mem:0.00M, Peak:0.00M | Hanliu_Garden_Highpoly, ViewLayer | Synchronizing object | planting · Leaf0.002
+Fra:1 Mem:387.40M (Peak 387.40M) | Time:00:00.61 | Mem:0.00M, Peak:0.00M | Hanliu_Garden_Highpoly, ViewLayer | Synchronizing object | planting · Wood.003
+Fra:1 Mem:392.91M (Peak 392.91M) | Time:00:00.61 | Mem:0.00M, Peak:0.00M | Hanliu_Garden_Highpoly, ViewLayer | Synchronizing object | planting · Leaf0.003
+Fra:1 Mem:404.60M (Peak 404.60M) | Time:00:00.61 | Mem:0.00M, Peak:0.00M | Hanliu_Garden_Highpoly, ViewLayer | Synchronizing object | planting · Leaf4.002
+Fra:1 Mem:410.50M (Peak 410.50M) | Time:00:00.61 | Mem:0.00M, Peak:0.00M | Hanliu_Garden_Highpoly, ViewLayer | Synchronizing object | planting · Leaf3.002
+Fra:1 Mem:410.95M (Peak 410.95M) | Time:00:00.61 | Mem:0.00M, Peak:0.00M | Hanliu_Garden_Highpoly, ViewLayer | Synchronizing object | planting · Wood.004
+Fra:1 Mem:412.07M (Peak 412.07M) | Time:00:00.61 | Mem:0.00M, Peak:0.00M | Hanliu_Garden_Highpoly, ViewLayer | Synchronizing object | planting · Leaf0.004
+Fra:1 Mem:413.04M (Peak 413.04M) | Time:00:00.61 | Mem:0.00M, Peak:0.00M | Hanliu_Garden_Highpoly, ViewLayer | Synchronizing object | planting · Leaf3.003
+Fra:1 Mem:413.19M (Peak 413.19M) | Time:00:00.61 | Mem:0.00M, Peak:0.00M | Hanliu_Garden_Highpoly, ViewLayer | Synchronizing object | planting · Leaf4.003
+Fra:1 Mem:416.82M (Peak 416.82M) | Time:00:00.61 | Mem:0.00M, Peak:0.00M | Hanliu_Garden_Highpoly, ViewLayer | Synchronizing object | planting · Wood.005
+Fra:1 Mem:418.67M (Peak 418.67M) | Time:00:00.61 | Mem:0.00M, Peak:0.00M | Hanliu_Garden_Highpoly, ViewLayer | Synchronizing object | planting · Yellow
+Fra:1 Mem:421.40M (Peak 421.40M) | Time:00:00.61 | Mem:0.00M, Peak:0.00M | Hanliu_Garden_Highpoly, ViewLayer | Synchronizing object | planting · Leaf0.005
+Fra:1 Mem:422.91M (Peak 422.91M) | Time:00:00.61 | Mem:0.00M, Peak:0.00M | Hanliu_Garden_Highpoly, ViewLayer | Synchronizing object | planting · Pink
+Fra:1 Mem:439.42M (Peak 439.42M) | Time:00:00.61 | Mem:0.00M, Peak:0.00M | Hanliu_Garden_Highpoly, ViewLayer | Synchronizing object | planting · White
+Fra:1 Mem:443.13M (Peak 443.13M) | Time:00:00.61 | Mem:0.00M, Peak:0.00M | Hanliu_Garden_Highpoly, ViewLayer | Synchronizing object | planting · Leaf4.004
+Fra:1 Mem:442.54M (Peak 443.13M) | Time:00:00.61 | Mem:0.00M, Peak:0.00M | Hanliu_Garden_Highpoly, ViewLayer | Synchronizing object | planting · Leaf3.004
+Fra:1 Mem:446.53M (Peak 446.53M) | Time:00:00.61 | Mem:0.00M, Peak:0.00M | Hanliu_Garden_Highpoly, ViewLayer | Synchronizing object | planting · Wood.006
+Fra:1 Mem:446.77M (Peak 446.77M) | Time:00:00.61 | Mem:0.00M, Peak:0.00M | Hanliu_Garden_Highpoly, ViewLayer | Synchronizing object | planting · Leaf3.005
+Fra:1 Mem:450.94M (Peak 451.29M) | Time:00:00.61 | Mem:0.00M, Peak:0.00M | Hanliu_Garden_Highpoly, ViewLayer | Synchronizing object | planting · Leaf4.008
+Fra:1 Mem:451.30M (Peak 451.30M) | Time:00:00.61 | Mem:0.00M, Peak:0.00M | Hanliu_Garden_Highpoly, ViewLayer | Synchronizing object | planting · Leaf4.005
+Fra:1 Mem:455.17M (Peak 455.17M) | Time:00:00.62 | Mem:0.00M, Peak:0.00M | Hanliu_Garden_Highpoly, ViewLayer | Synchronizing object | planting · Leaf0.006
+Fra:1 Mem:459.43M (Peak 459.43M) | Time:00:00.62 | Mem:0.00M, Peak:0.00M | Hanliu_Garden_Highpoly, ViewLayer | Synchronizing object | planting · Leaf3.008
+Fra:1 Mem:460.15M (Peak 460.15M) | Time:00:00.62 | Mem:0.00M, Peak:0.00M | Hanliu_Garden_Highpoly, ViewLayer | Synchronizing object | planting · Wood.007
+Fra:1 Mem:461.38M (Peak 461.38M) | Time:00:00.62 | Mem:0.00M, Peak:0.00M | Hanliu_Garden_Highpoly, ViewLayer | Synchronizing object | planting · Leaf4.006
+Fra:1 Mem:470.41M (Peak 470.41M) | Time:00:00.62 | Mem:0.00M, Peak:0.00M | Hanliu_Garden_Highpoly, ViewLayer | Synchronizing object | planting · Leaf0.007
+Fra:1 Mem:470.52M (Peak 470.52M) | Time:00:00.62 | Mem:0.00M, Peak:0.00M | Hanliu_Garden_Highpoly, ViewLayer | Synchronizing object | planting · Leaf3.006
+Fra:1 Mem:471.90M (Peak 471.90M) | Time:00:00.62 | Mem:0.00M, Peak:0.00M | Hanliu_Garden_Highpoly, ViewLayer | Synchronizing object | planting · Wood.008
+Fra:1 Mem:472.45M (Peak 472.45M) | Time:00:00.62 | Mem:0.00M, Peak:0.00M | Hanliu_Garden_Highpoly, ViewLayer | Synchronizing object | planting · Leaf4.007
+Fra:1 Mem:475.18M (Peak 475.18M) | Time:00:00.62 | Mem:0.00M, Peak:0.00M | Hanliu_Garden_Highpoly, ViewLayer | Synchronizing object | planting · Leaf3.007
+Fra:1 Mem:476.38M (Peak 476.38M) | Time:00:00.62 | Mem:0.00M, Peak:0.00M | Hanliu_Garden_Highpoly, ViewLayer | Synchronizing object | planting · Leaf0.008
+Fra:1 Mem:477.82M (Peak 477.82M) | Time:00:00.62 | Mem:0.00M, Peak:0.00M | Hanliu_Garden_Highpoly, ViewLayer | Synchronizing object | planting · Wood.009
+Fra:1 Mem:478.58M (Peak 478.58M) | Time:00:00.62 | Mem:0.00M, Peak:0.00M | Hanliu_Garden_Highpoly, ViewLayer | Synchronizing object | planting · Leaf0.009
+Fra:1 Mem:486.99M (Peak 499.21M) | Time:00:00.62 | Mem:0.00M, Peak:0.00M | Hanliu_Garden_Highpoly, ViewLayer | Initializing
+Fra:1 Mem:421.23M (Peak 499.21M) | Time:00:00.63 | Mem:0.00M, Peak:0.00M | Hanliu_Garden_Highpoly, ViewLayer | Waiting for render to start
+Fra:1 Mem:421.23M (Peak 499.21M) | Time:00:00.63 | Mem:0.00M, Peak:0.00M | Hanliu_Garden_Highpoly, ViewLayer | Updating Scene
+Fra:1 Mem:421.23M (Peak 499.21M) | Time:00:00.63 | Mem:0.00M, Peak:0.00M | Hanliu_Garden_Highpoly, ViewLayer | Updating Shaders
+Fra:1 Mem:421.23M (Peak 499.21M) | Time:00:00.63 | Mem:0.00M, Peak:0.00M | Hanliu_Garden_Highpoly, ViewLayer | Loading render kernels (may take a few minutes the first time)
+Fra:1 Mem:421.39M (Peak 499.21M) | Time:00:00.76 | Mem:0.09M, Peak:0.09M | Hanliu_Garden_Highpoly, ViewLayer | Updating Procedurals
+Fra:1 Mem:421.39M (Peak 499.21M) | Time:00:00.76 | Mem:0.09M, Peak:0.09M | Hanliu_Garden_Highpoly, ViewLayer | Updating Background
+Fra:1 Mem:421.39M (Peak 499.21M) | Time:00:00.76 | Mem:0.09M, Peak:0.09M | Hanliu_Garden_Highpoly, ViewLayer | Updating Camera
+Fra:1 Mem:421.39M (Peak 499.21M) | Time:00:00.76 | Mem:0.09M, Peak:0.09M | Hanliu_Garden_Highpoly, ViewLayer | Updating Meshes Flags
+Fra:1 Mem:421.39M (Peak 499.21M) | Time:00:00.76 | Mem:0.09M, Peak:0.09M | Hanliu_Garden_Highpoly, ViewLayer | Updating Objects
+Fra:1 Mem:421.39M (Peak 499.21M) | Time:00:00.76 | Mem:0.09M, Peak:0.09M | Hanliu_Garden_Highpoly, ViewLayer | Updating Objects | Copying Transformations to device
+Fra:1 Mem:421.44M (Peak 499.21M) | Time:00:00.76 | Mem:0.13M, Peak:0.13M | Hanliu_Garden_Highpoly, ViewLayer | Updating Particle Systems
+Fra:1 Mem:421.44M (Peak 499.21M) | Time:00:00.76 | Mem:0.13M, Peak:0.13M | Hanliu_Garden_Highpoly, ViewLayer | Updating Particle Systems | Copying Particles to device
+Fra:1 Mem:421.44M (Peak 499.21M) | Time:00:00.76 | Mem:0.13M, Peak:0.13M | Hanliu_Garden_Highpoly, ViewLayer | Updating Meshes
+Fra:1 Mem:421.44M (Peak 499.21M) | Time:00:00.76 | Mem:0.13M, Peak:0.13M | Hanliu_Garden_Highpoly, ViewLayer | Updating Objects | Applying Static Transformations
+Fra:1 Mem:421.44M (Peak 499.21M) | Time:00:00.76 | Mem:0.13M, Peak:0.13M | Hanliu_Garden_Highpoly, ViewLayer | Updating Mesh | Computing attributes
+Fra:1 Mem:447.01M (Peak 499.21M) | Time:00:00.76 | Mem:0.14M, Peak:0.14M | Hanliu_Garden_Highpoly, ViewLayer | Updating Mesh | Copying Attributes to device
+Fra:1 Mem:446.99M (Peak 499.21M) | Time:00:00.77 | Mem:25.68M, Peak:25.68M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH light 194/193 | Building BVH
+Fra:1 Mem:446.99M (Peak 499.21M) | Time:00:00.77 | Mem:25.68M, Peak:25.68M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH home_Plaster 3/193 | Building BVH
+Fra:1 Mem:446.99M (Peak 499.21M) | Time:00:00.77 | Mem:25.68M, Peak:25.68M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH home_Wood 4/193 | Building BVH
+Fra:1 Mem:446.99M (Peak 499.21M) | Time:00:00.77 | Mem:25.68M, Peak:25.68M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH home_Tile1 5/193 | Building BVH
+Fra:1 Mem:446.99M (Peak 499.21M) | Time:00:00.77 | Mem:25.68M, Peak:25.68M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH home_Tile3 8/193 | Building BVH
+Fra:1 Mem:446.99M (Peak 499.21M) | Time:00:00.77 | Mem:25.68M, Peak:25.68M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH home_StoneLight 10/193 | Building BVH
+Fra:1 Mem:446.99M (Peak 499.21M) | Time:00:00.77 | Mem:25.68M, Peak:25.68M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH home_Paper 12/193 | Building BVH
+Fra:1 Mem:446.99M (Peak 499.21M) | Time:00:00.77 | Mem:25.68M, Peak:25.68M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH home_Paper 12/193 | Building OptiX acceleration structure
+Fra:1 Mem:447.14M (Peak 499.21M) | Time:00:00.77 | Mem:25.68M, Peak:25.68M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH Large sky fill 193/193 | Building BVH
+Fra:1 Mem:447.19M (Peak 499.21M) | Time:00:00.77 | Mem:25.68M, Peak:25.68M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH Large sky fill 193/193 | Building OptiX acceleration structure
+Fra:1 Mem:447.19M (Peak 499.21M) | Time:00:00.77 | Mem:25.68M, Peak:25.68M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH Soft afternoon sun 192/193 | Building BVH
+Fra:1 Mem:447.20M (Peak 499.21M) | Time:00:00.77 | Mem:25.68M, Peak:25.68M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH Soft afternoon sun 192/193 | Building OptiX acceleration structure
+Fra:1 Mem:447.20M (Peak 499.21M) | Time:00:00.77 | Mem:25.68M, Peak:25.68M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH birds_Ink.003 191/193 | Building BVH
+Fra:1 Mem:447.20M (Peak 499.21M) | Time:00:00.77 | Mem:25.68M, Peak:25.68M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH birds_Ink.003 191/193 | Building OptiX acceleration structure
+Fra:1 Mem:449.26M (Peak 499.21M) | Time:00:00.77 | Mem:28.12M, Peak:28.12M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH Inscription 博客 13/193 | Building BVH
+Fra:1 Mem:449.26M (Peak 499.21M) | Time:00:00.77 | Mem:28.12M, Peak:28.12M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH Inscription 博客 13/193 | Building OptiX acceleration structure
+Fra:1 Mem:450.27M (Peak 499.21M) | Time:00:00.77 | Mem:29.01M, Peak:29.18M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH blog_Stone 14/193 | Building BVH
+Fra:1 Mem:450.27M (Peak 499.21M) | Time:00:00.77 | Mem:29.01M, Peak:29.18M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH blog_Stone 14/193 | Building OptiX acceleration structure
+Fra:1 Mem:450.27M (Peak 499.21M) | Time:00:00.77 | Mem:29.06M, Peak:29.18M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH blog_StoneLight 15/193 | Building BVH
+Fra:1 Mem:450.27M (Peak 499.21M) | Time:00:00.77 | Mem:29.06M, Peak:29.18M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH blog_StoneLight 15/193 | Building OptiX acceleration structure
+Fra:1 Mem:450.27M (Peak 499.21M) | Time:00:00.77 | Mem:29.24M, Peak:29.24M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH blog_Plaster 16/193 | Building BVH
+Fra:1 Mem:450.27M (Peak 499.21M) | Time:00:00.77 | Mem:29.24M, Peak:29.24M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH blog_Plaster 16/193 | Building OptiX acceleration structure
+Fra:1 Mem:450.17M (Peak 499.21M) | Time:00:00.77 | Mem:29.00M, Peak:29.52M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH blog_Wood 17/193 | Building BVH
+Fra:1 Mem:450.17M (Peak 499.21M) | Time:00:00.77 | Mem:29.00M, Peak:29.52M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH blog_Wood 17/193 | Building OptiX acceleration structure
+Fra:1 Mem:448.34M (Peak 499.21M) | Time:00:00.77 | Mem:28.64M, Peak:35.29M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH blog_Paper 18/193 | Building BVH
+Fra:1 Mem:448.34M (Peak 499.21M) | Time:00:00.77 | Mem:28.64M, Peak:35.29M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH blog_Paper 18/193 | Building OptiX acceleration structure
+Fra:1 Mem:448.42M (Peak 499.21M) | Time:00:00.77 | Mem:28.71M, Peak:35.29M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH blog_WoodLight 19/193 | Building BVH
+Fra:1 Mem:448.42M (Peak 499.21M) | Time:00:00.77 | Mem:28.72M, Peak:35.29M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH blog_WoodLight 19/193 | Building OptiX acceleration structure
+Fra:1 Mem:448.54M (Peak 499.21M) | Time:00:00.77 | Mem:28.85M, Peak:35.29M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH blog_Wood.001 20/193 | Building BVH
+Fra:1 Mem:448.54M (Peak 499.21M) | Time:00:00.77 | Mem:28.87M, Peak:35.29M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH blog_Wood.001 20/193 | Building OptiX acceleration structure
+Fra:1 Mem:448.78M (Peak 499.21M) | Time:00:00.78 | Mem:29.07M, Peak:35.29M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH birds_DuckBrown.001 190/193 | Building BVH
+Fra:1 Mem:448.78M (Peak 499.21M) | Time:00:00.78 | Mem:29.07M, Peak:35.29M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH birds_DuckBrown.001 190/193 | Building OptiX acceleration structure
+Fra:1 Mem:448.71M (Peak 499.21M) | Time:00:00.78 | Mem:29.13M, Peak:35.29M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH blog_Tile1 21/193 | Building BVH
+Fra:1 Mem:448.71M (Peak 499.21M) | Time:00:00.78 | Mem:29.14M, Peak:35.29M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH blog_Tile1 21/193 | Building OptiX acceleration structure
+Fra:1 Mem:449.35M (Peak 499.21M) | Time:00:00.78 | Mem:30.03M, Peak:35.29M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH blog_Tile0 22/193 | Building BVH
+Fra:1 Mem:449.35M (Peak 499.21M) | Time:00:00.78 | Mem:30.03M, Peak:35.29M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH blog_Tile0 22/193 | Building OptiX acceleration structure
+Fra:1 Mem:449.64M (Peak 499.21M) | Time:00:00.78 | Mem:30.10M, Peak:35.29M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH blog_Tile2 23/193 | Building BVH
+Fra:1 Mem:449.64M (Peak 499.21M) | Time:00:00.78 | Mem:30.10M, Peak:35.29M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH blog_Tile2 23/193 | Building OptiX acceleration structure
+Fra:1 Mem:448.84M (Peak 499.21M) | Time:00:00.78 | Mem:30.12M, Peak:35.29M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH blog_Tile3 24/193 | Building BVH
+Fra:1 Mem:448.84M (Peak 499.21M) | Time:00:00.78 | Mem:30.13M, Peak:35.29M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH blog_Tile3 24/193 | Building OptiX acceleration structure
+Fra:1 Mem:448.94M (Peak 499.21M) | Time:00:00.78 | Mem:30.22M, Peak:35.29M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH blog_Burgundy 25/193 | Building BVH
+Fra:1 Mem:448.94M (Peak 499.21M) | Time:00:00.78 | Mem:30.28M, Peak:35.29M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH blog_Burgundy 25/193 | Building OptiX acceleration structure
+Fra:1 Mem:448.99M (Peak 499.21M) | Time:00:00.78 | Mem:30.29M, Peak:35.29M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH blog_Ceramic 26/193 | Building BVH
+Fra:1 Mem:448.99M (Peak 499.21M) | Time:00:00.78 | Mem:30.30M, Peak:35.29M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH blog_Ceramic 26/193 | Building OptiX acceleration structure
+Fra:1 Mem:449.07M (Peak 499.21M) | Time:00:00.78 | Mem:30.71M, Peak:35.29M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH Inscription 别苑杂务 27/193 | Building BVH
+Fra:1 Mem:449.07M (Peak 499.21M) | Time:00:00.78 | Mem:30.71M, Peak:35.29M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH Inscription 别苑杂务 27/193 | Building OptiX acceleration structure
+Fra:1 Mem:450.70M (Peak 499.21M) | Time:00:00.78 | Mem:32.24M, Peak:35.29M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH chores_StoneLight 28/193 | Building BVH
+Fra:1 Mem:450.70M (Peak 499.21M) | Time:00:00.78 | Mem:32.46M, Peak:35.29M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH chores_StoneLight 28/193 | Building OptiX acceleration structure
+Fra:1 Mem:450.62M (Peak 499.21M) | Time:00:00.78 | Mem:32.69M, Peak:35.29M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH chores_Wood 29/193 | Building BVH
+Fra:1 Mem:450.62M (Peak 499.21M) | Time:00:00.78 | Mem:32.69M, Peak:35.29M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH chores_Wood 29/193 | Building OptiX acceleration structure
+Fra:1 Mem:450.60M (Peak 499.21M) | Time:00:00.78 | Mem:32.18M, Peak:35.29M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH chores_Plaster 30/193 | Building BVH
+Fra:1 Mem:450.60M (Peak 499.21M) | Time:00:00.78 | Mem:32.18M, Peak:35.29M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH chores_Plaster 30/193 | Building OptiX acceleration structure
+Fra:1 Mem:450.35M (Peak 499.21M) | Time:00:00.78 | Mem:32.18M, Peak:35.29M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH chores_Tile1 31/193 | Building BVH
+Fra:1 Mem:450.35M (Peak 499.21M) | Time:00:00.78 | Mem:32.54M, Peak:35.29M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH chores_Tile1 31/193 | Building OptiX acceleration structure
+Fra:1 Mem:450.47M (Peak 499.21M) | Time:00:00.78 | Mem:32.37M, Peak:35.29M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH birds_Ink.002 189/193 | Building BVH
+Fra:1 Mem:450.47M (Peak 499.21M) | Time:00:00.78 | Mem:32.37M, Peak:35.29M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH birds_Ink.002 189/193 | Building OptiX acceleration structure
+Fra:1 Mem:449.84M (Peak 499.21M) | Time:00:00.78 | Mem:33.69M, Peak:35.29M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH chores_Tile0 32/193 | Building BVH
+Fra:1 Mem:449.84M (Peak 499.21M) | Time:00:00.78 | Mem:33.69M, Peak:35.29M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH chores_Tile0 32/193 | Building OptiX acceleration structure
+Fra:1 Mem:449.55M (Peak 499.21M) | Time:00:00.78 | Mem:33.34M, Peak:35.29M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH chores_Tile2 33/193 | Building BVH
+Fra:1 Mem:449.55M (Peak 499.21M) | Time:00:00.78 | Mem:33.34M, Peak:35.29M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH chores_Tile2 33/193 | Building OptiX acceleration structure
+Fra:1 Mem:449.38M (Peak 499.21M) | Time:00:00.78 | Mem:32.31M, Peak:35.29M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH chores_Tile3 34/193 | Building BVH
+Fra:1 Mem:449.38M (Peak 499.21M) | Time:00:00.78 | Mem:32.75M, Peak:35.29M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH chores_Tile3 34/193 | Building OptiX acceleration structure
+Fra:1 Mem:449.29M (Peak 499.21M) | Time:00:00.78 | Mem:32.31M, Peak:35.29M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH chores_WoodLight 35/193 | Building BVH
+Fra:1 Mem:449.29M (Peak 499.21M) | Time:00:00.78 | Mem:32.45M, Peak:35.29M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH chores_WoodLight 35/193 | Building OptiX acceleration structure
+Fra:1 Mem:449.23M (Peak 499.21M) | Time:00:00.78 | Mem:32.31M, Peak:35.29M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH chores_Wood.001 36/193 | Building BVH
+Fra:1 Mem:449.23M (Peak 499.21M) | Time:00:00.78 | Mem:32.49M, Peak:35.29M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH chores_Wood.001 36/193 | Building OptiX acceleration structure
+Fra:1 Mem:449.16M (Peak 499.21M) | Time:00:00.79 | Mem:32.32M, Peak:35.29M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH chores_Paper 37/193 | Building BVH
+Fra:1 Mem:449.16M (Peak 499.21M) | Time:00:00.79 | Mem:32.32M, Peak:35.29M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH chores_Paper 37/193 | Building OptiX acceleration structure
+Fra:1 Mem:447.47M (Peak 499.21M) | Time:00:00.79 | Mem:31.95M, Peak:40.13M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH Inscription 造物录 38/193 | Building BVH
+Fra:1 Mem:447.47M (Peak 499.21M) | Time:00:00.79 | Mem:31.95M, Peak:40.13M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH Inscription 造物录 38/193 | Building OptiX acceleration structure
+Fra:1 Mem:448.84M (Peak 499.21M) | Time:00:00.79 | Mem:33.55M, Peak:40.13M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH making_Stone 39/193 | Building BVH
+Fra:1 Mem:448.84M (Peak 499.21M) | Time:00:00.79 | Mem:33.84M, Peak:40.13M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH making_Stone 39/193 | Building OptiX acceleration structure
+Fra:1 Mem:448.74M (Peak 499.21M) | Time:00:00.79 | Mem:33.31M, Peak:40.13M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH making_StoneLight 40/193 | Building BVH
+Fra:1 Mem:448.74M (Peak 499.21M) | Time:00:00.79 | Mem:33.32M, Peak:40.13M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH making_StoneLight 40/193 | Building OptiX acceleration structure
+Fra:1 Mem:448.75M (Peak 499.21M) | Time:00:00.79 | Mem:33.32M, Peak:40.13M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH making_Plaster 41/193 | Building BVH
+Fra:1 Mem:448.75M (Peak 499.21M) | Time:00:00.79 | Mem:33.32M, Peak:40.13M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH making_Plaster 41/193 | Building OptiX acceleration structure
+Fra:1 Mem:448.56M (Peak 499.21M) | Time:00:00.79 | Mem:33.34M, Peak:40.13M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH making_Wood 42/193 | Building BVH
+Fra:1 Mem:448.56M (Peak 499.21M) | Time:00:00.79 | Mem:33.34M, Peak:40.13M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH making_Wood 42/193 | Building OptiX acceleration structure
+Fra:1 Mem:448.61M (Peak 499.21M) | Time:00:00.79 | Mem:33.36M, Peak:40.13M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH birds_DuckBrown 188/193 | Building BVH
+Fra:1 Mem:448.61M (Peak 499.21M) | Time:00:00.79 | Mem:33.60M, Peak:40.13M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH birds_DuckBrown 188/193 | Building OptiX acceleration structure
+Fra:1 Mem:448.58M (Peak 499.21M) | Time:00:00.79 | Mem:33.37M, Peak:40.13M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH making_Paper 43/193 | Building BVH
+Fra:1 Mem:448.58M (Peak 499.21M) | Time:00:00.79 | Mem:33.37M, Peak:40.13M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH making_Paper 43/193 | Building OptiX acceleration structure
+Fra:1 Mem:448.51M (Peak 499.21M) | Time:00:00.79 | Mem:33.45M, Peak:40.13M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH making_WoodLight 44/193 | Building BVH
+Fra:1 Mem:448.51M (Peak 499.21M) | Time:00:00.79 | Mem:33.45M, Peak:40.13M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH making_WoodLight 44/193 | Building OptiX acceleration structure
+Fra:1 Mem:448.51M (Peak 499.21M) | Time:00:00.79 | Mem:33.38M, Peak:40.13M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH making_Wood.001 45/193 | Building BVH
+Fra:1 Mem:448.51M (Peak 499.21M) | Time:00:00.79 | Mem:33.38M, Peak:40.13M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH making_Wood.001 45/193 | Building OptiX acceleration structure
+Fra:1 Mem:448.68M (Peak 499.21M) | Time:00:00.79 | Mem:33.57M, Peak:40.13M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH making_Tile0 46/193 | Building BVH
+Fra:1 Mem:448.68M (Peak 499.21M) | Time:00:00.79 | Mem:33.59M, Peak:40.13M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH making_Tile0 46/193 | Building OptiX acceleration structure
+Fra:1 Mem:448.85M (Peak 499.21M) | Time:00:00.79 | Mem:33.76M, Peak:40.13M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH making_Tile1 47/193 | Building BVH
+Fra:1 Mem:448.85M (Peak 499.21M) | Time:00:00.79 | Mem:33.76M, Peak:40.13M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH making_Tile1 47/193 | Building OptiX acceleration structure
+Fra:1 Mem:449.23M (Peak 499.21M) | Time:00:00.79 | Mem:34.11M, Peak:40.13M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH making_Tile2 48/193 | Building BVH
+Fra:1 Mem:449.23M (Peak 499.21M) | Time:00:00.79 | Mem:34.11M, Peak:40.13M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH making_Tile2 48/193 | Building OptiX acceleration structure
+Fra:1 Mem:447.98M (Peak 499.21M) | Time:00:00.79 | Mem:33.95M, Peak:40.60M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH making_Tile3 49/193 | Building BVH
+Fra:1 Mem:447.98M (Peak 499.21M) | Time:00:00.79 | Mem:33.95M, Peak:40.60M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH making_Tile3 49/193 | Building OptiX acceleration structure
+Fra:1 Mem:448.02M (Peak 499.21M) | Time:00:00.79 | Mem:33.99M, Peak:40.60M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH making_WoodLight.001 50/193 | Building BVH
+Fra:1 Mem:448.02M (Peak 499.21M) | Time:00:00.79 | Mem:34.01M, Peak:40.60M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH making_WoodLight.001 50/193 | Building OptiX acceleration structure
+Fra:1 Mem:448.02M (Peak 499.21M) | Time:00:00.79 | Mem:34.00M, Peak:40.60M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH making_Ink 51/193 | Building BVH
+Fra:1 Mem:448.02M (Peak 499.21M) | Time:00:00.79 | Mem:34.00M, Peak:40.60M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH making_Ink 51/193 | Building OptiX acceleration structure
+Fra:1 Mem:448.03M (Peak 499.21M) | Time:00:00.79 | Mem:34.15M, Peak:40.60M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH making_Brass 52/193 | Building BVH
+Fra:1 Mem:448.03M (Peak 499.21M) | Time:00:00.79 | Mem:34.32M, Peak:40.60M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH making_Brass 52/193 | Building OptiX acceleration structure
+Fra:1 Mem:447.97M (Peak 499.21M) | Time:00:00.79 | Mem:34.13M, Peak:40.60M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH Inscription 语义花园 53/193 | Building BVH
+Fra:1 Mem:447.97M (Peak 499.21M) | Time:00:00.79 | Mem:34.13M, Peak:40.60M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH Inscription 语义花园 53/193 | Building OptiX acceleration structure
+Fra:1 Mem:449.34M (Peak 499.21M) | Time:00:00.79 | Mem:34.79M, Peak:40.60M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH birds_Yellow 187/193 | Building BVH
+Fra:1 Mem:449.34M (Peak 499.21M) | Time:00:00.79 | Mem:35.42M, Peak:40.60M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH birds_Yellow 187/193 | Building OptiX acceleration structure
+Fra:1 Mem:449.33M (Peak 499.21M) | Time:00:00.79 | Mem:35.41M, Peak:40.60M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH garden_Plaster 54/193 | Building BVH
+Fra:1 Mem:449.33M (Peak 499.21M) | Time:00:00.79 | Mem:35.41M, Peak:40.60M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH garden_Plaster 54/193 | Building OptiX acceleration structure
+Fra:1 Mem:449.33M (Peak 499.21M) | Time:00:00.79 | Mem:36.26M, Peak:40.60M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH garden_StoneLight 55/193 | Building BVH
+Fra:1 Mem:449.33M (Peak 499.21M) | Time:00:00.79 | Mem:36.26M, Peak:40.60M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH garden_StoneLight 55/193 | Building OptiX acceleration structure
+Fra:1 Mem:449.20M (Peak 499.21M) | Time:00:00.79 | Mem:36.18M, Peak:40.60M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH garden_Wood 56/193 | Building BVH
+Fra:1 Mem:449.20M (Peak 499.21M) | Time:00:00.79 | Mem:36.18M, Peak:40.60M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH garden_Wood 56/193 | Building OptiX acceleration structure
+Fra:1 Mem:449.20M (Peak 499.21M) | Time:00:00.80 | Mem:36.35M, Peak:40.60M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH garden_Tile1 57/193 | Building BVH
+Fra:1 Mem:449.20M (Peak 499.21M) | Time:00:00.80 | Mem:36.35M, Peak:40.60M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH garden_Tile1 57/193 | Building OptiX acceleration structure
+Fra:1 Mem:448.98M (Peak 499.21M) | Time:00:00.80 | Mem:36.30M, Peak:40.60M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH garden_Tile2 58/193 | Building BVH
+Fra:1 Mem:448.98M (Peak 499.21M) | Time:00:00.80 | Mem:36.30M, Peak:40.60M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH garden_Tile2 58/193 | Building OptiX acceleration structure
+Fra:1 Mem:448.91M (Peak 499.21M) | Time:00:00.80 | Mem:35.84M, Peak:40.60M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH garden_Tile0 59/193 | Building BVH
+Fra:1 Mem:448.91M (Peak 499.21M) | Time:00:00.80 | Mem:35.94M, Peak:40.60M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH garden_Tile0 59/193 | Building OptiX acceleration structure
+Fra:1 Mem:448.90M (Peak 499.21M) | Time:00:00.80 | Mem:35.83M, Peak:40.60M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH garden_Tile3 60/193 | Building BVH
+Fra:1 Mem:448.90M (Peak 499.21M) | Time:00:00.80 | Mem:35.83M, Peak:40.60M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH garden_Tile3 60/193 | Building OptiX acceleration structure
+Fra:1 Mem:448.90M (Peak 499.21M) | Time:00:00.80 | Mem:35.80M, Peak:40.60M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH garden_Wood.001 61/193 | Building BVH
+Fra:1 Mem:448.90M (Peak 499.21M) | Time:00:00.80 | Mem:35.80M, Peak:40.60M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH garden_Wood.001 61/193 | Building OptiX acceleration structure
+Fra:1 Mem:448.90M (Peak 499.21M) | Time:00:00.80 | Mem:35.82M, Peak:40.60M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH garden_Paper 62/193 | Building BVH
+Fra:1 Mem:448.90M (Peak 499.21M) | Time:00:00.80 | Mem:35.82M, Peak:40.60M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH garden_Paper 62/193 | Building OptiX acceleration structure
+Fra:1 Mem:448.89M (Peak 499.21M) | Time:00:00.80 | Mem:35.80M, Peak:40.60M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH garden_Wood.002 63/193 | Building BVH
+Fra:1 Mem:448.89M (Peak 499.21M) | Time:00:00.80 | Mem:35.80M, Peak:40.60M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH garden_Wood.002 63/193 | Building OptiX acceleration structure
+Fra:1 Mem:447.70M (Peak 499.21M) | Time:00:00.80 | Mem:35.69M, Peak:42.43M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH garden_Leaf4 64/193 | Building BVH
+Fra:1 Mem:447.70M (Peak 499.21M) | Time:00:00.80 | Mem:35.69M, Peak:42.43M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH garden_Leaf4 64/193 | Building OptiX acceleration structure
+Fra:1 Mem:448.36M (Peak 499.21M) | Time:00:00.80 | Mem:36.33M, Peak:42.43M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH birds_DuckGreen 186/193 | Building BVH
+Fra:1 Mem:448.36M (Peak 499.21M) | Time:00:00.80 | Mem:36.36M, Peak:42.43M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH birds_DuckGreen 186/193 | Building OptiX acceleration structure
+Fra:1 Mem:448.36M (Peak 499.21M) | Time:00:00.80 | Mem:36.57M, Peak:42.43M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH garden_Leaf0 65/193 | Building BVH
+Fra:1 Mem:448.36M (Peak 499.21M) | Time:00:00.80 | Mem:36.57M, Peak:42.43M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH garden_Leaf0 65/193 | Building OptiX acceleration structure
+Fra:1 Mem:448.95M (Peak 499.21M) | Time:00:00.80 | Mem:37.84M, Peak:42.43M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH garden_Leaf3 66/193 | Building BVH
+Fra:1 Mem:448.95M (Peak 499.21M) | Time:00:00.80 | Mem:37.84M, Peak:42.43M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH garden_Leaf3 66/193 | Building OptiX acceleration structure
+Fra:1 Mem:449.42M (Peak 499.21M) | Time:00:00.80 | Mem:38.35M, Peak:42.43M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH garden_PalePink 67/193 | Building BVH
+Fra:1 Mem:449.42M (Peak 499.21M) | Time:00:00.80 | Mem:38.35M, Peak:42.43M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH garden_PalePink 67/193 | Building OptiX acceleration structure
+Fra:1 Mem:450.62M (Peak 499.21M) | Time:00:00.80 | Mem:37.60M, Peak:42.43M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH garden_White 68/193 | Building BVH
+Fra:1 Mem:450.62M (Peak 499.21M) | Time:00:00.80 | Mem:37.60M, Peak:42.43M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH garden_White 68/193 | Building OptiX acceleration structure
+Fra:1 Mem:451.79M (Peak 499.21M) | Time:00:00.80 | Mem:40.33M, Peak:42.43M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH garden_Purple 69/193 | Building BVH
+Fra:1 Mem:451.79M (Peak 499.21M) | Time:00:00.80 | Mem:40.33M, Peak:42.43M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH garden_Purple 69/193 | Building OptiX acceleration structure
+Fra:1 Mem:452.62M (Peak 499.21M) | Time:00:00.80 | Mem:41.07M, Peak:42.43M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH garden_StoneLight.001 70/193 | Building BVH
+Fra:1 Mem:452.62M (Peak 499.21M) | Time:00:00.80 | Mem:41.10M, Peak:42.43M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH garden_StoneLight.001 70/193 | Building OptiX acceleration structure
+Fra:1 Mem:452.67M (Peak 499.21M) | Time:00:00.80 | Mem:41.11M, Peak:42.43M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH garden_Mortar 71/193 | Building BVH
+Fra:1 Mem:452.67M (Peak 499.21M) | Time:00:00.80 | Mem:41.11M, Peak:42.43M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH garden_Mortar 71/193 | Building OptiX acceleration structure
+Fra:1 Mem:452.75M (Peak 499.21M) | Time:00:00.80 | Mem:41.20M, Peak:42.43M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH garden_Stone 72/193 | Building BVH
+Fra:1 Mem:452.75M (Peak 499.21M) | Time:00:00.80 | Mem:41.20M, Peak:42.43M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH garden_Stone 72/193 | Building OptiX acceleration structure
+Fra:1 Mem:452.82M (Peak 499.21M) | Time:00:00.80 | Mem:42.23M, Peak:42.43M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH Inscription 居士自序 73/193 | Building BVH
+Fra:1 Mem:452.82M (Peak 499.21M) | Time:00:00.80 | Mem:42.23M, Peak:42.43M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH Inscription 居士自序 73/193 | Building OptiX acceleration structure
+Fra:1 Mem:453.80M (Peak 499.21M) | Time:00:00.80 | Mem:42.44M, Peak:43.42M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH about_Stone 74/193 | Building BVH
+Fra:1 Mem:453.80M (Peak 499.21M) | Time:00:00.80 | Mem:42.44M, Peak:43.42M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH about_Stone 74/193 | Building OptiX acceleration structure
+Fra:1 Mem:453.15M (Peak 499.21M) | Time:00:00.81 | Mem:42.23M, Peak:44.83M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH about_StoneLight 75/193 | Building BVH
+Fra:1 Mem:453.15M (Peak 499.21M) | Time:00:00.81 | Mem:42.23M, Peak:44.83M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH about_StoneLight 75/193 | Building OptiX acceleration structure
+Fra:1 Mem:453.15M (Peak 499.21M) | Time:00:00.81 | Mem:42.16M, Peak:44.83M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH birds_BirdGrey.001 185/193 | Building BVH
+Fra:1 Mem:453.15M (Peak 499.21M) | Time:00:00.81 | Mem:42.16M, Peak:44.83M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH birds_BirdGrey.001 185/193 | Building OptiX acceleration structure
+Fra:1 Mem:452.55M (Peak 499.21M) | Time:00:00.81 | Mem:41.92M, Peak:44.83M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH about_Plaster 76/193 | Building BVH
+Fra:1 Mem:452.55M (Peak 499.21M) | Time:00:00.81 | Mem:41.92M, Peak:44.83M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH about_Plaster 76/193 | Building OptiX acceleration structure
+Fra:1 Mem:451.93M (Peak 499.21M) | Time:00:00.81 | Mem:47.84M, Peak:47.84M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH about_Paper 77/193 | Building BVH
+Fra:1 Mem:451.93M (Peak 499.21M) | Time:00:00.81 | Mem:47.84M, Peak:47.84M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH about_Paper 77/193 | Building OptiX acceleration structure
+Fra:1 Mem:450.57M (Peak 499.21M) | Time:00:00.81 | Mem:41.28M, Peak:47.84M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH about_WoodLight 78/193 | Building BVH
+Fra:1 Mem:450.57M (Peak 499.21M) | Time:00:00.81 | Mem:41.28M, Peak:47.84M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH about_WoodLight 78/193 | Building OptiX acceleration structure
+Fra:1 Mem:449.34M (Peak 499.21M) | Time:00:00.81 | Mem:40.94M, Peak:47.84M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH about_Wood 79/193 | Building BVH
+Fra:1 Mem:449.34M (Peak 499.21M) | Time:00:00.81 | Mem:40.94M, Peak:47.84M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH about_Wood 79/193 | Building OptiX acceleration structure
+Fra:1 Mem:448.50M (Peak 499.21M) | Time:00:00.81 | Mem:40.87M, Peak:47.84M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH about_Wood.001 80/193 | Building BVH
+Fra:1 Mem:448.50M (Peak 499.21M) | Time:00:00.81 | Mem:41.03M, Peak:47.84M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH about_Wood.001 80/193 | Building OptiX acceleration structure
+Fra:1 Mem:448.60M (Peak 499.21M) | Time:00:00.81 | Mem:40.90M, Peak:47.84M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH about_Brass 81/193 | Building BVH
+Fra:1 Mem:448.60M (Peak 499.21M) | Time:00:00.81 | Mem:41.31M, Peak:47.84M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH about_Brass 81/193 | Building OptiX acceleration structure
+Fra:1 Mem:448.52M (Peak 499.21M) | Time:00:00.81 | Mem:41.24M, Peak:47.84M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH about_Tile1 82/193 | Building BVH
+Fra:1 Mem:448.52M (Peak 499.21M) | Time:00:00.81 | Mem:41.24M, Peak:47.84M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH about_Tile1 82/193 | Building OptiX acceleration structure
+Fra:1 Mem:448.82M (Peak 499.21M) | Time:00:00.81 | Mem:41.27M, Peak:47.84M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH about_Tile2 83/193 | Building BVH
+Fra:1 Mem:448.82M (Peak 499.21M) | Time:00:00.81 | Mem:41.27M, Peak:47.84M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH about_Tile2 83/193 | Building OptiX acceleration structure
+Fra:1 Mem:447.77M (Peak 499.21M) | Time:00:00.81 | Mem:41.14M, Peak:47.84M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH about_Tile0 84/193 | Building BVH
+Fra:1 Mem:447.77M (Peak 499.21M) | Time:00:00.81 | Mem:41.15M, Peak:47.84M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH about_Tile0 84/193 | Building OptiX acceleration structure
+Fra:1 Mem:447.92M (Peak 499.21M) | Time:00:00.81 | Mem:41.33M, Peak:47.84M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH about_Tile3 85/193 | Building BVH
+Fra:1 Mem:447.92M (Peak 499.21M) | Time:00:00.81 | Mem:41.33M, Peak:47.84M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH about_Tile3 85/193 | Building OptiX acceleration structure
+Fra:1 Mem:447.96M (Peak 499.21M) | Time:00:00.81 | Mem:41.33M, Peak:47.84M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH about_StoneLight.001 86/193 | Building BVH
+Fra:1 Mem:447.96M (Peak 499.21M) | Time:00:00.81 | Mem:41.42M, Peak:47.84M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH about_StoneLight.001 86/193 | Building OptiX acceleration structure
+Fra:1 Mem:447.92M (Peak 499.21M) | Time:00:00.81 | Mem:41.33M, Peak:47.84M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH birds_Orange 184/193 | Building BVH
+Fra:1 Mem:447.92M (Peak 499.21M) | Time:00:00.81 | Mem:41.45M, Peak:47.84M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH birds_Orange 184/193 | Building OptiX acceleration structure
+Fra:1 Mem:447.91M (Peak 499.21M) | Time:00:00.81 | Mem:41.35M, Peak:47.84M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH about_Wood.002 87/193 | Building BVH
+Fra:1 Mem:447.91M (Peak 499.21M) | Time:00:00.81 | Mem:41.36M, Peak:47.84M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH about_Wood.002 87/193 | Building OptiX acceleration structure
+Fra:1 Mem:448.08M (Peak 499.21M) | Time:00:00.82 | Mem:41.52M, Peak:47.84M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH about_Tile3.001 88/193 | Building BVH
+Fra:1 Mem:448.08M (Peak 499.21M) | Time:00:00.82 | Mem:41.54M, Peak:47.84M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH about_Tile3.001 88/193 | Building OptiX acceleration structure
+Fra:1 Mem:448.10M (Peak 499.21M) | Time:00:00.82 | Mem:41.55M, Peak:47.84M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH about_Tile0.001 89/193 | Building BVH
+Fra:1 Mem:448.10M (Peak 499.21M) | Time:00:00.82 | Mem:41.68M, Peak:47.84M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH about_Tile0.001 89/193 | Building OptiX acceleration structure
+Fra:1 Mem:448.15M (Peak 499.21M) | Time:00:00.82 | Mem:41.99M, Peak:47.84M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH about_Tile1.001 90/193 | Building BVH
+Fra:1 Mem:448.15M (Peak 499.21M) | Time:00:00.82 | Mem:42.42M, Peak:47.84M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH about_Tile1.001 90/193 | Building OptiX acceleration structure
+Fra:1 Mem:448.20M (Peak 499.21M) | Time:00:00.82 | Mem:41.87M, Peak:47.84M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH about_Tile2.001 91/193 | Building BVH
+Fra:1 Mem:448.20M (Peak 499.21M) | Time:00:00.82 | Mem:41.87M, Peak:47.84M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH about_Tile2.001 91/193 | Building OptiX acceleration structure
+Fra:1 Mem:448.28M (Peak 499.21M) | Time:00:00.82 | Mem:41.91M, Peak:47.84M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH about_WoodLight.001 92/193 | Building BVH
+Fra:1 Mem:448.28M (Peak 499.21M) | Time:00:00.82 | Mem:41.91M, Peak:47.84M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH about_WoodLight.001 92/193 | Building OptiX acceleration structure
+Fra:1 Mem:447.92M (Peak 499.21M) | Time:00:00.82 | Mem:42.48M, Peak:47.84M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH Inscription 友链 93/193 | Building BVH
+Fra:1 Mem:447.92M (Peak 499.21M) | Time:00:00.82 | Mem:42.48M, Peak:47.84M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH Inscription 友链 93/193 | Building OptiX acceleration structure
+Fra:1 Mem:448.71M (Peak 499.21M) | Time:00:00.82 | Mem:43.37M, Peak:47.84M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH friends_Wood 94/193 | Building BVH
+Fra:1 Mem:448.71M (Peak 499.21M) | Time:00:00.82 | Mem:43.37M, Peak:47.84M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH friends_Wood 94/193 | Building OptiX acceleration structure
+Fra:1 Mem:448.57M (Peak 499.21M) | Time:00:00.82 | Mem:42.74M, Peak:47.84M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH friends_WoodLight 95/193 | Building BVH
+Fra:1 Mem:448.57M (Peak 499.21M) | Time:00:00.82 | Mem:42.84M, Peak:47.84M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH friends_WoodLight 95/193 | Building OptiX acceleration structure
+Fra:1 Mem:448.52M (Peak 499.21M) | Time:00:00.82 | Mem:42.75M, Peak:47.84M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH friends_Ink 96/193 | Building BVH
+Fra:1 Mem:448.52M (Peak 499.21M) | Time:00:00.82 | Mem:42.75M, Peak:47.84M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH friends_Ink 96/193 | Building OptiX acceleration structure
+Fra:1 Mem:448.52M (Peak 499.21M) | Time:00:00.82 | Mem:42.79M, Peak:47.84M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH friends_Wood.001 97/193 | Building BVH
+Fra:1 Mem:448.52M (Peak 499.21M) | Time:00:00.82 | Mem:42.79M, Peak:47.84M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH friends_Wood.001 97/193 | Building OptiX acceleration structure
+Fra:1 Mem:448.54M (Peak 499.21M) | Time:00:00.82 | Mem:42.77M, Peak:47.84M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH birds_Ink.001 183/193 | Building BVH
+Fra:1 Mem:448.54M (Peak 499.21M) | Time:00:00.82 | Mem:43.16M, Peak:47.84M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH birds_Ink.001 183/193 | Building OptiX acceleration structure
+Fra:1 Mem:448.38M (Peak 499.21M) | Time:00:00.82 | Mem:42.77M, Peak:47.84M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH friends_Tile0 98/193 | Building BVH
+Fra:1 Mem:448.38M (Peak 499.21M) | Time:00:00.82 | Mem:42.82M, Peak:47.84M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH friends_Tile0 98/193 | Building OptiX acceleration structure
+Fra:1 Mem:448.36M (Peak 499.21M) | Time:00:00.82 | Mem:43.10M, Peak:47.84M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH friends_Tile2 99/193 | Building BVH
+Fra:1 Mem:448.36M (Peak 499.21M) | Time:00:00.82 | Mem:43.10M, Peak:47.84M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH friends_Tile2 99/193 | Building OptiX acceleration structure
+Fra:1 Mem:448.32M (Peak 499.21M) | Time:00:00.82 | Mem:43.74M, Peak:47.84M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH friends_Tile1 100/193 | Building BVH
+Fra:1 Mem:448.32M (Peak 499.21M) | Time:00:00.82 | Mem:43.74M, Peak:47.84M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH friends_Tile1 100/193 | Building OptiX acceleration structure
+Fra:1 Mem:448.21M (Peak 499.21M) | Time:00:00.82 | Mem:43.25M, Peak:47.84M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH friends_Paper 101/193 | Building BVH
+Fra:1 Mem:448.21M (Peak 499.21M) | Time:00:00.82 | Mem:43.25M, Peak:47.84M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH friends_Paper 101/193 | Building OptiX acceleration structure
+Fra:1 Mem:448.13M (Peak 499.21M) | Time:00:00.82 | Mem:42.88M, Peak:47.84M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH Inscription 会客间 102/193 | Building BVH
+Fra:1 Mem:448.13M (Peak 499.21M) | Time:00:00.82 | Mem:42.88M, Peak:47.84M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH Inscription 会客间 102/193 | Building OptiX acceleration structure
+Fra:1 Mem:449.25M (Peak 499.21M) | Time:00:00.82 | Mem:43.98M, Peak:47.84M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH backyard_Stone 103/193 | Building BVH
+Fra:1 Mem:449.25M (Peak 499.21M) | Time:00:00.82 | Mem:43.98M, Peak:47.84M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH backyard_Stone 103/193 | Building OptiX acceleration structure
+Fra:1 Mem:448.32M (Peak 499.21M) | Time:00:00.82 | Mem:43.76M, Peak:48.28M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH backyard_StoneLight 104/193 | Building BVH
+Fra:1 Mem:448.32M (Peak 499.21M) | Time:00:00.82 | Mem:43.78M, Peak:48.28M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH backyard_StoneLight 104/193 | Building OptiX acceleration structure
+Fra:1 Mem:448.32M (Peak 499.21M) | Time:00:00.82 | Mem:43.77M, Peak:48.28M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH backyard_Wood 105/193 | Building BVH
+Fra:1 Mem:448.32M (Peak 499.21M) | Time:00:00.82 | Mem:43.77M, Peak:48.28M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH backyard_Wood 105/193 | Building OptiX acceleration structure
+Fra:1 Mem:448.34M (Peak 499.21M) | Time:00:00.82 | Mem:43.79M, Peak:48.28M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH backyard_WoodLight 106/193 | Building BVH
+Fra:1 Mem:448.34M (Peak 499.21M) | Time:00:00.82 | Mem:43.80M, Peak:48.28M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH backyard_WoodLight 106/193 | Building OptiX acceleration structure
+Fra:1 Mem:448.35M (Peak 499.21M) | Time:00:00.82 | Mem:43.96M, Peak:48.28M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH backyard_Tile1 107/193 | Building BVH
+Fra:1 Mem:448.35M (Peak 499.21M) | Time:00:00.82 | Mem:43.96M, Peak:48.28M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH backyard_Tile1 107/193 | Building OptiX acceleration structure
+Fra:1 Mem:448.79M (Peak 499.21M) | Time:00:00.82 | Mem:44.37M, Peak:48.28M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH backyard_Tile0 108/193 | Building BVH
+Fra:1 Mem:448.79M (Peak 499.21M) | Time:00:00.82 | Mem:44.37M, Peak:48.28M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH backyard_Tile0 108/193 | Building OptiX acceleration structure
+Fra:1 Mem:449.22M (Peak 499.21M) | Time:00:00.82 | Mem:44.72M, Peak:48.28M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH birds_BirdWhite.001 182/193 | Building BVH
+Fra:1 Mem:449.23M (Peak 499.21M) | Time:00:00.82 | Mem:44.72M, Peak:48.28M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH birds_BirdWhite.001 182/193 | Building OptiX acceleration structure
+Fra:1 Mem:449.22M (Peak 499.21M) | Time:00:00.82 | Mem:44.93M, Peak:48.28M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH backyard_Tile2 109/193 | Building BVH
+Fra:1 Mem:449.22M (Peak 499.21M) | Time:00:00.82 | Mem:44.93M, Peak:48.28M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH backyard_Tile2 109/193 | Building OptiX acceleration structure
+Fra:1 Mem:449.65M (Peak 499.21M) | Time:00:00.83 | Mem:45.19M, Peak:48.28M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH backyard_Wood.001 110/193 | Building BVH
+Fra:1 Mem:449.65M (Peak 499.21M) | Time:00:00.83 | Mem:45.68M, Peak:48.28M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH backyard_Wood.001 110/193 | Building OptiX acceleration structure
+Fra:1 Mem:449.57M (Peak 499.21M) | Time:00:00.83 | Mem:45.21M, Peak:48.28M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH backyard_Ceramic 111/193 | Building BVH
+Fra:1 Mem:449.57M (Peak 499.21M) | Time:00:00.83 | Mem:45.22M, Peak:48.28M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH backyard_Ceramic 111/193 | Building OptiX acceleration structure
+Fra:1 Mem:449.58M (Peak 499.21M) | Time:00:00.83 | Mem:45.22M, Peak:48.28M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH backyard_White 112/193 | Building BVH
+Fra:1 Mem:449.58M (Peak 499.21M) | Time:00:00.83 | Mem:45.22M, Peak:48.28M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH backyard_White 112/193 | Building OptiX acceleration structure
+Fra:1 Mem:448.48M (Peak 499.21M) | Time:00:00.83 | Mem:44.98M, Peak:50.40M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH backyard_Paper 113/193 | Building BVH
+Fra:1 Mem:448.48M (Peak 499.21M) | Time:00:00.83 | Mem:44.99M, Peak:50.40M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH backyard_Paper 113/193 | Building OptiX acceleration structure
+Fra:1 Mem:448.48M (Peak 499.21M) | Time:00:00.83 | Mem:44.98M, Peak:50.40M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH site_Earth 114/193 | Building BVH
+Fra:1 Mem:448.48M (Peak 499.21M) | Time:00:00.83 | Mem:44.99M, Peak:50.40M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH site_Earth 114/193 | Building OptiX acceleration structure
+Fra:1 Mem:448.49M (Peak 499.21M) | Time:00:00.83 | Mem:45.07M, Peak:50.40M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH site_Stone 115/193 | Building BVH
+Fra:1 Mem:448.49M (Peak 499.21M) | Time:00:00.83 | Mem:45.07M, Peak:50.40M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH site_Stone 115/193 | Building OptiX acceleration structure
+Fra:1 Mem:449.28M (Peak 499.21M) | Time:00:00.83 | Mem:45.82M, Peak:50.40M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH site_PondBed 116/193 | Building BVH
+Fra:1 Mem:449.28M (Peak 499.21M) | Time:00:00.83 | Mem:45.85M, Peak:50.40M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH site_PondBed 116/193 | Building OptiX acceleration structure
+Fra:1 Mem:449.27M (Peak 499.21M) | Time:00:00.83 | Mem:45.80M, Peak:50.40M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH site_Water 117/193 | Building BVH
+Fra:1 Mem:449.27M (Peak 499.21M) | Time:00:00.83 | Mem:45.80M, Peak:50.40M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH site_Water 117/193 | Building OptiX acceleration structure
+Fra:1 Mem:448.80M (Peak 499.21M) | Time:00:00.83 | Mem:45.73M, Peak:50.40M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH site_Backdrop 118/193 | Building BVH
+Fra:1 Mem:448.80M (Peak 499.21M) | Time:00:00.83 | Mem:45.73M, Peak:50.40M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH site_Backdrop 118/193 | Building OptiX acceleration structure
+Fra:1 Mem:448.35M (Peak 499.21M) | Time:00:00.83 | Mem:45.65M, Peak:50.40M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH site_StoneLight 119/193 | Building BVH
+Fra:1 Mem:448.35M (Peak 499.21M) | Time:00:00.83 | Mem:45.65M, Peak:50.40M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH site_StoneLight 119/193 | Building OptiX acceleration structure
+Fra:1 Mem:448.76M (Peak 499.21M) | Time:00:00.83 | Mem:46.93M, Peak:50.40M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH birds_BirdGrey 181/193 | Building BVH
+Fra:1 Mem:448.76M (Peak 499.21M) | Time:00:00.83 | Mem:46.93M, Peak:50.40M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH birds_BirdGrey 181/193 | Building OptiX acceleration structure
+Fra:1 Mem:448.41M (Peak 499.21M) | Time:00:00.83 | Mem:46.22M, Peak:50.40M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH site_StoneLight.001 120/193 | Building BVH
+Fra:1 Mem:448.41M (Peak 499.21M) | Time:00:00.83 | Mem:46.22M, Peak:50.40M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH site_StoneLight.001 120/193 | Building OptiX acceleration structure
+Fra:1 Mem:448.57M (Peak 499.21M) | Time:00:00.83 | Mem:46.30M, Peak:50.40M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH site_Mortar 121/193 | Building BVH
+Fra:1 Mem:448.57M (Peak 499.21M) | Time:00:00.83 | Mem:46.30M, Peak:50.40M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH site_Mortar 121/193 | Building OptiX acceleration structure
+Fra:1 Mem:448.80M (Peak 499.21M) | Time:00:00.83 | Mem:46.54M, Peak:50.40M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH site_Stone.001 122/193 | Building BVH
+Fra:1 Mem:448.80M (Peak 499.21M) | Time:00:00.83 | Mem:46.60M, Peak:50.40M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH site_Stone.001 122/193 | Building OptiX acceleration structure
+Fra:1 Mem:448.93M (Peak 499.21M) | Time:00:00.83 | Mem:46.66M, Peak:50.40M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH site_Plaster 123/193 | Building BVH
+Fra:1 Mem:448.93M (Peak 499.21M) | Time:00:00.83 | Mem:46.66M, Peak:50.40M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH site_Plaster 123/193 | Building OptiX acceleration structure
+Fra:1 Mem:448.94M (Peak 499.21M) | Time:00:00.83 | Mem:46.70M, Peak:50.40M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH site_Tile1 124/193 | Building BVH
+Fra:1 Mem:448.94M (Peak 499.21M) | Time:00:00.83 | Mem:46.70M, Peak:50.40M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH site_Tile1 124/193 | Building OptiX acceleration structure
+Fra:1 Mem:449.37M (Peak 499.21M) | Time:00:00.83 | Mem:47.09M, Peak:50.40M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH site_Leaf0 125/193 | Building BVH
+Fra:1 Mem:449.37M (Peak 499.21M) | Time:00:00.83 | Mem:47.09M, Peak:50.40M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH site_Leaf0 125/193 | Building OptiX acceleration structure
+Fra:1 Mem:448.59M (Peak 499.21M) | Time:00:00.83 | Mem:47.17M, Peak:50.98M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH site_Leaf3 126/193 | Building BVH
+Fra:1 Mem:448.59M (Peak 499.21M) | Time:00:00.83 | Mem:47.19M, Peak:50.98M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH site_Leaf3 126/193 | Building OptiX acceleration structure
+Fra:1 Mem:448.59M (Peak 499.21M) | Time:00:00.83 | Mem:47.18M, Peak:50.98M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH site_Pink 127/193 | Building BVH
+Fra:1 Mem:448.59M (Peak 499.21M) | Time:00:00.83 | Mem:47.20M, Peak:50.98M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH site_Pink 127/193 | Building OptiX acceleration structure
+Fra:1 Mem:448.79M (Peak 499.21M) | Time:00:00.83 | Mem:47.38M, Peak:50.98M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH site_PalePink 128/193 | Building BVH
+Fra:1 Mem:448.79M (Peak 499.21M) | Time:00:00.83 | Mem:47.38M, Peak:50.98M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH site_PalePink 128/193 | Building OptiX acceleration structure
+Fra:1 Mem:449.02M (Peak 499.21M) | Time:00:00.84 | Mem:47.60M, Peak:50.98M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH site_Leaf2 129/193 | Building BVH
+Fra:1 Mem:449.02M (Peak 499.21M) | Time:00:00.84 | Mem:47.60M, Peak:50.98M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH site_Leaf2 129/193 | Building OptiX acceleration structure
+Fra:1 Mem:448.63M (Peak 499.21M) | Time:00:00.84 | Mem:47.92M, Peak:50.98M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH bridge_StoneLight 130/193 | Building BVH
+Fra:1 Mem:448.63M (Peak 499.21M) | Time:00:00.84 | Mem:48.23M, Peak:50.98M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH bridge_StoneLight 130/193 | Building OptiX acceleration structure
+Fra:1 Mem:448.62M (Peak 499.21M) | Time:00:00.84 | Mem:47.76M, Peak:50.98M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH birds_Ink 180/193 | Building BVH
+Fra:1 Mem:448.62M (Peak 499.21M) | Time:00:00.84 | Mem:48.15M, Peak:50.98M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH birds_Ink 180/193 | Building OptiX acceleration structure
+Fra:1 Mem:448.46M (Peak 499.21M) | Time:00:00.84 | Mem:48.29M, Peak:50.98M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH bridge_StoneLight.001 131/193 | Building BVH
+Fra:1 Mem:448.46M (Peak 499.21M) | Time:00:00.84 | Mem:48.29M, Peak:50.98M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH bridge_StoneLight.001 131/193 | Building OptiX acceleration structure
+Fra:1 Mem:448.54M (Peak 499.21M) | Time:00:00.84 | Mem:48.10M, Peak:50.98M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH planting_Wood 132/193 | Building BVH
+Fra:1 Mem:448.54M (Peak 499.21M) | Time:00:00.84 | Mem:48.10M, Peak:50.98M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH planting_Wood 132/193 | Building OptiX acceleration structure
+Fra:1 Mem:448.58M (Peak 499.21M) | Time:00:00.84 | Mem:48.36M, Peak:50.98M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH planting_WoodLight 133/193 | Building BVH
+Fra:1 Mem:448.58M (Peak 499.21M) | Time:00:00.84 | Mem:48.36M, Peak:50.98M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH planting_WoodLight 133/193 | Building OptiX acceleration structure
+Fra:1 Mem:450.25M (Peak 499.21M) | Time:00:00.84 | Mem:51.38M, Peak:51.38M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH planting_Leaf0 134/193 | Building BVH
+Fra:1 Mem:450.25M (Peak 499.21M) | Time:00:00.84 | Mem:51.38M, Peak:51.38M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH planting_Leaf0 134/193 | Building OptiX acceleration structure
+Fra:1 Mem:456.33M (Peak 499.21M) | Time:00:00.84 | Mem:50.07M, Peak:52.06M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH planting_Leaf2 135/193 | Building BVH
+Fra:1 Mem:456.33M (Peak 499.21M) | Time:00:00.84 | Mem:50.07M, Peak:52.06M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH planting_Leaf2 135/193 | Building OptiX acceleration structure
+Fra:1 Mem:462.75M (Peak 499.21M) | Time:00:00.84 | Mem:59.38M, Peak:59.38M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH planting_Leaf1 136/193 | Building BVH
+Fra:1 Mem:462.75M (Peak 499.21M) | Time:00:00.84 | Mem:59.38M, Peak:59.38M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH planting_Leaf1 136/193 | Building OptiX acceleration structure
+Fra:1 Mem:469.31M (Peak 499.21M) | Time:00:00.84 | Mem:62.92M, Peak:62.96M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH planting_Wood.001 137/193 | Building BVH
+Fra:1 Mem:469.31M (Peak 499.21M) | Time:00:00.84 | Mem:63.89M, Peak:63.89M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH planting_Wood.001 137/193 | Building OptiX acceleration structure
+Fra:1 Mem:469.16M (Peak 499.21M) | Time:00:00.84 | Mem:70.31M, Peak:70.71M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH planting_Leaf0.001 138/193 | Building BVH
+Fra:1 Mem:469.16M (Peak 499.21M) | Time:00:00.84 | Mem:70.31M, Peak:70.71M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH planting_Leaf0.001 138/193 | Building OptiX acceleration structure
+Fra:1 Mem:469.19M (Peak 499.21M) | Time:00:00.84 | Mem:69.87M, Peak:70.71M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH planting_PalePink 139/193 | Building BVH
+Fra:1 Mem:469.19M (Peak 499.21M) | Time:00:00.84 | Mem:69.87M, Peak:70.71M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH planting_PalePink 139/193 | Building OptiX acceleration structure
+Fra:1 Mem:472.09M (Peak 499.21M) | Time:00:00.84 | Mem:69.99M, Peak:70.71M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH planting_Leaf4 140/193 | Building BVH
+Fra:1 Mem:472.09M (Peak 499.21M) | Time:00:00.84 | Mem:70.27M, Peak:70.71M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH planting_Leaf4 140/193 | Building OptiX acceleration structure
+Fra:1 Mem:474.58M (Peak 499.21M) | Time:00:00.85 | Mem:75.36M, Peak:75.68M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH planting_Leaf3 141/193 | Building BVH
+Fra:1 Mem:474.58M (Peak 499.21M) | Time:00:00.85 | Mem:75.36M, Peak:75.68M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH planting_Leaf3 141/193 | Building OptiX acceleration structure
+Fra:1 Mem:474.85M (Peak 499.21M) | Time:00:00.85 | Mem:76.27M, Peak:76.27M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH birds_BirdWhite 179/193 | Building BVH
+Fra:1 Mem:474.85M (Peak 499.21M) | Time:00:00.85 | Mem:76.27M, Peak:76.27M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH birds_BirdWhite 179/193 | Building OptiX acceleration structure
+Fra:1 Mem:474.66M (Peak 499.21M) | Time:00:00.85 | Mem:76.66M, Peak:77.26M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH planting_Wood.002 142/193 | Building BVH
+Fra:1 Mem:474.66M (Peak 499.21M) | Time:00:00.85 | Mem:76.66M, Peak:77.26M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH planting_Wood.002 142/193 | Building OptiX acceleration structure
+Fra:1 Mem:474.51M (Peak 499.21M) | Time:00:00.85 | Mem:75.73M, Peak:77.26M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH planting_Leaf3.001 143/193 | Building BVH
+Fra:1 Mem:474.51M (Peak 499.21M) | Time:00:00.85 | Mem:75.73M, Peak:77.26M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH planting_Leaf3.001 143/193 | Building OptiX acceleration structure
+Fra:1 Mem:473.09M (Peak 499.21M) | Time:00:00.85 | Mem:75.78M, Peak:84.13M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH planting_Leaf4.001 144/193 | Building BVH
+Fra:1 Mem:473.09M (Peak 499.21M) | Time:00:00.85 | Mem:75.78M, Peak:84.13M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH planting_Leaf4.001 144/193 | Building OptiX acceleration structure
+Fra:1 Mem:466.84M (Peak 499.21M) | Time:00:00.85 | Mem:73.81M, Peak:99.75M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH planting_Leaf0.002 145/193 | Building BVH
+Fra:1 Mem:466.84M (Peak 499.21M) | Time:00:00.85 | Mem:73.81M, Peak:99.75M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH planting_Leaf0.002 145/193 | Building OptiX acceleration structure
+Fra:1 Mem:460.66M (Peak 499.21M) | Time:00:00.85 | Mem:72.13M, Peak:99.75M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH planting_Wood.003 146/193 | Building BVH
+Fra:1 Mem:460.66M (Peak 499.21M) | Time:00:00.85 | Mem:72.13M, Peak:99.75M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH planting_Wood.003 146/193 | Building OptiX acceleration structure
+Fra:1 Mem:460.66M (Peak 499.21M) | Time:00:00.85 | Mem:71.92M, Peak:99.75M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH planting_Leaf0.003 147/193 | Building BVH
+Fra:1 Mem:460.66M (Peak 499.21M) | Time:00:00.85 | Mem:71.92M, Peak:99.75M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH planting_Leaf0.003 147/193 | Building OptiX acceleration structure
+Fra:1 Mem:454.35M (Peak 499.21M) | Time:00:00.86 | Mem:70.89M, Peak:99.75M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH planting_Leaf4.002 148/193 | Building BVH
+Fra:1 Mem:454.35M (Peak 499.21M) | Time:00:00.86 | Mem:70.89M, Peak:99.75M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH planting_Leaf4.002 148/193 | Building OptiX acceleration structure
+Fra:1 Mem:454.35M (Peak 499.21M) | Time:00:00.86 | Mem:71.01M, Peak:99.75M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH planting_Leaf3.002 149/193 | Building BVH
+Fra:1 Mem:454.35M (Peak 499.21M) | Time:00:00.86 | Mem:71.01M, Peak:99.75M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH planting_Leaf3.002 149/193 | Building OptiX acceleration structure
+Fra:1 Mem:454.37M (Peak 499.21M) | Time:00:00.86 | Mem:70.23M, Peak:99.75M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH planting_Wood.004 150/193 | Building BVH
+Fra:1 Mem:454.37M (Peak 499.21M) | Time:00:00.86 | Mem:70.23M, Peak:99.75M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH planting_Wood.004 150/193 | Building OptiX acceleration structure
+Fra:1 Mem:449.15M (Peak 499.21M) | Time:00:00.86 | Mem:69.12M, Peak:99.75M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH planting_Leaf0.004 151/193 | Building BVH
+Fra:1 Mem:449.15M (Peak 499.21M) | Time:00:00.86 | Mem:69.67M, Peak:99.75M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH planting_Leaf0.004 151/193 | Building OptiX acceleration structure
+Fra:1 Mem:449.14M (Peak 499.21M) | Time:00:00.86 | Mem:69.46M, Peak:99.75M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH planting_Leaf3.003 152/193 | Building BVH
+Fra:1 Mem:449.14M (Peak 499.21M) | Time:00:00.86 | Mem:69.46M, Peak:99.75M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH planting_Leaf3.003 152/193 | Building OptiX acceleration structure
+Fra:1 Mem:449.27M (Peak 499.21M) | Time:00:00.86 | Mem:69.18M, Peak:99.75M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH planting_Leaf1.001 178/193 | Building BVH
+Fra:1 Mem:449.27M (Peak 499.21M) | Time:00:00.86 | Mem:69.32M, Peak:99.75M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH planting_Leaf1.001 178/193 | Building OptiX acceleration structure
+Fra:1 Mem:449.33M (Peak 499.21M) | Time:00:00.86 | Mem:70.12M, Peak:99.75M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH planting_Leaf4.003 153/193 | Building BVH
+Fra:1 Mem:449.33M (Peak 499.21M) | Time:00:00.86 | Mem:70.12M, Peak:99.75M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH planting_Leaf4.003 153/193 | Building OptiX acceleration structure
+Fra:1 Mem:449.33M (Peak 499.21M) | Time:00:00.86 | Mem:70.28M, Peak:99.75M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH planting_Wood.005 154/193 | Building BVH
+Fra:1 Mem:449.33M (Peak 499.21M) | Time:00:00.86 | Mem:70.28M, Peak:99.75M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH planting_Wood.005 154/193 | Building OptiX acceleration structure
+Fra:1 Mem:449.12M (Peak 499.21M) | Time:00:00.86 | Mem:70.23M, Peak:99.75M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH planting_Leaf0.005 155/193 | Building BVH
+Fra:1 Mem:449.12M (Peak 499.21M) | Time:00:00.86 | Mem:70.23M, Peak:99.75M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH planting_Leaf0.005 155/193 | Building OptiX acceleration structure
+Fra:1 Mem:449.11M (Peak 499.21M) | Time:00:00.86 | Mem:69.63M, Peak:99.75M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH planting_Pink 156/193 | Building BVH
+Fra:1 Mem:449.11M (Peak 499.21M) | Time:00:00.86 | Mem:69.63M, Peak:99.75M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH planting_Pink 156/193 | Building OptiX acceleration structure
+Fra:1 Mem:451.99M (Peak 499.21M) | Time:00:00.86 | Mem:70.32M, Peak:99.75M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH planting_Leaf4.004 157/193 | Building BVH
+Fra:1 Mem:451.99M (Peak 499.21M) | Time:00:00.86 | Mem:70.32M, Peak:99.75M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH planting_Leaf4.004 157/193 | Building OptiX acceleration structure
+Fra:1 Mem:454.33M (Peak 499.21M) | Time:00:00.86 | Mem:72.88M, Peak:99.75M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH planting_Leaf3.004 158/193 | Building BVH
+Fra:1 Mem:454.33M (Peak 499.21M) | Time:00:00.86 | Mem:72.88M, Peak:99.75M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH planting_Leaf3.004 158/193 | Building OptiX acceleration structure
+Fra:1 Mem:454.34M (Peak 499.21M) | Time:00:00.86 | Mem:74.94M, Peak:99.75M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH planting_Wood.006 159/193 | Building BVH
+Fra:1 Mem:454.34M (Peak 499.21M) | Time:00:00.86 | Mem:75.93M, Peak:99.75M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH planting_Wood.006 159/193 | Building OptiX acceleration structure
+Fra:1 Mem:454.12M (Peak 499.21M) | Time:00:00.86 | Mem:75.12M, Peak:99.75M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH planting_Leaf3.005 160/193 | Building BVH
+Fra:1 Mem:454.12M (Peak 499.21M) | Time:00:00.86 | Mem:75.12M, Peak:99.75M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH planting_Leaf3.005 160/193 | Building OptiX acceleration structure
+Fra:1 Mem:454.33M (Peak 499.21M) | Time:00:00.86 | Mem:76.12M, Peak:99.75M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH planting_Leaf4.005 161/193 | Building BVH
+Fra:1 Mem:454.33M (Peak 499.21M) | Time:00:00.86 | Mem:76.12M, Peak:99.75M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH planting_Leaf4.005 161/193 | Building OptiX acceleration structure
+Fra:1 Mem:454.33M (Peak 499.21M) | Time:00:00.86 | Mem:75.70M, Peak:99.75M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH planting_Leaf0.006 162/193 | Building BVH
+Fra:1 Mem:454.33M (Peak 499.21M) | Time:00:00.86 | Mem:75.70M, Peak:99.75M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH planting_Leaf0.006 162/193 | Building OptiX acceleration structure
+Fra:1 Mem:454.33M (Peak 499.21M) | Time:00:00.87 | Mem:75.67M, Peak:99.75M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH planting_Wood.007 163/193 | Building BVH
+Fra:1 Mem:454.33M (Peak 499.21M) | Time:00:00.87 | Mem:75.97M, Peak:99.75M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH planting_Wood.007 163/193 | Building OptiX acceleration structure
+Fra:1 Mem:454.26M (Peak 499.21M) | Time:00:00.87 | Mem:75.88M, Peak:99.75M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH planting_Leaf2.001 177/193 | Building BVH
+Fra:1 Mem:454.26M (Peak 499.21M) | Time:00:00.87 | Mem:75.88M, Peak:99.75M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH planting_Leaf2.001 177/193 | Building OptiX acceleration structure
+Fra:1 Mem:454.72M (Peak 499.21M) | Time:00:00.87 | Mem:76.31M, Peak:99.75M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH planting_Leaf4.006 164/193 | Building BVH
+Fra:1 Mem:454.72M (Peak 499.21M) | Time:00:00.87 | Mem:76.31M, Peak:99.75M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH planting_Leaf4.006 164/193 | Building OptiX acceleration structure
+Fra:1 Mem:454.95M (Peak 499.21M) | Time:00:00.87 | Mem:77.28M, Peak:99.75M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH planting_Leaf0.007 165/193 | Building BVH
+Fra:1 Mem:454.95M (Peak 499.21M) | Time:00:00.87 | Mem:77.28M, Peak:99.75M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH planting_Leaf0.007 165/193 | Building OptiX acceleration structure
+Fra:1 Mem:454.95M (Peak 499.21M) | Time:00:00.87 | Mem:77.42M, Peak:99.75M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH planting_Leaf3.006 166/193 | Building BVH
+Fra:1 Mem:454.95M (Peak 499.21M) | Time:00:00.87 | Mem:77.42M, Peak:99.75M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH planting_Leaf3.006 166/193 | Building OptiX acceleration structure
+Fra:1 Mem:454.94M (Peak 499.21M) | Time:00:00.87 | Mem:76.60M, Peak:99.75M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH planting_Wood.008 167/193 | Building BVH
+Fra:1 Mem:454.94M (Peak 499.21M) | Time:00:00.87 | Mem:76.60M, Peak:99.75M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH planting_Wood.008 167/193 | Building OptiX acceleration structure
+Fra:1 Mem:449.72M (Peak 499.21M) | Time:00:00.87 | Mem:76.11M, Peak:100.63M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH planting_Leaf4.007 168/193 | Building BVH
+Fra:1 Mem:449.72M (Peak 499.21M) | Time:00:00.87 | Mem:76.11M, Peak:100.63M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH planting_Leaf4.007 168/193 | Building OptiX acceleration structure
+Fra:1 Mem:449.72M (Peak 499.21M) | Time:00:00.87 | Mem:75.51M, Peak:100.63M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH planting_Leaf3.007 169/193 | Building BVH
+Fra:1 Mem:449.72M (Peak 499.21M) | Time:00:00.87 | Mem:75.51M, Peak:100.63M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH planting_Leaf3.007 169/193 | Building OptiX acceleration structure
+Fra:1 Mem:449.93M (Peak 499.21M) | Time:00:00.87 | Mem:76.48M, Peak:100.63M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH planting_Leaf0.008 170/193 | Building BVH
+Fra:1 Mem:449.93M (Peak 499.21M) | Time:00:00.87 | Mem:76.48M, Peak:100.63M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH planting_Leaf0.008 170/193 | Building OptiX acceleration structure
+Fra:1 Mem:449.93M (Peak 499.21M) | Time:00:00.87 | Mem:76.10M, Peak:100.63M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH planting_Wood.009 171/193 | Building BVH
+Fra:1 Mem:449.93M (Peak 499.21M) | Time:00:00.87 | Mem:76.10M, Peak:100.63M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH planting_Wood.009 171/193 | Building OptiX acceleration structure
+Fra:1 Mem:449.73M (Peak 499.21M) | Time:00:00.87 | Mem:76.05M, Peak:100.63M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH planting_Leaf0.009 172/193 | Building BVH
+Fra:1 Mem:449.73M (Peak 499.21M) | Time:00:00.87 | Mem:76.05M, Peak:100.63M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH planting_Leaf0.009 172/193 | Building OptiX acceleration structure
+Fra:1 Mem:449.66M (Peak 499.21M) | Time:00:00.87 | Mem:75.94M, Peak:100.63M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH planting_Leaf3.008 173/193 | Building BVH
+Fra:1 Mem:449.66M (Peak 499.21M) | Time:00:00.87 | Mem:75.94M, Peak:100.63M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH planting_Leaf3.008 173/193 | Building OptiX acceleration structure
+Fra:1 Mem:450.38M (Peak 499.21M) | Time:00:00.87 | Mem:76.46M, Peak:100.63M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH planting_Leaf4.008 174/193 | Building BVH
+Fra:1 Mem:450.38M (Peak 499.21M) | Time:00:00.87 | Mem:76.46M, Peak:100.63M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH planting_Leaf4.008 174/193 | Building OptiX acceleration structure
+Fra:1 Mem:449.88M (Peak 499.21M) | Time:00:00.87 | Mem:76.44M, Peak:100.63M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH planting_Yellow 176/193 | Building BVH
+Fra:1 Mem:449.88M (Peak 499.21M) | Time:00:00.87 | Mem:77.46M, Peak:100.63M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH planting_Yellow 176/193 | Building OptiX acceleration structure
+Fra:1 Mem:449.85M (Peak 499.21M) | Time:00:00.88 | Mem:77.55M, Peak:100.63M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH planting_White 175/193 | Building BVH
+Fra:1 Mem:449.85M (Peak 499.21M) | Time:00:00.88 | Mem:77.55M, Peak:100.63M | Hanliu_Garden_Highpoly, ViewLayer | Updating Geometry BVH planting_White 175/193 | Building OptiX acceleration structure
+Fra:1 Mem:446.99M (Peak 499.21M) | Time:00:00.88 | Mem:76.03M, Peak:100.63M | Hanliu_Garden_Highpoly, ViewLayer | Updating Scene BVH | Building
+Fra:1 Mem:447.00M (Peak 499.21M) | Time:00:00.88 | Mem:76.03M, Peak:100.63M | Hanliu_Garden_Highpoly, ViewLayer | Updating Scene BVH | Building OptiX acceleration structure
+Fra:1 Mem:447.00M (Peak 499.21M) | Time:00:00.88 | Mem:76.06M, Peak:100.63M | Hanliu_Garden_Highpoly, ViewLayer | Updating Scene BVH | Copying BVH to device
+Fra:1 Mem:447.00M (Peak 499.21M) | Time:00:00.88 | Mem:76.06M, Peak:100.63M | Hanliu_Garden_Highpoly, ViewLayer | Updating Mesh | Computing normals
+Fra:1 Mem:545.33M (Peak 545.33M) | Time:00:00.91 | Mem:76.06M, Peak:100.63M | Hanliu_Garden_Highpoly, ViewLayer | Updating Mesh | Copying Mesh to device
+Fra:1 Mem:545.33M (Peak 545.33M) | Time:00:00.92 | Mem:174.39M, Peak:174.39M | Hanliu_Garden_Highpoly, ViewLayer | Updating Objects Flags
+Fra:1 Mem:545.33M (Peak 545.33M) | Time:00:00.92 | Mem:174.39M, Peak:174.39M | Hanliu_Garden_Highpoly, ViewLayer | Updating Primitive Offsets
+Fra:1 Mem:545.33M (Peak 545.33M) | Time:00:00.92 | Mem:174.39M, Peak:174.39M | Hanliu_Garden_Highpoly, ViewLayer | Updating Images
+Fra:1 Mem:545.33M (Peak 545.33M) | Time:00:00.92 | Mem:174.39M, Peak:174.39M | Hanliu_Garden_Highpoly, ViewLayer | Updating Camera Volume
+Fra:1 Mem:545.33M (Peak 545.33M) | Time:00:00.92 | Mem:174.39M, Peak:174.39M | Hanliu_Garden_Highpoly, ViewLayer | Updating Lookup Tables
+Fra:1 Mem:545.33M (Peak 545.33M) | Time:00:00.92 | Mem:174.48M, Peak:174.48M | Hanliu_Garden_Highpoly, ViewLayer | Updating Lights
+Fra:1 Mem:545.33M (Peak 545.33M) | Time:00:00.92 | Mem:174.48M, Peak:174.48M | Hanliu_Garden_Highpoly, ViewLayer | Updating Lights | Computing tree
+Fra:1 Mem:545.33M (Peak 545.33M) | Time:00:00.92 | Mem:174.48M, Peak:174.48M | Hanliu_Garden_Highpoly, ViewLayer | Updating Integrator
+Fra:1 Mem:545.33M (Peak 545.33M) | Time:00:00.92 | Mem:174.48M, Peak:174.48M | Hanliu_Garden_Highpoly, ViewLayer | Updating Film
+Fra:1 Mem:545.33M (Peak 545.33M) | Time:00:00.92 | Mem:174.40M, Peak:174.48M | Hanliu_Garden_Highpoly, ViewLayer | Updating Lookup Tables
+Fra:1 Mem:545.33M (Peak 545.33M) | Time:00:00.92 | Mem:174.48M, Peak:174.48M | Hanliu_Garden_Highpoly, ViewLayer | Updating Baking
+Fra:1 Mem:545.33M (Peak 545.33M) | Time:00:00.92 | Mem:174.48M, Peak:174.48M | Hanliu_Garden_Highpoly, ViewLayer | Updating Device | Writing constant memory
+Fra:1 Mem:545.34M (Peak 545.34M) | Time:00:00.92 | Mem:174.48M, Peak:174.48M | Hanliu_Garden_Highpoly, ViewLayer | Loading denoising kernels (may take a few minutes the first time)
+Fra:1 Mem:549.66M (Peak 549.66M) | Time:00:00.93 | Mem:597.11M, Peak:597.11M | Hanliu_Garden_Highpoly, ViewLayer | Sample 0/32
+Fra:1 Mem:671.97M (Peak 671.97M) | Time:00:00.97 | Remaining:00:00.97 | Mem:719.42M, Peak:719.42M | Hanliu_Garden_Highpoly, ViewLayer | Sample 1/32
+Fra:1 Mem:723.48M (Peak 800.73M) | Time:00:04.93 | Mem:719.43M, Peak:719.43M | Hanliu_Garden_Highpoly, ViewLayer | Sample 32/32
+Fra:1 Mem:723.48M (Peak 800.73M) | Time:00:04.93 | Mem:719.43M, Peak:719.43M | Hanliu_Garden_Highpoly, ViewLayer | Finished
+Saved: 'D:\Projects\博客和机器人\my-astro-blog\artifacts\estate-highpoly\draft.png'
+Time: 00:05.23 (Saving: 00:00.21)
+
+GARDEN [8.7s] Rendered overview
+GARDEN [8.7s] Complete
+
+Blender quit

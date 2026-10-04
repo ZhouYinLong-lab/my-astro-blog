@@ -1,0 +1,121 @@
+{
+  "vertices": 1905897,
+  "polygons": 1264225,
+  "triangles": 2545651,
+  "mesh_objects": 185,
+  "materials": 37,
+  "regions": [
+    {
+      "id": "home",
+      "label": "首页",
+      "href": "/",
+      "anchor": [
+        -10,
+        -11,
+        1.7
+      ],
+      "projection": [
+        0.18545347452163696,
+        0.6468600034713745
+      ]
+    },
+    {
+      "id": "blog",
+      "label": "博客",
+      "href": "/blog/",
+      "anchor": [
+        1,
+        8,
+        3
+      ],
+      "projection": [
+        0.573820173740387,
+        0.33744001388549805
+      ]
+    },
+    {
+      "id": "chores",
+      "label": "别苑杂务",
+      "href": "/chores/",
+      "anchor": [
+        -13,
+        -5,
+        1.8
+      ],
+      "projection": [
+        0.16613923013210297,
+        0.5145629048347473
+      ]
+    },
+    {
+      "id": "making",
+      "label": "造物录",
+      "href": "/chores/making/",
+      "anchor": [
+        -13,
+        0,
+        2.5
+      ],
+      "projection": [
+        0.20486456155776978,
+        0.4057006239891052
+      ]
+    },
+    {
+      "id": "garden",
+      "label": "语义花园",
+      "href": "/chores/garden/",
+      "anchor": [
+        -11,
+        8,
+        1
+      ],
+      "projection": [
+        0.31068155169487,
+        0.3076559901237488
+      ]
+    },
+    {
+      "id": "about",
+      "label": "居士自序",
+      "href": "/about/",
+      "anchor": [
+        12.5,
+        8,
+        2.8
+      ],
+      "projection": [
+        0.8259946703910828,
+        0.41699159145355225
+      ]
+    },
+    {
+      "id": "friends",
+      "label": "友链",
+      "href": "/friend/",
+      "anchor": [
+        -13,
+        -12,
+        1.3
+      ],
+      "projection": [
+        0.11192374676465988,
+        0.655402809381485
+      ]
+    },
+    {
+      "id": "backyard",
+      "label": "会客间",
+      "href": "/backyard/",
+      "anchor": [
+        11,
+        -4,
+        2.5
+      ],
+      "projection": [
+        0.7001615762710571,
+        0.6352574229240417
+      ]
+    }
+  ]
+}
