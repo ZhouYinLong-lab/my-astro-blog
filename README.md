@@ -89,7 +89,7 @@ title: 文章标题        # 必填
 description: 文章描述   # 必填
 pubDate: 2025-01-01    # 必填
 image: /img/cover.webp # 可选
-categories: [技术]     # 可选
+categories: [做东西]   # 可选
 tags: [Astro, 博客]    # 可选
 badge: Pin             # 设为 Pin 可置顶
 draft: true            # 草稿不会出现在列表中

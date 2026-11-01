@@ -57,7 +57,7 @@ export default function FastApiPlayground({ apiBaseUrl = DEFAULT_API_URL }) {
         </button>
         <button
           type="button"
-          onClick={() => callApi("/api/posts?category=尺蠖&limit=10")}
+          onClick={() => callApi("/api/posts?category=解问题&limit=10")}
           disabled={loading}
           className="border-2 border-black bg-white px-3 py-2 font-bold text-black shadow-[3px_3px_0_0_#111] transition hover:-translate-y-0.5 disabled:cursor-wait disabled:opacity-60 dark:border-white dark:bg-zinc-800 dark:text-white dark:shadow-[3px_3px_0_0_#000]"
         >

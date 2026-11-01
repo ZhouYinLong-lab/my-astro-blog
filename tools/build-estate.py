@@ -71,7 +71,7 @@ M = {
 regions = [
     dict(id='home', label='主庭院', subtitle='寒柳别苑', href='/', anchor=[0,-6.1,2.1]),
     dict(id='making', label='机杼工坊', subtitle='项目与工具', href='/chores/making/', anchor=[-5.8,-.5,3]),
-    dict(id='lab', label='尺蠖实验室', subtitle='算法与智能系统', href='/blog/category/尺蠖/', anchor=[5.7,.5,3.4]),
+    dict(id='lab', label='尺蠖实验室', subtitle='算法与智能系统', href='/blog/category/解问题/', anchor=[5.7,.5,3.4]),
     dict(id='library', label='留丝书斋', subtitle='博客与阅读', href='/blog/', anchor=[0,4.6,3.8]),
     dict(id='garden', label='语义花园', subtitle='探索内容联系', href='/chores/garden/', anchor=[-4.4,5.8,1.2]),
     dict(id='backyard', label='会客间', subtitle='留言与交流', href='/backyard/', anchor=[5,-3.4,2.5]),

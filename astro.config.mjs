@@ -17,11 +17,13 @@ import updateConfig from "./src/integration/updateConfig.ts";
 import { remarkReadingTime } from "./src/plugins/remark-reading-time";
 
 import react from "@astrojs/react";
+import blogRedirects from "./src/blogRedirects.ts";
 
 // https://astro.build/config
 export default defineConfig({
   site: USER_SITE,
   output: "static",
+  redirects: blogRedirects,
   style: {
     scss: {
       includePaths: ["./src/styles"],

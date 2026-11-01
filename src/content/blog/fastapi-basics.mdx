@@ -9,7 +9,7 @@ tags:
   - API
   - 编程学习
 categories:
-  - 尺蠖
+  - 解问题
 image: /img/paintings/raphael-school-of-athens.jpg
 ---
 
@@ -261,7 +261,7 @@ def list_posts(
   {
     "slug": "fastapi-basics",
     "title": "FastAPI 入门：给寒柳别苑搭一个小型 API",
-    "category": "尺蠖",
+    "category": "解问题",
     "tags": ["Python", "FastAPI"],
     "content": "这是一篇 FastAPI 学习记录。"
   }
@@ -275,13 +275,13 @@ def list_posts(
 | 参数 | 例子 | FastAPI 的判断方式 |
 | --- | --- | --- |
 | 路径参数 | `/api/posts/{slug}` | 参数名出现在路径模板中 |
-| 查询参数 | `?category=尺蠖&limit=10` | 普通函数参数，且不属于路径 |
+| 查询参数 | `?category=解问题&limit=10` | 普通函数参数，且不属于路径 |
 | 请求体 | `{"message": "..."}` | 参数类型是 Pydantic 模型 |
 
 查询接口可以这样调用：
 
 ```bash
-curl.exe "https://api.zylatent.com/api/posts?category=尺蠖&limit=10"
+curl.exe "https://api.zylatent.com/api/posts?category=解问题&limit=10"
 ```
 
 `Query(ge=1, le=50)` 表示 `limit` 的最小值是 1，最大值是 50。如果传入 `limit=0`，FastAPI 会自动返回 422，而不是让错误参数继续进入业务逻辑。
@@ -555,7 +555,7 @@ print("主题：", "、".join(site["topics"]))
 
 posts = get_json(
     "/api/posts",
-    params={"category": "尺蠖", "limit": 10},
+    params={"category": "解问题", "limit": 10},
 )
 
 for index, post in enumerate(posts, start=1):
@@ -568,7 +568,7 @@ for index, post in enumerate(posts, start=1):
 
 ```bash
 curl.exe https://api.zylatent.com/health
-curl.exe "https://api.zylatent.com/api/posts?category=尺蠖&limit=10"
+curl.exe "https://api.zylatent.com/api/posts?category=解问题&limit=10"
 ```
 
 为了让这个公开演示保持简单，页面暂时只调用 `GET` 接口；读者可以通过线上 `/docs` 或命令行体验留言接口。当前留言只保存在服务器进程的内存中，重启后会消失，也没有验证码、频率限制和内容审核，因此它仍然只是学习演示，不应直接当作正式留言系统使用。

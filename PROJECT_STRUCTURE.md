@@ -151,7 +151,7 @@ hanliu-biyuan/
 |----------|----------|----------|
 | 页面路由 | `src/pages/<section>/index.astro` | 目录名即 URL |
 | 可复用组件 | `src/components/<domain>/` | PascalCase `.astro` |
-| 博客文章 | `src/content/blog/` | 描述性中文名 `.mdx` |
+| 博客文章 | `src/content/blog/` | 混合 kebab-case：技术项目用短英文，中文文章保留中文语义 |
 | 类型定义 | `src/interface/` | `.ts` 文件 |
 | 工具函数 | `src/utils/` | `camelCase.ts` |
 | 全局样式 | `src/styles/` | `kebab-case.scss` |
