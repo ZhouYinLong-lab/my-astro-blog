@@ -1,0 +1,453 @@
+---
+import ThemeToggle from "@components/widgets/ThemeToggle.astro";
+import { Icon } from "astro-icon/components";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+
+const mapUrl = "https://map.zylatent.com/";
+const articleUrl = "/blog/dog-map/";
+---
+
+<BaseLayout
+  title="Dog Map"
+  description="一张记录去过的地方、走过的路线和现场照片的个人地图。"
+  seoDescription="Dog Map：浏览柳含知记录的地点、路线与现场照片。"
+  immersive={true}
+  hideNavigation={true}
+  animateType="fade-up"
+>
+  <div slot="fullscreen" class="dog-map-page">
+    <aside class="dog-map-rail" aria-label="Dog Map 导航">
+      <a class="rail-button rail-back" href="/world/" aria-label="返回别苑" data-tooltip="返回别苑">
+        <Icon name="lucide:arrow-left" class="h-[18px] w-[18px]" />
+      </a>
+
+      <div class="map-signature">
+        <span class="signature-mark" aria-hidden="true">
+          <Icon name="lucide:map-pin" class="h-5 w-5" />
+        </span>
+        <div class="signature-copy">
+          <h1>Dog Map</h1>
+          <p>PERSONAL ROUTES</p>
+        </div>
+      </div>
+
+      <nav class="rail-actions" aria-label="Dog Map 工具">
+        <a
+          class="rail-button"
+          href={articleUrl}
+          aria-label="阅读 Dog Map 项目记录"
+          data-tooltip="项目记录"
+        >
+          <Icon name="lucide:book-open" class="h-[18px] w-[18px]" />
+        </a>
+
+        <details class="map-about">
+          <summary class="rail-button" aria-label="了解 Dog Map" data-tooltip="关于地图">
+            <Icon name="lucide:info" class="h-[18px] w-[18px]" />
+          </summary>
+          <section class="map-about-panel" aria-labelledby="map-about-title">
+            <p class="about-index">MAP NOTE · 01</p>
+            <h2 id="map-about-title">把地点放回原来的位置</h2>
+            <p>地图记录去过的地方、走过的路线，以及留在现场的照片和文字。</p>
+            <div class="about-links">
+              <a href={articleUrl}>阅读项目记录</a>
+              <a href="https://github.com/ZhouYinLong-lab/Dog-Map" target="_blank" rel="noopener noreferrer">查看源码</a>
+            </div>
+          </section>
+        </details>
+
+        <ThemeToggle className="dog-map-theme-toggle" />
+
+        <a
+          class="rail-button rail-open"
+          href={mapUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="独立打开 Dog Map"
+          data-tooltip="独立打开"
+        >
+          <Icon name="lucide:arrow-up-right" class="h-[18px] w-[18px]" />
+        </a>
+      </nav>
+    </aside>
+
+    <main class="dog-map-stage">
+      <iframe
+        id="dog-map-frame"
+        src={mapUrl}
+        title="Dog Map 个人路线地图"
+        loading="eager"
+        allow="fullscreen"
+        referrerpolicy="strict-origin-when-cross-origin"
+      ></iframe>
+
+      <div class="dog-map-loader" id="dog-map-loader" aria-live="polite">
+        <div class="loader-pin" aria-hidden="true">
+          <Icon name="lucide:map-pin" class="h-6 w-6" />
+        </div>
+        <div class="loader-copy">
+          <strong>正在打开 Dog Map</strong>
+          <span>读取地点、路线与现场记录</span>
+        </div>
+      </div>
+
+      <noscript>
+        <p class="dog-map-noscript">需要启用 JavaScript 才能浏览 Dog Map。</p>
+      </noscript>
+    </main>
+  </div>
+</BaseLayout>
+
+<style is:global>
+  .dog-map-page {
+    --map-bg: #121212;
+    --rail-bg: rgba(22, 22, 22, 0.95);
+    --rail-text: #f5f1e8;
+    --rail-muted: #aaa39a;
+    --rail-line: rgba(245, 241, 232, 0.16);
+    --rail-hover: rgba(245, 241, 232, 0.1);
+    --rail-accent: #e94343;
+    isolation: isolate;
+    display: grid;
+    grid-template-columns: 5.25rem minmax(0, 1fr);
+    width: 100%;
+    height: 100svh;
+    min-height: 34rem;
+    overflow: hidden;
+    color: var(--rail-text);
+    background: var(--map-bg);
+  }
+
+  .dog-map-rail {
+    position: relative;
+    z-index: 20;
+    display: grid;
+    grid-template-rows: auto minmax(0, 1fr) auto;
+    justify-items: center;
+    gap: 1rem;
+    min-width: 0;
+    padding: max(1rem, env(safe-area-inset-top)) 0.75rem max(1rem, env(safe-area-inset-bottom));
+    border-right: 1px solid var(--rail-line);
+    background: var(--rail-bg);
+    box-shadow: 0 0 2rem rgba(0, 0, 0, 0.18);
+  }
+
+  .rail-button {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.75rem;
+    height: 2.75rem;
+    border: 1px solid transparent;
+    border-radius: 0.7rem;
+    color: var(--rail-muted);
+    background: transparent;
+    transition: color 160ms ease, background-color 160ms ease, border-color 160ms ease;
+  }
+
+  .rail-button:hover,
+  .rail-button:focus-visible,
+  .map-about[open] > summary {
+    color: var(--rail-text);
+    border-color: var(--rail-line);
+    background: var(--rail-hover);
+  }
+
+  .rail-button:focus-visible,
+  .map-about-panel a:focus-visible {
+    outline: 2px solid var(--rail-accent);
+    outline-offset: 3px;
+  }
+
+  .rail-button::after {
+    position: absolute;
+    left: calc(100% + 0.65rem);
+    z-index: 30;
+    display: none;
+    width: max-content;
+    padding: 0.35rem 0.5rem;
+    border: 1px solid var(--rail-line);
+    border-radius: 0.4rem;
+    color: var(--rail-text);
+    background: #1d1d1d;
+    content: attr(data-tooltip);
+    font: 600 0.68rem/1.2 ui-monospace, SFMono-Regular, Menlo, monospace;
+    pointer-events: none;
+  }
+
+  .rail-button:hover::after,
+  .rail-button:focus-visible::after {
+    display: block;
+  }
+
+  .map-signature {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.65rem;
+    width: 100%;
+    padding-top: 0.75rem;
+  }
+
+  .signature-mark {
+    display: grid;
+    place-items: center;
+    width: 2.35rem;
+    height: 2.35rem;
+    border-radius: 0.55rem;
+    color: #fff;
+    background: var(--rail-accent);
+    box-shadow: 0 0.5rem 1.2rem rgba(233, 67, 67, 0.24);
+  }
+
+  .signature-copy {
+    width: 100%;
+    overflow: hidden;
+    text-align: center;
+  }
+
+  .signature-copy h1 {
+    overflow: hidden;
+    color: var(--rail-text);
+    font: 700 0.76rem/1.2 ui-monospace, SFMono-Regular, Menlo, monospace;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .signature-copy p {
+    margin-top: 0.25rem;
+    color: var(--rail-muted);
+    font: 500 0.5rem/1.2 ui-monospace, SFMono-Regular, Menlo, monospace;
+    letter-spacing: 0.08em;
+  }
+
+  .rail-actions {
+    display: grid;
+    grid-template-rows: repeat(4, auto);
+    align-content: end;
+    justify-items: center;
+    gap: 0.5rem;
+  }
+
+  .map-about {
+    position: relative;
+  }
+
+  .map-about > summary {
+    list-style: none;
+    cursor: pointer;
+  }
+
+  .map-about > summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .map-about-panel {
+    position: absolute;
+    right: -1rem;
+    bottom: 3.25rem;
+    width: min(20rem, calc(100vw - 7rem));
+    padding: 1rem;
+    border: 1px solid var(--rail-line);
+    border-radius: 0.85rem;
+    color: var(--rail-text);
+    background: #1d1d1d;
+    box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.3);
+  }
+
+  .about-index {
+    color: var(--rail-accent);
+    font: 600 0.65rem/1.2 ui-monospace, SFMono-Regular, Menlo, monospace;
+    letter-spacing: 0.15em;
+  }
+
+  .map-about-panel h2 {
+    margin-top: 0.55rem;
+    font: 700 1.05rem/1.35 ui-sans-serif, system-ui, sans-serif;
+  }
+
+  .map-about-panel > p:not(.about-index) {
+    margin-top: 0.55rem;
+    color: #c4beb5;
+    font: 400 0.78rem/1.65 ui-sans-serif, system-ui, sans-serif;
+  }
+
+  .about-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 0.85rem;
+  }
+
+  .about-links a {
+    min-height: 2.75rem;
+    display: inline-flex;
+    align-items: center;
+    color: #fff;
+    font: 600 0.72rem/1.2 ui-sans-serif, system-ui, sans-serif;
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+  }
+
+  .dog-map-stage {
+    position: relative;
+    min-width: 0;
+    min-height: 0;
+    background: var(--map-bg);
+  }
+
+  #dog-map-frame {
+    display: block;
+    width: 100%;
+    height: 100%;
+    min-height: 34rem;
+    border: 0;
+    background: var(--map-bg);
+  }
+
+  .dog-map-loader {
+    position: absolute;
+    top: 1.25rem;
+    left: 1.25rem;
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    padding: 0.65rem 0.8rem;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 0.7rem;
+    color: #fff;
+    background: rgba(18, 18, 18, 0.88);
+    backdrop-filter: blur(12px);
+    transition: opacity 240ms ease, visibility 240ms ease;
+  }
+
+  .dog-map-stage.is-loaded .dog-map-loader {
+    visibility: hidden;
+    opacity: 0;
+  }
+
+  .loader-pin {
+    display: grid;
+    place-items: center;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 0.45rem;
+    color: #fff;
+    background: var(--rail-accent);
+    animation: dog-map-pulse 1.4s ease-in-out infinite;
+  }
+
+  .loader-copy {
+    display: grid;
+    gap: 0.18rem;
+  }
+
+  .loader-copy strong {
+    font: 700 0.78rem/1.2 ui-sans-serif, system-ui, sans-serif;
+  }
+
+  .loader-copy span {
+    color: #b8b2aa;
+    font: 400 0.68rem/1.2 ui-sans-serif, system-ui, sans-serif;
+  }
+
+  .dog-map-noscript {
+    position: absolute;
+    inset: 50% auto auto 50%;
+    transform: translate(-50%, -50%);
+    width: min(90%, 24rem);
+    color: #fff;
+    text-align: center;
+  }
+
+  @keyframes dog-map-pulse {
+    50% { transform: scale(0.88); opacity: 0.72; }
+  }
+
+  @media (max-width: 640px) {
+    .dog-map-page {
+      grid-template-columns: 1fr;
+      grid-template-rows: auto minmax(0, 1fr);
+    }
+
+    .dog-map-rail {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.6rem;
+      min-height: 4rem;
+      padding: max(0.5rem, env(safe-area-inset-top)) max(0.65rem, env(safe-area-inset-right)) 0.5rem max(0.65rem, env(safe-area-inset-left));
+      border-right: 0;
+      border-bottom: 1px solid var(--rail-line);
+    }
+
+    .map-signature {
+      flex-direction: row;
+      justify-content: center;
+      gap: 0.5rem;
+      padding-top: 0;
+    }
+
+    .signature-copy {
+      width: auto;
+      text-align: left;
+    }
+
+    .rail-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.2rem;
+    }
+
+    .rail-button::after {
+      display: none;
+    }
+
+    .map-about-panel {
+      top: 3.2rem;
+      right: 0;
+      bottom: auto;
+      width: min(20rem, calc(100vw - 1.5rem));
+    }
+
+    .dog-map-stage {
+      min-height: 0;
+    }
+
+    #dog-map-frame {
+      min-height: 0;
+    }
+
+    .dog-map-loader {
+      top: 0.75rem;
+      left: 0.75rem;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .rail-button,
+    .dog-map-loader {
+      transition: none;
+    }
+
+    .loader-pin {
+      animation: none;
+    }
+  }
+</style>
+
+<script>
+  function setupDogMap() {
+    const frame = document.querySelector<HTMLIFrameElement>("#dog-map-frame");
+    const stage = document.querySelector<HTMLElement>(".dog-map-stage");
+    if (!frame || !stage) return;
+
+    const revealMap = () => stage.classList.add("is-loaded");
+    frame.addEventListener("load", revealMap, { once: true });
+    window.setTimeout(revealMap, 2400);
+  }
+
+  document.addEventListener("astro:page-load", setupDogMap);
+  setupDogMap();
+</script>

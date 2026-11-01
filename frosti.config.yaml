@@ -40,6 +40,11 @@ site:
           href: /chores/garden
           svg: "material-symbols:account-tree-outline-rounded"
           target: _self
+        - id: dog-map
+          text: Dog Map
+          href: /chores/map
+          svg: "material-symbols:map-outline-rounded"
+          target: _self
         - id: about
           text: 居士自序
           href: /about
