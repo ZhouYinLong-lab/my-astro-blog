@@ -42,35 +42,6 @@
 - 站点地图 & SEO
 - Swup / View Transitions 页面过渡动画
 
-## 本地运行
-
-```bash
-# 安装 pnpm（已有可跳过）
-npm i -g pnpm
-
-# 克隆项目
-git clone git@github.com:ZhouYinLong-lab/my-astro-blog.git
-cd my-astro-blog
-
-# 安装依赖
-pnpm i
-
-# 生成搜索索引（首次运行）
-pnpm run search:index
-
-# 启动开发服务器
-pnpm run dev
-```
-
-## 构建
-
-```bash
-pnpm run build    # 输出到 dist/
-pnpm run preview  # 本地预览
-```
-
-构建时自动运行 Pagefind 索引。
-
 ## 项目结构
 
 ```
