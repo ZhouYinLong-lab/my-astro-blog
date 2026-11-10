@@ -1,5 +1,5 @@
 ---
-import { type CollectionEntry, getCollection } from "astro:content";
+import { type CollectionEntry, getCollection, render } from "astro:content";
 import License from "@components/widgets/License.astro";
 import PostFilter from "@components/widgets/PostFilter.astro";
 import PostInfo from "@components/widgets/PostInfo.astro";
@@ -19,7 +19,7 @@ export async function getStaticPaths() {
     : posts;
 
   return filteredPosts.map((blog: CollectionEntry<"blog">) => ({
-    params: { slug: blog.slug },
+    params: { slug: blog.id },
     props: { blog },
   }));
 }
@@ -29,12 +29,12 @@ interface Props {
 }
 
 const { blog } = Astro.props;
-const { Content, remarkPluginFrontmatter, headings } = await blog.render();
+const { Content, remarkPluginFrontmatter, headings } = await render(blog);
 const displayDate = blog.data.pubDate
   ? dayjs(blog.data.pubDate).format(DATE_FORMAT)
   : "";
-const image = new URL(`/og/${blog.slug}.png`, Astro.site).toString();
-const url = new URL(`/blog/${blog.slug}`, Astro.url.origin);
+const image = new URL(`/og/${blog.id}.png`, Astro.site).toString();
+const url = new URL(`/blog/${blog.id}`, Astro.url.origin);
 const allPosts = await getCollection("blog");
 const visiblePosts = import.meta.env.PROD
   ? allPosts.filter((post) => !post.data.draft)
@@ -49,7 +49,7 @@ const titleTerms = new Set(
   blog.data.title.toLowerCase().match(/[a-z0-9]+|[\u4e00-\u9fff]{2,}/g) || [],
 );
 const relatedPosts = visiblePosts
-  .filter((post) => post.slug !== blog.slug)
+  .filter((post) => post.id !== blog.id)
   .map((post) => {
     const sharedTags = (post.data.tags || []).filter((tag) =>
       currentTags.has(tag.toLowerCase()),
@@ -65,7 +65,7 @@ const relatedPosts = visiblePosts
     const score =
       sharedTags.length * 6 + sharedCategories.length * 3 + sharedTerms.length;
     return {
-      slug: post.slug,
+      slug: post.id,
       title: post.data.title,
       description: post.data.description,
       tags: post.data.tags || [],

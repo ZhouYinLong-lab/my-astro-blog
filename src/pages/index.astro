@@ -128,7 +128,7 @@ const recentPosts = (await getAllPosts())
 
         <div class="grid gap-4 md:grid-cols-3">
           {recentPosts.map((post) => (
-            <a href={`/blog/${post.slug}/`} class="group rounded-2xl border border-base-300 bg-base-100 p-5 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
+            <a href={`/blog/${post.id}/`} class="group rounded-2xl border border-base-300 bg-base-100 p-5 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
               {post.data.image && (
                 <div class="mb-5 aspect-video overflow-hidden rounded-xl bg-base-200">
                   <img src={post.data.image} alt="" loading="lazy" class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />

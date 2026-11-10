@@ -27,7 +27,7 @@ allPosts.forEach((post: CollectionEntry<"blog">) => {
 
   postsByDate[dateStr].push({
     title: post.data.title || "无题归档",
-    url: `/blog/${post.slug}`, // Astro 默认的博客详情页路由
+    url: `/blog/${post.id}`, // Astro 默认的博客详情页路由
   });
 });
 ---

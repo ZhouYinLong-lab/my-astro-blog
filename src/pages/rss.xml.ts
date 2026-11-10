@@ -41,14 +41,14 @@ export async function GET(context: any) {
       const {
         data: { title, description, pubDate, image },
         body,
-        slug,
+        id,
       } = blog;
 
       const content = body
         ? replacePath(await marked(body), context.site)
         : "No content available.";
 
-      const postURL = new URL(`/blog/${slug}/`, context.site);
+      const postURL = new URL(`/blog/${id}/`, context.site);
       const coverURL = image ? new URL(image, context.site).toString() : undefined;
       const coverData = coverURL
         ? `<media:content url="${escapeXml(coverURL)}" medium="image" />`

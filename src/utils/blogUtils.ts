@@ -1,5 +1,5 @@
 import type { CollectionEntry } from "astro:content";
-import { getCollection } from "astro:content";
+import { getCollection, render } from "astro:content";
 
 /**
  * 获取所有博客文章并根据环境过滤草稿
@@ -171,7 +171,7 @@ export async function getPostsWithStats(
   return Promise.all(
     posts.map(async (blog: CollectionEntry<"blog">) => {
       try {
-        const { remarkPluginFrontmatter } = await blog.render();
+        const { remarkPluginFrontmatter } = await render(blog);
         return {
           ...blog,
           remarkPluginFrontmatter: {
@@ -181,10 +181,10 @@ export async function getPostsWithStats(
         };
       } catch (err) {
         console.error("[blog] failed to render post stats", {
-          slug: blog.slug,
+          slug: blog.id,
           err,
         });
-        throw new Error(`Failed to render blog stats for slug: ${blog.slug}`);
+        throw new Error(`Failed to render blog stats for slug: ${blog.id}`);
       }
     }),
   );

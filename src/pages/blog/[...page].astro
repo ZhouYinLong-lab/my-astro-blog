@@ -98,7 +98,7 @@ const pageLinks = generatePageLinks(totalPages);
               title={blog.data.title}
               image={blog.data.image}
               description={blog.data.description}
-              link={blog.data.link ? blog.data.link : "/blog/" + blog.slug}
+              link={blog.data.link ? blog.data.link : "/blog/" + blog.id}
               infoIcon="lucide:star"
             />
           </div>
@@ -108,7 +108,7 @@ const pageLinks = generatePageLinks(totalPages);
             title={blog.data.title}
             image={blog.data.image}
             description={blog.data.description}
-            url={"/blog/" + blog.slug}
+            url={"/blog/" + blog.id}
             pubDate={blog.data.pubDate}
             badge={blog.data.badge}
             categories={blog.data.categories}
