@@ -93,7 +93,7 @@
     "@types/react-dom": "^19.3.0",
     "daisyui": "^4.12.24",
     "pagefind": "^1.4.0",
-    "sass-embedded": "^1.107.0",
+    "sass-embedded": "^1.108.2",
     "shiki": "^4.4.3",
     "typescript": "^5.9.3"
   }
