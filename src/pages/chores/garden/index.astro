@@ -46,7 +46,7 @@ import BaseLayout from "@/layouts/BaseLayout.astro";
           <section class="garden-about-panel" aria-labelledby="garden-about-title">
             <p class="about-index">GARDEN NOTE · 01</p>
             <h2 id="garden-about-title">文章之间，也有距离</h2>
-            <p>地图按照内容语义排列文章与项目。位置越近，主题通常越相似；点击节点即可回到原文。</p>
+            <p>地图按照内容语义排列文章与项目。位置越近，内容通常越相似；颜色对应分类，标签用于继续筛选。</p>
             <div class="about-links">
               <a href="/blog/latent-garden/">阅读项目记录</a>
               <a href="https://github.com/ZhouYinLong-lab/Latent-Garden" target="_blank" rel="noopener noreferrer">查看源码</a>
@@ -72,7 +72,7 @@ import BaseLayout from "@/layouts/BaseLayout.astro";
     <main class="garden-stage">
       <iframe
         id="semantic-garden-frame"
-        src="https://latent-garden.zylatent.com/?embed=1&theme=obsidian&v=9"
+        src="https://latent-garden.zylatent.com/?embed=1&theme=obsidian&v=10"
         title="寒柳别苑语义地图"
         loading="eager"
         referrerpolicy="strict-origin-when-cross-origin"
@@ -84,7 +84,7 @@ import BaseLayout from "@/layouts/BaseLayout.astro";
         </div>
         <div class="loader-copy">
           <strong>正在展开花园</strong>
-          <span>读取文章坐标与主题关系</span>
+          <span>读取语义坐标与近邻关系</span>
         </div>
       </div>
 
