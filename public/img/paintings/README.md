@@ -2,7 +2,7 @@
 
 ## Raphael — The School of Athens
 
-- 文件：`raphael-school-of-athens.jpg`
+- 文件：`raphael-school-of-athens.webp`
 - 作者：Raphael（拉斐尔）
 - 年代：1509–1511
 - 来源：[Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Raphael_School_of_Athens.jpg)
@@ -10,7 +10,7 @@
 
 ## Pieter Bruegel the Elder — The Tower of Babel (Rotterdam)
 
-- 文件：`bruegel-tower-of-babel-rotterdam.jpg`
+- 文件：`bruegel-tower-of-babel-rotterdam.webp`
 - 作者：Pieter Bruegel the Elder（老彼得·勃鲁盖尔）
 - 年代：约 1568
 - 来源：[Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Pieter_Bruegel_the_Elder_-_The_Tower_of_Babel_%28Rotterdam%29_-_Google_Art_Project.jpg)
@@ -18,7 +18,7 @@
 
 ## Pierre-Auguste Renoir — Luncheon of the Boating Party
 
-- 文件：`renoir-luncheon-of-the-boating-party.jpg`
+- 文件：`renoir-luncheon-of-the-boating-party.webp`
 - 作者：Pierre-Auguste Renoir（皮埃尔-奥古斯特·雷诺阿）
 - 年代：1880–1881
 - 来源：[Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Pierre-Auguste-Renoir-The-Boating-Party-Lunch.jpg)
@@ -26,7 +26,7 @@
 
 ## Thomas Eakins — The Chess Players
 
-- 文件：`eakins-the-chess-players.jpg`
+- 文件：`eakins-the-chess-players.webp`
 - 作者：Thomas Eakins（托马斯·埃金斯）
 - 年代：1876
 - 收藏：纽约大都会艺术博物馆（The Metropolitan Museum of Art）
@@ -35,7 +35,7 @@
 
 ## Édouard Manet — A Bar at the Folies-Bergère
 
-- 文件：`manet-a-bar-at-the-folies-bergere.jpg`
+- 文件：`manet-a-bar-at-the-folies-bergere.webp`
 - 作者：Édouard Manet（爱德华·马奈）
 - 年代：1881–1882
 - 收藏：考陶尔德艺术学院（The Courtauld Institute of Art）
@@ -44,7 +44,7 @@
 
 ## Caravaggio — The Cardsharps
 
-- 文件：caravaggio-cardsharps.jpg
+- 文件：caravaggio-cardsharps.webp
 - 作者：Michelangelo Merisi da Caravaggio（卡拉瓦乔）
 - 年代：约 1594–1597
 - 作品：*The Cardsharps*（《作弊者》）

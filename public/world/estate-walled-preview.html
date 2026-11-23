@@ -50,9 +50,9 @@
       </header>
 
       <section class="comparison" aria-label="地图修复前后对比">
-        <img id="before" src="estate-light.png" alt="原始地图" />
+        <img id="before" src="estate-light.webp" alt="原始地图" />
         <div class="after-wrap" id="after-wrap">
-          <img id="after" src="estate-light-walled-v1-refined-tall.png" alt="从第一版重新修整的地图" />
+          <img id="after" src="estate-light-walled-v1-refined-tall.webp" alt="从第一版重新修整的地图" />
         </div>
       </section>
       <div class="labels"><span>修复后</span><span>原图</span></div>
@@ -72,8 +72,8 @@
         button.addEventListener("click", () => {
           const theme = button.dataset.theme;
           document.documentElement.dataset.theme = theme;
-          before.src = `estate-${theme}.png`;
-          after.src = `estate-${theme}-walled-v1-refined-tall.png`;
+          before.src = `estate-${theme}.webp`;
+          after.src = `estate-${theme}-walled-v1-refined-tall.webp`;
           document.querySelectorAll("[data-theme]").forEach((item) => {
             item.setAttribute("aria-pressed", String(item === button));
           });

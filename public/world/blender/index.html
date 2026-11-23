@@ -56,8 +56,8 @@
   <main class="layout">
     <div class="viewport" tabindex="0" aria-label="庭院画面，放大后可以横向滚动">
     <div class="scene" data-version="pixel" aria-label="固定视角的像素庭院">
-      <img class="day" src="estate-pixel-day.png?v=3" alt="日间像素庭院：深灰叠瓦、错缝石板、垂柳、竹林和完整的院落建筑" width="640" height="480">
-      <img class="night" src="estate-pixel-night.png?v=3" alt="夜间像素庭院，格窗透出暖光，灯笼照亮石板小路" width="640" height="480" loading="lazy">
+      <img class="day" src="estate-pixel-day.webp?v=3" alt="日间像素庭院：深灰叠瓦、错缝石板、垂柳、竹林和完整的院落建筑" width="640" height="480">
+      <img class="night" src="estate-pixel-night.webp?v=3" alt="夜间像素庭院，格窗透出暖光，灯笼照亮石板小路" width="640" height="480" loading="lazy">
       <div id="effects" aria-hidden="true"></div>
       <div id="pins"></div>
     </div>
@@ -96,7 +96,7 @@
     document.querySelector('#compare').addEventListener('click',event=>{
       const button=event.currentTarget;const previous=button.getAttribute('aria-pressed')!=='true';
       button.setAttribute('aria-pressed',String(previous));scene.dataset.version=previous?'previous':'pixel';
-      ['day','night'].forEach(theme=>{document.querySelector('.'+theme).src=(previous?'estate-':'estate-pixel-')+theme+'.png?v=3'});
+      ['day','night'].forEach(theme=>{document.querySelector('.'+theme).src=(previous?'estate-':'estate-pixel-')+theme+'.webp?v=3'});
       status.textContent=previous?'第二版 · 原始低模，对照相同机位。':'第三版 · 叠瓦、石板、垂柳与竹林。点击地标进入对应页面。';
     });
     document.querySelector('#zoom').addEventListener('click',event=>{

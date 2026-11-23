@@ -11,7 +11,7 @@ const republicData = {
       link: "/blog/sovereignty-declaration", // 点击跳转的文章链接
     },
     {
-      image: "/img/xuanyuan/shicha.jpg",
+      image: "/img/xuanyuan/shicha.webp",
       title: "执政官视察底层代码，强调整洁与秩序",
       date: "2026.02.23",
       link: "./articles/inspection.html",

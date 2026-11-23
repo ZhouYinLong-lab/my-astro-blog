@@ -10,7 +10,7 @@ tags:
   - PyMC
   - 数学建模
   - 概率编程
-image: /img/bayes/the-astronomer.jpg
+image: /img/bayes/the-astronomer.webp
 ---
 
 我最近在读 [《Probabilistic Programming and Bayesian Methods for Hackers》](https://github.com/CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers)，并把前 3 章整理成了几份中文学习记录。
@@ -104,7 +104,7 @@ print("95% credible interval:", final_posterior.ppf([0.025, 0.975]))
 
 本次固定种子生成了 67 次正面和 33 次反面，因此最终后验是 $\text{Beta}(68, 34)$。后验均值约为 $0.667$，95% 可信区间约为 $[0.573, 0.754]$。注意，均值没有直接等于模拟时的 $0.70$，这正是有限样本和不确定性的体现。
 
-![抛硬币的贝叶斯后验更新](/img/bayes/coin-bayesian-update.png)
+![抛硬币的贝叶斯后验更新](/img/bayes/coin-bayesian-update.webp)
 
 这让我意识到，贝叶斯推断的结果不应该只写成“$p=0.51$”。更完整的表达应该包括：中心位置、可信区间，以及这个区间为什么会是现在的形状。图中曲线随着数据增加逐渐变窄，但它并没有假装自己已经百分之百确定。
 
@@ -301,7 +301,7 @@ fig.savefig("mh-posterior-sampler.png", dpi=180, bbox_inches="tight")
 
 这个例子非常小，但已经包含了 MCMC 的完整骨架：提议、比较、接受或拒绝、记录，再丢掉前期尚未稳定的样本。用当前固定种子运行，接受率约为 $46.8\%$，后验均值约为 $0.865$，95% 区间约为 $[0.431, 1.306]$。
 
-![Metropolis-Hastings 的迹图与后验样本](/img/bayes/mh-posterior-sampler.png)
+![Metropolis-Hastings 的迹图与后验样本](/img/bayes/mh-posterior-sampler.webp)
 
 左图没有明显趋势，说明 burn-in 之后链已经围绕稳定区域波动；右图则把这些样本汇总成了一个分布。真实均值 $\mu=1$ 落在可信区间内，但后验均值略低，说明 20 个观测仍然不足以消除随机误差。
 
