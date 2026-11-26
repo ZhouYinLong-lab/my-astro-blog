@@ -33,7 +33,9 @@ tags:
 
 FDA 对早期药物发现的概括很直白：线索可以来自疾病机制、成千上万种化合物的测试、已有疗法的意外效果或新技术；但早期测试过后，只有极少数分子值得继续往下走。[FDA 的药物发现与开发说明](https://www.fda.gov/patients/drug-development-process/step-1-discovery-and-development)
 
-![药物发现从候选空间到临床候选物的逐层筛选示意图](/img/drug-discovery/01-drug-discovery-funnel.webp)
+![药物发现的四个阶段：待测分子、命中物、先导物、临床候选物](/img/drug-discovery/01-drug-discovery-funnel.webp)
+
+*图 1. 早期药物发现流程示意。各项目的筛选和优化顺序会有所不同。参考 [FDA 的药物发现与开发说明](https://www.fda.gov/patients/drug-development-process/step-1-discovery-and-development)。*
 
 ## 案例一：AZT 不是为 HIV 设计的
 
@@ -84,7 +86,9 @@ AZT 进入细胞
 
 每一个箭头背后都是不同类型的实验：细胞实验看复制下降，酶实验看目标受抑，代谢实验看活性形态生成，链延长实验则把抑制现象和分子层面的化学后果连了起来。缺了哪一环，都很难称得上完整的机制。
 
-![AZT-三磷酸掺入病毒 DNA 后造成链终止的示意图](/img/drug-discovery/02-azt-chain-termination.webp)
+![正常核苷酸接入后保留 3′ 羟基。AZT-TP 接入后，链末端留下带 3′ 叠氮基的 AZT-MP，DNA 链停止延长。](/img/drug-discovery/02-azt-chain-termination.webp)
+
+*图 2. AZT 链终止机制示意。AZT-TP 是接入前的底物，AZT-MP 是接入后留在 DNA 链中的残基。参考 [St. Clair 等，1987](https://pmc.ncbi.nlm.nih.gov/articles/PMC175837/)。*
 
 ### 进入人体后，疗效和代价一起到来
 
@@ -114,7 +118,9 @@ HIV 在复制时会先合成一条很长的蛋白前体，必须靠 **HIV 蛋白
 
 这两个数字回答的是两码事：$K_i$ 看的是分子和纯化蛋白酶粘得有多紧，$ED_{50}$ 看的是在真实细胞环境里达到一半药效需要多少浓度。在纯化酶里表现惊艳的分子，未必穿得过细胞膜，也未必扛得住肝脏代谢，更未必能靠口服在血液里维持有效浓度。
 
-![结构导向设计中蛋白结合口袋与小分子配体的示意图](/img/drug-discovery/03-structure-based-design.webp)
+![奈非那韦与 HIV-1 蛋白酶的共晶结构，PDB 1OHR](/img/drug-discovery/03-structure-based-design.webp)
+
+*图 3. 奈非那韦与 HIV-1 蛋白酶的共晶结构，X 射线衍射分辨率为 2.10 Å。图像来自 [RCSB PDB 条目 1OHR](https://www.rcsb.org/structure/1OHR)，配套论文为 [Kaldor 等，1997](https://doi.org/10.1021/jm9704098)。*
 
 ### 从图纸变成瓶子里的样品
 
@@ -150,7 +156,9 @@ Lyu 等人在 2019 年做过一次极具代表性的演示：把约 1.38 亿个�
 
 这串数字把虚拟筛选的定位交代得明明白白：电脑把 1.38 亿压缩到几百个，湿实验再把几百个压缩到几十个有价值的结构。它没有凭空算出一颗“必胜神药”，只是重写了实验室“先做哪几个”的排队顺序。
 
-![虚拟筛选从计算空间连接到微孔板湿实验的示意图](/img/drug-discovery/04-virtual-screening-to-wet-lab.webp)
+![D₄ 受体筛选：约 1.38 亿个分子参与对接，589 个入选合成，549 个成功合成并测试，122 个达到初筛结合阈值。](/img/drug-discovery/04-virtual-screening-to-wet-lab.webp)
+
+*图 4. D₄ 多巴胺受体筛选流程，按论文数据重绘。122 个是结合初筛命中数。数据来自 [Lyu 等，2019](https://doi.org/10.1038/s41586-019-0917-9)。*
 
 ### AlphaFold2 能直接替代实验结构吗？
 

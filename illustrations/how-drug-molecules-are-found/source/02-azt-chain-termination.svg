@@ -1,27 +1,23 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900">
-  <defs>
-    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#111820"/><stop offset="1" stop-color="#2a2027"/></linearGradient>
-    <filter id="glow"><feGaussianBlur stdDeviation="8" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
-    <style>text{font-family:"Microsoft YaHei","Noto Sans CJK SC",sans-serif;fill:#f1f6f4} .small{font-size:30px;fill:#b3c3c5} .label{font-size:40px;font-weight:600}</style>
-  </defs>
-  <rect width="1600" height="900" fill="url(#bg)"/>
-  <text x="100" y="100" font-size="54" font-weight="700">AZT 的链终止机制</text>
-  <text x="104" y="150" class="small">示意图：AZT-三磷酸被当作胸苷类似物掺入后，3' 端无法继续延长</text>
-  <g stroke="#93d1d1" stroke-width="9" fill="none" stroke-linecap="round">
-    <path d="M220 300 C350 220 450 380 580 300 S810 220 940 300"/>
-    <path d="M220 560 C350 480 450 640 580 560 S810 480 940 560"/>
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="400" viewBox="0 0 1200 400" role="img" aria-label="DNA 链能否延长，取决于末端的 3′ 基团">
+  <style>
+    text { font-family: Microsoft YaHei, Noto Sans CJK SC, sans-serif; fill: #182d37; }
+    .title { font-size: 42px; font-weight: 700; }
+    .heading { font-size: 34px; font-weight: 700; }
+    .note { font-size: 30px; }
+  </style>
+  <rect width="1200" height="400" fill="#f3f7f7"/>
+  <text x="48" y="75" class="title">DNA 链能否延长，取决于末端的 3′ 基团</text>
+  <rect x="48" y="120" width="1104" height="100" rx="12" fill="#e1efea"/>
+  <rect x="48" y="242" width="1104" height="100" rx="12" fill="#f5e6e1"/>
+  <g text-anchor="middle">
+    <text x="243" y="164" class="heading">正常核苷酸接入</text>
+    <text x="243" y="195" class="note">以 dTTP 为例</text>
+    <text x="613" y="181" class="heading">末端保留 3′–OH</text>
+    <text x="972" y="181" class="heading">可继续延长</text>
+    <text x="243" y="286" class="heading">AZT-TP 接入</text>
+    <text x="243" y="319" class="note">链末端留下 AZT-MP</text>
+    <text x="613" y="303" class="heading">末端为 3′–N₃</text>
+    <text x="972" y="303" class="heading">链延长停止</text>
   </g>
-  <g stroke="#719da9" stroke-width="5"><path d="M260 305 L260 545"/><path d="M350 285 L350 525"/><path d="M440 330 L440 590"/><path d="M530 305 L530 545"/><path d="M620 270 L620 510"/><path d="M710 245 L710 485"/><path d="M800 250 L800 490"/><path d="M890 275 L890 515"/></g>
-  <g fill="#a4e4d5" stroke="#e5fff4" stroke-width="3"><circle cx="260" cy="305" r="22"/><circle cx="350" cy="285" r="22"/><circle cx="440" cy="330" r="22"/><circle cx="530" cy="305" r="22"/><circle cx="620" cy="270" r="22"/></g>
-  <g fill="#6fb7cf" stroke="#d7ffff" stroke-width="3"><circle cx="260" cy="545" r="22"/><circle cx="350" cy="525" r="22"/><circle cx="440" cy="590" r="22"/><circle cx="530" cy="545" r="22"/></g>
-  <text x="190" y="690" class="small">正在延伸的病毒 DNA</text>
-  <g filter="url(#glow)"><circle cx="800" cy="490" r="34" fill="#e05a5a" stroke="#ffd0c8" stroke-width="7"/><path d="M800 455 L842 480 L830 530 L778 540 L760 490 Z" fill="none" stroke="#ffd0c8" stroke-width="5"/></g>
-  <text x="740" y="620" class="label" fill="#ff9a8e">AZT-TP</text><text x="700" y="665" class="small">3' 位缺少 OH</text>
-  <path d="M940 300 C1030 245 1080 250 1150 300" stroke="#93d1d1" stroke-width="9" fill="none" stroke-linecap="round"/>
-  <path d="M940 560" stroke="#93d1d1" stroke-width="9"/>
-  <path d="M1030 470 L1250 470" stroke="#e06b67" stroke-width="8" stroke-dasharray="18 18"/>
-  <path d="M1225 440 L1265 470 L1225 500" fill="none" stroke="#e06b67" stroke-width="8"/>
-  <text x="1040" y="380" class="label">后续核苷酸</text><text x="1040" y="425" class="small">无法接上</text>
-  <rect x="1030" y="650" width="390" height="105" rx="18" fill="#401f2a" stroke="#e06b67" stroke-width="3"/>
-  <text x="1070" y="715" font-size="39" font-family="Microsoft YaHei,Noto Sans CJK SC,sans-serif" fill="#ffb5a6">链延长在此停止</text>
+  <path d="M414 170h39m-10-9 10 9-10 9 M783 170h39m-10-9 10 9-10 9 M414 292h39m-10-9 10 9-10 9 M783 292h39m-10-9 10 9-10 9" fill="none" stroke="#536e74" stroke-width="3"/>
 </svg>
