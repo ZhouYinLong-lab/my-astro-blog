@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#0a1422"/><stop offset="1" stop-color="#162b3b"/></linearGradient>
+    <radialGradient id="protein"><stop stop-color="#76a7bb" stop-opacity=".82"/><stop offset="1" stop-color="#24485d" stop-opacity=".28"/></radialGradient>
+    <filter id="glow"><feGaussianBlur stdDeviation="8" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    <style>text{font-family:"Microsoft YaHei","Noto Sans CJK SC",sans-serif;fill:#eef8f6} .small{font-size:30px;fill:#a9c6cb} .label{font-size:40px;font-weight:600}</style>
+  </defs>
+  <rect width="1600" height="900" fill="url(#bg)"/>
+  <text x="100" y="100" font-size="54" font-weight="700">结构导向设计：口袋提供约束</text>
+  <text x="104" y="150" class="small">示意图：结构给出结合位置，但每一轮仍要合成、测试和复核</text>
+  <path d="M280 370 C180 240 320 175 470 255 C580 110 790 190 770 340 C930 260 1080 370 980 500 C1070 650 870 760 710 660 C550 800 350 690 390 545 C250 545 170 450 280 370 Z" fill="url(#protein)" stroke="#8ccad0" stroke-width="5" opacity=".9"/>
+  <path d="M600 365 C655 285 790 285 855 360 C900 415 860 500 790 515 C725 530 680 475 625 490 C570 505 545 435 600 365 Z" fill="#081521" stroke="#7dc5cd" stroke-width="6"/>
+  <path d="M620 395 C680 345 770 345 830 400" stroke="#416d7a" stroke-width="20" fill="none" opacity=".8"/>
+  <g stroke="#f3c36e" stroke-width="9" fill="none" stroke-linecap="round"><path d="M650 405 L710 440 L770 405 L820 440"/><path d="M710 440 L705 500"/></g>
+  <g fill="#f6bd64" stroke="#fff0bd" stroke-width="4" filter="url(#glow)"><circle cx="650" cy="405" r="18"/><circle cx="710" cy="440" r="20"/><circle cx="770" cy="405" r="18"/><circle cx="820" cy="440" r="18"/><circle cx="705" cy="500" r="18"/></g>
+  <g stroke="#d8f4d9" stroke-width="3" stroke-dasharray="8 9"><path d="M710 440 L675 365"/><path d="M770 405 L820 350"/><path d="M820 440 L885 455"/></g>
+  <text x="610" y="600" class="label">小分子配体</text><text x="610" y="642" class="small">球棍模型嵌入口袋</text>
+  <path d="M1070 310 L950 390" stroke="#a7d9d0" stroke-width="4"/><text x="1090" y="295" class="label">蛋白结合口袋</text><text x="1090" y="340" class="small">形状与残基限制设计空间</text>
+  <path d="M1110 520 L900 470" stroke="#d8f4d9" stroke-width="4" stroke-dasharray="12 12"/><text x="1140" y="535" class="label">氢键相互作用</text><text x="1140" y="580" class="small">虚线只表示示意关系</text>
+  <rect x="1035" y="690" width="390" height="90" rx="20" fill="#203f51" stroke="#7dc5cd" stroke-width="3"/><text x="1080" y="748" font-size="36" font-family="Microsoft YaHei,Noto Sans CJK SC,sans-serif" fill="#d8f4f0">提出 → 合成 → 测试 → 改造</text>
+</svg>

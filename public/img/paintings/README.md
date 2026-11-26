@@ -50,3 +50,12 @@
 - 作品：*The Cardsharps*（《作弊者》）
 - 来源：[Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Cardsharps-Caravaggio_(c.1597).jpg)
 - 许可：Public Domain（以来源页面当前标注为准）
+
+## Rembrandt — The Anatomy Lesson of Dr. Nicolaes Tulp
+
+- 文件：`rembrandt-anatomy-lesson.webp`
+- 作者：Rembrandt van Rijn（伦勃朗）
+- 年代：1632
+- 收藏：莫瑞泰斯皇家美术馆（Mauritshuis）
+- 来源：[Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Rembrandt_-_The_Anatomy_Lesson_of_Dr._Nicolaes_Tulp.jpg)
+- 许可：Public Domain Mark（以来源页面当前标注为准）

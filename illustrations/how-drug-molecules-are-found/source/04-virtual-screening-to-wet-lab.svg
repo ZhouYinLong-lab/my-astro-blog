@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#0a1323"/><stop offset=".52" stop-color="#111c2b"/><stop offset="1" stop-color="#2b1d19"/></linearGradient>
+    <filter id="glow"><feGaussianBlur stdDeviation="7" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    <style>text{font-family:"Microsoft YaHei","Noto Sans CJK SC",sans-serif;fill:#f1f6f5} .small{font-size:28px;fill:#afc4ca} .label{font-size:38px;font-weight:600}</style>
+  </defs>
+  <rect width="1600" height="900" fill="url(#bg)"/>
+  <text x="90" y="100" font-size="52" font-weight="700">虚拟筛选如何接上湿实验</text>
+  <text x="94" y="150" class="small">Lyu 等，2019：约 1.38 亿 → 589 → 549 → 122 个结合命中物</text>
+  <rect x="70" y="220" width="700" height="570" rx="28" fill="#0c1b2c" stroke="#3d8eaa" stroke-width="4"/>
+  <g stroke="#3d7591" stroke-width="2" opacity=".65"><path d="M120 300 H710 M120 380 H710 M120 460 H710 M120 540 H710 M120 620 H710 M120 700 H710"/><path d="M180 250 V750 M260 250 V750 M340 250 V750 M420 250 V750 M500 250 V750 M580 250 V750 M660 250 V750"/></g>
+  <g fill="#63d1d5" stroke="#d4fff2" stroke-width="2" filter="url(#glow)">
+    <circle cx="135" cy="280" r="8"/><circle cx="200" cy="350" r="8"/><circle cx="280" cy="285" r="8"/><circle cx="360" cy="415" r="8"/><circle cx="450" cy="300" r="8"/><circle cx="530" cy="500" r="8"/><circle cx="650" cy="350" r="8"/><circle cx="160" cy="580" r="8"/><circle cx="250" cy="680" r="8"/><circle cx="400" cy="620" r="8"/><circle cx="590" cy="690" r="8"/><circle cx="700" cy="580" r="8"/>
+  </g>
+  <text x="120" y="750" class="label">计算空间</text><text x="120" y="790" class="small">对接、相似性搜索、模型排序</text>
+  <g stroke="#e7bd74" stroke-width="7" fill="none"><path d="M800 500 H920"/><path d="M885 465 L930 500 L885 535"/></g>
+  <g transform="translate(980 270)"><rect width="360" height="340" rx="22" fill="#172838" stroke="#d3a76d" stroke-width="4"/>
+    <g fill="#6bd4c9" stroke="#d9fff0" stroke-width="2"><circle cx="55" cy="65" r="16"/><circle cx="125" cy="65" r="16"/><circle cx="195" cy="65" r="16"/><circle cx="265" cy="65" r="16"/><circle cx="55" cy="135" r="16"/><circle cx="125" cy="135" r="16"/><circle cx="195" cy="135" r="16"/><circle cx="265" cy="135" r="16"/><circle cx="55" cy="205" r="16"/><circle cx="125" cy="205" r="16"/><circle cx="195" cy="205" r="16"/><circle cx="265" cy="205" r="16"/><circle cx="55" cy="275" r="16"/><circle cx="125" cy="275" r="16"/><circle cx="195" cy="275" r="16"/><circle cx="265" cy="275" r="16"/></g>
+  </g>
+  <text x="1020" y="670" class="label">96 孔板</text><text x="1020" y="715" class="small">少量真实样品，逐孔复测</text>
+  <path d="M1420 270 L1420 610" stroke="#f2c17a" stroke-width="16" stroke-linecap="round"/><path d="M1420 610 L1375 680" stroke="#f2c17a" stroke-width="12"/><path d="M1420 610 L1465 680" stroke="#f2c17a" stroke-width="12"/><path d="M1360 680 H1480" stroke="#f2c17a" stroke-width="10"/>
+  <text x="1330" y="750" class="label">湿实验</text><text x="1315" y="792" class="small">结合与功能验证</text>
+</svg>
